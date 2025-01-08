@@ -1,18 +1,12 @@
-
 <div class="related-blogs">
   <h2>Related Blogs</h2>
-  <div class="blog-list">
-    {% assign product_tags = product.tags %}
-    {% for tag in product_tags %}
-      {% assign related_blogs = blogs.all_articles | where: "tags", tag %}
-      {% for article in related_blogs %}
-        <div class="blog-item">
-          <a href="{{ article.url }}">
-            <img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}">
-            <h3>{{ article.title }}</h3>
-          </a>
-        </div>
-      {% endfor %}
+  <p>Product Tags: {{ product.tags }}</p>
+  <p>All Blogs:</p>
+  <ul>
+    {% for article in blogs.all_articles %}
+      <li>{{ article.title }}</li>
+    {% else %}
+      <li>No blogs found</li>
     {% endfor %}
-  </div>
+  </ul>
 </div>
