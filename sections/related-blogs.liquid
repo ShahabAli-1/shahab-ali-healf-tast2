@@ -1,5 +1,5 @@
 <div class="related-blogs">
-  <h2>Related Blogs</h2>
+  <h2 class="related-blogs-title">Related Blogs</h2>
   <div class="blog-list">
     {% assign product_tags = product.tags %}
     {% for article in blogs['health-journal'].articles %}
@@ -8,8 +8,8 @@
         {% if article_tags contains tag %}
           <div class="blog-item">
             <a href="{{ article.url }}">
-              <img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}">
-              <h3>{{ article.title }}</h3>
+              <img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}" class="blog-item-image">
+              <h3 class="blog-item-title">{{ article.title }}</h3>
             </a>
           </div>
           {% break %}
