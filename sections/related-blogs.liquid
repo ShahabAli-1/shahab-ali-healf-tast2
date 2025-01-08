@@ -1,19 +1,20 @@
 <div class="related-blogs">
   <h2>Related Blogs</h2>
-  <ul>
+  <div class="blog-list">
     {% assign product_tags = product.tags %}
     {% for article in blogs['health-journal'].articles %}
       {% assign article_tags = article.tags %}
       {% for tag in product_tags %}
         {% if article_tags contains tag %}
-          <li>
+          <div class="blog-item">
             <a href="{{ article.url }}">
+              <img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}">
               <h3>{{ article.title }}</h3>
             </a>
-          </li>
+          </div>
           {% break %}
         {% endif %}
       {% endfor %}
     {% endfor %}
-  </ul>
+  </div>
 </div>
