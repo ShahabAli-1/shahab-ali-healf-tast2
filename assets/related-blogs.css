@@ -16,7 +16,7 @@
 .slick-arrow {
   background-color: black;
   border-radius: 50%;
-  color: #ffffff;
+  color: #ffffff !important;
   padding: 10px;
   position: absolute;
   z-index: 2;
