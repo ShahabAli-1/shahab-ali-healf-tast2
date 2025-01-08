@@ -23,11 +23,11 @@
 }
 
 .slick-prev {
-  left: -10px; /* Adjust arrow position */
+  left: 0px;
 }
 
 .slick-next {
-  right: -10px; /* Adjust arrow position */
+  right: 0px;
 }
 
 /* Blog Item Styling */
