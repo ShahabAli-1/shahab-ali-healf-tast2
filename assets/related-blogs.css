@@ -17,14 +17,15 @@
   padding: 10px !important;
   position: absolute !important;
   z-index: 2 !important;
+  color: black !important;
 }
 
 .slick-prev {
-  left: 10px !important;
+  left: 2px !important;
 }
 
 .slick-next {
-  right: 10px !important;
+  right: 2px !important;
 }
 /* Blog Item Styling */
 .blog-item {
