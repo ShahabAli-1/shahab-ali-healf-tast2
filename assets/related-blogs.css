@@ -21,11 +21,11 @@
 }
 
 .slick-prev {
-  left: 0px;
+  left: 10px;
 }
 
 .slick-next {
-  right: 0px;
+  right: 10px;
 }
 
 /* Blog Item Styling */
