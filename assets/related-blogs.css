@@ -25,14 +25,15 @@
 }
 .slick-prev:before {
   background-color: black !important;
+  border-radius: 50%;
   color: white !important;
 }
 .slick-prev {
-  left: 2px !important;
+  left: -10px !important;
 }
 
 .slick-next {
-  right: 2px !important;
+  right: -10px !important;
 }
 /* Blog Item Styling */
 .blog-item {
