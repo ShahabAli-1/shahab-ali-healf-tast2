@@ -1,4 +1,19 @@
-{% assign related_blogs = blogs['health-journal'].articles %}
-{% for article in related_blogs %}
-  <li>{{ article.title }}</li>
-{% endfor %}
+<div class="related-blogs">
+  <h2>Related Blogs</h2>
+  <ul>
+    {% assign product_tags = product.tags %}
+    {% for article in blogs['health-journal'].articles %}
+      {% assign article_tags = article.tags %}
+      {% for tag in product_tags %}
+        {% if article_tags contains tag %}
+          <li>
+            <a href="{{ article.url }}">
+              <h3>{{ article.title }}</h3>
+            </a>
+          </li>
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </ul>
+</div>
