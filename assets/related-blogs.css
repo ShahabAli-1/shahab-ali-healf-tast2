@@ -48,6 +48,11 @@
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
+.blog-item:hover {
+  transform: translateY(-5px); /* Add subtle hover effect */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
 .blog-item-image {
   width: 100%;
   height: auto;
