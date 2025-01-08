@@ -28,24 +28,25 @@
 <script>
   $(document).ready(function(){
     $('.blog-carousel').slick({
-      slidesToShow: 3,
+      slidesToShow: 4, // Default: 4 items on large screens
       slidesToScroll: 1,
       arrows: true,
       infinite: true,
       responsive: [
         {
-          breakpoint: 1024,
+          breakpoint: 1024, // Medium screens
           settings: {
-            slidesToShow: 2,
+            slidesToShow: 3,
           }
         },
         {
-          breakpoint: 768,
+          breakpoint: 768, // Small screens
           settings: {
-            slidesToShow: 1,
+            slidesToShow: 2,
           }
         }
       ]
     });
   });
 </script>
+

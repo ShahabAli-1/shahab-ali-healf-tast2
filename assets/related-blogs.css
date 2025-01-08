@@ -9,25 +9,25 @@
 .related-blogs-title {
   font-size: 24px;
   margin-bottom: 20px;
-  text-align: center;
+  text-align: start; /* Align title to the start */
 }
 
 /* Slick Carousel Customization */
 .slick-arrow {
   background-color: #333;
   border-radius: 50%;
-  color: #fff;
+  color: black;
   padding: 10px;
   position: absolute;
   z-index: 2;
 }
 
 .slick-prev {
-  left: -40px;
+  left: -10px; /* Adjust arrow position */
 }
 
 .slick-next {
-  right: -40px;
+  right: -10px; /* Adjust arrow position */
 }
 
 /* Blog Item Styling */
@@ -43,8 +43,8 @@
 }
 
 .blog-item-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  margin-top: 10px;
+  font-size: 24px;
+  line-height: 22px;
+  margin-top: 16px;
+  letter-spacing: -2px;
 }
