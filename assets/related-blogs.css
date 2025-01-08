@@ -14,9 +14,7 @@
 
 /* Slick Carousel Customization */
 .slick-arrow {
-  background-color: black;
   border-radius: 50%;
-  color: #ffffff !important;
   padding: 10px;
   position: absolute;
   z-index: 2;
@@ -46,5 +44,6 @@
   font-size: 24px;
   line-height: 22px;
   margin-top: 16px;
+  text-align: start;
   letter-spacing: -2px;
 }
