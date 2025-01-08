@@ -1,12 +1,4 @@
-<div class="related-blogs">
-  <h2>Related Blogs</h2>
-  <p>Product Tags: {{ product.tags }}</p>
-  <p>All Blogs:</p>
-  <ul>
-    {% for article in blogs.all_articles %}
-      <li>{{ article.title }}</li>
-    {% else %}
-      <li>No blogs found</li>
-    {% endfor %}
-  </ul>
-</div>
+{% assign related_blogs = blogs['news'].articles %}
+{% for article in related_blogs %}
+  <li>{{ article.title }}</li>
+{% endfor %}
