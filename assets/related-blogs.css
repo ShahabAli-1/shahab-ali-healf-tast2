@@ -21,7 +21,9 @@
 }
 
 .slick-next:before {
-  color: black !important;
+  background-color: black !important;
+  border-radius: 50%;
+  color: white !important;
 }
 .slick-prev:before {
   background-color: black !important;
@@ -29,11 +31,11 @@
   color: white !important;
 }
 .slick-prev {
-  left: -10px !important;
+  left: -20px !important;
 }
 
 .slick-next {
-  right: -10px !important;
+  right: -20px !important;
 }
 /* Blog Item Styling */
 .blog-item {
