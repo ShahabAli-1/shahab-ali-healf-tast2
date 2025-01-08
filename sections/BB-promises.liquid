@@ -1,0 +1,371 @@
+{% assign ss = section.settings %}
+{% capture arrow_svg %}
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+  <path d="M14.4375 17.875L7.5625 11L14.4375 4.125" stroke="black" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+{% endcapture %}
+
+{% capture slider_settings %}
+    {
+      "autoplay": true,
+      "autoplaySpeed": 8000,
+      "slidesPerView": 3.6,
+      "autoAdjustSlidesPerView": false,
+      "arrows": true,
+      "arrowSvg":  {{arrow_svg | json}},
+      "appendArrows": "#shopify-section-{{ section.id }} [data-arrows]",
+      "spacing": 40,
+      "loop": true,
+      "spacing": 24,
+      "responsive": [
+        {
+          "breakpoint": "834px",
+          "settings": {
+            "slidesPerView": 1.2,
+            "spacing": 16,
+            "dots": false,
+            "arrows": true
+          }
+        }
+      ]
+    }
+{% endcapture %}
+
+<div id="reviews" class="reviews__container wrapper">
+    <div class="reviews-stats__heading">
+      {%- if ss.title != blank -%}
+        <div class="reviews-stats__title">
+          <h2>{{ ss.title }}</h2>
+        </div>
+      {%- endif -%}
+      <div class="reviews-stats__wrapper ">
+        <div class="reviews-cards__wrapper">
+          {%- for block in section.blocks -%}
+              {% assign bs = block.settings %}
+              {%- case block.type -%}
+                  {%- when 'review_stats' -%}
+                  <div class="review-card">
+                    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20.6301" cy="20.6301" r="20.1562" stroke="black" stroke-width="0.94791"/>
+                    <path d="M14.793 21.3989L19.4617 26.0676L26.4647 15.563" stroke="black" stroke-width="1.04577" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+
+                      {%- if bs.review_title != blank -%}
+                          <p class="review-card__title">{{ bs.review_title }}</p>
+                      {%- endif -%}
+                      {%- if bs.review_value != blank -%}
+                          <p class="review-card__text">{{ bs.review_value }}<span>+</span></p>
+                      {%- endif -%}
+                  </div>
+              {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="promise-container">
+      <span class="promise-rating"> Rated  <strong>4.6 (Excellent)</strong> based on <strong>1,500+ reviews</strong> on</span> {%- render "promise-star-white" -%}
+    </div>
+    
+    <div style="position: relative;">
+      <div class="reviews-slider__container">
+          <div class="reviews-slider__wrapper" data-keen-slider='{{ slider_settings }}'>
+              {%- for block in section.blocks -%}
+                  {% assign bs = block.settings %}
+                  {%- case block.type -%}
+                  {%- when 'reviews_slider' -%}
+                      <div>
+                          <div class="reviews__stars" style="display: flex; align-items: baseline">
+                              {%- render "icon-review-stars" -%}
+                          {%- if bs.review_author != blank -%}
+                              <p class="reviews__author">
+                                  {{ bs.review_author  }}
+                              </p>
+                          {%- endif -%}
+                          </div>
+
+                          {%- if bs.review_title != blank -%}
+                              <p class="reviews__title">
+                                  {{ bs.review_title  }}
+                              </p>
+                          {%- endif -%}
+
+                          {%- if bs.review_description != blank -%}
+                              <p class="reviews__desc">
+                                  {{ bs.review_description | strip_html | escape  }}
+                              </p>
+                          {%- endif -%}
+                      </div>
+                  {% endcase %}
+              {% endfor %}
+          </div>
+      </div>
+      <div class="custom-slide-nav" data-arrows></div>
+    </div>
+
+    <div class="promise-container">
+      <p class="promise-rating">Healf.com is rated <strong>Excellent</strong> on</p> {%- render "promise-star" -%}
+    </div>
+</div>
+
+
+{% style %}
+    #shopify-section-{{ section.id }}.reviews {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+        background-color: #f7f7f7;
+    }
+
+    #shopify-section-{{ section.id }} {
+      background-image: url('{{ ss.banner_image | img_url: 'master' }}');
+      background-position: bottom;
+      background-size: cover;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.reviews {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+    #shopify-section-{{ section.id }}.reviews .custom-slide-nav {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    #shopify-section-{{ section.id }}.reviews .custom-slide-nav .keen-nav svg {
+      width: 30px;
+      rotate: -90deg;
+    }
+    #shopify-section-{{ section.id }}.reviews .custom-slide-nav .keen-nav li button {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+    #shopify-section-{{ section.id }}.reviews .custom-slide-nav .keen-nav {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      width: 100%;
+    }
+    @media (min-width: 835px) {
+        #shopify-section-{{ section.id }}.reviews .custom-slide-nav .keen-nav {
+            max-width: 1240px;
+        }
+    }
+    @media (min-width: 1369px) {
+        #shopify-section-{{ section.id }}.reviews .custom-slide-nav .keen-nav {
+            max-width: 1460px;
+        }
+    }
+    @media (min-width: 1921px) {
+        #shopify-section-{{ section.id }}.reviews .custom-slide-nav .keen-nav {
+            max-width: 1680px;
+        }
+    }
+    .reviews__container h2 {
+      text-align: center;
+      font-family: Avenir;
+      font-size: 52px;
+    }
+    .reviews__container .reviews-slider__wrapper .keen-slider__slide {
+      padding: 30px 30px 10px !important;
+    }
+    .reviews__container .reviews-stats__wrapper {
+    padding-top: 24px !important;
+    padding-bottom: 40px !important;
+    }
+    .reviews__container .reviews-stats__wrapper .reviews-cards__wrapper {
+      width: 100%;
+    }
+    .reviews__container .review-card {
+      flex-basis: calc(33% - 13px) !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .reviews__container .review-card__text {
+      font-size: 24px !important;
+      letter-spacing: -0.5px !important;
+      margin-left: 20px;
+    }
+  .reviews__container .reviews-slider__wrapper .keen-slider__slide {
+    background-color: #fff !important;
+  }
+  .reviews__container .reviews-slider__wrapper .reviews__title {
+    color: #000 !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    margin-left: 0 !important;
+  }
+  .reviews__container .reviews-slider__wrapper .reviews__desc {
+    color: #000 !important;
+    font-size: 16px !important;
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+  .reviews__container .reviews-slider__wrapper .reviews__author {
+      font-size: 14px !important;
+      color: #000 !important;
+  }
+  .promise-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+  }
+  .promise-rating {
+    font-size: 21px;
+    letter-spacing: -.5px;
+  }
+  @media screen and (max-width: 750px) {
+    .reviews__container h2 {
+      font-size: 30px;
+    }
+    .reviews__container .reviews-stats__wrapper .reviews-cards__wrapper {
+      gap: 8px !important;
+    }
+    .reviews-slider__container.wrapper {
+      padding: 0;
+    }
+    .reviews__container .reviews-stats__wrapper {
+      padding-bottom: 0 !important;
+    }
+    .reviews__container .review-card {
+      flex-basis: 100% !important;
+    }
+    .reviews__container .review-card__text {
+      font-size: 18px !important;
+      margin-left: 10px;
+    }
+    .reviews__container .review-card svg {
+      width: 33px;
+    }
+    .promise-container {
+      padding-top: 0;
+    }
+    .promise-container svg {
+      width: 90px;
+    }
+    .promise-rating {
+      font-size: 16.5px;
+      line-height: 2;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Promises",
+        "tag": "section",
+        "class": "reviews",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Reviews"
+            },
+            {
+              "type": "image_picker",
+              "id": "banner_image",
+              "label": "Banner Image"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "review_stats",
+                "name": "Reviews Stats",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "review_title",
+                        "label": "Review Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "review_value",
+                        "label": "Review Value"
+                    }
+                ]
+            },
+            {
+                "type": "reviews_slider",
+                "name": "Reviews Slider",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "review_title",
+                        "label": "Review Title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "review_description",
+                        "label": "Review Description"
+                    },
+                    {
+                        "type": "text",
+                        "id": "review_author",
+                        "label": "Review Author"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Promises"
+            }
+        ]
+    }
+{% endschema %}

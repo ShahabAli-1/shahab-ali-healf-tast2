@@ -1,0 +1,215 @@
+
+{{ 'maurten.css' | asset_url | stylesheet_tag }}
+
+<div class="section bicarb-public">
+    <div class="section-content panel weight-panel turbo-panel"
+         data-controller="turbo-navigate"
+         data-turbo-navigate-add-url-parameters-value="true"
+         data-turbo-navigate-current-panel-value="weight"
+         data-index="2"
+    >
+        <div>
+            <h1 class="liquid-title" style="color: #fff;">What's your weight and experience?</h1>
+            <p>The Bicarb System comes in different doses, based on your weight and previous experience with bicarb. Please choose if you are a novice or experienced bicarb user and enter your weight.</p>
+        </div>
+        <div class="bottom-content">
+            <div class="experience-level">
+                <div class="experience-radios">
+                    <label class="radio">
+                            <span class="radio__input">
+                                <input id="experience-beginner" type="radio" name="experience" value="beginner" data-action="turbo-navigate#experienceExpertChecked" checked/>
+                                <span class="radio__control"></span>
+                            </span>
+                        <span class="radio__label">Novice</span>
+                    </label>
+                    <label class="radio">
+                            <span class="radio__input">
+                                <input id="experience-expert" type="radio" name="experience" value="expert" data-action="turbo-navigate#experienceExperiencedChecked"/>
+                                <span class="radio__control"></span>
+                            </span>
+                        <span class="radio__label">Experienced</span>
+                    </label>
+                </div>
+            </div>
+            <div class="weight-inputs">
+                <div class="weight-text">
+                    <span class="weight-lbs xs-text">209 lbs</span><br>
+                    <span class="weight-kg">95 kg</span>
+                </div>
+                <div class="weight-buttons">
+                <div class="increase-decrease-buttons">
+                    <div class="minus-button"></div>
+                    <div class="plus-button"></div>
+                </div>
+                <div class="buttons-description">Press and hold to adjust</div>
+                </div>
+            </div>
+            <button id="continue-button" class="btn btn--white" data-url="/pages/maurten-buy-options?weight=95">Continue</button>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Variables to hold references to DOM elements
+    var weightElement = document.querySelector('.weight-kg');
+    var weightLbsElement = document.querySelector('.weight-lbs');
+    var plusButtonElement = document.querySelector('.plus-button');
+    var minusButtonElement = document.querySelector('.minus-button');
+    var continueButton = document.getElementById('continue-button');
+    var experienceExpertRadio = document.getElementById('experience-expert');
+
+    // Variables for weight values and timers
+    var weightValue = 95; // Default weight in kg
+    var weightLbsValue = Math.floor(weightValue * 2.20462262185);
+    var downPressTimer = null;
+    var pressInterval = null;
+    var maxWeight = 140;
+    var minWeight = 46;
+
+    // Function to update the Continue button URL
+    function updateContinueButtonUrl() {
+        var url = '/pages/maurten-buy-options?weight=' + weightValue;
+        if (experienceExpertRadio && experienceExpertRadio.checked) {
+            url += '&exp=true';
+        }
+        continueButton.setAttribute('data-url', url);
+    }
+
+    // Function to update weight display and button URL
+    function weightValueChanged() {
+        weightLbsValue = Math.floor(weightValue * 2.20462262185);
+        if (weightElement) {
+            weightElement.textContent = weightValue + ' kg';
+        }
+        if (weightLbsElement) {
+            weightLbsElement.textContent = weightLbsValue + ' lbs';
+        }
+        updateContinueButtonUrl(); // Update the button URL
+    }
+
+    // Functions to increase and decrease weight
+    function increaseWeight() {
+        if (weightValue < maxWeight) {
+            weightValue += 1;
+            weightValueChanged();
+        }
+    }
+
+    function decreaseWeight() {
+        if (weightValue > minWeight) {
+            weightValue -= 1;
+            weightValueChanged();
+        }
+    }
+
+    // Functions to handle press-and-hold functionality
+    function startPressInterval(callback) {
+        clearPressInterval();
+        downPressTimer = setTimeout(function() {
+            pressInterval = setInterval(callback, 30);
+        }, 800);
+    }
+
+    function clearPressInterval() {
+        if (downPressTimer !== null) {
+            clearTimeout(downPressTimer);
+            downPressTimer = null;
+        }
+        if (pressInterval !== null) {
+            clearInterval(pressInterval);
+            pressInterval = null;
+        }
+    }
+
+    // Functions to handle button visual states
+    function showPlusPressedState() {
+        plusButtonElement.classList.add('plus-button-pressed');
+        startPressInterval(increaseWeight);
+    }
+
+    function showPlusDefaultState() {
+        plusButtonElement.classList.remove('plus-button-pressed');
+        clearPressInterval();
+    }
+
+    function showMinusPressedState() {
+        minusButtonElement.classList.add('minus-button-pressed');
+        startPressInterval(decreaseWeight);
+    }
+
+    function showMinusDefaultState() {
+        minusButtonElement.classList.remove('minus-button-pressed');
+        clearPressInterval();
+    }
+
+    // Event listeners for the plus button
+    plusButtonElement.addEventListener('click', function(event) {
+        event.preventDefault();
+        increaseWeight();
+    });
+
+    plusButtonElement.addEventListener('mousedown', function() {
+        showPlusPressedState();
+    });
+
+    plusButtonElement.addEventListener('mouseup', function() {
+        showPlusDefaultState();
+    });
+
+    plusButtonElement.addEventListener('mouseleave', function() {
+        showPlusDefaultState();
+    });
+
+    plusButtonElement.addEventListener('touchstart', function() {
+        showPlusPressedState();
+    });
+
+    plusButtonElement.addEventListener('touchend', function() {
+        showPlusDefaultState();
+    });
+
+    // Event listeners for the minus button
+    minusButtonElement.addEventListener('click', function(event) {
+        event.preventDefault();
+        decreaseWeight();
+    });
+
+    minusButtonElement.addEventListener('mousedown', function() {
+        showMinusPressedState();
+    });
+
+    minusButtonElement.addEventListener('mouseup', function() {
+        showMinusDefaultState();
+    });
+
+    minusButtonElement.addEventListener('mouseleave', function() {
+        showMinusDefaultState();
+    });
+
+    minusButtonElement.addEventListener('touchstart', function() {
+        showMinusPressedState();
+    });
+
+    minusButtonElement.addEventListener('touchend', function() {
+        showMinusDefaultState();
+    });
+
+    // Event listener for the radio input
+    if (experienceExpertRadio) {
+        experienceExpertRadio.addEventListener('change', function() {
+            updateContinueButtonUrl();
+        });
+    }
+
+    continueButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default button behavior
+        var url = continueButton.getAttribute('data-url');
+        console.log(url);
+        window.location.href = url; // Navigate to the updated URL
+    });
+    // Initialize the weight display and update the button URL
+    weightValueChanged();
+});
+</script>
+

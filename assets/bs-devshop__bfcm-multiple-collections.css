@@ -1,0 +1,171 @@
+.bs-devshop__bfcm-multiple-collection {
+    
+}
+
+.bs-devshop__bfcm-multiple-collection__wrapper {
+    --container-padding: calc((100vw - var(--page-width)) / 2.7);
+    --padding-left: max(var(--container-padding), 4rem);
+    --padding-horizontal: calc(calc(calc(100vw - var(--page-width)) / 3) + 2rem);
+    padding-right: max(var(--padding-horizontal), 3rem) !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-left: calc((100vw - var(--max-width)) / 2);
+}
+
+.bs-devshop__bfcm-multiple-collection__wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.bs-devshop__bfcm-multi-collection-row {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    flex-wrap: nowrap;
+    min-width: min-content;
+    padding-bottom: 10px;
+}
+
+.bfcm-collection-filters {
+    margin-top: unset !important;
+}
+
+.bs-devshop__bfcm-multi-collection-item {
+    min-width: 15rem;
+    display: grid;
+    place-items: center;
+    padding: 12px 23px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 35px;
+    background: #eee;
+    white-space: nowrap;
+}
+
+.bs-devshop__bfcm-bfcm-collection-item {
+    min-width: fit-content !important;
+}
+
+.bs-devshop__bfcm-multi-collection-item:hover{
+    background: #000;
+    border: none;
+    color: #fff !important;
+    transition: all 0.3s ease-in-out;
+}
+.collection-menu-mobile {
+    display: none;
+    text-align: center;
+}
+.collection-menu-mobile select{
+    width: 50%;
+    border: none;
+    background: #eee;
+    padding: 20px;
+    margin-top: 20px;
+}
+.collection-menu-desktop{
+    margin-top: 3.2rem;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    padding-bottom: 5px;
+    margin-bottom: 2rem;
+}
+.collection-banner{
+    width:96%;
+    margin: 0 auto;
+    margin-top:5px;
+}
+
+.collection-banner.page-width {
+    width: 100%;
+}
+.collection-banner .banner__media{
+    border-radius: 20px;
+}
+
+.banner__media.desktop.full-image-height {
+    position: relative;
+}
+
+.banner__media.desktop.full-image-height img {
+    position: relative !important;
+    width: 100%;
+} 
+
+.collection-banner .banner__text.subtitle h3 {
+    font-size: 2.3rem;
+    letter-spacing: -1.2px;
+}
+
+.banner__media.mobile{
+    display: none;
+}
+@media screen and (max-width: 834px){
+    .bs-devshop__bfcm-multiple-collection__wrapper {
+        --padding-left: 2rem;
+        padding-right: 2rem !important;
+        padding-left: 20px;
+    }
+
+    .bs-devshop__bfcm-multi-collection-row {
+        gap: 8px;
+        padding-bottom: 5px;
+    }
+
+    .bs-devshop__bfcm-multi-collection-item {
+        min-width: auto;
+        padding: 12px 23px;
+        font-size: 13px;
+    }
+    .collection-banner {
+        margin-top: 3rem;
+    }
+
+    .collection-banner .banner__media.mobile img {
+        position: static;
+    }
+
+    .banner__text.body {
+        display: none;
+    }
+
+
+    .banner__text.body h4{
+        display: none;
+    }
+    .banner__media.mobile{
+        display: block;
+    }
+    .banner__media.desktop{
+        display: none;
+    }
+    
+    .collection-menu-desktop{
+        margin-top: 2.5rem;
+    }
+    .psykhe-ai-block-container .tw-mt-10{
+        margin-top: 1.5rem !important;
+    }
+}
+
+@media screen and (min-width: 835px) and (max-width: 1440px) {
+    .bs-devshop__bfcm-multiple-collection__wrapper {
+        padding-left: 40px;
+    }
+}
+
+@media screen and (min-width: 1441px) {
+    .bs-devshop__bfcm-multiple-collection__wrapper {
+        --max-width: 1390px;
+    }
+}
+
+@media screen and (min-width: 1921px) {
+    .bs-devshop__bfcm-multiple-collection__wrapper {
+        --max-width: 1610px;
+    }
+}
+

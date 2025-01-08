@@ -1,0 +1,146 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+      "autoplay": true,
+      "autoplaySpeed": 3000,
+      "slidesPerView": 5,
+      "autoAdjustSlidesPerView": true,
+      "loop": true,
+      "spacing": 50,
+      "responsive": [
+        {
+          "breakpoint": "1024px",
+          "settings": {
+            "spacing": 20,
+            "slidesPerView": 3
+          }
+        }
+      ]
+    }
+{% endcapture %}
+
+<div class="">
+    <div class="brands-slider__container">
+        {% if ss.title != blank %}
+            <p class="brands-slider__title">{{ ss.title }}</p>
+        {%- endif -%}
+
+        <div class="brands-slider__wrapper">
+            <div class="brands-slider__grid hide-scroll-bar">
+                {% for i in (1..2) %}
+                    {%- for block in section.blocks -%}
+                        {% assign bs = block.settings %}
+                        <a href="{{ bs.url }}" class="brands-slider__card">
+                            {% render 'image-element', image: bs.image, image_mobile: bs.image_mobile, size: '200x', extra_class: ''%}
+                        </a>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.brands-slider {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.brands-slider {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Brands slider",
+        "tag": "section",
+        "class": "brands-slider",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Header"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 0
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 0
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 0
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 0
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Brand",
+                "settings": [
+                    {
+                        "type": "url",
+                        "id": "url",
+                        "label": "Brand link"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Brand image"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Brands slider"
+            }
+        ]
+    }
+{% endschema %}

@@ -1,0 +1,54 @@
+
+  .shop-by-collection {
+    padding: 20px 16px 40px;
+  }
+
+  .shop-by-collection-wrapper {
+    position: relative;
+  }
+
+  .shop-by-collection h3 {
+    font-size: 26px;
+    letter-spacing: -2px;
+    margin-bottom: 16px;
+  }
+
+  .shop-by-collection__collection h5 {
+    font-size: 24px;
+    line-height: 22px;
+    margin-top: 16px;
+    letter-spacing: -2px;
+  }
+  .shop-by-collection__collection .image-element-wrapper {
+    border-radius: 4px;
+  }
+  .shop-by-collection .custom-slide-nav {
+    width: 100%;
+    position: absolute;
+    left: -4%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  .shop-by-collection .custom-slide-nav ul {
+    gap: 100%;
+    width: calc(100% - 35px);
+  }
+
+  .shop-by-collection .custom-slide-nav ul li button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    box-shadow: 0px 3px 6px rgba(22, 36, 17, 0.0431373);
+    }
+  @media screen and (min-width: 1024px) {
+    .shop-by-collection .custom-slide-nav {
+      left: -1%;
+    }
+    .shop-by-collection {
+      padding: 40px 65px;
+      position: relative;
+    }
+  }

@@ -1,0 +1,77 @@
+{% assign ss = section.settings %}
+
+{% if ss.text != blank %}
+    <div class="featured-in__container">
+        <div class="featured-in">{{ ss.text }}</div>
+        <div class="marquee-bar" data-speed="1">
+            <div class="marquee-slider__container">
+                {% for block in section.blocks %}
+                    {% assign bs = block.settings %}
+                    {{ bs.icon }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+<style>
+    .featured-in__container {
+        padding: 40px 0;
+        position: relative;
+        background-color: #000;
+        margin-bottom: -1px;
+    }
+    .featured-in {
+        padding: 40px;
+        position: absolute;
+        top: 0;
+        z-index: 2;
+        background-color: #000;
+        height: 100%;
+        color: #fff;
+        font-size: 30px;
+    }
+    @media (max-width: 834px) {
+    .featured-in__container {
+        padding: 20px 0;
+    }
+        .featured-in {
+            padding: 20px 10px 20px 20px;
+        }
+    }
+
+{% schema %}
+    {
+        "name": "BB - Marquee slider",
+        "tag": "section",
+        "class": "marquee-slider",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Marquee slider"
+            },
+            {
+                "type": "text",
+                "id": "text",
+                "label": "Title"
+            }
+        ],
+        "blocks":[
+            {
+                "type": "blocks",
+                "name": "Brand",
+                "settings": [
+                    {
+                        "type": "html",
+                        "id": "icon",
+                        "label": "Icon"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Marquee slider"
+            }
+        ]
+    }
+{% endschema %}

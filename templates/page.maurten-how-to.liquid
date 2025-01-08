@@ -1,0 +1,79 @@
+{{ 'maurten.css' | asset_url | stylesheet_tag }}
+
+<div class="section bicarb-public">
+  <div
+    class="section-content panel how-to-panel"
+    data-index="3"
+  >
+    <div>
+      <h1 class="liquid-title">Pick the right product for your athletes.</h1>
+      <p>
+        The right Bicarb System should be chosen according to the weight of the athlete. Bicarb System 15 is recommended
+        for body weights 46-66 kg. For body weights 67 kg and higher, we recommend a dosage corresponding to around 0.25
+        g/kg, while dosages up to around 0.3 g/kg are optional for experienced bicarb users.
+      </p>
+    </div>
+
+    <div
+      class="examples"
+      data-controller="bicarb-public"
+    >
+      <div class="example">
+        <p><span class="example-heading">Example 1</span>Athlete weighs 55 kg (121 lbs):</p>
+        <span class="ex-calc" data-bicarb-public-target="hideWhenFullExample">...</span>
+      </div>
+      <span class="show-full-example-link" data-bicarb-public-target="hideWhenFullExample">Show more</span>
+      <div class="expandable-content" data-bicarb-public-target="fullExampleContent">
+        <span class="ex-calc matching">15&nbsp;g / 55&nbsp;kg = 0.27&nbsp;g/kg</span>
+        <span class="ex-calc">19&nbsp;g / 55&nbsp;kg = 0.35&nbsp;g/kg</span>
+        <span class="ex-calc">22&nbsp;g / 55&nbsp;kg = 0.40&nbsp;g/kg</span>
+        <span class="ex-calc">25&nbsp;g / 55&nbsp;kg = 0.45&nbsp;g/kg</span>
+        <p class="ex-conclusion">Bicarb System 15 is recommended.</p>
+        <div class="example">
+          <p>
+            <span class="example-heading">Example 2</span>
+            Athlete weighs 90 kg (198 lbs):
+          </p>
+          <span class="ex-calc">15&nbsp;g / 90&nbsp;kg = 0.17&nbsp;g/kg</span>
+          <span class="ex-calc matching">19&nbsp;g / 90&nbsp;kg = 0.21&nbsp;g/kg</span>
+          <span class="ex-calc matching">22&nbsp;g / 90&nbsp;kg = 0.24&nbsp;g/kg</span>
+          <span class="ex-calc matching">25&nbsp;g / 90&nbsp;kg = 0.28&nbsp;g/kg</span>
+          <p class="ex-conclusion">
+            Bicarb System 22 is recommended: Bicarb System 25 is optional for athletes with previous experience of
+            bicarb that would like to maximise their buffering capacity and extend the bicarb effect time window.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-content">
+      <div class="how-to-calculations">
+        <div class="calc">
+          <span class="xs-text">Minimum</span>
+          <span class="calculation">0.20&nbsp;g/kg</span>
+        </div>
+        <div class="calc">
+          <span class="xs-text">Maximum</span>
+          <span class="calculation">0.30&nbsp;g/kg</span>
+        </div>
+      </div>
+      <a href="/pages/maurten-group-buy"
+        class="btn btn--white continue"
+      >
+        Continue
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var showMoreLink = document.querySelector('.show-full-example-link');
+    var expandableContent = document.querySelector('.expandable-content');
+
+    showMoreLink.addEventListener('click', function () {
+      showMoreLink.style.display = 'none';
+      expandableContent.style.display = 'block';
+    });
+  });
+</script>

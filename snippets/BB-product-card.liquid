@@ -1,0 +1,135 @@
+<div class="product-grid-item product-grid-item--{{ product.id }} {{ extra_class }}">
+    <div class="product-image-area">
+        {% assign variantsLength = product.variants | size %}
+        {% if product.compare_at_price > product.price %}
+          {% assign difference = product.compare_at_price | minus: product.price | times:100 | divided_by:product.compare_at_price %}
+          <div class="sale-percentage">-{{ difference }}%</div>
+        {% endif %}
+
+        {% if override_with_standard_image == true %}
+            <a aria-label="{{ product.title }}" href="{{ product.first_available_variant.url }}">
+                <div
+                    class="image-element-wrapper object-fit--contain"
+                    style="--aspect-desktop: 100.0%;--aspect-tablet: 100.0%;"
+                >
+                    <img src="{{ product.featured_image | image_url }}" width="400" height="400" class="image-element-image"/
+                ></div>
+
+                {%- if product.media[1] != nil -%}
+                    <div
+                        class="image-element-wrapper object-fit--contain"
+                        style="--aspect-desktop: 100.0%;--aspect-tablet: 100.0%;"
+                    >
+                        <img src="{{ product.media[1] | image_url }}" width="400" height="400" class="image-element-image" />
+                    </div>
+                {%- endif -%}
+            </a>
+        {% else %}
+            <a aria-label="{{ product.title }}" href="{{ product.first_available_variant.url }}">
+                {% assign image = product.featured_image %}
+
+                {% render "image-element", image: product.featured_image, image_mobile: blank, size: "400x", alt: product.title, show_placeholder: true, extra_class: "object-fit--contain" %}
+
+                {%- if product.media[1] != nil -%}
+                    {% render "image-element", image: product.media[1], image_mobile: blank, size: "400x", alt: product.title, show_placeholder: true, extra_class: "object-fit--contain" %}
+                {%- endif -%}
+            </a>
+        {% endif %}
+    </div>
+    <a aria-label="{{ product.title }}" href="{{ product.first_available_variant.url }}" class="product-info-area">
+        <div class="product-title__wrapper">
+            <span class="product-vendor">{{ product.vendor }}</span>
+            <span class="product-title">{{ product.title }}</span>
+
+            {% unless reviews == false %}
+            <div class="reviews">
+                <div class="yotpo bottomLine"
+
+bgzgoRGnLi5wOF0jyQdbzIfRCFKCpcmV701bZUJP
+                    data-appkey="bgzgoRGnLi5wOF0jyQdbzIfRCFKCpcmV701bZUJP"
+                    data-domain="{{shop.permanent_domain | escape }}"
+                    data-product-id="{{ product.id }}"
+                    data-product-models="{{ product.id }}"
+                    data-name="{{ product.title | escape }}"
+                    data-url="{{ shop.url }}{{ product.first_available_variant.url }}"
+                    data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+                    data-description="{{ product.description | escape }}"
+                    data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+                </div>
+            </div>
+            {% endunless %}
+        </div>
+
+        <div class="price__wrapper">
+            <span class="money">
+                {{ product.price | money }}
+            </span>
+            <span class="money compare-product-price {% unless product.compare_at_price > product.price %}hide{% endunless %}">
+                {{ product.compare_at_price | money }}
+            </span>
+        </div>
+        {% if quick_add != false %}
+            <div class="quick-add no-js-hidden">
+                {%- assign product_form_id = 'quick-add-' | append: section_id | append: product.id -%}
+                <product-form>
+                    {%- form 'product', product, data-productid: product.id, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                    <input
+                        type="hidden"
+                        name="id" data-productid="{{ product.id }}"
+                        value="{{ product.selected_or_first_available_variant.id }}"
+                        disabled
+                    >
+                    <button
+                        id="{{ product_form_id }}-submit"
+                        type="submit"
+                        name="add"
+                        class="product__btn quick-add__submit {% if buy_again %}product__btn--buy-again{% endif %}"
+                        aria-haspopup="dialog"
+                        aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ product.id }}"
+                        aria-live="polite"
+                        data-sold-out-message="true"
+                        {% if product.selected_or_first_available_variant.available == false %}
+                        disabled
+                        {% endif %}
+                    >
+                        {%- render 'icon-cart'-%}
+                        <span>
+                        {% if buy_again == true %}
+                            Buy again
+                        {%- elsif product.selected_or_first_available_variant.available -%}
+                            {{ 'products.product.add_to_cart' | t }}
+                        {%- else -%}
+                            {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                        </span>
+                        <span class="sold-out-message hidden">
+                        {{ 'products.product.sold_out' | t }}
+                        </span>
+                        <div class="loading-overlay__spinner hidden">
+                        <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            role="presentation"
+                            class="spinner"
+                            viewBox="0 0 66 66"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                        </div>
+                        <style>
+                            .product__btn--buy-again {
+                                background: #000 !important;
+                                color: #fff  !important;
+                            }
+                            .product__btn--buy-again:hover {
+                                background: #f6f6f6  !important;
+                            }
+                        </style>
+                    </button>
+                    {%- endform -%}
+                </product-form>
+            </div>
+        {% endif %}
+    </a>
+</div>

@@ -1,0 +1,509 @@
+
+{% capture arrow_svg %}
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.329508 1.19813C0.689466 0.838172 1.27307 0.838172 1.63303 1.19813L6.51165 6.07675L11.3903 1.19813C11.7502 0.838173 12.3338 0.838173 12.6938 1.19813C13.0538 1.55809 13.0538 2.1417 12.6938 2.50165L7.16341 8.03203C6.80345 8.39199 6.21985 8.39199 5.85989 8.03203L0.329508 2.50165C-0.0304497 2.1417 -0.0304496 1.55809 0.329508 1.19813Z" fill="black"/>
+</svg>
+{% endcapture %}
+
+{% capture slider_settings %}
+    {
+      "id": "mainProductSlider",
+      "slidesPerView": 2,
+      "autoAdjustSlidesPerView": false,
+      "dots": true,
+      "controls": true,
+      "loop": true,
+      "spacing": 20
+    }
+{% endcapture %}
+
+{% capture slider_settings_mobile %}
+    {
+      "enableWhen": "(max-width: 1024px)",
+      "slidesPerView": 1,
+      "autoplay": false,
+      "spacing": 0,
+      "loop": true,
+      "controls": true,
+      "dots": true,
+      "arrowSvg":  {{arrow_svg | json}},
+      "arrows": true
+    }
+{% endcapture %}
+
+{% capture slider_settings_mobile2 %}
+    {
+      "enableWhen": "(max-width: 1024px)",
+      "slidesPerView": 1,
+      "autoplay": false,
+      "spacing": 0,
+      "loop": true,
+      "controls": true,
+      "dots": false,
+      "arrowSvg":  {{arrow_svg | json}},
+      "dotsContainer": ".product-image-area-{{ product.id }}-mobile .slider-dots",
+      "arrows": true
+    }
+{% endcapture %}
+{% assign in_cart1 = false %}
+{% assign in_cart2 = false %}
+{% for item in cart.items %}
+    {% for property in item.properties %}
+      {% if property.first == '_free1' %}
+        {% assign in_cart1 = true %}
+      {% elsif property.first == '_free2' %}
+        {% assign in_cart2 = true %}
+      {% endif %}
+    {% endfor %}
+{% endfor %}
+
+{% assign skip_last = false %}
+{% for tag in product.tags %}
+  {% if tag contains 'google:' %}
+    {% assign skip_last = true %}
+  {% endif %}
+{% endfor %}
+
+{% assign show_bf_collection = false %}
+{% for collection in product.collections %}
+  {% if collection.handle == "bfcm24" %}
+    {% assign show_bf_collection = true %}
+  {% endif %}
+{% endfor %}
+
+<div class="product__media-wrapper">
+    <div class="product-image-area product-image-area-{{ product.id }}">
+        {% if product.images.size > 1 %}
+            <ul class="slider-dots product-image-thumbs {% if product.images.size > 6 %} product-image-thumbs__extended{% endif %} desktop-only">
+              {% if skip_last and request.host == 'uk.healf.com' %}
+                {% assign last_image = product.images.last %}
+                <li class="product-image-thumbs__item" data-dot="0">
+                    {% render 'image-element', image: last_image, image_mobile: last_image, size: '140x', alt: last_image.alt | default: product.title, extra_class: 'object-fit--cover' %}
+                </li>
+                {% for image in product.images %}
+                  {% unless forloop.last %}
+                    <li class="product-image-thumbs__item" data-dot="{{ forloop.index0 }}">
+                        {% render 'image-element', image: image, image_mobile: image, size: '140x', alt: alt, extra_class: 'object-fit--cover' %}
+                    </li>
+                  {% endunless %}
+                {% endfor %}
+
+              {% elsif skip_last and request.path contains '/en-uk' %}
+                {% assign last_image = product.images.last %}
+                <li class="product-image-thumbs__item" data-dot="0">
+                    {% render 'image-element', image: last_image, image_mobile: last_image, size: '140x', alt: last_image.alt | default: product.title, extra_class: 'object-fit--cover' %}
+                </li>
+                {% for image in product.images %}
+                  {% unless forloop.last %}
+                    <li class="product-image-thumbs__item" data-dot="{{ forloop.index0 }}">
+                        {% render 'image-element', image: image, image_mobile: image, size: '140x', alt: alt, extra_class: 'object-fit--cover' %}
+                    </li>
+                  {% endunless %}
+                {% endfor %}
+              {% elsif skip_last %}
+                {% for image in product.images %}
+                  {% unless forloop.last %}
+                    {% assign alt = image.alt | default: product.title %}
+                    <li class="product-image-thumbs__item" data-dot="{{ forloop.index0 }}">
+                        {% render 'image-element', image: image, image_mobile: image, size: '140x', alt: alt, extra_class: 'object-fit--cover'%}
+                    </li>
+                  {% endunless %}
+                {% endfor %}
+              {% else %}
+                {% for image in product.images %}
+                  {% assign alt = image.alt | default: product.title %}
+                  <li class="product-image-thumbs__item" data-dot="{{ forloop.index0 }}">
+                      {% render 'image-element', image: image, image_mobile: image, size: '140x', alt: alt, extra_class: 'object-fit--cover'%}
+                  </li>
+                {% endfor %}
+              {% endif %}
+              {% unless product.handle == 'healf-zone' %}
+              <li class="product-image-thumbs__item" data-dot="{{ product.images.size }}">
+                <div
+                  class="image-element-wrapper object-fit--contain"
+                  style="--aspect-desktop: 100%; --aspect-tablet: 100%;"
+                >
+                  {{ 'Healf_PDP_PromiseCard.png' | file_img_url: 'master' | img_tag: 'Promise card', 'image-element-image' }}
+                </div>
+              </li>
+              {% endunless %}
+            </ul>
+        {% endif %}
+        <div class="product-image-slider__wrapper desktop-only">
+            {% if show_bf_collection and product.compare_at_price > product.price %}
+              <div class="product-image-overlay">
+                {% assign savings = product.compare_at_price | minus: product.price %}
+                {% assign savings_percentage = savings | times: 100.0 | divided_by: product.compare_at_price | round %}
+                <div class="discount-badge">
+                  <div class="discount-badge__bf">BF</div>
+                  <div class="discount-badge__percentage">{{ savings_percentage | default: 0 }}%</div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if skip_last and request.path contains '/en-uk' %}
+              <div class="cart-sticker">
+                <p class="cart-sticker__info">
+                  Free gift with purchase
+                </p>
+              </div>
+            {% elsif product.handle == 'theragun-mini-black' %}
+              <div class="cart-sticker">
+                <p class="cart-sticker__info">
+                  Free Baja Gold Salt with purchase
+                </p>
+              </div>
+            {% endif %}
+            <ul class="product-image-slider"
+              data-keen-slider='{
+                  "id": "mainProductSlider",
+                  "loop": false,
+                  "arrows": true,
+                  "dots": false,
+                  "arrowSvg":  {{arrow_svg | json}},
+                  "appendArrows": "#shopify-section-{{ section.id }} [data-arrows]",
+                  "dotsContainer": ".product-image-area-{{ product.id }} .slider-dots",
+                  "responsive": [
+                      {
+                      "breakpoint": "1024px",
+                      "settings": {
+                          "slidesPerView": 1,
+                          "autoplay": false,
+                          "spacing": 0,
+                          "loop": true,
+                          "controls": true
+                      }
+                      }
+                  ]
+              }'>
+
+              {% if skip_last and request.host == 'uk.healf.com' %}
+                {% assign last_image = product.images.last %}
+                  <li class="desktop-slider-image-{{ forloop.index }}" data-product-image='{% for variant in image.variants %}{{ variant.id }}{% unless forloop.last %},{% endunless %}{% endfor %}'>
+                      {% render 'image-element', image: last_image, image_mobile: last_image, size: '2000x', alt: alt, img_zoom: false  %}
+                  </li>
+                {% for image in product.images %}
+                  {% unless forloop.last %}
+                    <li class="desktop-slider-image-{{ forloop.index }}" data-product-image='{% for variant in image.variants %}{{ variant.id }}{% unless forloop.last %},{% endunless %}{% endfor %}'>
+                        {% render 'image-element', image: image, image_mobile: image, size: '2000x', alt: alt, img_zoom: false  %}
+                    </li>
+                  {% endunless %}
+                {% endfor %}
+              {% elsif skip_last and request.path contains '/en-uk' %}
+                {% assign last_image = product.images.last %}
+                  <li class="desktop-slider-image-{{ forloop.index }}" data-product-image='{% for variant in image.variants %}{{ variant.id }}{% unless forloop.last %},{% endunless %}{% endfor %}'>
+                      {% render 'image-element', image: last_image, image_mobile: last_image, size: '2000x', alt: alt, img_zoom: false  %}
+                  </li>
+                {% for image in product.images %}
+                  {% unless forloop.last %}
+                    <li class="desktop-slider-image-{{ forloop.index }}" data-product-image='{% for variant in image.variants %}{{ variant.id }}{% unless forloop.last %},{% endunless %}{% endfor %}'>
+                        {% render 'image-element', image: image, image_mobile: image, size: '2000x', alt: alt, img_zoom: false  %}
+                    </li>
+                  {% endunless %}
+                {% endfor %}
+              {% elsif skip_last %}
+                {% for image in product.images %}
+                  {% unless forloop.last %}
+                    {% assign alt = image.alt | default: product.title %}
+                    <li class="desktop-slider-image-{{ forloop.index }}" data-product-image='{% for variant in image.variants %}{{ variant.id }}{% unless forloop.last %},{% endunless %}{% endfor %}'>
+                        {% render 'image-element', image: image, image_mobile: image, size: '2000x', alt: alt, img_zoom: false  %}
+                    </li>
+                  {% endunless %}
+                {% endfor %}
+              {% else %}
+                {% for image in product.images %}
+                  {% assign alt = image.alt | default: product.title %}
+                  <li class="desktop-slider-image-{{ forloop.index }}" data-product-image='{% for variant in image.variants %}{{ variant.id }}{% unless forloop.last %},{% endunless %}{% endfor %}'>
+                      {% render 'image-element', image: image, image_mobile: image, size: '2000x', alt: alt, img_zoom: false  %}
+                  </li>
+                {% endfor %}
+              {% endif %}
+              {% unless product.handle == 'healf-zone' %}
+              <li>
+                <div
+                  class="image-element-wrapper object-fit--contain"
+                  style="--aspect-desktop: 100%; --aspect-tablet: 100%;"
+                >
+                  {{ 'Healf_PDP_PromiseCard.png' | file_img_url: 'master' | img_tag: 'Promise card', 'image-element-image' }}
+                </div>
+              </li>
+              {% endunless %}
+            </ul>
+            <div class="custom-slide-nav" data-arrows></div>
+
+        </div>
+    </div>
+
+    <div class="product-image-area product-image-area-{{ product.id }}-mobile">
+      {% if skip_last and request.path contains '/en-uk' %}
+        <div class="cart-sticker">
+          <p class="cart-sticker__info">
+            Free gift with purchase
+          </p>
+        </div>
+      {% elsif product.handle == 'theragun-mini-black' %}
+        <div class="cart-sticker" style="bottom: 100px !important; top: inherit !important;">
+          <p class="cart-sticker__info">
+            Free Baja Gold Salt with purchase
+          </p>
+        </div>
+      {% endif %}
+
+      {% if show_bf_collection and product.compare_at_price > product.price %}
+        <div class="product-image-overlay">
+          {% assign savings = product.compare_at_price | minus: product.price %}
+          {% assign savings_percentage = savings | times: 100.0 | divided_by: product.compare_at_price | round %}
+
+          <div class="discount-badge">
+            <div class="discount-badge__bf">BF</div>
+            <div class="discount-badge__percentage">{{ savings_percentage | default: 0 }}%</div>
+          </div>
+        </div>
+      {% endif %}
+
+      <ul class="tablet-only product-slider__mobile {% if template.suffix == 'multivariant' %}hidden{% endif %}" data-keen-slider='{{ slider_settings_mobile2 }}'>
+        {% if skip_last and request.host == 'uk.healf.com' %}
+          {% assign last_image = product.images.last %}
+            <li>
+                {% render 'image-element', image: last_image, image_mobile: last_image, size: '1800x', alt: image.alt, extra_class: 'object-fit--contain', img_zoom: true %}
+            </li>
+          {% for image in product.images %}
+            {% unless forloop.last %}
+              <li>
+                  {% render 'image-element', image: image, image_mobile: image, size: '1800x', alt: image.alt, extra_class: 'object-fit--contain', img_zoom: true %}
+              </li>
+            {% endunless %}
+          {% endfor %}
+        {% elsif skip_last and request.path contains '/en-uk' %}
+          {% assign last_image = product.images.last %}
+            <li>
+                {% render 'image-element', image: last_image, image_mobile: last_image, size: '1800x', alt: image.alt, extra_class: 'object-fit--contain', img_zoom: true %}
+            </li>
+          {% for image in product.images %}
+            {% unless forloop.last %}
+              <li>
+                  {% render 'image-element', image: image, image_mobile: image, size: '1800x', alt: image.alt, extra_class: 'object-fit--contain', img_zoom: true %}
+              </li>
+            {% endunless %}
+          {% endfor %}
+        {% elsif skip_last %}
+          {% for image in product.images %}
+            {% unless forloop.last %}
+              <li>
+                  {% render 'image-element', image: image, image_mobile: image, size: '1800x', alt: image.alt, extra_class: 'object-fit--contain', img_zoom: true %}
+              </li>
+            {% endunless %}
+          {% endfor %}
+        {% else %}
+          {% for image in product.images %}
+            <li>
+                {% render 'image-element', image: image, image_mobile: image, size: '1800x', alt: image.alt, extra_class: 'object-fit--contain', img_zoom: true %}
+            </li>
+          {% endfor %}
+        {% endif %}
+        {% unless product.handle == 'healf-zone' %}
+        <li>
+          <div
+            class="image-element-wrapper object-fit--contain"
+            style="--aspect-desktop: 100%; --aspect-tablet: 100%;"
+          >
+            {{ 'Healf_PDP_PromiseCard.png' | file_img_url: 'master' | img_tag: 'Promise card', 'image-element-image' }}
+          </div>
+        </li>
+        {% endunless %}
+      </ul>
+      {% unless product.handle == 'healf-zone' %}
+      <ul class="slider-dots product-image-thumbs {% if product.images.size > 6 %} product-image-thumbs__extended{% endif %} tablet-only">
+        {% if skip_last and request.host == 'uk.healf.com' %}
+          {% assign last_image = product.images.last %}
+            <li class="product-image-thumbs__item" data-dot="{{ forloop.index0 }}">
+                {% render 'image-element', image: last_image, image_mobile: last_image, size: '140x', alt: alt, extra_class: 'object-fit--cover'%}
+            </li>
+          {% for image in product.images %}
+            {% unless forloop.last %}
+              <li class="product-image-thumbs__item" data-dot="{{ forloop.index0 }}">
+                  {% render 'image-element', image: image, image_mobile: image, size: '140x', alt: alt, extra_class: 'object-fit--cover'%}
+              </li>
+            {% endunless %}
+          {% endfor %}
+        {% elsif skip_last and request.path contains '/en-uk' %}
+          {% assign last_image = product.images.last %}
+            <li class="product-image-thumbs__item" data-dot="{{ forloop.index0 }}">
+                {% render 'image-element', image: last_image, image_mobile: last_image, size: '140x', alt: alt, extra_class: 'object-fit--cover'%}
+            </li>
+          {% for image in product.images %}
+            {% unless forloop.last %}
+              <li class="product-image-thumbs__item" data-dot="{{ forloop.index0 }}">
+                  {% render 'image-element', image: image, image_mobile: image, size: '140x', alt: alt, extra_class: 'object-fit--cover'%}
+              </li>
+            {% endunless %}
+          {% endfor %}
+        {% elsif skip_last %}
+          {% for image in product.images %}
+            {% unless forloop.last %}
+              {% assign alt = image.alt | default: product.title %}
+              <li class="product-image-thumbs__item" data-dot="{{ forloop.index0 }}">
+                  {% render 'image-element', image: image, image_mobile: image, size: '140x', alt: alt, extra_class: 'object-fit--cover'%}
+              </li>
+            {% endunless %}
+          {% endfor %}
+        {% else %}
+          {% for image in product.images %}
+            {% assign alt = image.alt | default: product.title %}
+            <li class="product-image-thumbs__item" data-dot="{{ forloop.index0 }}">
+                {% render 'image-element', image: image, image_mobile: image, size: '140x', alt: alt, extra_class: 'object-fit--cover'%}
+            </li>
+          {% endfor %}
+        {% endif %}
+        <li class="product-image-thumbs__item" data-dot="{{ product.images.size }}">
+          <div
+            class="image-element-wrapper object-fit--contain"
+            style="--aspect-desktop: 100%; --aspect-tablet: 100%;"
+          >
+            {{ 'Healf_PDP_PromiseCard.png' | file_img_url: 'master' | img_tag: 'Promise card', 'image-element-image' }}
+          </div>
+        </li>
+      </ul>
+      {% else %}
+        <style>
+          @media (max-width: 834px) {
+            .pdp-page__wrapper .product__media-wrapper {
+                background-color: #fff !important;
+            }
+          }
+        </style>
+        <br>
+      {% endunless %}
+    </div>
+
+    <div class='desktop-only'>
+        {% include 'product-accordion' %}
+        {% render 'trust-pilot', layout: 'product' %}
+    </div>
+</div>
+<style>
+
+  .image-element-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .product-image-overlay {
+    position: absolute;
+    padding-top:20px;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+  }
+  .discount-badge {
+    position: relative;
+    {% comment %} display: flex; {% endcomment %}
+  }
+  .discount-badge__percentage {
+    background: white;
+    border: 0.63px solid rgba(0, 0, 0, 1);
+    border-radius: 51.52px;
+    text-align: center;
+    height: 100%;
+    width: 63px;
+    font-family: Avenir;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 18.2px;
+    text-align: center;
+    color:rgba(0, 0, 0, 1);
+    padding: 6px 15px;
+  }
+  .discount-badge__bf {
+    padding-right: 20px;
+    z-index: -1;
+    position: absolute;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 100%;
+    border-radius: 51.52px;
+    font-family: Avenir;
+    margin-left: auto;
+    font-size: 15.45px;
+    width: 75px;
+    background: rgb(161,170,189);
+    background: linear-gradient(90deg, #CB8F51 34%, #C9B26B 66%, #6AA087 100%);
+    font-weight: 500;
+    line-height: 4.95px;
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+  }
+  @media (max-width: 768px) {
+    .product-image-overlay {
+      position: absolute;
+      padding-top: 20px;
+      top: 20px;
+    }
+    .discount-badge__bf {
+      font-size: 13px;
+      width: 70px;
+      padding: 6px 15px;
+    }
+    .discount-badge__percentage {
+      font-family: Avenir;
+      font-size: 14.95px;
+      font-weight: 800;
+      line-height: 16.68px;
+      width:64.15px;
+      padding: 4px 10px;
+    }
+  }
+
+
+  @media only screen and (max-width: 800px) {
+    #dg-chat-widget-launcher {
+        bottom: 70px !important;
+    }
+  }
+  .cart-sticker {
+    position: absolute;
+    z-index: 1;
+    border-radius: 4px;
+    top: 30px;
+    right: 10px;
+  }
+  .cart-sticker p {
+    background-color: #fff;
+    padding: 4px 16px;
+    border-radius: 4px;
+  }
+  @media only screen and (max-width: 800px) {
+    .cart-sticker p {
+      font-size: 13px
+    }
+  }
+  .cart-sticker p:empty {
+    display: none;
+  }
+</style>
+
+<style>
+.product__info-wrapper {
+  position: relative;
+}
+.tapcart-webbridge #MainContent {
+  display: none !important;
+}
+</style>
+<script type="text/javascript">
+window.onload = function() {
+  var screen = document.querySelector('#MainContent');
+  var referrer = document.referrer;
+  if(window.Tapcart.isInitialized){
+    screen.style.display = 'none';
+    Tapcart.actions.openProduct({
+        productId: '{{product.id}}'
+    });
+    if (referrer.includes('tapcart-login')) {
+      window.location.href = referrer + '#status';
+    }
+  }
+};
+</script>

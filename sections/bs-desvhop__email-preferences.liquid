@@ -1,0 +1,180 @@
+<div class="bs-devshop__email-preferences-container" style="background-image: url('{{ section.settings.background_image | img_url: 'master' }}');">
+  <div class="bs-devshop__email-preferences-content">
+    <img src="{{ section.settings.logo | img_url: 'master' }}" alt="healf logo" class="bs-devshop__email-preferences-logo">
+    <span class="bs-devshop__email-preferences-title">{{ section.settings.title }}</span>
+    <div class="bs-devshop__email-preferences__button-container">
+      {% for block in section.blocks %}
+        {% if block.type == 'button' %}
+          <a href="{{ block.settings.button_url }}" class="bs-devshop__email-preferences__button btn">{{ block.settings.button_text }}</a>
+        {% elsif block.type == 'text_link' %}
+          <a href="{{ block.settings.link_url }}" class="bs-devshop__email-preferences__text-link">{{ block.settings.link_text }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "Email Preferences",
+"settings": [
+  {
+    "type": "image_picker",
+    "id": "background_image",
+    "label": "Background Image"
+  },
+  {
+    "type": "image_picker",
+    "id": "logo",
+    "label": "Logo"
+  },
+  {
+    "type": "richtext",
+    "id": "title",
+    "label": "Title",
+    "default": "<p>Thank you for updating<br> your preferences</p>"
+  }
+],
+"blocks": [
+  {
+    "type": "button",
+    "name": "Button",
+    "settings": [
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Button"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      }
+    ]
+  },
+  {
+    "type": "text_link",
+    "name": "Text Link",
+    "settings": [
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link Text",
+        "default": "Close"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      }
+    ]
+  }
+],
+"presets": [
+  {
+    "name": "Email Preferences",
+    "blocks": [
+      {
+        "type": "button"
+      },
+      {
+        "type": "button"
+      },
+      {
+        "type": "button"
+      },
+      {
+        "type": "button"
+      },
+      {
+        "type": "text_link"
+      }
+    ]
+  }
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+  .bs-devshop__email-preferences-container {
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .bs-devshop__email-preferences-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 75rem;
+    margin-top: 10rem;
+  }
+  
+  .bs-devshop__email-preferences-logo {
+    width: 16rem;
+    height: 4.8rem;
+  }
+  
+  .bs-devshop__email-preferences-title {
+    font-size: 4rem;
+    color: #fff;
+    margin: 4rem 0;
+    line-height: 1.2;
+  }
+  
+  .bs-devshop__email-preferences__button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 6.4rem;
+  }
+  
+  .bs-devshop__email-preferences__button {
+    display: block;
+    padding: 0.75rem 5rem !important;
+    background-color: #000;
+    color: #fff;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1.5rem;
+    font-size: 1.7rem !important;
+    border: none !important;
+  }
+  
+  
+  .bs-devshop__email-preferences__text-link {
+    color: #fff;
+    text-decoration: none;
+    margin-top: 1rem;
+    display: inline-block;
+    text-decoration: underline;
+    font-size: 1.7rem !important;
+  }
+  
+  @media (max-width: 768px) {
+    .bs-devshop__email-preferences-container {
+      padding: 1rem;
+      min-height: unset;
+    }
+
+    .bs-devshop__email-preferences-logo {
+      width: 10rem;
+      height: 3rem;
+    }
+  
+    .bs-devshop__email-preferences-content {
+      max-width: 100%;
+      margin-bottom: 5rem;
+    }
+  
+    .bs-devshop__email-preferences-title {
+      font-size: 2.8rem;
+    }
+  }
+{% endstylesheet %}

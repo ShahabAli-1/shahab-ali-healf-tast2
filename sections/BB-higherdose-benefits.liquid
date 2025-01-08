@@ -1,0 +1,183 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+        "slidesPerView": 4,
+        "loop": true,
+        "controls": true,
+        "arrows": true,
+        "dots": true,
+        "arrowSvg":  {{arrow_svg | json}},
+        "appendArrows": "#shopify-section-{{ section.id }} [data-arrows]",
+        "responsive": [
+        {
+            "breakpoint": "1024px",
+            "settings": {
+            "spacing": 10,
+            "slidesPerView": 3
+            }
+        }
+        ]
+    }
+{% endcapture %}
+
+<div class="higherdose-benefits__container">
+    <div class="wrapper">
+        {% if ss.title != blank %}
+            <h2>
+                {{ ss.title }}
+            </h2>
+        {%- endif -%}
+
+        <ul class="slider-dots">
+            <div>
+                {%- for block in section.blocks -%}
+                {% assign bs = block.settings %}
+
+                    <li class="product-image-thumbs__item" data-dot="{{ forloop.index0 }}">
+                        {{ bs.title }}
+                    </li>
+                {% endfor %}
+            </div>
+        </ul>
+
+        <div data-keen-slider='{
+            "id": "mainProductSlider",
+            "slidesPerView": 3,
+            "loop": true,
+            "dots": false,
+            "spacing": 80,
+            "dotsContainer": ".higherdose-benefits__container .slider-dots"
+        }'>
+            {%- for block in section.blocks -%}
+                {% assign bs = block.settings %}
+
+                <div class="benefit">
+                    {% if bs.image != blank %}
+                        {% render 'image-element', image: bs.image, image_mobile: bs.image, size: '600x', extra_class: 'object-fit--cover'%}
+                    {%- endif -%}
+
+                    {% if bs.title != blank %}
+                        <h5>{{ bs.title }}</h5>
+                    {%- endif -%}
+
+                    {% if bs.content != blank %}
+                        <p>
+                            {{ bs.content }}
+                        </p>
+                    {%- endif -%}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.higherdose-benefits {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.higherdose-benefits {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - HigherDOSE Benefits",
+        "tag": "section",
+        "class": "higherdose-benefits",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Text"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "KEY BENEFITS"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Blocks",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Image"
+                    },
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "content",
+                        "label": "Content"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - HigherDOSE Benefits"
+            }
+        ]
+    }
+{% endschema %}

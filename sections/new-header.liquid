@@ -1,0 +1,1223 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+      "slidesPerView": 1,
+      "autoplay": false,
+      "controls": true,
+      "loop": true,
+        "responsive": [
+            {
+                "breakpoint": "834px",
+                "settings": {
+                    "slidesPerView": 1
+                }
+            },
+            {
+                "breakpoint": "480px",
+                "settings": {
+                  "slidesPerView": 1
+                }
+            }
+        ]
+    }
+{% endcapture %}
+
+<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<header class="header new-header sticky-nav-background ab__test-hide" data-test-name="floating-menu">
+    <div class="header__logo">
+        {% comment %}{% include 'desktop-menu' %}{% endcomment %}
+        {% include 'desktop-menu-new' %}
+        <div class="logo-wrapper new-mobile-menu">
+          {% comment %}{% include 'mobile-menu' %}{% endcomment %}
+          {% include 'mobile-menu-new' %}
+        </div>
+
+        <div class="logo">
+            <a href="{{ routes.root_url }}">
+              <svg class="new-logo" style="width: 160px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 269.81 81"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Layer_1-2"><path class="cls-1" d="m94.38,80.94c-17.61,0-30.41-12.25-30.41-31.28s12.47-31.28,30.41-31.28,29.86,11.92,29.86,29.97c0,1.6-.07,3.2-.28,4.81-.08.63-.63,1.1-1.27,1.1h-41.74c-.79,0-1.4.72-1.27,1.5,1.29,7.92,7.09,11.45,14.31,11.45,6.26,0,10.37-3.82,12.82-8.82.22-.44.66-.73,1.15-.73h14.13c.83,0,1.45.78,1.25,1.59-2.75,11.06-14.67,21.7-28.97,21.7Zm-13.22-36.97h25.83c.77,0,1.37-.68,1.28-1.45-.9-7.14-6.94-11.57-14.33-11.57-6.86,0-12.37,4.11-14.04,11.45-.18.8.43,1.57,1.26,1.57Z"/><path class="cls-1" d="m204.56.06h13.3c.56,0,1.01.45,1.01,1.01v78.93c0,.56-.45,1.01-1.01,1.01h-13.3c-.56,0-1.01-.45-1.01-1.01V1.06c0-.56.45-1.01,1.01-1.01Z"/><path class="cls-1" d="m192.3,19.36h-13.89c-.42,0-.77.34-.77.77v5.71c0,.69-.86,1.03-1.32.52-3.81-4.34-10.05-7.97-18.7-7.97-15.42,0-27.67,12.14-27.67,31.06s12.25,31.5,27.56,31.5c8.56,0,14.95-3.63,18.8-8.12.45-.53,1.32-.19,1.32.51v6.85c0,.42.34.77.77.77h13.89c.42,0,.77-.34.77-.77V20.13c0-.42-.34-.77-.77-.77Zm-32.45,46.72c-9.92,0-16.93-7.3-16.93-16.61s7-16.61,16.93-16.61,16.54,7.3,16.54,16.61-7.01,16.61-16.54,16.61Z"/><path class="cls-1" d="m261.54,21.4l-.02,9.13c0,.33-.26.59-.59.59-5.21,0-10.41,0-15.62,0-.33,0-.59.26-.59.59-.02,15.79,0,32.75-.03,48.5,0,.43-.36.79-.8.79h-13.75c-.44,0-.8-.35-.79-.79.03-15.57.03-32.74.07-48.29,0-.44-.36-.8-.8-.8h-2.11c-.4,0-.72-.32-.72-.72v-8.67c0-.43.34-.78.77-.8l1.56-.04c.43-.02.76-.37.77-.79.1-4.55,1.51-7.56,2.54-9.25,4.88-8.07,16.64-11.75,29.47-9.03.37.08.64.42.64.8l-.06,8.71c0,.53-.51.89-1.01.76-7.8-2.14-14.68-.43-17.13,3.75-.47.8-1.03,2.14-1.02,4.18,0,.44.35.78.8.78,5.95,0,11.89,0,17.84,0,.33,0,.59.27.59.59Z"/><circle class="cls-1" cx="261.45" cy="71.64" r="8.36"/><path class="cls-1" d="m57.75,45.4v34.6c0,.52-.42.94-.94.94h-13.43c-.52,0-.94-.42-.94-.94v-32.53c0-5.52-1.73-9.61-4.7-12.1-2.28-1.92-4.42-2.7-8.34-3.3-3.01-.46-7.76-.42-13.15.38-.48.07-.83.48-.84.96-.04,4.69-.07,9.37-.11,14.06v32.52c0,.52-.42.94-.94.94H.94c-.52,0-.94-.42-.94-.94V.94C0,.42.42,0,.94,0h13.44c.52,0,.94.43.94.94v16.61c0,.57.49,1.03,1.07.97,7.72-.78,20.28-1.1,29.69,3.91,1.6.85,2.61,1.62,3.38,2.22,8.15,6.4,8.33,17.81,8.29,20.75Z"/></g></svg>
+            </a>
+        </div>
+
+        <div class="header-icons">
+           {% comment %} <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/bfcm24" class="mobile-hide" style="background: var(--Full-gradient, linear-gradient(90deg, #32755F 0%, #5377BB 37.12%, #CB8F51 67.88%, #CE6C47 100%));
+              background-clip: text;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              line-height: 44px;">
+              Black Friday
+            </a> {% endcomment %}
+            <div class="search-modal__container desktop-only">
+                <div class="search-modal__content search-modal__inner" tabindex="-1">
+                    {%- if settings.predictive_search_enabled -%}
+                        <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+                    {%- endif -%}
+                        <form action="{{ routes.search_url }}" method="get" role="search" class="search wrapper wrapper--large">
+                        <div class="search__field">
+                            <input class="search__input field__input"
+                            id="Search-In-Modal-1"
+                            type="search"
+                            name="q"
+                            value=""
+                            placeholder="Search all products"
+                            {%- if settings.predictive_search_enabled -%}
+                                role="combobox"
+                                aria-expanded="false"
+                                aria-owns="predictive-search-results-list"
+                                aria-controls="predictive-search-results-list"
+                                aria-haspopup="listbox"
+                                aria-autocomplete="list"
+                                autocorrect="off"
+                                autocomplete="off"
+                                autocapitalize="off"
+                                spellcheck="false"
+                            {%- endif -%}
+                            >
+                            <input type="hidden" name="options[prefix]" value="last">
+                            <input type="hidden" name="type" value="product">
+                            <label for="Search-In-Modal-1">
+                                {% render 'icon-search' %}
+                            </label>
+                        </div>
+
+                        {%- if settings.predictive_search_enabled -%}
+                            <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                            {% comment %} <div class="predictive-search__loading-state">
+                                <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                </svg>
+                            </div> {% endcomment %}
+                            </div>
+
+                            <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                        {%- endif -%}
+                        </form>
+                    {%- if settings.predictive_search_enabled -%}
+                        </predictive-search>
+                    {%- endif -%}
+                </div>
+            </div>
+
+            {% comment %} Edgemesh Server: Dynamic content tagged {% endcomment %}
+              {%- if shop.customer_accounts_enabled -%}
+                <script>
+                function changeLocation() {
+                    window.location = window.location.pathname + window.location.search + "#status";
+                }
+                </script>
+                <a onclick="changeLocation()" class="header__icon header__icon--account link focus-inset" style="cursor: pointer;">
+                  <dynamic>
+                    {%- if customer -%}
+                      <span>
+                        {{ customer.first_name }}
+                      </span>
+                    {%- endif -%}
+                  </dynamic>
+                  <dynamic default="preserve">
+                    {% render 'icon-account' %}
+                    <span class="visually-hidden">
+                        {%- liquid
+                        if customer
+                            echo 'customer.account_fallback' | t
+                        else
+                            echo 'customer.log_in' | t
+                        endif
+                        -%}
+                    </span>
+                  </dynamic>
+                </a>
+              {%- endif -%}
+
+          <div class="status-outer-container" style="width: 20px; display: none;">
+            <status-saved-link aria-label="View saved items" style="width: 20px;" class="saved-link outer-link"></status-saved-link>
+          </div>
+
+          <script>
+            document.addEventListener("DOMContentLoaded", function() {
+              setTimeout(() => {
+                // Assuming 'shadowHost' is the host element of the shadow DOM
+                var container = document.querySelector('.status-outer-container');
+                var shadowHost = document.querySelector('.outer-link');
+                if (!shadowHost) {
+                  return;
+                }
+
+                // Access the shadow root
+                var shadowRoot = shadowHost.shadowRoot;
+                if (!shadowRoot) {
+                  return;
+                }
+
+                var indicator = shadowRoot.querySelector('.indicator');
+
+                if (indicator && !isNaN(indicator.textContent.trim()) && parseInt(indicator.textContent.trim()) > 0) {
+                  console.log(indicator.textContent);
+                  // Find the parent link element with class 'saved-link' and hide it
+                  container.style.display = 'block';
+                  shadowHost.style.display = 'block';
+                }
+                var favoriteButton = document.querySelector('.status-favorite-button');
+                if (favoriteButton) {
+                  favoriteButton.addEventListener('click', function() {
+                    container.style.display = 'block';
+                    shadowHost.style.display = 'block';
+                  });
+                }
+              }, 2000);
+
+              document.addEventListener('status:items:updated', (event) => {
+                if (event.detail.items.length === 0) {
+                  shadowHost.style.display = 'none';
+                }
+              });
+            });
+          </script>
+
+          <style>
+            .saved-link {
+              margin-top: 4px;
+              --icon-stroke: 1px;
+              --indicator-position-horizontal: 140%;
+              --indicator-background: #000;
+              --icon-stroke-color: #fff;
+            }
+            header.header.sticky-nav-background .saved-link, .menu-open header.header .saved-link {
+              --icon-stroke-color: #000;
+            }
+          </style>
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(() => {
+                  var elements = document.querySelectorAll('.logo-wrapper.new-mobile-menu');
+                  elements.forEach(function(element) {
+                      element.style.pointerEvents = 'inherit';
+                  });
+                }, 1500);
+              });
+            </script>
+
+            <a href="#" id="cart-icon-bubble" aria-label="Side Cart Trigger" data-cart-trigger data-cart-mount class="header__icon header__icon--cart cart-trigger" data-class-change='
+            [
+                {
+                    "target": ".side-cart",
+                    "class": "shown",
+                    "method": "toggle",
+                    "on": "click",
+                    "preventDefault": true
+                },
+                {
+                    "target": "body",
+                    "class": "overflow-hidden",
+                    "method": "toggle",
+                    "on": "click",
+                    "preventDefault": true
+                },
+                {
+                    "target": ".cart-trigger",
+                    "class": "active",
+                    "method": "toggle",
+                    "on": "click",
+                    "preventDefault": true
+                },
+                {
+                  "target": ".search-dropdown",
+                  "class": "open",
+                  "method": "remove",
+                  "on": "click",
+                  "preventDefault": true
+                },
+                {
+                  "target": ".collection--filters",
+                  "class": "open",
+                  "method": "remove",
+                  "on": "click",
+                  "preventDefault": true
+                }
+            ]
+        ' data-lock-scroll='
+              [
+                  {
+                      "target": "[data-side-cart-scroll]",
+                      "method": "toggleScroll",
+                      "on": "click",
+                      "preventDefault": true
+                  }
+              ]
+          '>
+                {% render 'icon-cart' %}
+
+              {% comment %} Edgemesh Server: Modified for compatibility -- please see cart-refresh.liquid
+                <span class="{% if cart.item_count == 0 %}hidden {% endif %}cart-count-bubble" rv-text="data.cart.item_count">
+                  {{ cart.item_count }}
+                </span>
+              {% endcomment %}
+              <span class="{% if cart.item_count == 0 %}hidden {% endif %} cart-count-bubble" rv-text="data.cart.item_count">
+                {{ cart.item_count }}
+              </span>
+            </a>
+        </div>
+    </div>
+
+    <div class="search-modal__container tablet-only">
+        <div class="search-modal__content search-modal__inner" tabindex="-1">
+            {%- if settings.predictive_search_enabled -%}
+                <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+            {%- endif -%}
+                <form action="{{ routes.search_url }}" method="get" role="search" class="search wrapper wrapper--large">
+                <div class="search__field">
+                    <input class="search__input field__input"
+                    id="Search-In-Modal-1"
+                    type="search"
+                    name="q"
+                    value=""
+                    placeholder="Search all products"
+                    {%- if settings.predictive_search_enabled -%}
+                        role="combobox"
+                        aria-expanded="false"
+                        aria-owns="predictive-search-results-list"
+                        aria-controls="predictive-search-results-list"
+                        aria-haspopup="listbox"
+                        aria-autocomplete="list"
+                        autocorrect="off"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                    {%- endif -%}
+                    >
+                    <input type="hidden" name="options[prefix]" value="last">
+                    <input type="hidden" name="type" value="product">
+                    <label for="Search-In-Modal-1">
+                        {% render 'icon-search' %}
+                    </label>
+                </div>
+                   {%- if settings.predictive_search_enabled -%}
+                    <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                    <div class="predictive-search__loading-state">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                    </div>
+                    </div>
+
+                    <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                {%- endif -%}
+                </form>
+            {%- if settings.predictive_search_enabled -%}
+                </predictive-search>
+            {%- endif -%}
+        </div>
+    </div>
+</header>
+<header class="header header2 new-header sticky-nav-background ab__test" data-test-name="floating-menu">
+  <div class="header__inner">
+    <div class="announcement-bar-div"></div>
+  <div class="header__logo">
+      {% comment %}{% include 'desktop-menu' %}{% endcomment %}
+      {% include 'desktop-menu-new' %}
+      <div class="logo-wrapper new-mobile-menu">
+        {% comment %}{% include 'mobile-menu' %}{% endcomment %}
+        {% include 'mobile-menu-new' %}
+      </div>
+
+      <div class="logo">
+          <a href="{{ routes.root_url }}">
+            <svg class="new-logo" style="width: 160px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 269.81 81"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Layer_1-2"><path class="cls-1" d="m94.38,80.94c-17.61,0-30.41-12.25-30.41-31.28s12.47-31.28,30.41-31.28,29.86,11.92,29.86,29.97c0,1.6-.07,3.2-.28,4.81-.08.63-.63,1.1-1.27,1.1h-41.74c-.79,0-1.4.72-1.27,1.5,1.29,7.92,7.09,11.45,14.31,11.45,6.26,0,10.37-3.82,12.82-8.82.22-.44.66-.73,1.15-.73h14.13c.83,0,1.45.78,1.25,1.59-2.75,11.06-14.67,21.7-28.97,21.7Zm-13.22-36.97h25.83c.77,0,1.37-.68,1.28-1.45-.9-7.14-6.94-11.57-14.33-11.57-6.86,0-12.37,4.11-14.04,11.45-.18.8.43,1.57,1.26,1.57Z"/><path class="cls-1" d="m204.56.06h13.3c.56,0,1.01.45,1.01,1.01v78.93c0,.56-.45,1.01-1.01,1.01h-13.3c-.56,0-1.01-.45-1.01-1.01V1.06c0-.56.45-1.01,1.01-1.01Z"/><path class="cls-1" d="m192.3,19.36h-13.89c-.42,0-.77.34-.77.77v5.71c0,.69-.86,1.03-1.32.52-3.81-4.34-10.05-7.97-18.7-7.97-15.42,0-27.67,12.14-27.67,31.06s12.25,31.5,27.56,31.5c8.56,0,14.95-3.63,18.8-8.12.45-.53,1.32-.19,1.32.51v6.85c0,.42.34.77.77.77h13.89c.42,0,.77-.34.77-.77V20.13c0-.42-.34-.77-.77-.77Zm-32.45,46.72c-9.92,0-16.93-7.3-16.93-16.61s7-16.61,16.93-16.61,16.54,7.3,16.54,16.61-7.01,16.61-16.54,16.61Z"/><path class="cls-1" d="m261.54,21.4l-.02,9.13c0,.33-.26.59-.59.59-5.21,0-10.41,0-15.62,0-.33,0-.59.26-.59.59-.02,15.79,0,32.75-.03,48.5,0,.43-.36.79-.8.79h-13.75c-.44,0-.8-.35-.79-.79.03-15.57.03-32.74.07-48.29,0-.44-.36-.8-.8-.8h-2.11c-.4,0-.72-.32-.72-.72v-8.67c0-.43.34-.78.77-.8l1.56-.04c.43-.02.76-.37.77-.79.1-4.55,1.51-7.56,2.54-9.25,4.88-8.07,16.64-11.75,29.47-9.03.37.08.64.42.64.8l-.06,8.71c0,.53-.51.89-1.01.76-7.8-2.14-14.68-.43-17.13,3.75-.47.8-1.03,2.14-1.02,4.18,0,.44.35.78.8.78,5.95,0,11.89,0,17.84,0,.33,0,.59.27.59.59Z"/><circle class="cls-1" cx="261.45" cy="71.64" r="8.36"/><path class="cls-1" d="m57.75,45.4v34.6c0,.52-.42.94-.94.94h-13.43c-.52,0-.94-.42-.94-.94v-32.53c0-5.52-1.73-9.61-4.7-12.1-2.28-1.92-4.42-2.7-8.34-3.3-3.01-.46-7.76-.42-13.15.38-.48.07-.83.48-.84.96-.04,4.69-.07,9.37-.11,14.06v32.52c0,.52-.42.94-.94.94H.94c-.52,0-.94-.42-.94-.94V.94C0,.42.42,0,.94,0h13.44c.52,0,.94.43.94.94v16.61c0,.57.49,1.03,1.07.97,7.72-.78,20.28-1.1,29.69,3.91,1.6.85,2.61,1.62,3.38,2.22,8.15,6.4,8.33,17.81,8.29,20.75Z"/></g></svg>
+          </a>
+      </div>
+
+      <div class="header-icons">
+          <div class="search-modal__container desktop-only">
+              <div class="search-modal__content search-modal__inner" tabindex="-1">
+                  {%- if settings.predictive_search_enabled -%}
+                      <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+                  {%- endif -%}
+                      <form action="{{ routes.search_url }}" method="get" role="search" class="search wrapper wrapper--large">
+                      <div class="search__field">
+                          <input class="search__input field__input"
+                          id="Search-In-Modal-1"
+                          type="search"
+                          name="q"
+                          value=""
+                          placeholder="Search all products"
+                          {%- if settings.predictive_search_enabled -%}
+                              role="combobox"
+                              aria-expanded="false"
+                              aria-owns="predictive-search-results-list"
+                              aria-controls="predictive-search-results-list"
+                              aria-haspopup="listbox"
+                              aria-autocomplete="list"
+                              autocorrect="off"
+                              autocomplete="off"
+                              autocapitalize="off"
+                              spellcheck="false"
+                          {%- endif -%}
+                          >
+                          <input type="hidden" name="options[prefix]" value="last">
+                          <input type="hidden" name="type" value="product">
+                          <label for="Search-In-Modal-1">
+                              {% render 'icon-search' %}
+                          </label>
+                      </div>
+
+                      {%- if settings.predictive_search_enabled -%}
+                          <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                          {% comment %} <div class="predictive-search__loading-state">
+                              <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                              </svg>
+                          </div> {% endcomment %}
+                          </div>
+
+                          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                      {%- endif -%}
+                      </form>
+                  {%- if settings.predictive_search_enabled -%}
+                      </predictive-search>
+                  {%- endif -%}
+              </div>
+          </div>
+
+          {% comment %} Edgemesh Server: Dynamic content tagged {% endcomment %}
+            {%- if shop.customer_accounts_enabled -%}
+              <script>
+              function changeLocation() {
+                  window.location = window.location.pathname + window.location.search + "#status";
+              }
+              </script>
+              <a onclick="changeLocation()" class="header__icon header__icon--account link focus-inset" style="cursor: pointer;">
+                <dynamic>
+                  {%- if customer -%}
+                    <span>
+                      {{ customer.first_name }}
+                    </span>
+                  {%- endif -%}
+                </dynamic>
+                <dynamic default="preserve">
+                  {% render 'icon-account' %}
+                  <span class="visually-hidden">
+                      {%- liquid
+                      if customer
+                          echo 'customer.account_fallback' | t
+                      else
+                          echo 'customer.log_in' | t
+                      endif
+                      -%}
+                  </span>
+                </dynamic>
+              </a>
+            {%- endif -%}
+
+        <div class="status-outer-container" style="width: 20px; display: none;">
+          <status-saved-link aria-label="View saved items" style="width: 20px;" class="saved-link outer-link"></status-saved-link>
+        </div>
+
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(() => {
+              // Assuming 'shadowHost' is the host element of the shadow DOM
+              var container = document.querySelector('.status-outer-container');
+              var shadowHost = document.querySelector('.outer-link');
+              if (!shadowHost) {
+                return;
+              }
+
+              // Access the shadow root
+              var shadowRoot = shadowHost.shadowRoot;
+              if (!shadowRoot) {
+                return;
+              }
+
+              var indicator = shadowRoot.querySelector('.indicator');
+
+              if (indicator && !isNaN(indicator.textContent.trim()) && parseInt(indicator.textContent.trim()) > 0) {
+                console.log(indicator.textContent);
+                // Find the parent link element with class 'saved-link' and hide it
+                container.style.display = 'block';
+                shadowHost.style.display = 'block';
+              }
+              var favoriteButton = document.querySelector('.status-favorite-button');
+              if (favoriteButton) {
+                favoriteButton.addEventListener('click', function() {
+                  container.style.display = 'block';
+                  shadowHost.style.display = 'block';
+                });
+              }
+            }, 2000);
+
+            document.addEventListener('status:items:updated', (event) => {
+              if (event.detail.items.length === 0) {
+                shadowHost.style.display = 'none';
+              }
+            });
+          });
+        </script>
+
+        <style>
+          .saved-link {
+            margin-top: 4px;
+            --icon-stroke: 1px;
+            --indicator-position-horizontal: 140%;
+            --indicator-background: #000;
+            --icon-stroke-color: #fff;
+          }
+          header.header.sticky-nav-background .saved-link, .menu-open header.header .saved-link {
+            --icon-stroke-color: #000;
+          }
+        </style>
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              setTimeout(() => {
+                var elements = document.querySelectorAll('.logo-wrapper.new-mobile-menu');
+                elements.forEach(function(element) {
+                    element.style.pointerEvents = 'inherit';
+                });
+              }, 1500);
+            });
+          </script>
+
+          <a href="#" id="cart-icon-bubble" aria-label="Side Cart Trigger" data-cart-trigger data-cart-mount class="header__icon header__icon--cart cart-trigger" data-class-change='
+          [
+              {
+                  "target": ".side-cart",
+                  "class": "shown",
+                  "method": "toggle",
+                  "on": "click",
+                  "preventDefault": true
+              },
+              {
+                  "target": "body",
+                  "class": "overflow-hidden",
+                  "method": "toggle",
+                  "on": "click",
+                  "preventDefault": true
+              },
+              {
+                  "target": ".cart-trigger",
+                  "class": "active",
+                  "method": "toggle",
+                  "on": "click",
+                  "preventDefault": true
+              },
+              {
+                "target": ".search-dropdown",
+                "class": "open",
+                "method": "remove",
+                "on": "click",
+                "preventDefault": true
+              },
+              {
+                "target": ".collection--filters",
+                "class": "open",
+                "method": "remove",
+                "on": "click",
+                "preventDefault": true
+              }
+          ]
+      ' data-lock-scroll='
+            [
+                {
+                    "target": "[data-side-cart-scroll]",
+                    "method": "toggleScroll",
+                    "on": "click",
+                    "preventDefault": true
+                }
+            ]
+        '>
+                {% render 'icon-cart' %}
+
+              {% comment %} Edgemesh Server: Modified for compatibility -- please see cart-refresh.liquid
+                <span class="{% if cart.item_count == 0 %}hidden {% endif %}cart-count-bubble" rv-text="data.cart.item_count">
+                  {{ cart.item_count }}
+                </span>
+              {% endcomment %}
+              <span class="{% if cart.item_count == 0 %}hidden {% endif %} cart-count-bubble" rv-text="data.cart.item_count">
+                {{ cart.item_count }}
+              </span>
+            </a>
+      </div>
+  </div>
+
+  <div class="search-modal__container tablet-only">
+      <div class="search-modal__content search-modal__inner" tabindex="-1">
+          {%- if settings.predictive_search_enabled -%}
+              <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+          {%- endif -%}
+              <form action="{{ routes.search_url }}" method="get" role="search" class="search wrapper wrapper--large">
+              <div class="search__field">
+                  <input class="search__input field__input"
+                  id="Search-In-Modal-1"
+                  type="search"
+                  name="q"
+                  value=""
+                  placeholder="Search all products"
+                  {%- if settings.predictive_search_enabled -%}
+                      role="combobox"
+                      aria-expanded="false"
+                      aria-owns="predictive-search-results-list"
+                      aria-controls="predictive-search-results-list"
+                      aria-haspopup="listbox"
+                      aria-autocomplete="list"
+                      autocorrect="off"
+                      autocomplete="off"
+                      autocapitalize="off"
+                      spellcheck="false"
+                  {%- endif -%}
+                  >
+                  <input type="hidden" name="options[prefix]" value="last">
+                  <input type="hidden" name="type" value="product">
+                  <label for="Search-In-Modal-1">
+                      {% render 'icon-search' %}
+                  </label>
+              </div>
+                 {%- if settings.predictive_search_enabled -%}
+                  <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                  <div class="predictive-search__loading-state">
+                      <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                      <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                      </svg>
+                  </div>
+                  </div>
+
+                  <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+              {%- endif -%}
+              </form>
+          {%- if settings.predictive_search_enabled -%}
+              </predictive-search>
+          {%- endif -%}
+      </div>
+  </div>
+</div>
+</header>
+
+<style>
+  {% unless request.path == "/" %}
+    {% comment %} With new floating menu - need to reduce top padding on homepage with video {% endcomment %}
+    body {
+      padding-top: 120px;
+    }
+  {% endunless %}
+
+.tapcart-webbridge body {
+  padding-top: 0;
+}
+body.tapcart-webbridge {
+  padding-top: 0;
+}
+body .tapcart-webbridge {
+  padding-top: 0;
+}
+.tapcart-webbridge #announcementBarButton, .tapcart-webbridge div#onetrust-consent-sdk {
+  display: none !important;
+}
+header.header .header__logo {
+  width: 96%;
+}
+
+header.header.new-header[data-test-name="floating-menu"].ab__test--active-test {
+  background: transparent;
+  padding-top: 4.3rem !important;
+
+}
+header.header .header__inner {
+  background: #fff;
+  {% comment %} max-width: 1400px; {% endcomment %}
+  margin: 0 auto;
+  background: #fff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  width: 96%;
+  padding: 0 2rem;
+}
+header.header nav {
+  justify-content: start;
+  position: inherit;
+  background: transparent
+}
+
+header.header .mega-menu-inner ul {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header.header .mega-menu-inner .last-link {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+header.header .mega-menu-inner .last-link .btn {
+    color: #000;
+    background-color: #fff;
+    border-width: 1px;
+}
+
+.shopify-section-group-header-group {
+  margin-top: 0;
+  position: relative;
+}
+
+header.header, header.header nav {
+  box-shadow: none;
+  transition: all 0.35s ease;
+  background: transparent;
+}
+
+header.header.ab__test--active-test, header.header.ab__test--active-test nav {
+  box-shadow: none;
+  transition: all 0.35s ease;
+  background: transparent;
+  border-radius: 15px;
+}
+
+header.header,
+header.header.sticky-nav-background  {
+  background: #fff;
+}
+header.header nav>ul li .main_link span {
+  color: #fff;
+  transition: all 0.35s ease;
+}
+header.header .new-logo {
+  transition: all 0.35s ease;
+}
+header.header .header__logo .header-icons {
+  justify-content: end;
+}
+header.header .search-modal__container .search-modal__content predictive-search form {
+  background: #fff;
+}
+header.header .header__logo .header-icons .header__icon.header__icon--account, header.header .header__logo .header-icons .header__icon {
+  color: #fff;
+}
+header.header .search-modal__container .search-modal__content, header.header .search-modal__container .search-modal__content predictive-search, header.header .search__field {
+  position: unset;
+}
+header.header #shopping-bag_5_ * {
+  stroke: #fff;
+}
+header.header.sticky-nav-background .menu-drawer-container .burger-menu-inner::after, header.header.sticky-nav-background .menu-drawer-container .burger-menu-inner::before {
+  background-color: #000;
+}
+.findify-autocomplete .findify-mobile .findify-product-add-to-cart, .findify-autocomplete .findify-mobile .findify-product-add-to-cart span {
+  background-color: #f7f7f7;
+  color: #000;
+}
+.findify-autocomplete .findify-mobile .findify-product-add-to-cart svg path {
+  stroke: #000;
+}
+.findify-components--cards--promo__button:hover, .findify-product-add-to-cart:hover, .findify-components-autocomplete--products__view-all a {
+  background-color: #000 !important;
+  border-radius: 32px !important;
+}
+.mega-menu .childlink__container.childlink__container--Category ul li:last-child a, .mega-menu .childlink__container.childlink__container--Featured ul li:last-child a, .mega-menu .childlink__container.childlink__container--Health ul li:last-child a, li .mega-menu .childlink__container .Healf.Journal li:first-child a {
+  color: #000
+}
+header.header.sticky-nav-background, .menu-open header.header {
+  background-color: #fff;
+}
+header.header.sticky-nav {
+  padding-top: 0px;
+  top: -80px !important;
+}
+header.header[data-test-name="floating-menu"].sticky-nav {
+  padding-top: 0px;
+  top: -160px !important;
+}
+header.header.sticky-nav-background .new-logo .cls-1, .menu-open header.header .new-logo .cls-1 {
+  fill: #000;
+}
+header.header.sticky-nav-background nav>ul li .main_link span, .menu-open header.header nav>ul li .main_link span {
+  color: #000;
+}
+header.header.sticky-nav-background .header__logo .header-icons .header__icon.header__icon--account, header.header.sticky-nav-background .header__logo .header-icons .header__icon,.menu-open header.header .header__logo .header-icons .header__icon.header__icon--account, .menu-open header.header .header__logo .header-icons .header__icon {
+  color: #000;
+}
+header.header.sticky-nav-background #shopping-bag_5_ *, .menu-open header.header #shopping-bag_5_ * {
+  stroke: #000;
+}
+header.header.sticky-nav-background .menu-drawer-container .burger-menu-inner::after, header.header.sticky-nav .menu-drawer-container .burger-menu-inner::before, .menu-open header.header .menu-drawer-container .burger-menu-inner::after, .menu-open header.header .menu-drawer-container .burger-menu-inner::before, .product-form__buttons .btn, .faq__container .btn {
+  background-color: #000;
+  border-color: #000;
+}
+.product-form__buttons .btn:hover {
+  background-color: #fff;
+}
+header.header nav>ul li .mega-menu {
+  top: 92%;
+}
+#chat-button {
+  display: none;
+}
+.deferred-media__poster-button {
+  background-color: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+.deferred-media__poster-button:hover {
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+}
+.sticky-cta__wrapper button {
+  background-color: #000;
+  border-color: #000;
+}
+.findify-layouts--autocomplete--dropdown__fullscreen {
+  margin-top: 0;
+}
+
+.shopify-app-block #announcementBarButton[data-test-name="floating-menu"].ab__test--active-test.sticky-nav {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  transition: all 0.3s;
+}
+
+@media (max-width: 835px) {
+  header.header .header__logo .logo-wrapper {
+      display: flex;
+      align-items: end;
+      gap: 6px;
+  }
+
+  header.header[data-test-name="floating-menu"].ab__test .header__inner {
+    padding: 0 1rem;
+  }
+
+  header.header[data-test-name="floating-menu"].ab__test .header__inner .header-icons link span {
+    font-size: 1.2rem;
+  }
+
+  header.header[data-test-name="floating-menu"].ab__test .header__logo {
+    width: 100%;
+  }
+
+  header.header[data-test-name="floating-menu"].ab__test .search-modal__container {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  header.header[data-test-name="floating-menu"].ab__test .search-modal__container .search__input {
+    font-size: 1.4rem;
+  }
+
+  header.header[data-test-name="floating-menu"].ab__test .header-icons .link {
+    font-size: 1.2rem;
+  }
+
+  header.header .header__logo .logo {
+    top: 46%;
+    transition: all 0.35s ease;
+  }
+  header.header .header__logo .logo svg {
+    width: 110px;
+    max-width: 100px;
+  }
+  header.header .menu-drawer__navigation-container {
+    background-color: #fff;
+  }
+  header.header.ab__test--active-test .menu-drawer__navigation-container {
+    background-color: #fff;
+    border-radius: 15px;
+  }
+  header.header.sticky-nav {
+    top: -110px;
+  }
+
+  .shopify-section-group-header-group.section {
+    position: absolute;
+    top: 0
+  }
+  header.header .header__inner {
+    width: 92%;
+  }
+}
+@media (min-width: 835px) {
+  header.header .new-mobile-menu {
+    display: none;
+  }
+  .shopify-app-block #announcementBarButton[data-test-name="floating-menu"].ab__test-hide {
+      top: 10px;
+      left: 2%;
+      right: 2%;
+      width: 96%;
+      border-radius: 4px;
+  }
+  header.header {
+      padding-top: 50px;
+  }
+
+  header.header .search-modal__container {
+    max-width: 300px;
+  }
+  .video-section__media.global-media-settings--full-width {
+    padding-bottom: 50%;
+  }
+  .findify-layouts--autocomplete--dropdown__fullscreen .findify-layouts--autocomplete--dropdown {
+    width: 80% !important;
+    left: 10% !important;
+    right: 10%;
+    margin-top: 0;
+  }
+  .findify-mobile-autocomplete-close svg path {
+    fill: #000;
+  }
+
+  .shopify-app-block #announcementBarButton[data-test-name="floating-menu"].ab__test--active-test {
+    top: 10px;
+    left: 2%;
+    right: 2%;
+    width: 96%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    transition: all 0.3s;
+  }
+}
+
+#announcementBarButton.sticky-nav {
+    top: 0px;
+}
+
+#announcementBarButton[data-test-name="floating-menu"].ab__test--active-test {
+  top: 10px !important;
+}
+#announcementBarButton span {
+  transition: top 0.3s;
+  transform: translate(-50%, 0);
+}
+#announcementBarButton span:last-child {
+  top: -50px;
+  z-index: -1;
+}
+
+@media screen and (max-width: 835px) {
+  .shopify-app-block #announcementBarButton[data-test-name="floating-menu"].ab__test--active-test {
+    top: 10px;
+    left: 4%;
+    right: 4%;
+    width: 92%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+}
+</style>
+
+<script>
+  var header = document.querySelector(".new-header");
+  var announcement = document.querySelector(".shopify-app-block #announcementBarButton");
+  var lastScrollPosition = 0;
+  var startScrollPosition = null;
+  var counter = 0;
+  var counter2 = 0;
+
+// Select the parent element
+var shopifyAppBlock = document.querySelector('.shopify-app-block');
+
+// Check if the parent element exists
+if (shopifyAppBlock) {
+  // Create a new announcement bar button element
+  const newAnnouncement = document.createElement('button');
+  newAnnouncement.id = 'newAnnouncementBarButton';
+  newAnnouncement.className = 'container';
+  newAnnouncement.type = 'button';
+  newAnnouncement.tabIndex = 0;
+  newAnnouncement.style.display = 'none';
+
+  // Get the existing image tag from the first announcement bar button
+  const existingAnnouncement = document.querySelector('.shopify-app-block #announcementBarButton');
+  const imgTag = existingAnnouncement ? existingAnnouncement.querySelector('img') : null;
+
+  // Create the new span element with the desired text
+  const spanElement = document.createElement('span');
+  spanElement.innerHTML = 'Tap here';
+
+  newAnnouncement.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    CartUtils.addDiscountCodeToCart('AUG30');
+  });
+
+  // Create the new text node for the remaining text
+  const textNode = document.createTextNode(' – £30 OFF when you spend over £150');
+
+  // Append the image tag, span element, and text node to the new announcement bar button
+  if (imgTag) {
+    newAnnouncement.appendChild(imgTag.cloneNode(true)); // Clone the image tag if it exists
+  }
+  newAnnouncement.appendChild(spanElement);
+  newAnnouncement.appendChild(textNode);
+
+  // Append the new announcement bar button to the parent element
+  shopifyAppBlock.appendChild(newAnnouncement);
+}
+
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const button = document.getElementById('announcementBarButton');
+    button.classList.remove('container');
+    button.setAttribute('data-test-name', 'floating-menu');
+    const buttonText = button.childNodes[0].textContent.trim();
+    const originalTextDiv = document.createElement('div');
+    originalTextDiv.textContent = buttonText;
+    originalTextDiv.style.cssText = `
+      display: none;
+    `;
+    button.innerHTML = '';
+    button.appendChild(originalTextDiv);
+
+    if (button) {
+      // Get the current content before the image
+      {% comment %} const textContent = button.childNodes[0].textContent.trim(); {% endcomment %}
+      const textContent = '£20 off orders over £100 - code NOV20'
+
+      function createScrollContent() {
+        const textContainer = document.createElement('div');
+        textContainer.style.cssText = `
+          position: relative;
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+        `;
+
+        const scrollContent = document.createElement('div');
+        scrollContent.style.cssText = `
+          display: inline-block;
+          white-space: nowrap;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+          color: #fff;
+          font-size: 1.4rem;
+        `;
+
+        let totalContentItems = 20
+        let possibleContent = [
+          // '365 Day Returns',
+          'Free Delivery over £50',
+          'Black Friday Now Live - Up to 50% off',
+          textContent
+        ]
+
+        let validItemCount = 0;  // Keep track of valid items
+
+        for (let i = 0; i < totalContentItems; i++) {
+          const textSpan = document.createElement('span');
+          textSpan.textContent = possibleContent[i % possibleContent.length];
+
+          let shouldHide = textSpan.innerHTML === "CANNOT LOAD";
+          if (!shouldHide) {
+            textSpan.style.cssText = `
+              padding-left: 35px;
+              padding-right: 35px;
+            `;
+            scrollContent.appendChild(textSpan);
+
+            if (i < totalContentItems - 1) {
+              const separatorSpan = document.createElement('div');
+              separatorSpan.style.cssText = `
+                font-size: 10px;
+                height: 100%;
+                line-height: 1;
+                position: relative;
+                top: -0.08rem;
+                vertical-align: middle;
+                display: inline-block;
+              `;
+              separatorSpan.textContent = '●';
+              scrollContent.appendChild(separatorSpan);
+            }
+
+            validItemCount++;
+          }
+        }
+
+        textContainer.appendChild(scrollContent);
+        return textContainer;
+      }
+
+      const originalScrollContent = createScrollContent();
+      button.insertBefore(originalScrollContent, button.firstChild);
+
+      const copyButton = button.cloneNode(true);
+
+      copyButton.classList.add('ab__test');
+      copyButton.setAttribute('data-test-name', 'floating-menu');
+
+      button.classList.add('ab__test-hide');
+
+      button.parentNode.insertBefore(copyButton, button.nextSibling);
+
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        #announcementBarButton:hover .scrollContent,
+        .ab__test:hover .scrollContent {
+          animation-play-state: paused;
+        }
+      `;
+      document.head.appendChild(style);
+
+      [button, copyButton].forEach(btn => {
+        const scrollContent = btn.querySelector('div > div');
+        scrollContent.classList.add('scrollContent');
+
+        // fixes flicker: Add a small delay before starting the animation and making the content visible
+        setTimeout(() => {
+          scrollContent.style.opacity = '1';
+          scrollContent.style.animation = 'scroll 120s linear infinite';
+          btn.style.visibility = 'visible';
+        }, 100);
+
+        btn.addEventListener('mouseenter', () => {
+          scrollContent.style.animationPlayState = 'paused';
+        });
+        btn.addEventListener('mouseleave', () => {
+          scrollContent.style.animationPlayState = 'running';
+        });
+        {% if request.path contains '/en-uk' %}
+        btn.addEventListener('click', (e) => {
+          e.stopImmediatePropagation();
+          window.location.href='https://healf.com/en-uk/collections/bfcm24'
+        });
+        {% endif %}
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "New Header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_mobile",
+      "label": "Main menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_mobile_new",
+      "label": "New Mobile menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "announcement_bar",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+        "type": "url",
+        "id": "announcement_url",
+        "label": "Announcement Url"
+    },
+    {
+        "type": "blog",
+        "id": "blog",
+        "label": "Blog"
+    },
+    {
+        "type": "richtext",
+        "id": "announcement_content",
+        "label": "Announcement content"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_title",
+      "name": "Collection Title",
+      "settings": [
+        {
+          "type": "text",
+          "id": "show_under",
+          "label": "Show under nav item"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    },
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "text",
+          "id": "show_under",
+          "label": "Show under nav item"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Link"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image -- mobile"
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "name": "Trending list",
+      "settings": [
+        {
+          "type": "text",
+          "id": "show_under",
+          "label": "Show under nav item"
+        },
+        {
+          "type": "textarea",
+          "id": "trending",
+          "label": "Collection handles seperated by commas"
+        }
+      ]
+    },
+  ],
+  "presets": [
+    {
+      "name": "New Header",
+      "blocks": [
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

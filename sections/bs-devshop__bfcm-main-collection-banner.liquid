@@ -1,0 +1,431 @@
+{{ 'bs-devshop__bfcm-main-collection-banner.css' | asset_url | stylesheet_tag }}
+
+<style>
+  #Banner-{{ section.id }}::after {
+    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+  
+  {%- for block in section.blocks -%}
+    {% case block.type %}
+      {% when 'pill' %}
+        #Block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top }}px;
+          margin-bottom: {{ block.settings.margin_bottom }}px;
+        }
+      {% when 'heading' %}
+        #Block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top }}px;
+          margin-bottom: {{ block.settings.margin_bottom }}px;
+        }
+      {% when 'description' %}
+        #Block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top }}px;
+          margin-bottom: {{ block.settings.margin_bottom }}px;
+        }
+      {% when 'disclaimer' %}
+        #Block-{{ block.id }} {
+          margin-top: {{ block.settings.margin_top }}px;
+          margin-bottom: {{ block.settings.margin_bottom }}px;
+        }
+    {% endcase %}
+  {%- endfor -%}
+
+  .bs-devshop__bfcm-main-collection-banner__section {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  @media (max-width: 768px) {
+    .bs-devshop__bfcm-main-collection-banner__section {
+      padding-top: {{ section.settings.mobile_padding_top }}px;
+      padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+  }
+</style>
+
+<div id="Banner-{{ section.id }}" class="wrapper bs-devshop__bfcm-main-collection-banner__section">
+  <div class="bs-devshop__bfcm-main-collection-banner">
+    {%- if section.settings.image != blank -%}
+      <div class="bs-devshop__bfcm-main-collection-banner__media desktop media">
+        {{ section.settings.image | image_url: width: 1500 | image_tag:
+          loading: 'lazy',
+          sizes: "100vw",
+          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+          alt: section.settings.image.alt | escape
+        }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.image_2 != blank -%}
+      <div class="bs-devshop__bfcm-main-collection-banner__media mobile media">
+        {{ section.settings.image_2 | image_url: width: 1500 | image_tag:
+          loading: 'lazy',
+          sizes: "100vw",
+          widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+          alt: section.settings.image_2.alt | escape
+        }}
+      </div>
+    {%- endif -%}
+
+    <div class="banner__content banner__content--middle-left page-width bs-devshop__bfcm-main-collection-banner__content">
+      <div class="bs-devshop__bfcm-main-collection-banner__content-box banner__box">
+        {%- for block in section.blocks -%}
+          {% case block.type %}
+            {% when 'pill' %}
+              {%- if block.settings.content != blank -%}
+                <div id="Block-{{ block.id }}" class="bs-devshop__bfcm-main-collection-banner__sale-banner-pill" {{ block.shopify_attributes }}>
+                  {{ block.settings.content }}
+                </div>
+              {%- endif -%}
+
+            {% when 'heading' %}
+              {%- if block.settings.heading != blank -%}
+                <div id="Block-{{ block.id }}" class="bs-devshop__bfcm-main-collection-banner__heading-wrapper" {{ block.shopify_attributes }}>
+                  <div class="heading-content">
+                    <h1 class="bs-devshop__bfcm-main-collection-banner__heading">{{ block.settings.heading }}</h1>
+                  </div>
+                  {%- if block.settings.text != blank -%}
+                    <div class="bs-devshop__bfcm-main-collection-banner__text">
+                      {{ block.settings.text }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+            {% when 'description' %}
+              {%- if block.settings.description != blank -%}
+                <div class="bs-devshop__bfcm-main-collection-banner__description-wrapper">
+                <div id="Block-{{ block.id }}" class="bs-devshop__bfcm-main-collection-banner__description" {{ block.shopify_attributes }}>
+                  {{ block.settings.description }}
+                  </div>
+                  {%- if block.settings.disclaimer != blank -%}
+                    <div id="Block-{{ block.id }}" class="bs-devshop__bfcm-main-collection-banner__stock-notice" {{ block.shopify_attributes }}>
+                      {{ block.settings.disclaimer }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+            {% when 'disclaimer-and-cta' %}
+              {%- if block.settings.disclaimer != blank -%}
+                <div class="bs-devshop__bfcm-main-collection-banner__disclaimer-and-cta-wrapper">
+                <div id="Block-{{ block.id }}" class="bs-devshop__bfcm-main-collection-banner__description" {{ block.shopify_attributes }}>
+                  {{ block.settings.disclaimer }}
+                  </div>
+                  {%- if block.settings.cta != blank and block.settings.show_cta == true -%}
+                    <div id="Block-{{ block.id }}" class="bs-devshop__bfcm-main-collection-banner__cta" {{ block.shopify_attributes }}>
+                      <a href="{{ block.settings.cta_url }}" class="bs-devshop__bfcm-main-collection-banner__cta-link">{{ block.settings.cta }}</a>
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+            {% when 'disclaimer' %}
+              {%- if block.settings.disclaimer != blank and section.settings.show_bottom_disclaimer == true -%}
+                <div id="Block-{{ block.id }}" class="bs-devshop__bfcm-main-collection-banner__stock-notice bottom-disclaimer" {{ block.shopify_attributes }}>
+                  {{ block.settings.disclaimer }}
+                </div>
+              {%- endif -%}
+          {% endcase %}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "BFCM Main Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Banner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Mobile Banner Image"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Image overlay opacity",
+      "default": 30
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_disclaimer",
+      "label": "Show bottom disclaimer",
+      "default": false,
+      "info": "If enabled, the bottom disclaimer will be shown instead of the description disclaimer."
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Mobile Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Mobile Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pill",
+      "name": "Sale Pill",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "content",
+          "label": "Content",
+          "default": "Now Live"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margin Top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Margin Bottom",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading",
+          "default": "<p>Up to 50% Off</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Black Friday Collection</p>"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin Top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin Bottom",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Shop our Black Friday Collection</p>"
+        },
+        {
+          "type": "text",
+          "id": "disclaimer",
+          "label": "Stock Notice",
+          "default": "While stock last"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin Top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin Bottom",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "disclaimer-and-cta",
+      "name": "Disclaimer and CTA",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "disclaimer",
+          "label": "Stock Notice",
+          "default": "While stock last"
+        },
+        {
+          "type": "text",
+          "id": "cta",
+          "label": "CTA",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "CTA link",
+        },
+        {
+          "type": "checkbox",
+          "id": "show_cta",
+          "label": "Show CTA",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin Top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin Bottom",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "disclaimer",
+      "name": "Stock Notice",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "disclaimer",
+          "label": "Stock Notice",
+          "default": "While stock last"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin Top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin Bottom",
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BFCM Main Banner",
+      "blocks": [
+        {
+          "type": "pill"
+        },
+        {
+          "type": "heading"
+        },
+
+        {
+          "type": "description"
+        },
+        {
+          "type": "disclaimer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

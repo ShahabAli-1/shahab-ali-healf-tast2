@@ -1,0 +1,102 @@
+{%- for block in section.blocks -%}
+  {% assign heading = block.settings.heading %}
+{% endfor %}
+
+{% unless product.metafields.custom_fields["faq"] == blank and heading == blank %} 
+  <div id="accordion__container" class="accordion__container background-neutral {% if template.name != "index" %}accordion__container-page{% endif %}{% if section.settings.no_spacing == true %} no__spacing{% endif %}">
+      <div class="page-width center">
+          <h3>{{ section.settings.heading }}</h3>
+      </div>
+
+      <div class="accordion accordion-width accordion__sub-container flex f-j-center f-d-column f-a-center" data-toggle-group>
+        {% if product.metafields.custom_fields["faq"] != blank %}
+          {% assign data_attr = shop.metafields._cf_products["faq"].data_attr %}
+          {% for item in product.metafields.custom_fields["faq"] %}
+            <div class="accordion-item accordion__content" data-toggle-item>
+                <div class="accordion-header flex f-j-between f-a-center" data-toggle-trigger>
+                    <h4>
+                      {% if item.title != blank %}
+                        {{ item.title }}
+                      {% endif %}
+                    </h4>
+                    {% include 'icon-plus-thin' %}
+                </div>
+                <div class="accordion-content" data-toggle-elem>
+                    <p>
+                      {% if item.body != blank %}
+                              {{ item.body }}
+                        {%- endif -%}
+                    </p>
+                </div>
+            </div>
+          {%- endfor -%}
+        {% else %}
+          {%- for block in section.blocks -%}
+            <div class="accordion-item accordion__content" data-toggle-item>
+                <div class="accordion-header flex f-j-between f-a-center" data-toggle-trigger>
+                    <h4>{{ block.settings.heading | escape }}</h4>
+                    {% include 'icon-plus-thin' %}
+                </div>
+                <div class="accordion-content" data-toggle-elem>
+                    <p>
+                        {%- if block.settings.text != blank -%}
+                            {{ block.settings.text }}
+                        {%- endif -%}
+                    </p>
+                </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+  </div>
+{% endunless %}
+
+
+{% schema %}
+{
+  "name": "Accordion",
+  "tag": "section",
+  "class": "spaced-section--full-width",
+  "settings": [
+      {
+          "type" : "text", 
+          "id" : "heading",
+          "label" : "Heading"
+      },
+      {
+        "type": "checkbox",
+        "id": "no_spacing",
+        "default": false,
+        "label": "Remove the spacing on accordion container"
+      }
+  ],
+  "blocks": [
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+          {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+          },
+          {
+          "type": "richtext",
+          "id": "text",
+          "label": "Paragraph"
+          }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BB - Accordion",
+      "blocks": [
+        {
+          "type": "accordion"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

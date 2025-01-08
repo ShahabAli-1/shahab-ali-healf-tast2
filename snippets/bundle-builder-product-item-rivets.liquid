@@ -1,0 +1,27 @@
+<li class="bundle-builder-product-item" rv-each-item="data.products_to_display">
+  
+  <input type="radio" rv-id="item.product.id" rv-name="item.step" rv-value="item.product.handle" rv-data-product-title="item.product.title" rv-data-product-variant="item.variant" rv-on-change="controller.setSelectedProduct">
+
+  <label rv-for="item.product.id">
+    <p class="recommended" rv-if="item.recommended">recommended for you</p>
+
+    <div class="image-area">
+      {%- include 'product--badges' -%}
+
+      <div class="object-fit--cover" rv-aria-label="item.product.title">
+        <img loading="lazy" rv-alt="item.product.title" rv-src="item.product.featured_image | getSizedImage '239x'">
+      </div>
+    </div>
+
+    <div class="info-area">
+      <h3 class="product-title" rv-aria-label="item.product.title" rv-text="item.product.title"></h3>
+      <div class="bottom-title" rv-if="item.metafields.bottom_title" rv-text="item.metafields.bottom_title"></div>
+    </div>
+
+    <p class="selected">
+      <span class="tick">{% include 'icon-tick' %}</span>
+      Selected
+    </p>
+  </label>
+
+</li>

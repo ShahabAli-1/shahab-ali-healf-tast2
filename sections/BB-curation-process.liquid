@@ -1,0 +1,159 @@
+{% assign ss = section.settings %}
+
+<div class="section-curation-process">
+  <div class="wrapper">
+    <div class="curation-process__container">
+      <div class="curation-process__grid flex">
+        <div class="curation-process__content--left">
+          <h3 class="curation-process__left__title liquid-title">{{ss.title}}</h3>
+          <div class="curation-process__left__subtitle liquid-subtitle">{{ss.sub_title}}</div>
+        </div>
+
+        <div class="curation-process__content--right">
+          <div class="curation-process__content__images hide-scroll-bar">
+            {%- for block in section.blocks -%}
+              {% assign bs = block.settings %}
+              <div class="curation-process__block">
+                <div class="curation-process__image">
+                  {% render 'image-element',
+                      image: bs.image,
+                      image_mobile: bs.image,
+                      size: '1920x',
+                      extra_class: 'object-fit--cover blocks-image'
+                  %}
+                </div>
+                <div class="curation-process__block_content">
+                  <div class="curation-process_content__title liquid-title">
+                    <p>0{{ forloop.index }}.</p>
+                    <p> {{ bs.title }}</p>
+                  </div>
+                  <div class="curation-process_content__desc liquid-subtitle">{{ bs.description }}</div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% style %}
+  #shopify-section-{{ section.id }} .section-curation-process{
+    background: {{ss.bg_color}};
+    padding-top: {{ ss.padding_top }}px;
+    padding-bottom: {{ ss.padding_bottom }}px;
+  }
+
+  @media screen and (max-width: 834px) {
+    #shopify-section-{{ section.id }} .section-curation-process{
+      padding-top: {{ ss.padding_top_tablet }}px;
+      padding-bottom: {{ ss.padding_bottom_tablet }}px;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "BB - Curation Process",
+  "tag": "section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Three Step Curation Process"
+    },
+    {
+      "type": "richtext",
+      "id": "sub_title",
+      "label": "Sub Title",
+      "default": "<p>The Healf stamp of approval: Here at Healf every product goes through a rigorous Three Step Curation Process, so you know you are only getting the best.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "unit": "px",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "unit": "px",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Paddings - Tablet"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "label": "Padding top",
+      "unit": "px",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "label": "Padding bottom",
+      "unit": "px",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "blocks",
+      "name": "Process",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BB - Curation Process"
+    }
+  ]
+}
+{% endschema %}

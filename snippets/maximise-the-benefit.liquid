@@ -1,0 +1,95 @@
+{%- assign matching_tags = '|' -%}
+{%- assign cart_product_ids = "" -%}
+
+
+{%- for item in cart.items -%}
+  {%- assign cart_product_ids = cart_product_ids | append: item.product.id | append: '|' -%}
+  {%- for tag in item.product.tags -%}
+    {%- if tag contains 'filter:' or tag contains 'goal:' or tag contains 'benefit-' -%}
+      {%- assign tag_formatted = '|' | append: tag | append: '|' -%}
+      {%- unless matching_tags contains tag_formatted -%}
+        {%- assign matching_tags = matching_tags | append: tag | append: '|' -%}
+      {%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+
+{%- assign tags_to_search_arr = matching_tags | split: "|" -%}
+{% assign pulled_from_collection = "" %}
+{% assign already_used_prods = cart_product_ids %}
+
+{% if tags_to_search_arr.size > 0 %}
+
+<div class="recommended-title">
+  <p style="text-align: left;">Maximise the benefits</p>
+</div>
+
+<div class="maximize-benefits">
+  {%- for tag in tags_to_search_arr -%}
+    {% comment %} {% if matching_product_count >= 4 %}
+      {% break %}
+    {% endif %} {% endcomment %}
+
+    {% assign formatted_tag = tag | split: ':' | last %}
+    {% assign collection_formatted_name = formatted_tag | split: " " | join: "-" | downcase %}
+
+    {% if pulled_from_collection contains formatted_tag %}
+      {% continue %}
+    {% endif %}
+    
+    {%- assign tagged_prods = collections[collection_formatted_name].products -%}
+    {% assign pulled_from_collection = pulled_from_collection | append: formatted_tag | append: "|" %}
+
+    {% comment %} {% if tagged_prods.size > 0 %}
+      {{ formatted_tag }} as {{ collection_formatted_name }}: [ {{ tagged_prods.size }} ]
+      {% else %}
+      {{ formatted_tag }} as {{ collection_formatted_name }}: empty 
+    {% endif %} {% endcomment %}
+
+    {% assign prods_of_tag_added = 0 %}
+
+    {% if tagged_prods.size == 0 %}
+      {% continue %}
+    {% endif %}
+
+    {% for prod in tagged_prods %}
+        {% if already_used_prods contains prod.id %} 
+          {% continue %}
+        {% endif %}
+
+        {% render 'maximize-benefits-product-card', product: prod, benefit_name: formatted_tag %}
+
+        {% assign prods_of_tag_added = prods_of_tag_added | plus: 1 %}
+        {% assign already_used_prods = already_used_prods | append: prod.id | append: "|" %}
+
+        {% if prods_of_tag_added >= 3 %}
+          {% break %}
+        {% endif %}
+    {% endfor %}
+
+  {%- endfor -%}
+
+</div>
+
+<script>
+  const expandableBenefitItems = document.querySelectorAll('.maximize-benefits__product-content .read-more a')
+
+  function toggleReadMore(e) {
+    let aEl = e.target
+    let isClosed = aEl.innerHTML == 'Read More'
+    console.log('is closed: ' + isClosed)
+    let expandableText = aEl.closest('.description').querySelector('.expandable-text')
+
+    if (isClosed) {
+      expandableText.classList.remove('hidden')
+      aEl.innerHTML = 'Read Less'
+    } else {
+      expandableText.classList.add('hidden')
+      aEl.innerHTML = 'Read More'
+    }
+  }
+
+  expandableBenefitItems.forEach((n) => n.addEventListener('click', toggleReadMore))
+</script>
+
+{% endif %}

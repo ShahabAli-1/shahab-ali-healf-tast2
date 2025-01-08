@@ -1,0 +1,111 @@
+{% assign image_url = image | img_url: size %}
+{% assign image_retina_url = image | img_url: size, scale: 2 %}
+
+{% assign tablet_size = '600' %}  
+{% assign mobile_size = '400' %} 
+
+{% assign image_tablet_url = image_mobile | default: image | img_url: tablet_size %}
+{% assign image_mobile_url = image_mobile | default: image | img_url: mobile_size %}
+
+{% assign image_retina_tablet_url = image_mobile | default: image | img_url: tablet_size, scale: 2 %}
+{% assign image_retina_mobile_url = image_mobile | default: image | img_url: mobile_size, scale: 2 %}
+
+{% assign placeholder_url = image | img_url: '30x30' %}
+
+
+{% if type == 'file_url' %}
+  {% assign image_url = image | file_img_url: size %}
+  {% assign image_retina_url = image | file_img_url: size, scale: 2 %}
+
+  {% assign image_tablet_url = image_mobile | default: image | file_img_url: tablet_size %}
+  {% assign image_mobile_url = image_mobile | default: image | file_img_url: mobile_size %}
+
+  {% assign image_retina_tablet_url = image_mobile | default: image | file_img_url: tablet_size, scale: 2 %}
+  {% assign image_retina_mobile_url = image_mobile | default: image | file_img_url: mobile_size, scale: 2 %}
+
+  {% assign placeholder_url = image | file_img_url: '30x30' %}
+{% endif %}
+
+{% if type == 'full_url' %}
+  {% assign size_jpg = '_' | append: size | append: '.jpg' %}
+  {% assign size_png = '_' | append: size | append: '.png' %}
+  {% assign size_gif = '_' | append: size | append: '.gif' %}
+
+  {% assign size_retina_jpg = '_' | append: size | append: '@2x.jpg' %}
+  {% assign size_retina_png = '_' | append: size | append: '@2x.png' %}
+  {% assign size_retina_gif = '_' | append: size | append: '@2x.gif' %}
+
+  {% assign image_url = image | replace: '.jpg', size_jpg | replace: '.png', size_png | replace: '.gif', size_gif %}
+  {% assign image_retina_url = image | replace: '.jpg', size_retina_jpg | replace: '.png', size_retina_png | replace: '.gif', size_retina_gif %}
+
+  {% assign size_jpg = '_' | append: tablet_size | append: '.jpg' %}
+  {% assign size_png = '_' | append: tablet_size | append: '.png' %}
+  {% assign size_gif = '_' | append: tablet_size | append: '.gif' %}
+  {% assign size_retina_jpg = '_' | append: tablet_size | append: '@2x.jpg' %}
+  {% assign size_retina_png = '_' | append: tablet_size | append: '@2x.png' %}
+  {% assign size_retina_gif = '_' | append: tablet_size | append: '@2x.gif' %}
+
+  {% assign image_tablet_url = image_mobile | default: image | replace: '.jpg', size_jpg | replace: '.png', size_png | replace: '.gif', size_gif %}
+  {% assign image_retina_tablet_url = image_mobile | default: image | replace: '.jpg', size_retina_jpg | replace: '.png', size_retina_png | replace: '.gif', size_retina_gif  %}
+
+
+  {% assign size_jpg = '_' | append: mobile_size | append: '.jpg' %}
+  {% assign size_png = '_' | append: mobile_size | append: '.png' %}
+  {% assign size_gif = '_' | append: mobile_size | append: '.gif' %}
+  {% assign size_retina_jpg = '_' | append: mobile_size | append: '@2x.jpg' %}
+  {% assign size_retina_png = '_' | append: mobile_size | append: '@2x.png' %}
+  {% assign size_retina_gif = '_' | append: mobile_size | append: '@2x.gif' %}
+
+  {% assign image_mobile_url = image_mobile | default: image | replace: '.jpg', size_jpg | replace: '.png', size_png | replace: '.gif', size_gif %}
+  {% assign image_retina_mobile_url = image_mobile | default: image | replace: '.jpg', size_retina_jpg | replace: '.png', size_retina_png | replace: '.gif', size_retina_gif  %}
+  
+
+  {% assign size_jpg = '_' | append: '1x1' | append: '.jpg' %}
+  {% assign size_png = '_' | append: '1x1' | append: '.png' %}
+  {% assign size_gif = '_' | append: '1x1' | append: '.gif' %}
+  {% assign placeholder_url = image | replace: '.jpg', size_jpg | replace: '.png', size_png | replace: '.gif', size_gif %}
+{% endif %}
+
+{% if image_mobile == blank %}
+  {% assign image_mobile = image %}
+  {% assign image_tablet = image %}
+{% endif %}
+
+{% assign ss = section.settings %}
+{% assign img_zoom = img_zoom %}
+
+<div 
+ class="image-element-wrapper {% if img_zoom %}has-zoom{% endif %} wrapper--{{ image.id }} {% if extra_class != blank %}{{ extra_class }}{% endif %}" 
+    style="
+    {% if image.aspect_ratio != blank or image_mobile.aspect_ratio != blank %}--aspect-desktop: {{ 100.0 | divided_by: image.aspect_ratio }}%; --aspect-tablet: {{ 100.0 | divided_by: image_mobile.aspect_ratio }}%;{% endif %}
+    {% if img_zoom %}
+        background-image: url('{{ image | img_url: '1300x' }}'); background-position: center center;
+    {% endif %}"
+
+    {% if img_zoom %}
+        data-image-with-zoom
+    {% endif %}
+    {% if extra_attr != blank %}{{ extra_attr }}{% endif %} {% if manual_lazy_load %}data-lazy-load-trigger='{
+    "addListenerTo": "closest:.product-grid-item",
+    "target": "this",
+    "subTarget": "[data-lazy-manual]",
+    "on": "mouseover"
+}'{% endif %}>
+   
+  <picture>
+    {% if image_mobile == '1px' %}
+      <source media="(max-width: 834px)" data-srcset="about:blank">
+    {% elsif image == '1px' %}
+      {% assign image_url = image_mobile | img_url: '834x' %}
+      <source media="(min-width: 835px)" data-srcset="about:blank">
+    {% else %}
+      <source media="(max-width: 480px)" data-srcset="{{ image_mobile_url }} 1x, {{ image_retina_mobile_url }} 2x">
+      <source media="(max-width: 834px)" data-srcset="{{ image_tablet_url }} 1x, {{ image_retina_tablet_url }} 2x">
+    {% endif %}
+    <img draggable="false" data-srcset="{{ image_url }} 1x, {{ image_retina_url }} 2x"  alt="{{ alt | strip_html }}" {% if manual_lazy_load %}data-lazy-manual{% else %}data-lazy{% endif %}  class="image-element-image">
+  </picture>
+
+  <img src="{{ placeholder_url }}" alt="{{ alt | default: image.alt | default: bs.title | default: ss.title | default: page.title | default: shop.name | strip_html }}" class="placeholder">
+
+</div>
+

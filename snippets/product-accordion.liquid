@@ -1,0 +1,138 @@
+<div id="accordion__container" class="accordion__container accordion__container-pdp">
+    {%- if product.description != blank -%}
+    <div class="accordion" data-toggle-group>
+        <div class="accordion-item accordion__content open" data-toggle-item>
+            <div class="accordion-header flex f-j-between f-a-center" data-toggle-trigger>
+                <h4>Product Description</h4>
+                {% render 'icon-chevron' %}
+            </div>
+            <div class="accordion-content open" data-toggle-elem>
+              <div class='product__description--first'>
+                {{ product.description | truncatewords: 50 }}
+                </li></ul></ol></span></i></strong>
+                <span
+                    class="read-more"
+                    data-class-change='[
+                    {
+                        "target": ".accordion-item .product__description--last, .accordion-item .product__description--first",
+                        "method": "add",
+                        "class": "show",
+                        "on": "click"
+                    }
+                ]'>Read more</span>
+              </div>
+              <div class="product__description--last">
+                  {{ product.description }}
+              </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if product.metafields.custom.why_its_healf.value %}
+    <div class="accordion why-its-healf" data-toggle-group>
+        <div class="accordion-item accordion__content" data-toggle-item>
+            <div class="accordion-header flex f-j-between f-a-center" data-toggle-trigger>
+                <h4>Why It's Healf</h4>
+                {% render 'icon-chevron' %}
+            </div>
+            <div class="accordion-content" data-toggle-elem>
+                {{ product.metafields.custom.why_its_healf.value }}
+            </div>
+        </div>
+    </div>
+    {% endif %}      
+    {% if product.metafields.my_fields.ingredients.value %}
+    <div class="accordion" data-toggle-group>
+        <div class="accordion-item accordion__content" data-toggle-item>
+            <div class="accordion-header flex f-j-between f-a-center" data-toggle-trigger>
+                {% assign tech = false %}
+                {% for tag in product.tags %}
+                  {% if tag == 'Workout Accessorie' or tag == 'Wearable' %}
+                    {% assign tech = true %}
+                  {% endif %}
+                {% endfor %}
+                {%  if tech == true %}
+                  <h4>Specifications</h4>
+                {% else %}
+                  <h4>Ingredients</h4>
+                {% endif %}
+                {% render 'icon-chevron' %}
+            </div>
+            <div class="accordion-content" data-toggle-elem>
+                {{ product.metafields.my_fields.ingredients.value }}
+            </div>
+        </div>
+    </div>
+    {% endif %}   
+    {% unless product.id == 8556381864175 %}
+      {% comment %} Hide delivery & returns accordion for Eight Sleep {% endcomment %}
+      <div class="accordion" data-toggle-group>
+          <div class="accordion-item accordion__content" data-toggle-item>
+              <div class="accordion-header flex f-j-between f-a-center" data-toggle-trigger>
+                <h4>Delivery & Returns</h4>
+                {% render 'icon-chevron' %}
+              </div>
+              <div class="accordion-content" data-toggle-elem>
+                <p><b>SHIPPING INFORMATION:</b></p>
+                <p>At Healf we prioritise safe and fast delivery for all our customers. Our carefully selected couriers are Royal Mail and DPD.</p>
+                <br>
+                <div class="desktop-only" style="display: flex; justify-content: space-between;">
+                  <div>
+                    <p><b>Option</b></p>
+                    <p>UK Standard Delivery</p>
+                    <p>Next Working Day Delivery</p>
+                    <p>International Deliveries</p>
+                  </div>
+                  <div>
+                    <p><b>Est. Delivery</b></p>
+                    <p>2-3 Working Days</p>
+                    <p>Next Working Day*</p>
+                    <p>7 Working Days**</p>
+                  </div>
+                  <div>
+                    <p><b>Orders <£50</b></p>
+                    <p>£3.95</p>
+                    <p>£5.95</p>
+                    <p>£22.95 (Europe)</p>
+                  </div>
+                  <div>
+                    <p><b>Orders >£50</b></p>
+                    <p>FREE</p>
+                    <p>£5.95</p>
+                    <p>£49 (International)</p>
+                  </div>
+                </div>
+                <div class="desktop-only">
+                  <br>
+                  <p>*(if placed before 12.00)</p>
+                  <p>**(up to 4 weeks)</p>
+                </div>
+                <div class="tablet-only">
+                  <p><b>UK Standard Delivery:</b> Enjoy free standard delivery on orders above £50, this option usually requires 2-3 working days. If your order is under £50, this delivery option is available for £3.95.</p><br>
+                  <p><b>Next Working Day Delivery:</b> For when you need our products urgently, we offer a next working day shipping for £5.95. For orders placed before 12.00 we will ship it the same day to ensure you receive your order the next working day.</p>
+                </div>
+                <p><br><b>RETURNS POLICY:</b></p>
+                <p>
+                  If for any reason you are not satisfied with your order, we provide free 365 day UK returns for all our customers. To initiate your return, simply contact us at <a href="mailto:team@healf.com">team@healf.com</a> and we’ll send you a return slip and help to arrange a collection. The item you return must be sent in the same condition as received, and inside the original packaging. Once received we will notify you via email.
+                </p>
+                <p>
+                  For international returns, we unfortunately do not cover the cost. However, we work with an array of carriers and can offer self-posting returns for customers shopping from outside the UK.
+                </p>
+              </div>
+          </div>
+      </div>
+    {% endunless %}
+    {% if product.metafields.my_fields.suggested_use.value %}
+    <div class="accordion" data-toggle-group>
+        <div class="accordion-item accordion__content" data-toggle-item>
+            <div class="accordion-header flex f-j-between f-a-center" data-toggle-trigger>
+                <h4>Suggested Use</h4>
+                {% render 'icon-chevron' %}
+            </div>
+            <div class="accordion-content" data-toggle-elem>
+                {{ product.metafields.my_fields.suggested_use.value }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>

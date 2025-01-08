@@ -1,0 +1,242 @@
+<!-- mobile menu button -->
+{%- if ss.menu_mobile_new != blank -%}
+  <header-drawer data-breakpoint="tablet" class="old-header-drawer">
+    <details class="menu-drawer-container">
+      <summary
+        class="header__icon header__icon--menu header__icon--summary link focus-inset"
+        aria-label="{{ 'sections.header.menu' | t }}"
+      >
+        <span class="burger-menu-inner"> </span>
+      </summary>
+
+
+      <div id="menu-drawer" class="new-menu-drawer menu-drawer motion-reduce" tabindex="-1">
+        <div class="menu-drawer__inner-container">
+          <div class="menu-drawer__navigation-container">
+            <nav class="menu-drawer__navigation">
+              <ul class="top-menu-drawer__menu menu-drawer__menu list-menu" role="list">
+                {%- for link in ss.menu_mobile_new.links -%}
+                  <li
+                    {% if link.title == 'Eat'
+                      or link.title == 'Move'
+                      or link.title == 'Mind'
+                      or link.title == 'Sleep'
+                    %}
+                      class="special-menu-item{% if forloop.first %} special-menu-item__first{% endif %}"
+                    {% endif %}
+                  >
+                    {%- if link.links != blank -%}
+                      <div
+                        id="main-menu__container-{{ forloop.index }}"
+                        class="main-menu__container{% if forloop.first %} menu-opening open{% endif %}"
+                      >
+                        <p
+                          class="menu-drawer__menu-item menu-list"
+                          data-class-change='
+                            [
+                                {
+                                    "target": ".main-menu__container",
+                                    "class": "open",
+                                    "method": "remove",
+                                    "on": "click",
+                                    "preventDefault": true
+                                },
+                                {
+                                    "target": "#main-menu__container-{{ forloop.index }}",
+                                    "class": "open",
+                                    "method": "add",
+                                    "on": "click",
+                                    "preventDefault": true
+                                }
+                            ]
+                          '
+                        >
+                          {{ link.title | escape }}
+                        </p>
+
+                        <div
+                          id="link-{{ link.title | escape }}"
+                          class="menu-drawer__submenu menu-drawer__submenu-main motion-reduce"
+                          tabindex="-1"
+                        >
+                          <div class="menu-drawer__inner-submenu">
+                            <ul class="menu-drawer__menu-main list-menu" role="list" tabindex="-1">
+                              {%- for childlink in link.links -%}
+                                <li>
+                                  {%- if childlink.links == blank -%}
+                                    <a
+                                      href="{{ childlink.url }}"
+                                      class="menu-drawer__menu-item menu-drawer__menu-item-main link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                      {% if childlink.current %}
+                                        aria-current="page"
+                                      {% endif %}
+                                    >
+                                      {{ childlink.title | escape }}
+                                      {% if childlink.title contains 'Shop All' or childlink.title contains 'Quiz' %}
+                                        {% render 'icon-chevron' %}
+                                        {% render 'icon-caret' %}
+                                      {% endif %}
+                                    </a>
+                                  {%- else -%}
+                                    <details>
+                                      <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                        {{ childlink.title | escape | split: '[Collection]' | first }}
+                                          {% render 'icon-chevron' %}
+                                      </summary>
+                                      <div
+                                        id="childlink-{{ childlink.title | escape }}"
+                                        class="menu-drawer__submenu motion-reduce"
+                                      >
+                                        <button
+                                          class="menu-drawer__close-button link link--text focus-inset"
+                                          aria-expanded="true"
+                                        >
+                                          {% render 'icon-chevron' %} &nbsp;
+                                          {{ childlink.title | escape | split: '[Collection]' | first }}
+                                        </button>
+                                        <ul
+                                          class="menu-drawer__menu list-menu"
+                                          role="list"
+                                          tabindex="-1"
+                                          {% if childlink.title contains '[Collection]' %}
+                                            data-keen-slider="{{ slider_settings }}"
+                                          {% endif %}
+                                        >
+                                          {%- for grandchildlink in childlink.links -%}
+                                            {% assign the_product = grandchildlink.object %}
+                                            <li>
+                                              {% if childlink.title contains '[Collection]' %}
+                                                <div>
+                                                  {% include 'collection-item',
+                                                    product: the_product,
+                                                    extra_class: 'simple-item'
+                                                  %}
+                                                </div>
+                                              {% endif %}
+                                              <a
+                                                href="{{ grandchildlink.url }}"
+                                                class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                                {% if grandchildlink.current %}
+                                                  aria-current="page"
+                                                {% endif %}
+                                              >
+                                                {{ grandchildlink.title | escape }}
+                                              </a>
+                                            </li>
+                                          {%- endfor -%}
+                                        </ul>
+                                      </div>
+                                    </details>
+                                  {%- endif -%}
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+
+                            {%- if section.blocks != empty -%}
+                              <div class="collection-images">
+                                {%- for block in section.blocks -%}
+                                  {% assign bs = block.settings %}
+
+                                  {%- case block.type -%}
+                                    {%- when 'collection_title' -%}
+                                      {% if bs.show_under != link.title %}
+                                        {% continue %}
+                                      {% endif %}
+                                    {%- when 'collection' -%}
+                                      {% if bs.show_under != link.title %}
+                                        {% continue %}
+                                      {% endif %}
+
+                                      <div>
+                                        <a class="image__area" href="{{ bs.btn_link }}">
+                                          {% render 'image-element',
+                                            image: bs.image,
+                                            image_mobile: bs.image_mobile,
+                                            size: '1600x',
+                                            extra_class: 'object-fit--cover'
+                                          %}
+                                        </a>
+                                        <a class="content-area" href="{{ bs.btn_link }}">
+                                          {{ block.settings.btn_label }}
+                                        </a>
+                                      </div>
+                                  {% endcase %}
+                                {% endfor %}
+                              </div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                    {%- else -%}
+                      <a
+                        href="{{ link.url }}"
+                        class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+                        {% if link.current %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        {% if link.title == 'Deals' %}
+                          <div class="link-icon-container">{% render 'icon-deals' %}</div>
+                        {% endif %}
+                        {{ link.title | escape }}
+                      </a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </details>
+  </header-drawer>
+{%- endif -%}
+
+<style>
+.new-menu-drawer .main-menu__container .menu-drawer__menu-item {
+  font-size: 24px !important;
+}
+.new-menu-drawer .main-menu__container .menu-list {
+  font-size: 24px !important;
+}
+.new-menu-drawer .top-menu-drawer__menu .special-menu-item {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: fit-content !important;
+}
+.menu-drawer__menu-main li {
+  border-bottom: none !important;
+}
+.menu-drawer-container #menu-drawer .menu-drawer__navigation .top-menu-drawer__menu::before {
+  left: 0 !important;
+  right: 0 !important;
+  top: 52px !important;
+  margin: 0 auto !important;
+  width: calc(100% - 32px) !important;
+  background-color: #000 !important;
+}
+.menu-drawer-container #menu-drawer .menu-drawer__navigation .top-menu-drawer__menu .special-menu-item .menu-drawer__submenu-main .menu-drawer__menu-main details .menu-drawer__close-button {
+  justify-content: inherit !important;
+  padding: 12px 0px !important;
+  font-size: 24px !important;
+  width: 90% !important;
+  margin: 0 auto !important;
+  font-weight: 400 !important;
+}
+.main-menu__container.open>.menu-drawer__menu-item {
+  border-bottom: 2px solid !important;
+  padding-bottom: 15px !important;
+}
+.main-menu__container>.menu-drawer__menu-item {
+  justify-content: center !important;
+}
+.menu-drawer-container #menu-drawer .menu-drawer__navigation .top-menu-drawer__menu .special-menu-item summary.menu-drawer__menu-item>svg, .menu-drawer-container #menu-drawer .menu-drawer__navigation .top-menu-drawer__menu .special-menu-item a.menu-drawer__menu-item>svg {
+    width: 20px !important;
+    height: 11px !important;
+    transform: rotate(-90deg);
+}
+.menu-drawer-container #menu-drawer .menu-drawer__navigation .top-menu-drawer__menu .special-menu-item .menu-drawer__menu-item {
+    gap: 8px !important;
+    line-height: 19px !important;
+}
+</style>

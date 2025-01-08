@@ -1,0 +1,166 @@
+{% assign ss = section.settings %}
+
+<div class="contact-banner__container {{ ss.class }}">
+    {% if ss.image != blank %}
+        {% render 'image-element', image: ss.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--cover'%}
+    {%- endif -%}
+
+    <div class="wrapper">
+        <div class="contact-banner__card wrapper">
+            <div class="contact-banner__card-title">
+                {% if ss.logo != blank %}
+                    <div>
+                        <h4>Brand of the month</h4>
+                        {% render 'image-element', image: ss.logo, image_mobile: ss.logo, size: '200x', extra_class: 'object-fit--contain'%}
+                    </div>
+                {% elsif ss.title != blank %}
+                    <div>
+                        <h4>Brand of the month</h4>
+                        <h3>{{ ss.title }}</h3>
+                    </div>
+                {% endif %}
+                {% if ss.text != blank %}
+                    {{ ss.text }}
+                {% endif %}
+            </div>
+            {% if ss.button_text != blank %}
+                <a target="_blank" href="{{ ss.button_link }}" class="btn liquid-button">{{ ss.button_text }}</a>
+            {%- endif -%}
+            {% if ss.button_text2 != blank %}
+                <br>
+                <a target="_blank" href="{{ ss.button_link2 }}" class="btn">{{ ss.button_text2 }}</a>
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.contact-banner {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.contact-banner {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Contact Banner",
+        "tag": "section",
+        "class": "contact-banner",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Contact banner"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Background Image"
+            },
+            {
+                "type": "image_picker",
+                "id": "image_mobile",
+                "label": "Background Image Mobile"
+            },
+            {
+                "type": "text",
+                "id": "class",
+                "label": "Custom Class"
+            },
+            {
+                "type": "image_picker",
+                "id": "logo",
+                "label": "Logo"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "text",
+                "label": "Content"
+            },
+            {
+                "type": "text",
+                "id": "button_text",
+                "label": "Button Text"
+            },
+            {
+                "type": "url",
+                "id": "button_link",
+                "label": "Button Link"
+            },
+            {
+                "type": "text",
+                "id": "button_text2",
+                "label": "Button Text"
+            },
+            {
+                "type": "url",
+                "id": "button_link2",
+                "label": "Button Link"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Contact Banner"
+            }
+        ]
+    }
+{% endschema %}

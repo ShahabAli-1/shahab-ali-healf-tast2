@@ -1,0 +1,249 @@
+<script src="{{ 'grid-banners.js' | asset_url }}" defer="defer"></script>
+
+<div class="bs-devshop__quiz-banner-container {% unless request.design_mode %}hidden{% endunless %} ab__test" data-test-name="inject-quiz-banner">
+  {% for block in section.blocks %}
+    {% assign bs = block.settings %}
+    <div
+      banner-type="quiz"
+      class="
+        bs-devshop__quiz-grid-scroll-banner 
+        bs-devshop__quiz-grid-scroll-banner--content-{{ bs.content_alignment }}
+      "
+    >
+      <div class="bs-devshop__content-block">
+        <div class="bs-devshop__content-inner-block">
+          <div class="bs-devshop__content-block-title"><p>{{ bs.title }}</p></div>
+          <div class="bs-devshop__content-block-body">{{ bs.body }}</div>
+
+          <a href="{{ bs.cta_url }}" class="btn btn--white">
+            {{ bs.cta_title }}
+          </a>
+        </div>
+      </div>
+      <div class="bs-devshop__img-container-group">
+        <div class="bs-devshop__img-container" style='--bg-image: url(" {{ bs.image_1 | image_url: width: 800 }}")'>
+          <!-- hidden image to cache, or bg image flickers (bg image for sizing reasons) -->
+          <img src="{{ bs.image_1 | image_url: width: 800 }}" class="hidden" width=800 height=200 />
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .bs-devshop__quiz-banner-container {
+
+    width: 100%;
+  }
+  .bs-devshop__quiz-grid-scroll-banner {
+    width: 100%;
+    flex-basis: 100%;
+    background-color: black;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    margin-left: 1.2rem;
+    {% comment %} padding-left: 24px; {% endcomment %}
+    margin-right: 1.2rem;
+  }
+
+  .bs-devshop__quiz-grid-scroll-banner--content-left .bs-devshop__content-block {
+    order: 0;
+  }
+  .bs-devshop__quiz-grid-scroll-banner--content-right .bs-devshop__content-block {
+    order: 2;
+  }
+
+  .bs-devshop__quiz-grid-scroll-banner .bs-devshop__content-block {
+    padding: 4rem 3.8rem;
+    color: white;
+    min-width: 50%;
+    min-width: 54.2rem;
+  }
+
+  .bs-devshop__quiz-grid-scroll-banner .bs-devshop__content-inner-block {
+    position: relative;
+  }
+
+  .bs-devshop__quiz-grid-scroll-banner .bs-devshop__content-block a {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: white !important;
+    color: black !important;
+  }
+
+  .bs-devshop__content-block-title p{
+    font-size: 4.9rem;
+    line-height: 98.1%;
+
+  }
+
+  .bs-devshop__content-block-title {
+    margin-bottom: 3.4rem;
+
+  }
+
+
+  .bs-devshop__content-block-body p {
+    font-size: 1.95rem;
+    line-height: 24.7px;
+    max-width: 70%;
+  }
+
+  .bs-devshop__quiz-grid-scroll-banner .bs-devshop__img-container-group {
+    display: flex;
+    width: 100%;
+  }
+
+  .bs-devshop__quiz-grid-scroll-banner .bs-devshop__img-container {
+    background-image: var(--bg-image);
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    min-height: 11.5rem;
+  }
+
+  .bs-devshop__quiz-banner-cta {
+    border: none;
+  }
+
+  @media (max-width: 990px) {
+    .bs-devshop__quiz-grid-scroll-banner {
+      flex-direction: column;
+      position: relative;
+      padding-bottom: 20rem;
+      {% comment %} padding-left: 12px; {% endcomment %}
+      margin-left: 0.6rem;
+    }
+
+    .bs-devshop__quiz-grid-scroll-banner .bs-devshop__content-block {
+      min-width: 100%;
+      max-width: 100%;
+      padding: 2.4rem 1.8rem;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .bs-devshop__quiz-grid-scroll-banner .bs-devshop__content-inner-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bs-devshop__content-block-title p{
+      font-size: 2.87rem;
+    }
+
+    .bs-devshop__content-block-title {
+      margin-bottom: 1.5rem;
+    }
+
+    .bs-devshop__content-block-body p {
+      font-size: 1.7rem;
+      margin: auto;
+      line-height: 18px;
+      max-width: unset;
+    }
+
+
+    .bs-devshop__content-block-body br {
+      display: none;
+    }
+    
+    .bs-devshop__quiz-grid-scroll-banner .bs-devshop__content-block a {
+      position: absolute;
+      bottom: -18rem; 
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .bs-devshop__quiz-grid-scroll-banner .bs-devshop__img-container-group {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 20rem;
+      z-index: 1;
+    }
+
+    .bs-devshop__quiz-grid-scroll-banner .bs-devshop__img-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    .bs-devshop__quiz-grid-scroll-banner .bs-devshop__img-container:nth-child(2) {
+      display: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Quiz Banner",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "limit": 1,
+      "type": "banner",
+      "name": "Banner Config",
+      "settings": [
+        {
+          "type": "select",
+          "id": "content_alignment",
+          "label": "Content Alignment",
+          "default": "left",
+          "options": [
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "title",
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "body"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "text",
+          "id": "cta_title",
+          "label": "CTA Title"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "CTA Url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quiz Banner",
+      "blocks": [
+        {
+          "type": "banner"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

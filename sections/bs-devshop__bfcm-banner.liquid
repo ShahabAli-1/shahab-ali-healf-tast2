@@ -1,0 +1,202 @@
+{% assign ss = section.settings %}
+{% if ss.image %}
+  <link 
+    rel="preload" 
+    as="image" 
+    href="{{ ss.image | image_url: width: 2000 }}" 
+    fetchpriority="high"
+  >
+{% endif %}
+
+<script src="{{ 'grid-banners.js' | asset_url }}" defer="defer"></script>
+
+<div class="bs-devshop__bfcm-banner-container wrapper {% unless request.design_mode %}hidden{% endunless %}" {% if collection.handle != 'bfcm24' %}style="display: none;"{% endif %}>
+  <div class="bs-devshop__bfcm-banner">
+    <a href="{{ ss.cta_url }}" class="bs-devshop__bfcm-banner__collection">
+      <div class="bs-devshop__bfcm-banner-image">
+        <img 
+          src="{{ ss.image | image_url: width: 2000 }}"
+          alt="{{ ss.title }}"
+          width="2000"
+          height="1000"
+          loading="eager"
+          class="object-fit--cover"
+        >
+      </div>
+      <div class="bs-devshop__bfcm-banner-content-div">
+        <h3 class="bs-devshop__bfcm-banner-title">{{ ss.banner_title }}</h3>
+        <div class="bs-devshop__bfcm-banner-content">{{ ss.content }}</div>
+      </div>
+      <a href="{{ ss.cta_url }}" class="bs-devshop__bfcm-banner__collection-link btn btn--white">{{ ss.cta_title }}</a>
+    </a>
+  </div>
+</div>
+
+<style>
+  .bs-devshop__bfcm-banner-container {
+    margin-bottom: 4rem;
+  }
+
+  .bs-devshop__bfcm-banner {
+    position: relative;
+  }
+
+  .bs-devshop__bfcm-banner__collection {
+    position: relative;
+    display: block;
+  }
+
+  .bs-devshop__bfcm-banner__collection::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    background: linear-gradient(294.98deg, rgba(0, 0, 0, 0) 49.96%, rgba(0, 0, 0, 0.2) 98.7%);
+    pointer-events: none;
+  }
+
+  .bs-devshop__bfcm-banner-image {
+    min-height: 44rem;
+    min-width: 25rem;
+    position: relative;
+  }
+
+  .bs-devshop__bfcm-banner-image img {
+    border-radius: 12px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    padding-bottom: unset !important;
+  }
+
+  .bs-devshop__bfcm-banner-content-div {
+    position: absolute;
+    top: 2.75rem;
+    left: 1.7rem;
+    right: 1rem;
+    color: #fff;
+    margin: 0;
+    z-index: 10;
+  }
+
+  .bs-devshop__bfcm-banner-title {
+    font-size: 3.5rem;
+    font-weight: 500;
+    line-height: 46px;
+    letter-spacing: -2px;
+  }
+
+  .bs-devshop__bfcm-banner-content {
+    font-size: 7.8rem;
+    font-weight: 500;
+    line-height: 68px;
+    letter-spacing: -2px;
+    z-index: 1;
+  }
+
+  .bs-devshop__bfcm-banner__collection-link {
+    font-size: 1.4rem;
+    font-weight: 500;
+    position: absolute;
+    bottom: 2.9rem;
+    right: 1.7rem;
+    z-index: 1;
+    padding: 0.9rem 2.8rem;
+  }
+
+  .injected-bfcm-banner {
+    width: 100%;
+  }
+
+  @media (max-width: 834px) {
+    .bs-devshop__bfcm-banner-image {
+      min-height: 35rem;
+    }
+    .wrapper {
+      padding-right: 0px !important;
+    }
+
+    .bs-devshop__bfcm-banner-content {
+      font-size: 5.8rem;
+      line-height: 50px;
+    }
+  }
+
+  @media (max-width: 999px) {
+    .injected-bfcm-banner {
+      flex-basis: calc(100% - 5px) !important;
+    }
+  }
+
+  @media screen and (min-width: 1000px) and (max-width: 1199px) {
+    .injected-bfcm-banner {
+      flex-basis: calc(66.67% - 15px) !important;
+    }
+
+    .bs-devshop__bfcm-collection-title {
+      font-size: 5.8rem;
+      line-height: 65px;
+    }
+
+    .wrapper {
+        padding-left: 20px;
+        padding-right: 0px;
+      }
+  }
+
+  @media (min-width: 1200px) {
+    .wrapper {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .injected-bfcm-banner {
+      flex-basis: calc(50% - 15px) !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BFCM Banner",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Banner Title"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "CTA Title",
+      "default": "Shop Collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA Url"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BFCM Banner"
+    }
+  ]
+}
+{% endschema %}

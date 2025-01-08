@@ -1,0 +1,456 @@
+{% style %}
+    .bs-devshop__beta-apply__apply-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4.3rem 0;
+        background-color: #000;
+        color: #fff;
+        border-top-left-radius: 3.6rem;
+        border-top-right-radius: 3.6rem;
+    }
+
+    .bs-devshop__beta-apply__apply-form__wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .bs-devshop__beta-apply__apply-form__title {
+        font-size: 2.5rem;
+        font-weight: 400;
+        letter-spacing: -0.04em;
+        line-height: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .bs-devshop__beta-apply__apply-form__input-container {
+        width: 100%;
+        max-width: 52.7rem;
+        padding: 0.2rem;
+        border-radius: 4rem;
+        background: linear-gradient(90.44deg, #C38F91 3.92%, #FCBD44 66.45%, #B0CB90 99.99%);
+        height: 5.4rem;
+    }
+
+    .bs-devsohp__beta-apply__apply-form__input-container .error-message {
+        font-size: 1.5rem;
+        padding-top: 1rem;
+        text-align: center;
+        color: #c30010;
+    }
+
+    .bs-devshop__beta-apply__apply-form__input-inner {
+        display: flex;
+        align-items: stretch;
+        height: 100%;
+        background-color: #000;
+        border-radius: 3.4rem;
+        overflow: hidden;
+        padding: 0.3rem;
+    }
+
+
+
+    .bs-devshop__beta-apply__apply-form__input-inner input[type="email"] {
+        flex: 1;
+        min-width: 0;
+        padding: 0 1.6rem;
+        border: none;
+        background-color: transparent !important;
+        color: #fff !important;
+        font-size: 1.8rem;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .bs-devshop__beta-apply__apply-form__input-inner input[type="email"]:focus {
+        background-color: transparent !important;
+        color: #fff !important;
+    }
+
+    .bs-devshop__beta-apply__apply-form__input-inner input[type="email"]::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Prevent background color change on autocomplete */
+    .bs-devshop__beta-apply__apply-form__input-inner input[type="email"]:-webkit-autofill,
+    .bs-devshop__beta-apply__apply-form__input-inner input[type="email"]:-webkit-autofill:hover,
+    .bs-devshop__beta-apply__apply-form__input-inner input[type="email"]:-webkit-autofill:focus,
+    .bs-devshop__beta-apply__apply-form__input-inner input[type="email"]:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 3rem #000 inset !important;
+        -webkit-text-fill-color: #fff !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    /* For Firefox */
+    .bs-devshop__beta-apply__apply-form__input-inner input[type="email"]::-moz-selection {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* For other browsers */
+    .bs-devshop__beta-apply__apply-form__input-inner input[type="email"]::selection {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .bs-devshop__beta-apply__apply-form__input-inner button {
+        position: relative;
+        transition: all 0.3s ease;
+        padding: 0 2rem;
+        background-color: #fff;
+        color: #000;
+        border: none;
+        font-size: 1.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+        border-radius: 3.8rem;
+    }
+
+    .bs-devshop__beta-apply__apply-form__input-inner button .loader {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        border: 2px solid #000;
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .bs-devshop__beta-apply__apply-form__input-inner button.loading {
+        color: transparent;
+    }
+
+    .bs-devshop__beta-apply__apply-form__input-inner button.loading .loader {
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .bs-devshop__beta-apply__apply-form__title {
+            font-size: 2.1rem;
+        }
+
+        .bs-devshop__beta-apply__apply-form__input-container {
+            max-width: 379px;
+        }
+
+        .bs-devshop__beta-apply__apply-form__input-inner input[type="email"],
+        .bs-devshop__beta-apply__apply-form__input-inner button {
+            font-size: 1.7rem;
+        }
+
+        .bs-devshop__beta-apply__apply-form__input-inner button {
+            padding: 0 1.5rem;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .bs-devshop__beta-apply__apply-form__input-container {
+            max-width: 100%;
+        }
+    }
+
+    /* Modal styles */
+    .bs-devshop__beta-apply__modal-overlay {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .bs-devshop__beta-apply__modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .bs-devshop__beta-apply__modal {
+        background: linear-gradient(72.81deg, #32755F -1.81%, #5377BB 37.65%, #CB8F51 70.35%, #CE6C47 104.51%);
+        padding: 6.8rem 6.4rem;
+        border-radius: 0.4rem;
+        max-width: 90%;
+        width: 100%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        transform: scale(0.9);
+        opacity: 0;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .bs-devshop__beta-apply__modal-overlay.active .bs-devshop__beta-apply__modal {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+        from { transform: scale(0.9); }
+        to { transform: scale(1); }
+    }
+
+    .bs-devshop__beta-apply__modal-overlay.active .bs-devshop__beta-apply__modal {
+        animation: fadeIn 0.3s ease forwards, scaleIn 0.3s ease forwards;
+    }
+
+    .bs-devshop__beta-apply__modal-content {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .bs-devshop__beta-apply__modal h2 {
+        font-size: 5.5rem;
+        font-weight: 400;
+        line-height: 5.5rem;
+        color: #FFFFFF;
+    }
+
+    .bs-devshop__beta-apply__modal p {
+        font-size: 2.2rem;
+        font-weight: 400;
+        line-height: 2.5rem;
+        color: #FFFFFF;
+    }
+
+    .bs-devshop__beta-apply__modal-close {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .bs-devshop__beta-apply__modal-close svg {
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+
+    @media (max-width: 768px) {
+        .bs-devshop__beta-apply__modal {
+            padding: 4rem;
+        }
+
+        .bs-devshop__beta-apply__modal-close {
+            top: 1rem;
+            right: 1rem;
+
+        }
+
+        .bs-devshop__beta-apply__modal-content {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .bs-devshop__beta-apply__modal h2 {
+            font-size: 4rem;
+            line-height: 4rem;
+        }
+
+        .bs-devshop__beta-apply__modal h2 br {
+            display: none;
+        }
+
+        .bs-devshop__beta-apply__modal p {
+            margin-top: 2rem;
+            font-size: 1.8rem;
+            line-height: 2.2rem;
+        }
+
+        .bs-devshop__beta-apply__modal p br {
+            display: none;
+        }
+    }
+{% endstyle %}
+
+<section id="healfzone-signup-form" class="bs-devshop__beta-apply__apply-form">
+    <div class="bs-devshop__beta-apply__apply-form__wrapper page-width">
+        <h2 class="bs-devshop__beta-apply__apply-form__title">Apply now for Healf Zone BETA</h2>
+        <form id="betaSignupForm" class="bs-devshop__beta-apply__apply-form__input-container">
+            <div class="bs-devshop__beta-apply__apply-form__input-inner">
+                <input type="email" id="betaEmail" placeholder="Email" required />
+                <button type="submit">
+                    Confirm
+                    <span class="loader"></span>
+                </button>
+            </div>
+            <p class="error-message"></p>
+        </form>
+    </div>
+</section>
+
+<div id="thankYouPopup" class="bs-devshop__beta-apply__modal-overlay">
+    <div class="bs-devshop__beta-apply__modal">
+        <div class="bs-devshop__beta-apply__modal-content">
+            <h2>Thank you for signing <br>up for Healf Zone Beta</h2>
+            <p>We have received your request and will be in <br>touch soon. Please reach out to zone@healf.com if <br>you have any questions, we would love <br>to hear from you.</p>
+        </div>
+        <button class="bs-devshop__beta-apply__modal-close">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 18L18 6M6 6L18 18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
+</div>
+
+<script>
+
+// Beta signup functionality
+document.addEventListener("DOMContentLoaded", function() {
+    const betaSignupForm = document.getElementById('betaSignupForm');
+    const thankYouPopup = document.querySelector('.bs-devshop__beta-apply__modal-overlay');
+    const submitButton = betaSignupForm.querySelector('button[type="submit"]');
+    const errorMessage = betaSignupForm.querySelector('.error-message')
+
+    function debounce(func, wait) {
+        let timeout;
+        let canCall = true;
+        return function executedFunction(...args) {
+            if (!canCall) {
+                if (errorMessage) errorMessage.innerHTML = "Please wait 5 seconds before submitting again.";
+                return;
+            }
+
+            canCall = false;
+            func(...args);
+
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                canCall = true;
+                if (errorMessage) errorMessage.innerHTML = "";
+            }, wait);
+        };
+    }
+
+    if (betaSignupForm) {
+
+    const debouncedSubmit = debounce(handleSubmit, 5000);
+    betaSignupForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        debouncedSubmit();
+    });
+
+    function handleSubmit() {
+        submitButton.classList.add('loading');
+
+            fetch('{{ "healf-zone-email-list.json" | asset_url }}')
+            .then(response => response.json())
+            .then(data => {
+                const alphaTesters = data.emails;
+
+                if (errorMessage) errorMessage.innerHTML = ""
+                const email = document.getElementById('betaEmail').value.toLowerCase();
+                let isAlphaTester = alphaTesters.includes(email);
+
+                if (isAlphaTester) {
+                    subscribeToKlayvioListAxaj(email, "U2aqPj")
+                        .done(function(response) {
+                            submitButton.classList.remove('loading');
+                            console.log(response)
+                        })
+                    window.location.href = 'https://healf.com/products/healf-zone';
+                    return;
+                } else {
+                    subscribeToKlayvioListAxaj(email, "SbiE9Z")
+                        .done(function(response) {
+                            submitButton.classList.remove('loading');
+
+                            if (response.success) {
+                                showThankYouModal();
+                            } else {
+                                if (errorMessage) errorMessage.innerHTML = "There was an error signing up. Please try again."
+                            }
+                        })
+                        .fail(function(jqXHR, textStatus, errorThrown) {
+                            submitButton.classList.remove('loading');
+
+                            console.error('Error:', textStatus, errorThrown);
+                            if (errorMessage) errorMessage.innerHTML = "There was an error signing up. Please try again."
+                        });
+                }
+
+            })
+            .catch(error => console.error('Error fetching JSON:', error));
+        };
+    }
+
+    function subscribeToKlayvioListAxaj(email, listId) {
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://manage.kmail-lists.com/ajax/subscriptions/subscribe",
+            "method": "POST",
+            "headers": {
+                "content-type": "application/x-www-form-urlencoded",
+                "cache-control": "no-cache"
+            },
+            "data": {
+                "g": listId,
+                "email": email
+            }
+        };
+
+        return $.ajax(settings);
+    }
+
+    function showThankYouModal() {
+        thankYouPopup.style.display = 'flex';
+        void thankYouPopup.offsetWidth;
+        thankYouPopup.classList.add('active');
+    }
+
+    function hideThankYouModal() {
+        thankYouPopup.classList.remove('active');
+        // Wait for the animation to finish before hiding the overlay
+        setTimeout(() => {
+            thankYouPopup.style.display = 'none';
+        }, 300); // This should match the transition duration in CSS
+    }
+
+    const closeButton = document.querySelector('.bs-devshop__beta-apply__modal-close');
+    if (closeButton) {
+        closeButton.addEventListener('click', hideThankYouModal);
+    } else {
+        console.error('Close button not found');
+    }
+
+    // Close modal when clicking outside of it
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('thankYouPopup');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});
+
+</script>
+

@@ -1,0 +1,75 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "bs_devshop_all_brands_page_damX8w": {
+      "type": "bs-devshop__all-brands-page",
+      "blocks": {
+        "trending_brand_PpQhRC": {
+          "type": "trending_brand",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/ARRAE_Product_Shoot_Glasses__0929_1_1.png",
+            "title": "Arrae",
+            "cta_action": "shopify:\/\/collections\/arrae"
+          }
+        },
+        "trending_brand_qGa36h": {
+          "type": "trending_brand",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/BEKN01_Q1_Nature_213_copy_1.png",
+            "title": "Beekeeper's Naturals",
+            "cta_action": "shopify:\/\/collections\/beekeepers-naturals"
+          }
+        },
+        "trending_brand_8AnmUN": {
+          "type": "trending_brand",
+          "settings": {
+            "background_image": "shopify:\/\/shop_images\/ffff_6be42009-42d5-4c55-a9ef-f5f5aa15cdda_2000x_1.png",
+            "title": "Lumie",
+            "cta_action": "shopify:\/\/collections\/lumie"
+          }
+        }
+      },
+      "block_order": [
+        "trending_brand_PpQhRC",
+        "trending_brand_qGa36h",
+        "trending_brand_8AnmUN"
+      ],
+      "settings": {
+        "background_image": "shopify:\/\/shop_images\/Sleep_Oral_Health_455.png",
+        "title": "Healf Brands",
+        "title_color": "#ffffff",
+        "description": "Browse hundreds of the best global wellbeing brands <br> backed by our Three Step Curation process.",
+        "description_color": "#ffffff",
+        "button_1_action": "browse",
+        "button_1_title": "Filters",
+        "button_1_url": "",
+        "button_2_action": "filter",
+        "button_2_title": "Sort by: Popularity",
+        "button_2_url": "",
+        "search_placeholder": "Search all brands",
+        "padding_top": 78,
+        "padding_bottom": 78
+      }
+    }
+  },
+  "order": [
+    "main",
+    "bs_devshop_all_brands_page_damX8w"
+  ]
+}

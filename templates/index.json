@@ -1,0 +1,968 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "509475a7-b369-4a8c-b788-a242cad5174f": {
+      "type": "video",
+      "settings": {
+        "enable_parallax": true,
+        "heading": "",
+        "heading_size": "h1",
+        "enable_video_looping": true,
+        "video": "shopify://files/videos/NOLOGOHEALFcomerchial3.mov",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "cover_image": "shopify://shop_images/Screen_Shot_2023-11-08_at_3.22.13_PM.png",
+        "description": "",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "635c3119-b0a1-4854-bf73-303879bd53d9": {
+      "type": "BB-brands-slider",
+      "blocks": {
+        "blocks_pNTJ6F": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/thorne",
+            "image": "shopify://shop_images/Throne.png"
+          }
+        },
+        "blocks_AQ8cM7": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/therabody",
+            "image": "shopify://shop_images/Therabody_e582f3ab-287b-4703-ad09-9615eb3acafb.png"
+          }
+        },
+        "blocks_gqN6L4": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/higherdose",
+            "image": "shopify://shop_images/Higherdose_e46be1e9-cda4-4ecf-bc02-ab5fd0f6b90f.png"
+          }
+        },
+        "blocks_dY9pxm": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/momentous",
+            "image": "shopify://shop_images/Momentous.png"
+          }
+        },
+        "blocks_Jyjkxx": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/lmnt-electrolytes",
+            "image": "shopify://shop_images/LMNT_5a2cc989-71c3-4227-a73a-d933afdcd0a3.png"
+          }
+        },
+        "blocks_nKqpLG": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/whoop",
+            "image": "shopify://shop_images/Whoop_76c0e73a-b4e2-4987-b43f-e4efdafd9802.png"
+          }
+        },
+        "blocks_G9DGEa": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/agent-nateur",
+            "image": "shopify://shop_images/AgentN.png"
+          }
+        },
+        "blocks_a7PnEz": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/apollo-neuro",
+            "image": "shopify://shop_images/Apollo.png"
+          }
+        },
+        "blocks_qtcKwR": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/lyma",
+            "image": "shopify://shop_images/Lyma.png"
+          }
+        },
+        "blocks_RzqFze": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/arrae",
+            "image": "shopify://shop_images/arrae.png"
+          }
+        },
+        "blocks_yDnxVL": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/erewhon",
+            "image": "shopify://shop_images/EREWHON.png"
+          }
+        },
+        "blocks_xqiMk4": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/wellbel",
+            "image": "shopify://shop_images/Wellbell.png"
+          }
+        },
+        "blocks_nwkEea": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/organifi",
+            "image": "shopify://shop_images/Organifi_3a48cc45-734d-46f7-8abf-b41af34a40a6.png"
+          }
+        },
+        "blocks_9VhMnm": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/kiki-health",
+            "image": "shopify://shop_images/Kiki.png"
+          }
+        },
+        "blocks_nVzEY6": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/dirtea",
+            "image": "shopify://shop_images/DIRTEA.png"
+          }
+        },
+        "blocks_rzRLtG": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/mosh",
+            "image": "shopify://shop_images/MOsh.png"
+          }
+        },
+        "blocks_3kaUef": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/hunter-gather",
+            "image": "shopify://shop_images/Hunter.png"
+          }
+        },
+        "blocks_qWwcKj": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/berkeley-life",
+            "image": "shopify://shop_images/BerkeleyLife.png"
+          }
+        },
+        "blocks_KrxM38": {
+          "type": "blocks",
+          "settings": {
+            "url": "shopify://collections/ultrahuman",
+            "image": "shopify://shop_images/Ultrahuman.png"
+          }
+        },
+        "blocks_4WXy4H": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "shopify://collections/hyperice",
+            "image": "shopify://shop_images/hyperice.png"
+          }
+        },
+        "be072adb-aded-4c6c-88a8-99d82dcb6605": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "shopify://collections/erewhon",
+            "image": "shopify://shop_images/16f33aa517ddb62efb47ceee8671856b.png"
+          }
+        },
+        "blocks_UMiLn8": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "shopify://collections/apollo-neuro",
+            "image": "shopify://shop_images/logo_png.png"
+          }
+        },
+        "blocks_f9ygka": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "shopify://collections/ancient-nutrition",
+            "image": "shopify://shop_images/6d4e100cf656a3d6e9bf317ec22ff5c8.png"
+          }
+        },
+        "blocks_wEMRTC": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "",
+            "image": "shopify://shop_images/AN_logotype_ink.png"
+          }
+        },
+        "blocks_9hiDbX": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "shopify://collections/ultrahuman",
+            "image": "shopify://shop_images/ultrahuman_logo.png"
+          }
+        },
+        "blocks_Lx7kKA": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "shopify://collections/neurohacker-collective",
+            "image": "shopify://shop_images/neurohacker_logo.png"
+          }
+        },
+        "9966f0b8-2bb0-4fcb-afb0-9f64286e4932": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "shopify://collections/pvolve",
+            "image": "shopify://shop_images/c5489e6dea08edb147613f11f0622fa5.png"
+          }
+        },
+        "blocks_dxQ4yj": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "shopify://collections/kiki-health",
+            "image": "shopify://shop_images/kiki_health_logo.png"
+          }
+        },
+        "blocks_3qyg6a": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "shopify://collections/fatty15",
+            "image": "shopify://shop_images/output-onlinepngtools__53_-removebg-preview.png"
+          }
+        },
+        "blocks_UixCFf": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "shopify://collections/berkeley-life",
+            "image": "shopify://shop_images/output-onlinepngtools_54.png"
+          }
+        },
+        "blocks_iDV7eh": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "url": "",
+            "image": "shopify://shop_images/output-onlinepngtools_56_1_8c086382-0307-400e-9d21-b112b5d79318.png"
+          }
+        }
+      },
+      "block_order": [
+        "blocks_pNTJ6F",
+        "blocks_AQ8cM7",
+        "blocks_gqN6L4",
+        "blocks_dY9pxm",
+        "blocks_Jyjkxx",
+        "blocks_nKqpLG",
+        "blocks_G9DGEa",
+        "blocks_a7PnEz",
+        "blocks_qtcKwR",
+        "blocks_RzqFze",
+        "blocks_yDnxVL",
+        "blocks_xqiMk4",
+        "blocks_nwkEea",
+        "blocks_9VhMnm",
+        "blocks_nVzEY6",
+        "blocks_rzRLtG",
+        "blocks_3kaUef",
+        "blocks_qWwcKj",
+        "blocks_KrxM38",
+        "blocks_4WXy4H",
+        "be072adb-aded-4c6c-88a8-99d82dcb6605",
+        "blocks_UMiLn8",
+        "blocks_f9ygka",
+        "blocks_wEMRTC",
+        "blocks_9hiDbX",
+        "blocks_Lx7kKA",
+        "9966f0b8-2bb0-4fcb-afb0-9f64286e4932",
+        "blocks_dxQ4yj",
+        "blocks_3qyg6a",
+        "blocks_UixCFf",
+        "blocks_iDV7eh"
+      ],
+      "settings": {
+        "title": "Only the best brands",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_tablet": 0,
+        "padding_bottom_tablet": 0
+      }
+    },
+    "e1f98d8a-16a5-4a5e-ae83-0ea3f4b2945e": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<div class=\"wrapper liquid-wrapper\" style=\"display: flex; justify-content: space-between;\">\n<h2 class='liquid-title' style=\"color: #fff;\">The Four Pillars™</h2>\n<p class='liquid-subtitle' style=\"color: #fff; text-align: left; line-height: 1.2; max-width: 480px;\">The Four Pillars are our foundation. True wellbeing emerges from the balance of EAT, MOVE, MIND, SLEEP, and we provide you with the tools and rituals to achieve this.  </p>\n</div>",
+        "class": "",
+        "color": "#000000",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "f9ef5a3a-065d-47db-a2bc-68509cfd95f1": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<h2 class='liquid-title best-sellers-title'>Our best sellers</h2>",
+        "class": "",
+        "color": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "bs_devshop_bfcm_main_collection_banner_R4BL6a": {
+      "type": "bs-devshop__bfcm-main-collection-banner",
+      "blocks": {
+        "pill_g8bq4x": {
+          "type": "pill",
+          "settings": {
+            "content": "Now Live",
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "heading_Ki9Pbi": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p><a href=\"/collections/bfcm24\" title=\"Black Friday Sale - Supplement Edit\">Up to 50% off</a></p>",
+            "text": "<p><a href=\"/collections/bfcm24\" title=\"Black Friday Sale - Supplement Edit\">Black Friday Collection</a></p>",
+            "margin_top": 60,
+            "margin_bottom": 52
+          }
+        },
+        "disclaimer_and_cta_bcTNFQ": {
+          "type": "disclaimer-and-cta",
+          "settings": {
+            "disclaimer": "While stocks last",
+            "cta": "Shop collection",
+            "cta_url": "shopify://collections/bfcm24",
+            "show_cta": true,
+            "margin_top": 76,
+            "margin_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "pill_g8bq4x",
+        "heading_Ki9Pbi",
+        "disclaimer_and_cta_bcTNFQ"
+      ],
+      "custom_css": [
+        "{@media only screen and (min-width: 835px) {border-top-left-radius: 40px; border-top-right-radius: 40px; }}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Eat_Bundle_077_2_1.png",
+        "image_2": "shopify://shop_images/Rectangle_6830_1.png",
+        "image_overlay_opacity": 30,
+        "show_bottom_disclaimer": false,
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "mobile_padding_top": 20,
+        "mobile_padding_bottom": 0
+      }
+    },
+    "bb_product_slider_accordion_YDEbTk": {
+      "type": "BB-product-slider--accordion",
+      "custom_css": [
+        "{background-color: white;}"
+      ],
+      "settings": {
+        "reverses": false,
+        "is_zoom": false,
+        "image": "shopify://shop_images/Frame_77064092.png",
+        "button_text": "Shop collection",
+        "button_url": "shopify://collections/lmnt-electrolytes",
+        "title": "",
+        "product": [],
+        "collection": "lmnt-electrolytes",
+        "oddit": false,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_tablet": 10,
+        "padding_bottom_tablet": 40
+      }
+    },
+    "shop_by_collection_6eey8k": {
+      "type": "shop-by-collection",
+      "blocks": {
+        "blocks_7tEwwx": {
+          "type": "blocks",
+          "settings": {
+            "collection": "fatty15",
+            "image": "shopify://shop_images/fatty15-brand.png",
+            "title": "20% off Fatty15"
+          }
+        },
+        "blocks_KJPwA6": {
+          "type": "blocks",
+          "settings": {
+            "collection": "ancient-brave",
+            "image": "shopify://shop_images/antient_x_brave-brand.png",
+            "title": "Up to 20% off Ancient + Brave"
+          }
+        }
+      },
+      "block_order": [
+        "blocks_7tEwwx",
+        "blocks_KJPwA6"
+      ],
+      "settings": {
+        "title": "Shop by collection"
+      }
+    },
+    "bb_product_slider_qmgwXQ": {
+      "type": "BB-product-slider",
+      "settings": {
+        "title": "Selling Fast",
+        "button_text": "",
+        "button_url": "",
+        "collection": "black-friday-sale-main-collection",
+        "oddit": false,
+        "padding_top": 0,
+        "padding_bottom": 40,
+        "padding_top_tablet": 0,
+        "padding_bottom_tablet": 0
+      }
+    },
+    "bb_product_slider_accordion_nYTa76": {
+      "type": "BB-product-slider--accordion",
+      "settings": {
+        "reverses": true,
+        "is_zoom": false,
+        "image": "shopify://shop_images/Group_10879376_1.png",
+        "button_text": "Shop collection",
+        "button_url": "shopify://collections/hyperice",
+        "title": "",
+        "product": [],
+        "collection": "hyperice",
+        "oddit": false,
+        "padding_top": 0,
+        "padding_bottom": 20,
+        "padding_top_tablet": 40,
+        "padding_bottom_tablet": 40
+      }
+    },
+    "shop_by_collection_xctwfp": {
+      "type": "shop-by-collection",
+      "blocks": {
+        "blocks_ejpm3F": {
+          "type": "blocks",
+          "settings": {
+            "collection": "arrae",
+            "image": "shopify://shop_images/image_70.png",
+            "title": "Up to 20% Off Arrae"
+          }
+        },
+        "blocks_xDKhi3": {
+          "type": "blocks",
+          "settings": {
+            "collection": "higherdose",
+            "image": "shopify://shop_images/Rectangle_7001.png",
+            "title": "Up to 25% off HigherDOSE"
+          }
+        },
+        "blocks_b3MErp": {
+          "type": "blocks",
+          "settings": {
+            "collection": "dirtea",
+            "image": "shopify://shop_images/Rectangle_7002.png",
+            "title": "20% off DIRTEA"
+          }
+        }
+      },
+      "block_order": [
+        "blocks_ejpm3F",
+        "blocks_xDKhi3",
+        "blocks_b3MErp"
+      ],
+      "settings": {
+        "title": "Shop by collection"
+      }
+    },
+    "a25685c6-01f5-41db-8ee5-8400ab8f38e4": {
+      "type": "BB-blog",
+      "blocks": {
+        "article_WL8UTV": {
+          "type": "article",
+          "settings": {
+            "article": "health-journal/should-we-be-exercising-our-brain"
+          }
+        },
+        "article_hNz4tR": {
+          "type": "article",
+          "settings": {
+            "article": "health-journal/gift-guide-the-beauty-edition"
+          }
+        },
+        "article_QngM9q": {
+          "type": "article",
+          "settings": {
+            "article": "health-journal/3-ingredient-recipe-hydrating-spicy-margarita-with-a-twist"
+          }
+        },
+        "article_4NnHGe": {
+          "type": "article",
+          "settings": {
+            "article": "health-journal/is-tiktoks-naval-pulling-with-castor-oil-trend-worth-trying"
+          }
+        },
+        "article_xmDJN3": {
+          "type": "article",
+          "settings": {
+            "article": "health-journal/gift-guide-the-coffee-connoisseur"
+          }
+        },
+        "article_y7EFc8": {
+          "type": "article",
+          "settings": {
+            "article": "health-journal/gift-guide-the-stocking-filler"
+          }
+        },
+        "article_rrHcpR": {
+          "type": "article",
+          "settings": {
+            "article": "health-journal/gift-guide-for-the-fitness-fanatic"
+          }
+        },
+        "article_Bc3qcx": {
+          "type": "article",
+          "settings": {
+            "article": "health-journal/when-should-i-start-taking-vitamin-d-again"
+          }
+        }
+      },
+      "block_order": [
+        "article_WL8UTV",
+        "article_hNz4tR",
+        "article_QngM9q",
+        "article_4NnHGe",
+        "article_xmDJN3",
+        "article_y7EFc8",
+        "article_rrHcpR",
+        "article_Bc3qcx"
+      ],
+      "settings": {
+        "title": "Healf Journals",
+        "subtitle": "<p>Journals are supplements for your mind. We offer a range of expert-written articles as a resource to support our community's wellbeing journey.</p>",
+        "button_text": "Explore Journals",
+        "button_link": "shopify://blogs/health-journal",
+        "blog": "health-journal",
+        "post_limit": 6,
+        "show_excerpt": false,
+        "excerpt_word_count": 10,
+        "show_date": true,
+        "show_author": false,
+        "show_tags": true,
+        "padding_top": 40,
+        "padding_bottom": 80,
+        "padding_top_tablet": 0,
+        "padding_bottom_tablet": 40
+      }
+    },
+    "eaa21906-732a-494e-9ad1-a932b344fe85": {
+      "type": "BB-featured-brands",
+      "blocks": {
+        "8728805d-5b9d-4007-9e5e-dac2e7ccf281": {
+          "type": "blocks",
+          "settings": {
+            "title": "",
+            "text": "Eat",
+            "sub_text": "",
+            "url": "shopify://collections/eat",
+            "image": "shopify://shop_images/0561da98b61a0ccc038e42858fe7a55f.jpg"
+          }
+        },
+        "ad36bf7e-d7e7-46a1-877e-95ff09d28ef6": {
+          "type": "blocks",
+          "settings": {
+            "title": "",
+            "text": "Move",
+            "sub_text": "",
+            "url": "shopify://collections/move",
+            "image": "shopify://shop_images/f1d45386e81d4c4882c752149215d26f.jpg"
+          }
+        },
+        "c0f7f3e5-37d2-46e5-bd17-c1ce9bee36b2": {
+          "type": "blocks",
+          "settings": {
+            "title": "",
+            "text": "Mind",
+            "sub_text": "",
+            "url": "shopify://collections/mind",
+            "image": "shopify://shop_images/a777b9af88e8d1490e7a36382493a138.jpg"
+          }
+        },
+        "798d9d34-ea2f-435d-a00a-2829f4342fbc": {
+          "type": "blocks",
+          "settings": {
+            "title": "",
+            "text": "Sleep",
+            "sub_text": "",
+            "url": "shopify://collections/sleep",
+            "image": "shopify://shop_images/a520f8b90ad0ef8dcda7579acf3d4994.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "8728805d-5b9d-4007-9e5e-dac2e7ccf281",
+        "ad36bf7e-d7e7-46a1-877e-95ff09d28ef6",
+        "c0f7f3e5-37d2-46e5-bd17-c1ce9bee36b2",
+        "798d9d34-ea2f-435d-a00a-2829f4342fbc"
+      ],
+      "settings": {
+        "title": "The Four Pillars™",
+        "subtitle": "<p>The Four Pillars™ are our foundation: EAT, MOVE, MIND, SLEEP. We offer tools and rituals across each pillar to help you find balance and enhance your wellbeing.</p>",
+        "padding_top": 35,
+        "padding_bottom": 40,
+        "padding_top_tablet": 20,
+        "padding_bottom_tablet": 20
+      }
+    },
+    "dcc24465-9c8e-40e8-84a4-b31e94bfa7b0": {
+      "type": "BB-best-sellers",
+      "blocks": {
+        "23d7515d-92b2-489d-bad5-02683b4746f0": {
+          "type": "blocks",
+          "settings": {
+            "title": "LMNT",
+            "description": "Enhance your hydration with LMNT electrolytes.",
+            "url": "shopify://collections/lmnt-electrolytes",
+            "new_image": "shopify://shop_images/efbab6d890bf4e2e66dd8ac0b4a239a0.png",
+            "image": "shopify://shop_images/Screenshot_2024-04-12_112247.png",
+            "image2": "shopify://shop_images/thumbnail_site_images_lmnt_2-04.jpg",
+            "image3": "shopify://shop_images/F3HdI-RWcAAJ9kn_afccd799-bed7-40e9-b536-ec0ac7bbe587.jpg"
+          }
+        },
+        "8ec66de1-ddae-44f7-9b2f-0de5a63f8342": {
+          "type": "blocks",
+          "settings": {
+            "title": "Hyperice",
+            "description": "Targeted and transformative muscle recovery.",
+            "url": "shopify://collections/hyperice",
+            "new_image": "shopify://shop_images/Normatec_Elite-03874.jpg",
+            "image": "shopify://shop_images/Armra2.jpg",
+            "image2": "shopify://shop_images/0624_ARMRA_11_UNFLAVORED_068_1.png",
+            "image3": "shopify://shop_images/0624_ARMRA_28_UNFLAVORED_286_Blue_1.png"
+          }
+        },
+        "38ffaa8b-30b2-44d5-93c6-9c582c9902af": {
+          "type": "blocks",
+          "settings": {
+            "title": "DIRTEA",
+            "description": "Award-winning functional mushroom blends.",
+            "url": "shopify://collections/dirtea",
+            "new_image": "shopify://shop_images/image_42_3255531f-62cb-4f46-b9de-76852ec6fa72.png",
+            "image": "shopify://shop_images/image_43_baced6ec-4236-44b4-aa00-c12d341b14be.png",
+            "image2": "shopify://shop_images/Screenshot_2024-05-02_185043_695c50d3-2473-4704-8cc9-bbeea5a45a8b.png",
+            "image3": "shopify://shop_images/Screenshot_2024-05-02_171025_0bbbfc65-6d81-465f-9e3a-7e17eb8a686b.png"
+          }
+        },
+        "662947f9-8072-4e06-b022-5fedacfe871b": {
+          "type": "blocks",
+          "settings": {
+            "title": "Ultrahuman",
+            "description": "Industry-leaders in wearable technology.",
+            "url": "shopify://collections/ultrahuman",
+            "new_image": "shopify://shop_images/Ultrahuman.jpg",
+            "image": "shopify://shop_images/Ultrahuman2.jpg",
+            "image2": "shopify://shop_images/Screenshot_2024-08-08_092651.png",
+            "image3": "shopify://shop_images/Screenshot_2024-08-08_092702.png"
+          }
+        },
+        "16c896ba-4239-4311-9bd1-956fdb503626": {
+          "type": "blocks",
+          "settings": {
+            "title": "Eight Sleep",
+            "description": "Clinically-backed sleep solutions.",
+            "url": "shopify://collections/eight-sleep",
+            "new_image": "shopify://shop_images/Eight_Sleep.jpg",
+            "image": "shopify://shop_images/image_41.png",
+            "image2": "shopify://shop_images/LYMA_SUPPLEMENT_9.jpg",
+            "image3": "shopify://shop_images/LYMA_SUPPLEMENT_11.jpg"
+          }
+        },
+        "fdbb57c3-c37c-44dc-8aa7-1e4a42c49b0b": {
+          "type": "blocks",
+          "disabled": true,
+          "settings": {
+            "title": "Neurohacker Collective",
+            "description": "",
+            "url": "shopify://collections/neurohacker-collective",
+            "image": "shopify://shop_images/image_df60cc11-1ed4-4cbf-95dd-e96e8291a746.png",
+            "image2": "shopify://shop_images/Frame1322_8a916b37-370f-45bc-b96e-0fe88a66d4e9.png",
+            "image3": "shopify://shop_images/B3164364-8D09-4D95-B458-6D50C49C250D.png"
+          }
+        }
+      },
+      "block_order": [
+        "23d7515d-92b2-489d-bad5-02683b4746f0",
+        "8ec66de1-ddae-44f7-9b2f-0de5a63f8342",
+        "38ffaa8b-30b2-44d5-93c6-9c582c9902af",
+        "662947f9-8072-4e06-b022-5fedacfe871b",
+        "16c896ba-4239-4311-9bd1-956fdb503626",
+        "fdbb57c3-c37c-44dc-8aa7-1e4a42c49b0b"
+      ],
+      "settings": {
+        "title": "Best sellers",
+        "title_left": "We blend old rituals and new technologies to bring you to the here and now.",
+        "cta_text": "Shop best-sellers",
+        "cta_link": "",
+        "bg_color": "#000000",
+        "padding_top": 20,
+        "padding_bottom": 0,
+        "padding_top_tablet": 0,
+        "padding_bottom_tablet": 0
+      }
+    },
+    "bb_curation_process_zrcgge": {
+      "type": "BB-curation-process",
+      "blocks": {
+        "blocks_pABiDD": {
+          "type": "blocks",
+          "settings": {
+            "title": "The Discovery",
+            "description": "<p>With a global team of buyers and network of health professionals, coupled with advanced AI trend analysis, we have access to a constant stream of innovative, high-quality wellbeing brands. Our approach keeps you at the forefront of wellbeing innovation.</p>",
+            "image": "shopify://shop_images/cfe872d8e2d3caf9e3442d8cc8a29048.jpg"
+          }
+        },
+        "blocks_WLJEcR": {
+          "type": "blocks",
+          "settings": {
+            "title": "Expert Validation",
+            "description": "<p>Each product is rigorously tested by a panel of industry specialists—including dieticians, personal trainers, psychologists, and sleep experts—to ensure that we offer only the highest quality wellbeing products.</p>",
+            "image": "shopify://shop_images/628edddccaf4f5ce9deb0bdd53120909.jpg"
+          }
+        },
+        "blocks_Wmewet": {
+          "type": "blocks",
+          "settings": {
+            "title": "Community Testing",
+            "description": "<p>The Healf stamp of approval: Here at Healf every product goes through a rigorous Three Step Curation Process, so you know you are only getting the best.</p>",
+            "image": "shopify://shop_images/fd1674779bbffd775ac1b1b5b8de1896.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "blocks_pABiDD",
+        "blocks_WLJEcR",
+        "blocks_Wmewet"
+      ],
+      "settings": {
+        "title": "Three Step Curation Process",
+        "sub_title": "<p>The Healf stamp of approval: every product goes through a rigorous Three Step Curation Process, so you know you are only getting the best.</p>",
+        "bg_color": "#000000",
+        "padding_top": 180,
+        "padding_bottom": 160,
+        "padding_top_tablet": 40,
+        "padding_bottom_tablet": 40
+      }
+    },
+    "bb_ambassador_slider_new_8RRp3x": {
+      "type": "BB-ambassador-slider-new",
+      "blocks": {
+        "slide_F46kPV": {
+          "type": "slide",
+          "settings": {
+            "tag": "eat",
+            "title": "Rose Ferguson",
+            "subtitle": "Functional Medicine Practitioner",
+            "description": "<p>\"Healf and I believe that food should be celebrated as a source of energy, connection, and wellness. Together, let’s redefine what it means to truly nourish yourself.\"</p>",
+            "link": "shopify://collections/rose-fergusons-edit",
+            "image": "shopify://shop_images/4d9bed75cd5d2e4406b0226630562005.jpg"
+          }
+        },
+        "slide_iVFeT6": {
+          "type": "slide",
+          "settings": {
+            "tag": "move",
+            "title": "Ben Greenfield",
+            "subtitle": "Health consultant, speaker, and New York Times bestselling author",
+            "description": "<p>\"Your body was made to move. With Healf, I’m excited to show you how powerful and resilient you can become when movement is a part of your daily ritual.\"</p>",
+            "link": "shopify://collections/ben-greenfield",
+            "image": "shopify://shop_images/Screenshot_2024-07-29_at_22.11.35.png"
+          }
+        },
+        "slide_MPFFKJ": {
+          "type": "slide",
+          "settings": {
+            "tag": "Mind",
+            "title": "Jonny Wilkinson",
+            "subtitle": "Health ambassador, ex-England rugby captain, and philanthropist",
+            "description": "<p>\"At Healf, we believe true wellbeing starts from within. We can improve our overall wellbeing by taking care of our bodies, so our bodies can take care of our mind\"</p>",
+            "link": "shopify://collections/jonny-wilkinson",
+            "image": "shopify://shop_images/image_18_26818b9f-ad36-46c3-909d-b0979cd470d0.png"
+          }
+        },
+        "slide_BtDGYf": {
+          "type": "slide",
+          "settings": {
+            "tag": "sleep",
+            "title": "Dr. Tara Swart",
+            "subtitle": "Neuroscientist and senior lecturer at MIT Sloan.",
+            "description": "<p>\"Sleep is a non-negotiable foundation of health. When you invest in quality sleep, you’re investing in every aspect of your wellbeing.\"</p>",
+            "link": "shopify://collections/anna-archers-favourites",
+            "image": "shopify://shop_images/Randi-230801-3395-Edit-17.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "slide_F46kPV",
+        "slide_iVFeT6",
+        "slide_MPFFKJ",
+        "slide_BtDGYf"
+      ],
+      "settings": {
+        "title": "Meet our Advisors",
+        "padding_top": 20,
+        "padding_bottom": 140,
+        "padding_top_tablet": 10,
+        "padding_bottom_tablet": 60
+      }
+    },
+    "bb_spotlight_ztGq6Q": {
+      "type": "BB-spotlight",
+      "blocks": {
+        "item_QnkRgb": {
+          "type": "item",
+          "settings": {
+            "is_square": true,
+            "image": "shopify://shop_images/Frame8922_b6c53478-cc92-408f-abf3-6237305965f0.png",
+            "title": "Digital Gift Card",
+            "text": "<p>Give the gift of Healf</p>",
+            "button_text": "Shop here",
+            "button_link": "https://healf.com/products/healf-gift-card?variant=42157859012847",
+            "tag": ""
+          }
+        },
+        "item_xPHYYi": {
+          "type": "item",
+          "settings": {
+            "is_square": false,
+            "image": "shopify://shop_images/88aad778890645ff6eac1e9e8f9e9555.png",
+            "title": "ECHO",
+            "text": "<p>Experience the benefits of hydrogen-infused water, from improving cognitive function to combatting oxidative stress.</p>",
+            "button_text": "Shop the brand",
+            "button_link": "https://healf.com/collections/echo",
+            "tag": "Brand of the month"
+          }
+        }
+      },
+      "block_order": [
+        "item_QnkRgb",
+        "item_xPHYYi"
+      ],
+      "settings": {
+        "title": "Spotlight",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_top_tablet": 40,
+        "padding_bottom_tablet": 40
+      }
+    },
+    "bb_promises_qyPAax": {
+      "type": "BB-promises",
+      "blocks": {
+        "review_stats_nkWHgk": {
+          "type": "review_stats",
+          "settings": {
+            "review_title": "",
+            "review_value": "365 Day Free Returns"
+          }
+        },
+        "review_stats_4pCVRF": {
+          "type": "review_stats",
+          "settings": {
+            "review_title": "",
+            "review_value": "Free Delivery Over £50"
+          }
+        },
+        "review_stats_n9Xmkn": {
+          "type": "review_stats",
+          "settings": {
+            "review_title": "",
+            "review_value": "Next Day UK Delivery Available"
+          }
+        },
+        "reviews_slider_LU8qVy": {
+          "type": "reviews_slider",
+          "settings": {
+            "review_title": "Amazing brand with amazing prices",
+            "review_description": "<p>Amazing brand with amazing prices. I had a little issue with my transaction, which was resolved very promptly and efficiently. Will definitely buy from them again.</p>",
+            "review_author": "Maksim A."
+          }
+        },
+        "reviews_slider_HFwib8": {
+          "type": "reviews_slider",
+          "settings": {
+            "review_title": "Incredibly helpful",
+            "review_description": "<p>Incredibly helpful, responsive, and fair customer service. I had an issue with delivery, the team helped with this and then some!</p>",
+            "review_author": "George."
+          }
+        },
+        "reviews_slider_Yw8Ad6": {
+          "type": "reviews_slider",
+          "settings": {
+            "review_title": "Best brands in health",
+            "review_description": "<p>The only place on the internet I can truly trust to have done the work for me in selecting the best brands in health. Especially love the Yogi Bare mats.</p>",
+            "review_author": "Lydia H."
+          }
+        },
+        "reviews_slider_YJTNEN": {
+          "type": "reviews_slider",
+          "settings": {
+            "review_title": "Subscription service",
+            "review_description": "<p>The subscription service is offering great prices and is very easy to use. Allowing me to skip a month if I need to. Everything arrives quickly and well wrapped. </p>",
+            "review_author": "Lusjus"
+          }
+        }
+      },
+      "block_order": [
+        "review_stats_nkWHgk",
+        "review_stats_4pCVRF",
+        "review_stats_n9Xmkn",
+        "reviews_slider_LU8qVy",
+        "reviews_slider_HFwib8",
+        "reviews_slider_Yw8Ad6",
+        "reviews_slider_YJTNEN"
+      ],
+      "settings": {
+        "banner_image": "shopify://shop_images/Group_48812.png",
+        "title": "The <span style=\"margin-left: 100px;\">Healf Promise</span>",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "padding_top_tablet": 30,
+        "padding_bottom_tablet": 30
+      }
+    }
+  },
+  "order": [
+    "509475a7-b369-4a8c-b788-a242cad5174f",
+    "635c3119-b0a1-4854-bf73-303879bd53d9",
+    "e1f98d8a-16a5-4a5e-ae83-0ea3f4b2945e",
+    "f9ef5a3a-065d-47db-a2bc-68509cfd95f1",
+    "bs_devshop_bfcm_main_collection_banner_R4BL6a",
+    "bb_product_slider_accordion_YDEbTk",
+    "shop_by_collection_6eey8k",
+    "bb_product_slider_qmgwXQ",
+    "bb_product_slider_accordion_nYTa76",
+    "shop_by_collection_xctwfp",
+    "a25685c6-01f5-41db-8ee5-8400ab8f38e4",
+    "eaa21906-732a-494e-9ad1-a932b344fe85",
+    "dcc24465-9c8e-40e8-84a4-b31e94bfa7b0",
+    "bb_curation_process_zrcgge",
+    "bb_ambassador_slider_new_8RRp3x",
+    "bb_spotlight_ztGq6Q",
+    "bb_promises_qyPAax"
+  ]
+}

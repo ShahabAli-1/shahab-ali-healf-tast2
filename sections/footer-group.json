@@ -1,0 +1,92 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "new_footer_8kkedV": {
+      "type": "new-footer",
+      "blocks": {
+        "block_rUpMkE": {
+          "type": "block",
+          "settings": {
+            "title": "Shop",
+            "list": "shop"
+          }
+        },
+        "block_tUREgK": {
+          "type": "block",
+          "settings": {
+            "title": "Explore",
+            "list": "healf-binary-boa"
+          }
+        },
+        "block_atGUT6": {
+          "type": "block",
+          "settings": {
+            "title": "Support",
+            "list": "customer-service-1"
+          }
+        }
+      },
+      "block_order": [
+        "block_rUpMkE",
+        "block_tUREgK",
+        "block_atGUT6"
+      ],
+      "settings": {
+        "copyright": "<p>Copyright © 2024, Healf. All rights reserved.</p>",
+        "description": "<p>Nourishment for your inbox with the latest in wellbeing & exclusive offers </p>",
+        "show_social": true
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "a9d906a2-34cf-4d05-a30a-699d3bfc9736": {
+          "type": "block",
+          "settings": {
+            "title": "Shop",
+            "list": "shop"
+          }
+        },
+        "cb8474cc-6773-4d1c-9ebc-a8d397b8dbcf": {
+          "type": "block",
+          "settings": {
+            "title": "Explore",
+            "list": "healf-binary-boa"
+          }
+        },
+        "2be920a8-fe85-4c8c-bbb6-7c9515fc38a9": {
+          "type": "block",
+          "settings": {
+            "title": "Support",
+            "list": "customer-service-1"
+          }
+        }
+      },
+      "block_order": [
+        "a9d906a2-34cf-4d05-a30a-699d3bfc9736",
+        "cb8474cc-6773-4d1c-9ebc-a8d397b8dbcf",
+        "2be920a8-fe85-4c8c-bbb6-7c9515fc38a9"
+      ],
+      "disabled": true,
+      "settings": {
+        "copyright": "<p>Copyright © 2024, Healf. All rights reserved.</p>",
+        "description": "<p>To inspire everyday healthy living by connecting people to the world's best health brands.</p>",
+        "show_social": true
+      }
+    }
+  },
+  "order": [
+    "new_footer_8kkedV",
+    "footer"
+  ]
+}

@@ -1,0 +1,966 @@
+{% if ss.enable_membership %}
+  <div data-test-name="new-cart-drawer" class="free-shipping-header" rv-if="data.cart.item_count | gt 0">
+    <h3
+      rv-html="data.cart.total_price | getShippingHeaderChooseAGift"
+      style="font-weight: 400; font-family: 'Avenir';"
+    ></h3>
+  </div>
+  <div class="free-shipping-notice" rv-if="data.cart.item_count | gt 0">
+    <p rv-html="data.cart.total_price | getChooseAGiftThresholds" style="color: #666; margin-bottom: 20px;"></p>
+  </div>
+  <!-- AB test shipping 40 -->
+  <div data-test-name="new-cart-drawer" class="free-shipping-notice hidden" rv-if="data.cart.item_count | gt 0">
+    <p rv-html="data.cart.total_price | getChooseAGiftThresholdsAB40" style="color: #666; margin-bottom: 20px;"></p>
+  </div>
+
+  <div rv-if="data.cart.item_count | gt 0" class="continue-shopping-prompt ab-test__continue-shopping hidden">
+  <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/best-sellers">Continue Shopping</a>
+</div>
+  <div class="tiered-progress-bar tiered-progress-bar__choose" rv-if="data.cart.item_count | gt 0">
+    <div class="progress-bar__outer" rv-style="data.cart.total_price | getPercentNotice2" data-test-name="new-upsell">
+      <div class="tiered-bubble_container" data-test-name="new-upsell">
+        <div class="process-bar-mobile ab__test" data-test-name="new-upsell" rv-style="data.cart.total_price | getPercentNotice2"></div>
+        <div class="tier-wrapper">
+          <div rv-class="data.cart.total_price | getBubbleNotice12">
+            <div class="tiered-bubble">
+              <img
+                style="width: 100%; height: 100%; margin: 0; border-radius: 0;"
+                class="discount-pack-list-item__image"
+                src="https://cdn.shopify.com/s/files/1/0405/7291/1765/files/bf48ab5a42c71f354d060cdb8845681b.png"
+                alt=""
+                width="40"
+                height="40"
+              >
+            </div>
+          </div>
+          <p class="tier-bubble__title">Free shipping</p>
+          <p class="tier-bubble__price ship-50">£50</p>
+        </div>
+        <div class="tier-wrapper">
+          <div rv-class="data.cart.total_price | getBubbleNotice22">
+            <div class="tiered-bubble tier-1" style="background-color: #f7f7f7">
+              <img src="" width="50" height="50" id="image_free1">
+
+              <span
+                id="question-mark_free1"
+                class="question-mark tier-1 show"
+                style="
+                  justify-content: center;
+                  align-items: center;
+                  height: 100%;
+                  font-weight: 700;
+                "
+              >
+                {{ 'free-gift-cart.jpg' | file_img_url: 'master' | img_tag: '', 'free-gift-image' }}
+              </span>
+
+              <style>
+                #image_free1 {
+                  display: none;
+                }
+
+                #image_free1.show {
+                  display: block;
+                }
+
+                #question-mark_free1 {
+                  display: flex;
+                }
+
+                #question-mark_free1.show {
+                  display: flex;
+                }
+              </style>
+            </div>
+          </div>
+          <p class="tier-bubble__title" style="width: 114px; text-align:center">Gift One</p>
+          <p class="tier-bubble__price" style="width: 114px; text-align:center">£75</p>
+        </div>
+        <div class="tier-wrapper">
+          <div rv-class="data.cart.total_price | getBubbleNotice32">
+            <div class="tiered-bubble tier-2">
+              <img src="" width="50" height="50" id="image_free2">
+
+              <span
+                id="question-mark_free2"
+                class="question-mark tier-2 show"
+                style="
+                  justify-content: center;
+                  align-items: center;
+                  height: 100%;
+                  font-weight: 700;
+                "
+              >
+                {{ 'free-gift-cart-2.png' | file_img_url: 'master' | img_tag: '', 'free-gift-image' }}
+              </span>
+
+              <style>
+                #image_free2 {
+                  display: none;
+                }
+
+                #image_free2.show {
+                  display: block;
+                }
+
+                #question-mark_free2 {
+                  display: flex;
+                }
+
+                #question-mark_free2.show {
+                  display: flex;
+                }
+              </style>
+            </div>
+          </div>
+          <p class="tier-bubble__title" style="width: 100px; text-align:center">Gift Two</p>
+          <p class="tier-bubble__price" style="width: 100px; text-align:center">£150</p>
+        </div>
+        <div class="tier-wrapper ab__test" data-test-name="new-upsell">
+          <div rv-class="data.cart.total_price | getBubbleNotice42">
+            <div class="tiered-bubble tier-3">
+              <img src="" width="50" height="50" id="image_free3">
+
+              <span
+                  id="question-mark_free3"
+                  class="question-mark tier-3 show"
+                  style="
+                  justify-content: center;
+                  align-items: center;
+                  height: 100%;
+                  font-weight: 700;
+                "
+              >
+                {{ 'free-gift-cart-3.png' | file_img_url: 'master' | img_tag: '', 'free-gift-image' }}
+              </span>
+
+              <style>
+                  #image_free3 {
+                      display: none;
+                  }
+                  #image_free3.show {
+                      display: block;
+                  }
+                  #question-mark_free3 {
+                      display: flex;
+                  }
+                  #question-mark_free3.show {
+                      display: flex;
+                  }
+              </style>
+            </div>
+          </div>
+          <p class="tier-bubble__title" style="width: 100px; text-align:center">Gift Three</p>
+          <p class="tier-bubble__price" style="width: 100px; text-align:center">£250</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABTest shipping 40 -->
+   <div class="tiered-progress-bar tiered-progress-bar__choose ab-test__ab-40 hidden" rv-if="data.cart.item_count | gt 0">
+    <div class="progress-bar__outer" rv-style="data.cart.total_price | getPercentNotice2">
+      <div class="tiered-bubble_container">
+        <div class="tier-wrapper">
+          <div rv-class="data.cart.total_price | getBubbleNoticeAb40">
+            <div class="tiered-bubble">
+              <img
+                style="width: 100%; height: 100%; margin: 0; border-radius: 0;"
+                class="discount-pack-list-item__image"
+                src="https://cdn.shopify.com/s/files/1/0405/7291/1765/files/bf48ab5a42c71f354d060cdb8845681b.png"
+                alt=""
+                width="40"
+                height="40"
+              >
+            </div>
+          </div>
+          <p class="tier-bubble__title">Free shipping</p>
+          <p class="tier-bubble__price ship-50">£40</p>
+        </div>
+        <div class="tier-wrapper">
+          <div rv-class="data.cart.total_price | getBubbleNotice22">
+            <div class="tiered-bubble tier-1" style="background-color: #f7f7f7">
+              <img src="" width="50" height="50" id="image_free1">
+
+              <span
+                id="question-mark_free1"
+                class="question-mark tier-1 show"
+                style="
+                  justify-content: center;
+                  align-items: center;
+                  height: 100%;
+                  font-weight: 700;
+                "
+              >
+                {{ 'free-gift-cart.jpg' | file_img_url: 'master' | img_tag: '', 'free-gift-image' }}
+              </span>
+
+              <style>
+                #image_free1 {
+                  display: none;
+                }
+                #image_free1.show {
+                  display: block;
+                }
+                #question-mark_free1 {
+                  display: flex;
+                }
+                #question-mark_free1.show {
+                  display: flex;
+                }
+              </style>
+            </div>
+          </div>
+          <p class="tier-bubble__title" style="width: 114px; text-align:center">Gift One</p>
+          <p class="tier-bubble__price" style="width: 114px; text-align:center">£75</p>
+        </div>
+        <div class="tier-wrapper" >
+          <div rv-class="data.cart.total_price | getBubbleNotice32">
+            <div class="tiered-bubble tier-2">
+              <img src="" width="50" height="50" id="image_free2">
+
+              <span
+                id="question-mark_free2"
+                class="question-mark tier-2 show"
+                style="
+                  justify-content: center;
+                  align-items: center;
+                  height: 100%;
+                  font-weight: 700;
+                "
+              >
+                {{ 'free-gift-cart-2.png' | file_img_url: 'master' | img_tag: '', 'free-gift-image' }}
+              </span>
+
+              <style>
+                #image_free2 {
+                  display: none;
+                }
+                #image_free2.show {
+                  display: block;
+                }
+                #question-mark_free2 {
+                  display: flex;
+                }
+                #question-mark_free2.show {
+                  display: flex;
+                }
+              </style>
+            </div>
+          </div>
+          <p class="tier-bubble__title" style="width: 100px; text-align:center">Gift Two</p>
+          <p class="tier-bubble__price" style="width: 100px; text-align:center">£150</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+
+<hr style="border: 1px solid#f7f7f7; margin: 0;" class="choose-your-gift--border ab__test" data-test-name="new-cart-drawer">
+
+<div rv-if="data.cart.total_price | gt  7500">
+  <div id="Tier1Gifts" rv-hide="data.hasFreeGift1">
+    <div class="choose-your-gift" data-test-name="new-cart-drawer">
+      <p>You've unlocked a free gift!</p>
+      <modal-opener data-modal="#modal_free1">
+        <button class="btn" id="choose-your-gift-tier-1" aria-haspopup="dialog">Choose your gift</button>
+      </modal-opener>
+    </div>
+    <modal-dialog id="modal_free1" class="tier-modal">
+      <div
+        role="dialog"
+        aria-modal="true"
+        tabindex="-1"
+        class="modal-free-gift"
+      >
+        <div class="modal-free-gift__wrapper">
+          <button
+            id="ModalClose-tier1"
+            type="button"
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            {% render 'icon-close' %}
+          </button>
+          <h3>Free gift when you spend £75</h3>
+          <p>Please choose a free gift from the following</p>
+          {% assign tier_1_collection = collections['tier-1-free-gift'] %}
+
+          <div class="gifts">
+            <div class="overflow-wrap" data-length="{{ tier_1_collection.products | size }}">
+              {% for product in tier_1_collection.products %}
+                {% if product.selected_or_first_available_variant.available %}
+                  <div class="free-gift">
+                    <a class="free-gift__link" href="{{ product.first_available_variant.url }}">
+                      {% render 'image-element',
+                        image: product.featured_image,
+                        image_mobile: blank,
+                        size: '400x',
+                        alt: product.title,
+                        show_placeholder: true,
+                        extra_class: 'object-fit--contain'
+                      %}
+                    </a>
+                    <div class="product-title__wrapper">
+                      <span class="product-vendor">{{ product.vendor }}</span>
+                      <span class="product-title">{{ product.title }}</span>
+                    </div>
+
+                    <product-form>
+                      <form
+                        method="post"
+                        action="/cart/add"
+                        accept-charset="UTF-8"
+                        class="form free-item-form-tier-1"
+                        enctype="multipart/form-data"
+                        data-type="add-to-cart-form"
+                        data-chosen-image="{{ product.featured_image | image_url }}"
+                      >
+                        <input type="hidden" name="form_type" value="product">
+                        <input type="hidden" name="utf8" value="✓">
+                        <input type="hidden" name="properties[_free1]" value="true">
+
+                        <div class="selectors__container">
+                          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                          <div class="product-form__buttons">
+                            <button
+                              type="submit"
+                              name="add"
+                              class="product-form__submit btn"
+                              style="
+                                margin-right: auto;
+                                margin-top: 20px;
+                                justify-content: space-between;
+                                background-color: #000 !Important;
+                                color: #fff !important;
+                                font-weight: 400;
+                                padding: 4px 30px;
+                                margin-top: 10px !important;
+                                width: fit-content !important;
+                              "
+                            >
+                              <span>Select</span>
+                              <div class="loading-overlay__spinner hidden">
+                                <svg
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  class="spinner"
+                                  viewBox="0 0 66 66"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                </svg>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                        <input type="hidden" name="product-id" value="{{ product.id }}">
+                      </form>
+                    </product-form>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </modal-dialog>
+  </div>
+</div>
+<div rv-if="data.cart.total_price | gt 15000">
+  <div id="Tier2Gifts" rv-hide="data.hasFreeGift2">
+    <div data-test-name="new-cart-drawer" class="choose-your-gift">
+      <p>You've unlocked a second gift!</p>
+      <modal-opener data-modal="#modal_free2">
+        <button class="btn" id="choose-your-gift-tier-2" aria-haspopup="dialog">Choose your gift</button>
+      </modal-opener>
+    </div>
+    <modal-dialog id="modal_free2" class="tier-modal">
+      <div
+        role="dialog"
+        aria-modal="true"
+        tabindex="-1"
+        class="modal-free-gift"
+      >
+        <div class="modal-free-gift__wrapper">
+          <button
+            id="ModalClose-tier1"
+            type="button"
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            {% render 'icon-close' %}
+          </button>
+          <h3>Second free gift when you spend £150</h3>
+          <p>Please choose a free gift from the following</p>
+          {% assign tier_2_collection = collections['tier-2-free-gift'] %}
+
+          <div class="gifts">
+            <div class="overflow-wrap" data-length="{{ tier_2_collection.products | size }}">
+              {% for product in tier_2_collection.products %}
+                {% if product.selected_or_first_available_variant.available %}
+                  <div class="free-gift">
+                    <a class="free-gift__link" href="{{ product.first_available_variant.url }}" style="pointer-events: none;">
+                      {% render 'image-element',
+                        image: product.featured_image,
+                        image_mobile: blank,
+                        size: '400x',
+                        alt: product.title,
+                        show_placeholder: true,
+                        extra_class: 'object-fit--contain'
+                      %}
+                    </a>
+                    <div class="product-title__wrapper">
+                      <span class="product-vendor">{{ product.vendor }}</span>
+                      <span class="product-title">{{ product.title }}</span>
+                    </div>
+
+                    <product-form>
+                      <form
+                        method="post"
+                        action="/cart/add"
+                        accept-charset="UTF-8"
+                        class="form free-item-form-tier-2"
+                        enctype="multipart/form-data"
+                        data-type="add-to-cart-form"
+                        data-chosen-image="{{ product.featured_image | image_url }}"
+                      >
+                        <input type="hidden" name="form_type" value="product">
+                        <input type="hidden" name="utf8" value="✓">
+                        <input type="hidden" name="properties[_free2]" value="true">
+
+                        <div class="selectors__container">
+                          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                          <div class="product-form__buttons">
+                            <button
+                              type="submit"
+                              name="add"
+                              class="product-form__submit btn"
+                              style="
+                                margin-right: auto;
+                                margin-top: 20px;
+                                justify-content: space-between;
+                                background-color: #000 !Important;
+                                color: #fff !important;
+                                font-weight: 400;
+                                padding: 4px 30px;
+                                margin-top: 10px !important;
+                                width: fit-content !important;
+                              "
+                            >
+                              <span>Select</span>
+                              <div class="loading-overlay__spinner hidden">
+                                <svg
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  class="spinner"
+                                  viewBox="0 0 66 66"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                </svg>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                        <input type="hidden" name="product-id" value="{{ product.id }}">
+                      </form>
+                    </product-form>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </modal-dialog>
+  </div>
+</div>
+<div data-test-name="new-upsell" rv-if="data.cart.total_price | gt 25000" class="ab__test">
+  <div id="Tier3Gifts" rv-hide="data.hasFreeGift3" >
+    <div class="choose-your-gift" data-test-name="new-cart-drawer">
+      <p>You've unlocked a third gift!</p>
+      <modal-opener data-modal="#modal_free3">
+        <button class="btn" id="choose-your-gift-tier-3" aria-haspopup="dialog">Choose your gift</button>
+      </modal-opener>
+    </div>
+    <modal-dialog id="modal_free3" class="tier-modal">
+      <div
+          role="dialog"
+          aria-modal="true"
+          tabindex="-1"
+          class="modal-free-gift"
+      >
+        <div class="modal-free-gift__wrapper">
+          <button
+              id="ModalClose-tier3"
+              type="button"
+              aria-label="{{ 'accessibility.close' | t }}"
+          >
+            {% render 'icon-close' %}
+          </button>
+          <h3>Second free gift when you spend £250</h3>
+          <p>Please choose a free gift from the following</p>
+          {% assign tier_3_collection = collections['tier-3-free-gift'] %}
+
+          <div class="gifts">
+            <div class="overflow-wrap" data-length="{{ tier_3_collection.products | size }}">
+              {% for product in tier_3_collection.products %}
+                {% if product.selected_or_first_available_variant.available %}
+                  <div class="free-gift">
+                    <a class="free-gift__link" href="{{ product.first_available_variant.url }}" style="pointer-events: none;">
+                      {% render 'image-element',
+                          image: product.featured_image,
+                          image_mobile: blank,
+                          size: '400x',
+                          alt: product.title,
+                          show_placeholder: true,
+                          extra_class: 'object-fit--contain'
+                      %}
+                    </a>
+                    <div class="product-title__wrapper">
+                      <span class="product-vendor">{{ product.vendor }}</span>
+                      <span class="product-title">{{ product.title }}</span>
+                    </div>
+
+                    <product-form>
+                      <form
+                          method="post"
+                          action="/cart/add"
+                          accept-charset="UTF-8"
+                          class="form free-item-form-tier-3"
+                          enctype="multipart/form-data"
+                          data-type="add-to-cart-form"
+                          data-chosen-image="{{ product.featured_image | image_url }}"
+                      >
+                        <input type="hidden" name="form_type" value="product">
+                        <input type="hidden" name="utf8" value="✓">
+                        <input type="hidden" name="properties[_free3]" value="true">
+
+                        <div class="selectors__container">
+                          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                          <div class="product-form__buttons">
+                            <button
+                                type="submit"
+                                name="add"
+                                class="product-form__submit btn"
+                                style="
+                                margin-right: auto;
+                                margin-top: 20px;
+                                justify-content: space-between;
+                                background-color: #000 !Important;
+                                color: #fff !important;
+                                font-weight: 400;
+                                padding: 4px 30px;
+                                margin-top: 10px !important;
+                                width: fit-content !important;
+                              "
+                            >
+                              <span>Select</span>
+                              <div class="loading-overlay__spinner hidden">
+                                <svg
+                                    aria-hidden="true"
+                                    focusable="false"
+                                    class="spinner"
+                                    viewBox="0 0 66 66"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                </svg>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                        <input type="hidden" name="product-id" value="{{ product.id }}">
+                      </form>
+                    </product-form>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </modal-dialog>
+  </div>
+</div>
+
+<script>
+  const free1Form = document.querySelectorAll('.free-item-form-tier-1');
+  const free2Form = document.querySelectorAll('.free-item-form-tier-2');
+  const free3Form = document.querySelectorAll('.free-item-form-tier-3 ');
+
+  free1Form.forEach((form) =>
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      fetch('/cart/add', {
+        method: 'post',
+        body: formData,
+      }).catch((e) => console.log(e));
+    })
+  );
+
+  free2Form.forEach((form) =>
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      fetch('/cart/add', {
+        method: 'post',
+        body: formData,
+      }).catch((e) => console.log(e));
+    })
+  );
+</script>
+
+<style>
+    /* Continue shopping prompt */
+    .continue-shopping-prompt {
+      padding-bottom: 1.5rem;
+      display: flex;
+      flex-direction: flex-start;
+      width: 100%;
+    }
+
+    .continue-shopping-prompt a {
+      text-align: left;
+      font-weight: bold;
+      width: 100%;
+      text-decoration: underline;
+    }
+
+    .product-form__buttons {
+      display: flex;
+      justify-content: end;
+    }
+    .tiered-progress-bar__choose .progress-bar__outer {
+      background: #c7c7c7;
+      height: 2px;
+      position: relative;
+      overflow: visible;
+      margin-top: 32px;
+      margin-bottom: 80px;
+    }
+    .tiered-progress-bar__choose .progress-bar__outer .tier-wrapper {
+      width: fit-content;
+      position: relative;
+      text-align: center;
+      background-color: #fff;
+    }
+    .tiered-progress-bar__choose .progress-bar__outer .tiered-bubble__outer {
+      position: absolute;
+      top: -6px;
+      right: 0;
+      left: 0;
+      margin: -20px auto 0;
+      width: fit-content;
+      z-index: 2;
+      background: #c7c7c7;
+      padding: 2px;
+    }
+    .tiered-progress-bar__choose .tiered-bubble {
+      background-color: #f7f7f7;
+      overflow: hidden;
+      width: 50px;
+      height: 50px;
+    }
+    .tiered-progress-bar__choose .tiered-bubble img {
+      margin: 0 !important;
+      border-radius: 0 !important;
+      opacity: 0.95;
+    }
+    .tiered-progress-bar__choose .tier-bubble__title {
+      padding-top: 40px;
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 400;
+    }
+
+    .tiered-progress-bar__choose .tier-bubble__price {
+      color: #666;
+      letter-spacing: 0;
+      max-width: 100px;
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .tiered-progress-bar__choose .tiered-bubble_container {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .threshold-container.ab__test--active-test .tiered-progress-bar__choose .tiered-bubble_container {
+        display: flex !important;
+    }
+    @media (max-width: 600px) {
+        .threshold-container.ab__test--active-test .tiered-progress-bar__choose .progress-bar__outer {
+            background: transparent!important;
+            height: auto;
+            margin: 10px 0 0;
+        }
+        .threshold-container.ab__test--active-test .tiered-progress-bar__choose .tiered-bubble_container{
+            display: block;
+            white-space: nowrap;
+            overflow: auto;
+        }
+        .threshold-container.ab__test--active-test .tiered-progress-bar__choose .tiered-bubble_container::-webkit-scrollbar {
+            display: none;
+        }
+        .threshold-container.ab__test--active-test .tiered-progress-bar__choose .tiered-bubble_container .tiered-bubble__outer {
+            position: static;
+            margin: 0;
+        }
+        .threshold-container.ab__test--active-test .tiered-progress-bar__choose .tiered-bubble_container .tier-wrapper{
+            flex: 1;
+            margin: 0 10px;
+            max-width: 23%;
+            display: inline-flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .threshold-container.ab__test--active-test .tiered-progress-bar__choose .tiered-bubble_container .tier-wrapper:first-child{
+          margin-left: 0;
+        }
+
+        .threshold-container.ab__test--active-test .tiered-progress-bar__choose .tiered-bubble_container .tier-bubble__title{
+            padding-top: 15px;
+        }
+        .threshold-container.ab__test--active-test .process-bar-mobile {
+            left: 10px;
+            height: 2px;
+            right: 10px;
+            position: absolute;
+            top: 25px;
+            display: block;
+        }
+    }
+
+
+
+    .tiered-progress-bar__choose .tiered-bubble_half-filled {
+      background: linear-gradient(to right, #000 50%, #c7c7c7 50%) !important;
+    }
+
+    .tiered-progress-bar__choose .tiered-bubble_filled {
+      background: #000 !important;
+    }
+    .tiered-progress-bar__choose .tiered-bubble_filled img {
+      opacity: 1;
+    }
+    .tiered-progress-bar__choose .progress-bar__inner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      direction: rtl;
+      z-index: 0;
+      border-radius: 0 100px 100px 0;
+    }
+    .membership-wrapper {
+      background-color: #f7f7f7;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 16px;
+      margin-bottom: 10px;
+    }
+    .membership-wrapper .left-area {
+      width: 64px;
+      height: 64px;
+    }
+    .membership-wrapper .left-area a {
+      padding-bottom: 100%;
+    }
+    .membership-wrapper .btn {
+      text-align: left;
+      color: #000 !important;
+      background-color: transparent !important;
+      font-weight: bold;
+      border: none;
+      padding: 0;
+      width: 150px !important;
+    }
+    .membership-wrapper .btn svg {
+      margin-left: 40px;
+      width: 20px !important;
+    }
+    .cart-item--rivets[extra-class='£0'] .cart-item-quantity-selector {
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .product-variant-name {
+      position: relative;
+      font-size: 10px;
+      color: rgba(0, 0, 0, 0.8);
+      font-weight: 400;
+    }
+    .product-variant-name::before {
+      content: '';
+      background-color: #000;
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      position: absolute;
+      left: -12px;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+
+    {% comment %} Free gift {% endcomment %}
+    .choose-your-gift {
+        padding: 12px;
+        background-color: #f5f5f7;
+        font-size: 13px;
+        line-height: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        margin-top: 10px;
+    }
+
+    .choose-your-gift .btn {
+        {% comment %} height: 30px; {% endcomment %}
+        padding: 4px 12px;
+        font-size: 12px;
+    }
+
+    .modal-free-gift {
+      background-color: rgba(0, 0, 0, 0.2);
+      height: 100%;
+      margin: 0;
+      overflow: auto;
+      padding: 0;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 9999;
+      display: none;
+    }
+
+    .tier-modal[open] .modal-free-gift {
+      display: block;
+    }
+
+    .modal-free-gift__wrapper {
+      height: 75dvh;
+      padding-top: 6rem;
+      width: calc(100vw - 60px);
+      background: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 2px;
+      overflow-y: scroll;
+    }
+
+    .modal-free-gift__wrapper > h3 {
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .modal-free-gift__wrapper > p {
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .modal-free-gift__wrapper > button {
+      width: 16px;
+      color: black;
+      position: absolute;
+      right: 24px;
+      top: 24px;
+    }
+
+    .gifts {
+      overflow-x: hidden;
+      padding-bottom: 32px;
+    }
+
+    .overflow-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 16px;
+    }
+
+    .overflow-wrap[data-length="3"],
+    .overflow-wrap[data-length="2"],
+    .overflow-wrap[data-length="1"] {
+        justify-content: center;
+    }
+
+    .overflow-wrap::after {
+        content: '';
+        border-right: 1px solid white;
+    }
+
+    .free-gift {
+      width: 50%;
+      flex-shrink: 0;
+      flex-basis: calc(50% - 8px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .free-gift .product-title__wrapper {
+      min-height: 50px;
+    }
+
+    .modal-free-gift .btn {
+        position: relative;
+    }
+
+    .modal-free-gift .btn.loading span {
+        opacity: 0;
+    }
+
+    .modal-free-gift .btn.loading > .loading-overlay__spinner {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .modal-free-gift .btn.loading > .loading-overlay__spinner .path {
+        stroke: rgb(255,255,255);
+      }
+
+    @media screen and (min-width: 1024px) {
+      .modal-free-gift__wrapper > h3 {
+        font-size: 24px;
+      }
+
+      .free-gift {
+        width: 25%;
+        max-width: 320px;
+        flex-basis: unset;
+      }
+
+      .gifts {
+        overflow-x: scroll;
+        padding-bottom: 64px;
+      }
+
+      .overflow-wrap {
+        flex-wrap: unset;
+        padding: unset;
+      }
+
+      .overflow-wrap::after {
+        border-right: 36px solid white;
+      }
+
+      .free-gift:first-of-type {
+        margin-left: 48px;
+      }
+  }
+</style>

@@ -1,0 +1,27 @@
+{% assign ss = section.settings %}
+
+<div class="bundle-builder-header" style="--bundle-builder-header--color: {{ ss.color_text }}; background-image: url('{{ ss.image | img_url: '2000x' }}');" data-bundle-builder-header>
+  <div class="wrapper">
+    <h2 class="h2" rv-html="data.current_stage.header.title"></h2>
+    <p rv-html="data.current_stage.header.text"></p>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Color",
+        "default": "#ffffff"
+      }
+    ]
+  }
+{% endschema %}

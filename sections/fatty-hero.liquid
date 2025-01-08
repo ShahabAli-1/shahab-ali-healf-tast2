@@ -1,0 +1,115 @@
+{{ 'component-fatty-hero.css' | asset_url | stylesheet_tag }}
+{%  liquid 
+    assign ss = section.settings 
+    assign description = ss.description
+    assign fatty_image = ss.fatty_image
+    assign bg_image = ss.bg_image
+    assign bg_color = ss.bg_color
+    assign button_text = ss.button_text
+    assign button_link = ss.button_link
+    assign blocks = section.blocks
+%}
+
+{%  style %}
+    #fatty__hero--{{section.id}} {
+        background-color: {{ bg_color }}
+    }
+{% endstyle %}
+
+<section class="bs-devshop__fattyhero" id="fatty__hero--{{section.id}}">
+    <div class="bs-devshop__fattyhero__wrapper page-width">
+        <div class="bs-devshop__fattyhero__container">
+            <div class="bs-devshop__fattyhero__content">
+                <div class="bs-devshop__fattyhero__content--top">
+                    {% if fatty_image != blank %}
+                        <div class="bs-devshop__fattyhero__logo">{% render 'image-element', size: '600x', image: fatty_image, extra_class: 'object-fit--cover'%}</div>
+                    {% endif %}
+                    {% if description != blank %}
+                        <div class="bs-devshop__fattyhero__text">{{description}}</div>
+                    {% endif %}
+                </div>
+                {% if blocks != blank %}
+                    <div class="bs-devshop__fattyhero__links">
+                        {% for block in blocks %}
+                            {%  liquid 
+                                assign button_text = block.settings.button_text
+                                assign button_link = block.settings.button_link
+                                assign hide_mobile = block.settings.hide_mobile
+                            %}
+                            <a class="bs-devshop__fattyhero__link btn--white {% if hide_mobile %}fattyhero__link--mobile--hidden{% endif %}" href="{{button_link}}">{{ button_text }}</a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            {% if bg_image != blank %}
+                <div class="bs-devshop__fattyhero__image">
+                    {% render 'image-element', image: bg_image, size: '1920x', extra_class: 'object-fit--cover'%}
+                </div>
+            {% endif %}
+            <div class="bs-devshop__fattyhero__search">
+                {% comment %} {% render 'component-search' %} {% endcomment %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Fatty Hero Banner",
+  "class": "section",
+  "settings": [
+    {
+        "type": "image_picker",
+        "id": "fatty_image",
+        "label": "Fatty Image"
+    },
+    {
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Background Image"
+    },
+    {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background Color",
+        "default": "#C7DBDC"
+    },
+    {
+        "type": "richtext",
+        "id": "description",
+        "label": "Description",
+        "default": "<p>Fatty15 is a groundbreaking, essential C15:0 supplement that strengthens your cells & protects against age-related breakdown.</p>"
+    }
+  ],
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link"
+        },
+        {
+            "type": "checkbox",
+            "id": "hide_mobile",
+            "label": "Hide on mobile",
+            "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fatty Hero Banner"
+    }
+  ]
+}
+{% endschema %}

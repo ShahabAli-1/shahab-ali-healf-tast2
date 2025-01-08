@@ -1,0 +1,16 @@
+{%- assign meta_obj_grid = product.metafields.custom_fields  -%}
+
+<div class="bundle-builder-product-details">
+  <div class="head"></div>
+
+  <div class="main">
+    {% for caption in table_captions %}
+      {% assign height = caption | split: '|' | last | times: 14 | plus: 48 %}
+      <div class="row" style="height: {{ height }}px;">
+        {{ caption | split: '|' | first }}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+

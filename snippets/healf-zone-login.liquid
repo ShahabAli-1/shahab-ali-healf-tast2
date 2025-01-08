@@ -1,0 +1,86 @@
+
+{% assign shopify_secret = "72a0e85fdc3b0384d6145eafa01623cc" %}
+{% assign shop_name = "how2go" %}
+{% assign time_stamp = 'now' | date: "%s" %}
+{% assign customer_id = customer.id %}
+
+{% capture message %}
+  customerId={{ customer_id }}&shop={{ shop_name }}&time_stamp={{ time_stamp }}
+{% endcapture %}
+
+{% assign hmac_full = message | hmac_sha256: shopify_secret %}
+
+<!-- Pass the computed values to JavaScript -->
+<script>
+  const customerId = "{{ customer_id }}";
+  const message = "{{ message }}";
+  const hmac = "{{ hmac_full }}";
+  const timeStamp = "{{ time_stamp }}";
+</script>
+
+<script>
+  function healfZone() {
+    setTimeout(() => {
+      // Assuming 'shadowHost' is the host element of the shadow DOM
+      var shadowHost = document.querySelector('#status-app');
+      if (!shadowHost) {
+        return;
+      }
+
+      // Access the shadow root
+      var shadowRoot = shadowHost.shadowRoot;
+      if (!shadowRoot) {
+        return;
+      }
+
+      (function() {
+        // Ensure customerId is defined
+        if (typeof customerId === 'undefined' || customerId === '') {
+          console.error('Customer is not logged in.');
+          return;
+        }
+
+        var zoneButton = shadowRoot.querySelector('.section-button.content-link-button');
+
+        console.log(message);
+        console.log(hmac);
+
+        // Call the backend to generate a signed JWT token
+        fetch(`https://api.stage.optimallyme.com/sessions/external/shopify/generate-token?${message}&hmac=${hmac}`)
+          .then(response => response.json())
+          .then(data => {
+            const token = data.token;
+            zoneButton.href = `https://zone.healf.com/sign-in/sso?token=${token}`;
+            zoneButton.style.height = 'inherit';
+            zoneButton.style.visibility = 'visible';
+            zoneButton.style.setProperty('padding', '10px 20px', 'important');
+
+            // Check if sampleId is received in query string of URL
+            var queryString = window.location.search || '';
+            if (queryString.startsWith('?sampleId=OPME-')) {
+              console.log("Sample ID included in query string");
+              queryString = queryString.substring(0, 10) + queryString.substring(15, 21);
+              console.log("Query string: " + queryString);
+            }
+          })
+          .catch(error => console.error('Error fetching JWT:', error));
+      })();
+    }, 500);
+  }
+
+  document.addEventListener('status:loaded', (event) => {
+    if (StatusAccounts.customer.tags.includes("healf-zone")) {
+      healfZone();
+    }
+  });
+  document.addEventListener('status:widget:open', (event) => {
+    if (StatusAccounts.customer.tags.includes("healf-zone")) {
+      healfZone();
+    }
+  });
+  document.addEventListener('status:shopify:login', (event) => {
+    if (StatusAccounts.customer.tags.includes("healf-zone")) {
+      healfZone();
+    }
+  });
+</script>

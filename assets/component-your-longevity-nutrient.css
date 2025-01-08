@@ -1,0 +1,154 @@
+.bs-devshop__yln__banner {
+    aspect-ratio: 3;
+    border-radius: 0.4rem;
+    overflow: hidden;
+}
+
+.bs-devshop__yln__wrapper {
+    padding-top: 9.6rem;
+    padding-bottom: 9.6rem;
+}
+
+.bs-devshop__yln__content--top {
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    margin-bottom: 3rem;
+    gap: 3rem
+}
+
+.bs-devshop__yln__heading {
+    flex: 1;
+    font-size: 7.2rem;
+    line-height: 1;
+    font-weight: 500;
+}
+
+.bs-devshop__yln__description {
+    flex: 1;
+    font-size: 3rem;
+    line-height: 3.9rem;
+}
+
+.bs-devshop__yln__columns {
+    display: flex;
+    margin-top: 2rem;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.bs-devshop__yln__percent {
+    font-weight: 500;
+    font-size: 7.2rem;
+    line-height: 1;
+    margin-top: 2.4rem;
+}
+
+.bs-devshop__yln__text {
+    font-size: 3rem;
+    line-height: 3.6rem;
+    max-width: 40rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 750px) {
+    .bs-devshop__yln__banner .image-element-wrapper {
+        padding-bottom: 33.3% !important;
+    }
+
+    .yln__column--mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 1199px) {
+    .bs-devshop__yln__heading,
+    .bs-devshop__yln__percent {
+        font-size: 5.6rem;
+    }
+    
+    .bs-devshop__yln__description,
+    .bs-devshop__yln__text {
+        font-size: 2.4rem;
+        line-height: 3rem;
+    }
+}
+
+@media (max-width: 989px) {
+    .bs-devshop__yln__wrapper {
+        padding-top: 4.8rem;
+        padding-bottom: 4.8rem;
+    }
+
+    .bs-devshop__yln__heading {
+        font-size: 3.5rem;
+        line-height: 4rem;
+    }
+
+    .bs-devshop__yln__percent {
+        font-size: 5rem;
+        line-height: 4rem;
+    }
+
+    .bs-devshop__yln__description,
+    .bs-devshop__yln__text {
+        font-size: 2rem;
+        line-height: 2.6rem;
+        flex: 2
+    }
+}
+
+
+@media (max-width: 639px) {
+    .bs-devshop__yln__wrapper {
+        padding-top: 2.4rem;
+        padding-bottom: 2.4rem;
+    }
+
+    .bs-devshop__yln__columns {
+       flex-direction: column;
+       gap: 1rem;
+       margin-top: 0;
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       align-items: flex-end;
+    }
+
+    .bs-devshop__yln__content--top {
+        flex-direction: column;
+        gap: 1.6rem;
+        margin-bottom: 1.6rem;
+    }
+
+    .bs-devshop__yln__text {
+        max-width: 100%;
+    }
+
+    .bs-devshop__yln__banner .image-element-wrapper {
+        padding-bottom: 75% !important;
+    }
+
+    .bs-devshop__yln__description, .bs-devshop__yln__text {
+        font-size: 1.6rem;
+        line-height: 1.9rem;
+    }
+
+    .bs-devshop__yln__link {
+        background-color: #000;
+        color: #fff;
+        padding: 1.2rem 3.2rem;
+        border-radius: 3.2rem;
+        font-weight: 400;
+        border: 1px solid #000;
+        transition: ease .3s;
+        display: inline-block;
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+    }
+
+    .bs-devshop__yln__column:not(.yln__column--mobile) {
+        height: 100%;
+    }
+}
+
+  

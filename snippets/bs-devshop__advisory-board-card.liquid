@@ -1,0 +1,43 @@
+{% comment %}
+  Renders a card for the advisory board section.
+  Accepts:
+  - image: The image to display in the card.
+  - title: The title of the card.
+  - content: The content of the card.
+  - list_item_1: First list item (optional).
+  - list_item_2: Second list item (optional).
+  - custom_class: A custom class to add to the card.
+  Usage:
+  {% render 'bs-devshop__advisory-board-card',
+    title: 'Advisor Name',
+    image: 'advisor-image.jpg',
+    content: 'Advisor description',
+    list_item_1: 'PhD',
+    list_item_2: 'AI Engineer',
+    custom_class: ''
+  %}
+{% endcomment %}
+<div class="bs-devshop__advisory-board-card {{ custom_class }}">
+    {% if image %}
+      <img
+        src="{{ image | img_url: 'master' }}"
+        alt="{{ title }}"
+        class="bs-devshop__advisory-board-card__image"
+        width="320px"
+        height="320px"
+      >
+    {% endif %}
+    <div class="bs-devshop__advisory-board-card__content">
+      <h3 class="bs-devshop__advisory-board-card__title">{{ title }}</h3>
+      <ul class="bs-devshop__advisory-board-card__list">
+        {% if list_item_1 != blank %}
+        <li class="bs-devshop__advisory-board-card__list-item">{{ list_item_1 }}</li>
+        {% endif %}
+        {% if list_item_2 != blank %}
+        <li class="bs-devshop__advisory-board-card__list-item">{{ list_item_2 }}</li>
+        {% endif %}
+      </ul>
+    
+      <div class="bs-devshop__advisory-board-card__text">{{ content }}</div>
+    </div>
+  </div>

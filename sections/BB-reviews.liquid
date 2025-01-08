@@ -1,0 +1,206 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+      "autoplay": true,
+      "autoplaySpeed": 8000,
+      "slidesPerView": 2.6,
+      "autoAdjustSlidesPerView": false,
+      "spacing": 20,
+      "loop": true,
+      "spacing": 24,
+      "responsive": [
+        {
+          "breakpoint": "480px",
+          "settings": {
+            "slidesPerView": 1.3,
+            "dots": false
+          }
+        }
+      ]
+    }
+{% endcapture %}
+
+<div id="reviews" class="reviews__container">
+    <div class="reviews-stats__wrapper wrapper">
+        {%- if ss.title != blank -%}
+            <h3>{{ ss.title }}</h3>
+        {%- endif -%}
+
+        <div class="reviews-cards__wrapper">
+            {%- for block in section.blocks -%}
+                {% assign bs = block.settings %}
+                {%- case block.type -%}
+                    {%- when 'review_stats' -%}
+                    <div class="review-card">
+                        {%- if bs.review_title != blank -%}
+                            <p class="review-card__title">{{ bs.review_title }}</p>
+                        {%- endif -%}
+                        {%- if bs.review_value != blank -%}
+                            <p class="review-card__text">{{ bs.review_value }}<span>+</span></p>
+                        {%- endif -%}
+                    </div>
+                {%- endcase -%}
+            {%- endfor -%}
+        </div>
+    </div>
+
+    <div class="reviews-slider__container">
+        <div class="reviews-slider__wrapper" data-keen-slider='{{ slider_settings }}'>
+            {%- for block in section.blocks -%}
+                {% assign bs = block.settings %}
+                {%- case block.type -%}
+                {%- when 'reviews_slider' -%}
+                    <div>
+                        <div class="reviews__stars" style="display: flex; align-items: baseline">
+                            {%- render "icon-review-stars" -%}
+                        {%- if bs.review_author != blank -%}
+                            <p class="reviews__author">
+                                {{ bs.review_author  }}
+                            </p>
+                        {%- endif -%}
+                        </div>
+
+                        {%- if bs.review_title != blank -%}
+                            <p class="reviews__title">
+                                {{ bs.review_title  }}
+                            </p>
+                        {%- endif -%}
+
+                        {%- if bs.review_description != blank -%}
+                            <p class="reviews__desc">
+                                {{ bs.review_description | strip_html | escape  }}
+                            </p>
+                        {%- endif -%}
+                    </div>
+                {% endcase %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% style %}
+    #shopify-section-{{ section.id }}.reviews {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.reviews {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Reviews",
+        "tag": "section",
+        "class": "reviews",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Reviews"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "review_stats",
+                "name": "Reviews Stats",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "review_title",
+                        "label": "Review Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "review_value",
+                        "label": "Review Value"
+                    }
+                ]
+            },
+            {
+                "type": "reviews_slider",
+                "name": "Reviews Slider",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "review_title",
+                        "label": "Review Title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "review_description",
+                        "label": "Review Description"
+                    },
+                    {
+                        "type": "text",
+                        "id": "review_author",
+                        "label": "Review Author"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Reviews"
+            }
+        ]
+    }
+{% endschema %}

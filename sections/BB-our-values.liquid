@@ -1,0 +1,172 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+      "enableWhen": "(max-width: 834px)",
+      "slidesPerView": 1,
+      "autoAdjustSlidesPerView": false,
+      "loop": true,
+      "spacing": 16,
+      "arrows": true
+    }
+{% endcapture %}
+<div class="our-values__container-outer wrapper">
+    <div class="our-values__text">
+        <h2 class="liquid-title">
+            {{ ss.title }}
+        </h2>
+        {% if ss.btn_label != blank %}
+        <a href="{{ ss.btn_url }}">
+            <span>{{ ss.btn_label }}</span>
+            {% include 'icon-chevron' %}
+        </a>
+        {% endif %}
+    </div>
+    <div class="our-values__container" data-keen-slider='{{ slider_settings }}'>
+        {% for block in section.blocks %}
+            {% assign bs = block.settings %}
+            <div class="our-values__card">
+                {% if bs.image != blank %}
+                    {% render 'image-element', image: bs.image, image_mobile: bs.image, size: '600x', extra_class: 'object-fit--cover'%}
+                {%- endif -%}
+                <div class="our-values__card-text">
+                {% if bs.number != blank %}
+                    <h3>{{ bs.number }}</h3>
+                {%- endif -%}
+                {% if bs.title != blank %}
+                    <h4>{{ bs.title }}</h4>
+                {%- endif -%}
+                {% if bs.description != blank %}
+                    <p>{{ bs.description }}</p>
+                {%- endif -%}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.our-values {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.our-values {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Our Values",
+        "tag": "section",
+        "max_blocks": 3,
+        "class": "our-values",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Content"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "Only the best brands"
+            },
+            {
+                "type": "text",
+                "id": "btn_label",
+                "label": "Button label"
+            },
+            {
+                "type": "url",
+                "id": "btn_url",
+                "label": "Button URL"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "block",
+                "name": "Block",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Value Image"
+                    },
+                    {
+                        "type": "text",
+                        "id": "number",
+                        "label": "Value number"
+                    },
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Value title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "description",
+                        "label": "Value description"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Our Values"
+            }
+        ]
+    }
+{% endschema %}

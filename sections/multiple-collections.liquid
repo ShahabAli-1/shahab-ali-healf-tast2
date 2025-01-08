@@ -1,0 +1,43 @@
+{{ 'multiple-collection.css' | asset_url | stylesheet_tag }}
+{% assign navigation = collection.metafields.custom.collections_navigation %}
+{% if collection.handle == 'eat' or collection.handle == 'move' or collection.handle == 'mind' or collection.handle == 'sleep' %}
+<multiple-collection id="multipleCollection" data-test-name="collection-test">
+<div  class="page-width ">
+    <div class="multi-collection-row collection-menu-desktop">
+      {% for nav_collection in navigation.value %}
+            <a href="{{ nav_collection.handle }}" class="multi-collection-item coll-item {% if nav_collection.handle == collection.handle %}active{% endif %}">{{ nav_collection.title | capitalize  }}</a>
+        {% endfor %}
+    </div>
+</div>
+</multiple-collection>
+{% endif %}
+
+{% schema %}
+  {
+        "name": "Multiple Collections",
+        "max_blocks": 5,
+        "settings": [
+      ],
+        "blocks": [
+        {
+          "type": "collection",
+          "name": "Collection",
+          "settings": [
+            {
+              "type": "collection",
+              "label": "Select Collection",
+              "id": "collection",
+              "info": "Choose Collection"
+            }
+          ]
+        }
+      ],
+        "presets": [
+        {
+          "name": "Multiple Collections",
+          "category": "Custom"
+        }
+      ]
+      }
+
+{% endschema %}

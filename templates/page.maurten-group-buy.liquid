@@ -1,0 +1,684 @@
+{{ 'maurten.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="section bicarb-public overlay-container"
+  data-controller="bicarb-buy-option"
+  data-action="maurten-update-cart@window->bicarb-buy-option#cartUpdated"
+>
+  <div
+    class="section-content panel group-buy-panel turbo-panel"
+    data-bicarb-buy-option-target="buyPanel"
+    data-controller="turbo-navigate"
+    data-turbo-navigate-current-panel-value="group"
+    data-index="4"
+  >
+    <div>
+      <h1 class="liquid-title">Picking for your athletes.</h1>
+      <p>
+        When choosing Bicarb System for your Athletes keep in mind the weight of the athlete and the sensitivity of
+        their stomach. Our recommendation is to start out with a low dosage (0.20 g/kg) before moving up to medium
+        dosage (0.25 g/kg).
+      </p>
+    </div>
+<!-- Remove the outer form and keep only one form -->
+<form
+  method="POST"
+  action="/cart/add"
+  accept-charset="UTF-8"
+  enctype="multipart/form-data"
+  class="add-to-cart"
+  data-controller="cart"
+  id="add-to-cart-form"
+>
+  <!-- Required hidden inputs -->
+  <input type="hidden" name="form_type" value="product">
+  <input type="hidden" name="utf8" value="✓">
+
+  <!-- Quantity Inputs -->
+  <ul>
+    {% assign product = all_products['maurten-bicarb-system'] %}
+
+    {% for variant in product.variants %}
+    <li class="bicarb-products">
+      <div class="bicarb-product">
+        <span class="product-title">Bicarb System {{ variant.title }}</span>
+      </div>
+      <div class="amount">
+        <input
+          type="number"
+          name="variant_{{ variant.id }}"
+          value="0"
+          min="0"
+          data-variant-id="{{ variant.id }}"
+          data-cart-target="qty"
+          data-price="{{ variant.price | divided_by: 100.0 }}"
+          data-currency="GBP"
+        >
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <!-- Total Price -->
+  <div class="total" style="width: 100%; display: flex; justify-content: space-between">
+    <p>Total:</p>
+    <p data-cart-target="total">£<span class="maurten-total">0</span></p>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="qty-price-container">
+    <div class="product-form__buttons">
+      <button
+        type="submit"
+        name="add"
+        class="btn btn--white button--primary continue product-form__submit btn bundle-form"
+        data-cart-target="submitButton"
+      >
+        <span>Add to Cart</span>
+      </button>
+    </div>
+  </div>
+</form>
+
+
+    <div class="satchet-sizes">
+      <div id="how-to" class="satchet-sizes">
+        <table class="bicarb-doses">
+          <thead>
+            <tr>
+              <th rowspan="2" class="dose-sizes">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+                Minimum ~ 20g/kg<br>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+                Medium ~ 25g/kg<br>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+                Maximum ~ 31g/kg
+              </th>
+              <th class="title" colspan="5">Bicarb System</th>
+            </tr>
+            <tr>
+              <th class="system">12</th>
+              <th class="system">15</th>
+              <th class="system">19</th>
+              <th class="system">22</th>
+              <th class="system">25</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="weight">≤ 43&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">44–46&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">47–54&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">55&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">56–58&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">59–67&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">68&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">69&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">70–76&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">77–80&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">81–85&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">86–88&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">89–102&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#EBAE37"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">103–116&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8EC237"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">117–125&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">126–142&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="8" cy="8" r="8" fill="#8BB0B9"></circle><path d="M3 7.5L6.5 11L13 5" stroke="black"></path>
+                </svg>
+              </td>
+            </tr>
+            <tr>
+              <td class="weight">≥ 143&nbsp;kg</td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+              <td class="system">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="13.667" y1="2.35355" x2="2.35332" y2="13.6673" stroke="#9B3029"></line><line x1="13.9599" y1="13.667" x2="2.64621" y2="2.35332" stroke="#9B3029"></line>
+                </svg>
+              </td>
+            </tr>
+          </tbody>
+          <thead>
+            <tr>
+              <th></th>
+              <th class="system">12</th>
+              <th class="system">15</th>
+              <th class="system">19</th>
+              <th class="system">22</th>
+              <th class="system">25</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- - Thank you overlay - -->
+  <div class="dialog hidden" data-bicarb-buy-option-target="thankYouMessage">
+    <div class="panel thank-you-panel dialog-content">
+      <div>
+        <h1>Thank you</h1>
+        <p>
+          The Maurten Bicarb System has been added to your cart. Once received, you can unlock the Bicarb Digital
+          System, created by our in-house nutritional scientists to make it intuitive to plan, prepare, and execute a
+          bicarb session or race.
+        </p>
+      </div>
+      <div>
+        <a class="button button--white button--primary continue" href="/cart" data-turbo="false">Ok, got it!</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const inputs = document.querySelectorAll('input[data-cart-target="qty"]');
+  const totalElement = document.querySelector('.maurten-total');
+  const form = document.getElementById('add-to-cart-form');
+  const submitButton = form.querySelector('button[type="submit"]');
+
+  // ... existing code for updateTotal and checkQuantities ...
+
+  // Handle form submission
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Collect variant IDs and quantities
+    const items = [];
+    inputs.forEach((input) => {
+      const quantity = parseInt(input.value, 10) || 0;
+      if (quantity > 0) {
+        const variantId = input.getAttribute('data-variant-id');
+        items.push({ id: variantId, quantity: quantity });
+      }
+    });
+
+    if (items.length === 0) {
+      alert('Please enter a quantity for at least one product.');
+      return;
+    }
+
+    // Prepare the data for AJAX request
+    const formData = {
+      items: items
+    };
+
+    // Send AJAX request to /cart/add.js
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (response.ok) {
+        // Items added successfully, dispatch the custom event
+        const event = new Event('maurten:cart:add');
+        document.dispatchEvent(event);
+      } else {
+        response.json().then(data => {
+          alert(data.message || 'An error occurred while adding items to the cart.');
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while adding items to the cart.');
+    });
+  });
+});
+
+</script>
+

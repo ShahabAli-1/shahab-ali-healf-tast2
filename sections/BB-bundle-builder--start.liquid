@@ -1,0 +1,71 @@
+{% assign ss = section.settings %}
+
+<script data-bundle-builder-json type="application/json">
+  {
+    "stage_order": 0,
+    "header": {
+      "title": {{ ss.header_title | json }},
+      "text": {{ ss.header_text | json }}
+    }
+  }
+</script>
+
+<div class="quiz-start__container" rv-if="data.current_stage.stage_order | eq 0">
+  {% include 'logo' %}
+
+  <div class="text__container">
+    <h1 class="h1">
+      {{ ss.title}}
+    </h1>
+
+    <div class="rte">
+      {{ ss.text }}
+    </div>
+  </div>
+
+  {% render 'image-element', image: ss.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--cover member-main-image'%}                
+  <button class="button button--next" rv-on-click="controller.nextStage">{{ ss.cta_text }}</button>
+</div>
+
+{% schema %}
+  {
+    "name": "Start",
+    "class": "bundle-builder-start",
+    "settings": [
+      {
+        "type":"header",
+        "content":"Header"
+      },
+      {
+        "type":"text",
+        "id":"header_title",
+        "label":"Header Title"
+      },
+      {
+        "type":"text",
+        "id":"header_text",
+        "label":"Header Text"
+      },
+      {
+        "type":"header",
+        "content":"Content"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title"
+      },
+      {
+        "type":"richtext",
+        "id":"text",
+        "label":"Text"
+      },
+      {
+        "type":"text",
+        "id":"cta_text",
+        "label":"CTA Text",
+        "default":"Start"
+      }
+    ]
+  }
+{% endschema %}

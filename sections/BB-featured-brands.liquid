@@ -1,0 +1,213 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+      "enableWhen": "(max-width: 1024px)",
+      "slidesPerView": 1.3,
+      "autoAdjustSlidesPerView": false,
+      "loop": true,
+      "nav": true,
+      "dots": true,
+      "spacing": 16
+    }
+{% endcapture %}
+<div class="featured-brands">
+    <div class="wrapper">
+        <div class="featured-brands__heading">
+            <div class="featured-brands__heading__content flex">
+                <h3 class="featured-brands__heading__title liquid-title">{{ ss.title }}</h3>
+                <div class="featured-brands__heading__subtitle liquid-subtitle">{{ ss.subtitle }}</div>
+            </div>
+        </div>
+
+        <div class="featured-brands__container scroll-trigger animate--fade-in{% if template.name == 'page' %} featured-brands__container-page" data-keen-slider='{{ slider_settings }}'{% else %} featured-brands__container-grid"{% endif %}>
+        {%- for block in section.blocks -%}
+            {% assign bs = block.settings %}
+            <a href="{{ bs.url }}" class="brand__card is-slow-zoom" style="position: relative; overflow: visible;">
+                {% render 'image-element', image: bs.image, image_mobile: bs.image_mobile, size: '1920x', extra_class: 'object-fit--cover'%}
+
+                {%- if bs.title != blank -%}
+                    <p class="brand__title">
+                        {{ bs.title  }}
+                    </p>
+                {%- endif -%}
+                {%- if bs.text != blank -%}
+                    <p class="brand__button">
+                        {{ bs.text | upcase }}
+                        {% include 'icon-chevron-circle' %}
+                    </p>
+                {%- endif -%}
+                {%- if bs.sub_text != blank -%}
+                    <p class="brand__subtext">
+                        {{ bs.sub_text }}
+                    </p>
+                {%- endif -%}
+            </a>
+        {% endfor %}
+    </div>
+    <!-- end test -->
+    <div class="featured-brands__bar">&nbsp;</div>
+</div>
+
+
+{% style %}
+    #shopify-section-{{ section.id }} .featured-brands {
+        {% unless template.name == 'page' %}
+        background: #000;
+        {% endunless %}
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+    #shopify-section-{{ section.id }} .featured-brands .brand__subtext {
+        margin-top: 20px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }} .featured-brands {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+    @media screen and (max-width: 834px) {
+        #shopify-section-{{ section.id }} .featured-brands {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+        .brand__subtext {
+            top: 80%;
+        }
+    }
+
+    .four-pillars.mobile.hide {
+        display: none;
+    }
+    .four-pillars.desktop.hide {
+        display: none;
+    }
+
+    {% if page.handle == 'book-a-call' %}
+    .featured-brands__container .brand__card .brand__button {
+      top: 48%;
+      bottom: inherit;
+    }
+    @media screen and (max-width: 1440px) and (min-width: 1025px) {
+      .featured-brands__container .brand__card .brand__button {
+        top: 20vw;
+      }
+    }
+    @media screen and (max-width: 1024px) {
+      .featured-brands__container .brand__card .brand__button {
+        top: 90vw;
+      }
+    }
+    {%  endif %}
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Featured Brand",
+        "tag": "section",
+        "class": "section",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "The Four Pillars™"
+            },
+            {
+                "type": "richtext",
+                "id": "subtitle",
+                "label": "Subtitle",
+                "default": "<p>The Four Pillars™ are our foundation. True wellbeing emerges from the balance and synergy of EAT, MOVE, MIND, SLEEP. We provide the tools and rituals across The Four Pillars™ to enhance your wellbeing. </p>"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Brand",
+                "limit": 4,
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Brand Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "text",
+                        "label": "Brand link text"
+                    },
+                    {
+                        "type": "text",
+                        "id": "sub_text",
+                        "label": "Brand sub text"
+                    },
+                    {
+                        "type": "url",
+                        "id": "url",
+                        "label": "Brand link"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Brand image"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Featured Brand"
+            }
+        ]
+    }
+{% endschema %}

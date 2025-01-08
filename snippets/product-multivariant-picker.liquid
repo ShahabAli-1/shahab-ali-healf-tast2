@@ -1,0 +1,133 @@
+{% comment %}
+  Renders product variant-picker
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} Id of the product form to which the variant picker is associated.
+  - update_url: {Boolean} whether or not to update url when changing variants. If false, the url isn't updated. Default: true (optional).
+  Usage:
+  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<div class="product-slider__container product-list">
+  <div class="product-slider__list slider-not__accordion swiper">
+    {%- for option in product.options_with_values -%}
+      <div class="swiper-wrapper">
+        {% render 'product-multivariant-options', product: product, option: option, block: block %}
+      </div>
+      <div class="swiper-button-prev">
+        {% include 'icon-chevron' %}
+      </div>
+      <div class="swiper-button-next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke="#2C2C2C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+      <div class="swiper-scrollbar"></div>
+    {%- endfor -%}
+  </div>
+
+  <script>
+    console.log('test');
+    const swiper = new Swiper('.swiper', {
+      // Enable touch control
+      touchEventsTarget: 'container',
+
+      // Enable arrow control
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+      // Enable touch control
+      touchStartPreventDefault: false,
+      touchMoveStopPropagation: false,
+
+      spaceBetween: 10,
+
+      // Enable scrollbar
+      scrollbar: {
+        el: '.swiper-scrollbar',
+      },
+
+      // Set number of slides visible at the same time
+      slidesPerView: 3,
+    });
+    console.log('test2');
+  </script>
+</div>
+
+<script>
+var labels = document.querySelectorAll('.product-slider__list label');
+
+function updateActiveLabel(event) {
+    var clickedLabel = event.target;
+
+    if (!clickedLabel.classList.contains('disabled')) {
+        labels.forEach(function(label) {
+            label.classList.remove('label-active');
+        });
+        clickedLabel.classList.add('label-active');
+    }
+}
+
+labels.forEach(function(label) {
+    label.addEventListener('click', updateActiveLabel);
+});
+</script>
+
+<noscript class="product-form__noscript-wrapper-{{ section.id }}">
+  <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+    <label class="form__label" for="Variants-{{ section.id }}">
+      {{- 'products.product.product_variants' | t -}}
+    </label>
+    <div class="select">
+      <select
+        name="id" data-productid="{{ product.id }}"
+        id="Variants-{{ section.id }}"
+        class="select__select"
+        form="{{ product_form_id }}"
+      >
+        {%- for variant in product.variants -%}
+          <option
+            {% if variant == product.selected_or_first_available_variant %}
+              selected="selected"
+            {% endif %}
+            {% if variant.available == false %}
+              disabled
+            {% endif %}
+            value="{{ variant.id }}"
+          >
+            {%- liquid
+              echo variant.title
+              echo variant.price | money | strip_html | prepend: ' - '
+              if variant.available == false
+                echo 'products.product.sold_out' | t | prepend: ' - '
+              endif
+              if variant.quantity_rule.increment > 1
+                echo 'products.product.quantity.multiples_of' | t: quantity: variant.quantity_rule.increment | prepend: ' - '
+              endif
+              if variant.quantity_rule.min > 1
+                echo 'products.product.quantity.minimum_of' | t: quantity: variant.quantity_rule.min | prepend: ' - '
+              endif
+              if variant.quantity_rule.max != null
+                echo 'products.product.quantity.maximum_of' | t: quantity: variant.quantity_rule.max | prepend: ' - '
+              endif
+              # TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter
+              # theme-check-disable
+              assign cart_quantity = cart | item_count_for_variant: variant.id
+              # theme-check-enable
+              if cart_quantity > 0
+                echo 'products.product.quantity.in_cart_html' | t: quantity: cart_quantity | prepend: ' - '
+              endif
+            -%}
+          </option>
+        {%- endfor -%}
+      </select>
+      {% render 'icon-caret' %}
+    </div>
+  </div>
+</noscript>

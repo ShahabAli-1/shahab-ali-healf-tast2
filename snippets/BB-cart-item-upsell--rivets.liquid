@@ -1,0 +1,39 @@
+<div class="cart-item--upsell" rv-each-item="data.upsellProducts">
+    <div class="image-area"> 
+        <a rv-href="item.handle | getUrl" class="object-fit--cover">
+            <img loading="lazy" rv-src="item | getImage item.currentVariant | getSizedImage '120x120' " rv-srcset="item | getImage item.currentVariant | getSrcSet '420x420' ">
+        </a>
+    </div> 
+
+    <div class="content-area">
+        <div>
+            <p class="cart-item-top-title" rv-text="item.product_type"></p>
+            
+            <a class="cart-item-product-title" rv-href="item.handle | getUrl" rv-text="item.title"></a>
+
+            {% comment %}
+            <div class="reviews"> 
+                <div class="yotpo bottomLine"
+                    data-appkey="bgzgoRGnLi5wOF0jyQdbzIfRCFKCpcmV701bZUJP"
+                    data-domain="{{shop.permanent_domain | escape }}"
+                    data-product-id="{{ item.product.id }}"
+                    data-product-models="{{ item.product.id }}"
+                    data-name="{{ item.product.title | escape }}"
+                    data-url="{{ shop.url }}{{ item.product.url }}"
+                    data-image-url="{{ item.product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+                    data-description="{{ item.product.description | escape }}"
+                    data-bread-crumbs="{% for tag in item.product.tags %}{{ tag | escape }};{% endfor %}">
+                </div>
+            </div>
+            {% endcomment %}
+
+            <div class="cart-item-product-price__wrapper">
+                <p class="cart-item-product-price" rv-data-money="item.currentVariant.price" rv-html="item.currentVariant.price | money"></p>
+            </div>
+        </div>
+
+        <button type="button" class="add-btn" rv-on-click="controller.addUpsellItem">
+            {% include 'icon-plus' %} Add    
+        </button>
+    </div>
+</div>

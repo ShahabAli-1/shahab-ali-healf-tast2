@@ -1,0 +1,347 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+      "autoplay": true,
+      "autoplaySpeed": 5000,
+      "slidesPerView": 1,
+      "autoAdjustSlidesPerView": false,
+      "fade": true,
+      "loop": true
+    }
+{% endcapture %}
+<div class="template-index wrapper">
+
+<div class="sale-slider__container" style="
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+">
+    <div class="sale-info__container">
+      <div class="sale-info__title-container">
+        {% if ss.title != blank %}
+            <p class="sale-slider__date">{{ ss.title }}</p>
+        {%- endif -%}
+      </div>
+
+      <div style="position: absolute; top: 50%; transform: translate(0%, -50%);">
+        {% if ss.date != blank %}
+          <p class="sale-slider__description box">{{ ss.date }}</p>
+        {% endif %}
+
+        {% if ss.description != blank %}
+          <p class="sale-slider__title">{{ ss.description  | strip_html | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="sale-info__title-container sitc">
+        {% if ss.button_text != blank %}
+            <p class="sale-slider__title-i">{{ ss.button_text }}</p>
+        {%- endif -%}
+        {% if ss.title != blank %}
+          <a href="{{ ss.button_link }}" class="sale-slider__btn btn">Shop Collection</a>
+        {%- endif -%}
+      </div>
+    </div>
+    <div data-keen-slider='{{ slider_settings }}' style="height: 40vh;">
+        {%- for block in section.blocks -%}
+        {% assign bs = block.settings %}
+            <div class="sale-slider__card">
+                {% if bs.image != blank %}
+                    {% render 'image-element', image: bs.image, image_mobile: bs.image_mobile, size: '1920x', extra_class: 'object-fit--cover'%}
+                {%- endif -%}
+                {% if bs.image_logo != blank %}
+                  <div class="sale-slider__logo">
+                    {% render 'image-element', image: bs.image_logo, image_mobile: bs.image_logo, size: '200x', extra_class: 'object-fit--contain'%}
+                  </div>
+                {%- endif -%}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+
+<style>
+
+[class*=object-fit--] {
+    height: 100%;
+}
+
+@media (max-width: 834px) {
+  .box {
+    width: 270px;
+  }
+
+    .template-index .wrapper {
+        padding-top: 20px;
+    }
+
+    .sale-slider__title-i {
+      font-size: 14px !important;
+  }
+}
+
+    .template-index .wrapper {
+        padding-top: 40px;
+    }
+
+  .sale-slider__container {
+    display: flex;
+    position: relative;
+  }
+  .sale-info__container {
+    border-radius: 20px 0 0 20px;
+    padding: 20px;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-right: auto;
+    width: 50%;
+
+    position: relative;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .sale-info__container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background-image: url('{{ ss.image | img_url:"master" }}');
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+
+  [data-keen-slider] {
+    flex-grow: 1;
+    position: relative;
+  }
+  .sale-info__title-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .sitc {
+    position: absolute;
+    bottom: 20px;
+    width: 93%;
+  }
+  .sale-slider__title {
+    color: #FFF;
+    font-size: 38px;
+    letter-spacing: -1px;
+    padding-bottom: 40px;
+  }
+  .sale-slider__title-i {
+    color: #FFF;
+    letter-spacing: -1px;
+    align-content: end;
+    font-size: 26px;
+  }
+  .sale-slider__date {
+    color: #FFF;
+    font-size: 18px;
+    border-radius: 36px;
+    line-height: 46px;
+    padding: 0px 22px;
+    border: 1px solid #FFF;
+    letter-spacing: -1px;
+    background-color: rgb(255 255 255 / 19%);
+  }
+  .sale-slider__description {
+    color: #FFF;
+    font-size: 74px;
+    line-height: 1;
+    letter-spacing: -1.5px;
+    padding-top: 40px;
+  }
+  .sale-slider__btn {
+    background-color: #FFF;
+    color: #000;
+    border-color: #FFF;
+    width: 220px;
+  }
+  .sale-slider__container .sale-slider__card>.image-element-wrapper {
+    padding-bottom: 400px;
+    border-radius: 0px;
+  }
+  .sale-slider__logo {
+    position: absolute;
+    z-index: 1;
+    right: 20px;
+    bottom: 20px;
+    width: 250px;
+  }
+
+  [data-keen-slider] {
+    border-radius: 0px 20px 20px 0px;
+  }
+
+  @media (max-width: 834px) {
+      .sale-info__container::before {
+          background-image: url('{{ ss.image_mobile | img_url:"master" }}');
+      }
+      .sale-slider__container .sale-slider__card>.image-element-wrapper {
+          height: auto;
+          padding-bottom: 100%;
+      }
+    .sale-info__container {
+      width: calc(100% - 40px);
+      top: 50%;
+    }
+    .sale-slider__title {
+      font-size: 34px;
+    }
+    .sale-slider__date {
+      line-height: 30px;
+      font-size: 16px;
+      padding: 0 16px;
+    }
+    .sale-slider__description {
+      font-size: 60px;
+    }
+    .sale-slider__btn {
+      padding: 8px 20px;
+      margin: 0 20px;
+      width: 170px;
+    }
+    .sale-slider__logo {
+      width: 140px;
+    }
+  }
+
+  @media (max-width: 834px) {
+  .sale-slider__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sale-info__container {
+    width: 100%;
+        top: 0%;
+        order: 1;
+        border-radius: 20px 20px 0px 0px;
+        height: 380px;
+  }
+
+  [data-keen-slider] {
+    order: 2;
+    border-radius: 0px 0px 20px 20px;
+  }
+
+  .sale-slider__title {
+    font-size: 32px;
+  }
+
+  .sale-slider__logo {
+    width: 140px;
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1060px) {
+  .sale-slider__description {
+    font-size: 70px;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 999px) {
+  .sale-slider__description {
+    font-size: 70px;
+  }
+
+  .sale-slider__title {
+    color: #FFF;
+    font-size: 28px;
+  }
+
+  .sale-slider__title-i, .sale-slider__date  {
+    font-size: 18px;
+  }
+
+  .sale-slider__title {
+    padding-bottom: 80px;
+      }
+}
+</style>
+
+{% schema %}
+  {
+      "name": "BB - Sale Slider",
+      "tag": "section",
+      "class": "banner-slider",
+      "settings": [
+          {
+              "type": "header",
+              "content": "Sale info"
+          },
+          {
+              "type": "text",
+              "id": "title",
+              "label": "Title"
+          },
+          {
+              "type": "text",
+              "id": "date",
+              "label": "Date"
+          },
+          {
+              "type": "text",
+              "id": "description",
+              "label": "Description"
+          },
+          {
+              "type": "text",
+              "id": "button_text",
+              "label": "Button text"
+          },
+          {
+              "type": "url",
+              "id": "button_link",
+              "label": "Button Link"
+          },
+          {
+              "type": "image_picker",
+              "id": "image",
+              "label": "Image"
+          },
+          {
+              "type": "image_picker",
+              "id": "image_mobile",
+              "label": "Image mobile"
+          },
+      ],
+      "blocks": [
+          {
+              "type": "blocks",
+              "name": "Brand",
+              "settings": [
+                  {
+                      "type": "image_picker",
+                      "id": "image",
+                      "label": "Image"
+                  },
+                  {
+                      "type": "image_picker",
+                      "id": "image_mobile",
+                      "label": "Image mobile"
+                  },
+                  {
+                      "type": "image_picker",
+                      "id": "image_logo",
+                      "label": "Image logo"
+                  }
+              ]
+          }
+      ],
+      "presets": [
+          {
+              "name": "BB - Sale Slider"
+          }
+      ]
+  }
+{% endschema %}

@@ -1,0 +1,10 @@
+<div rv-each-item="data.current_stage.questions">
+  <h3 class="h3" rv-text="item.question"></h3>
+
+  <ul class="flex f-wrap">
+    <li rv-each-subitem="item.answers">
+      <input type="radio" rv-id="item.step | add subitem.answer" rv-name="item.step" rv-value="subitem.products_to_recommend" rv-data-ometria="item.ometria" rv-on-change="controller.setAnswer" required>
+      <label rv-for="item.step | add subitem.answer" rv-text="subitem.answer"></label>
+    </li>
+  </ul>
+</div>

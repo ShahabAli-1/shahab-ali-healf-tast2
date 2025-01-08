@@ -1,0 +1,204 @@
+{% assign ss = section.settings %}
+
+<div class="brands-featured__container wrapper" id="three-step">
+    <div class="brands-featured__header" style="margin-bottom: 0">
+        {% if ss.title != blank %}
+            <h2 class='liquid-title'>{{ ss.title }}</h2>
+        {%- endif -%}
+        {% if ss.subtitle != blank %}
+            <h3>{{ ss.subtitle |strip_html|escape }}</h3>
+        {%- endif -%}
+    </div>
+
+    <div class="brands-featured__wrapper brands-featured__wrapper-slider">
+        {% for block in section.blocks %}
+        {% assign bs = block.settings %}
+            <div class="brands-featured__wrapper-item">
+                {% if bs.image != blank %}
+                    {% render 'image-element', image: bs.image, image_mobile: ss.image_mobile, size: 'master', extra_class: 'object-fit--cover'%}
+                {%- endif -%}
+                <div class="brands-featured__wrapper-title__container">
+                    {% if bs.title != blank %}
+                        <p class='brands-featured__wrapper-title' style="color: #fff; display: flex; justify-content: space-between;"><span>0{{ forloop.index }}</span><span>{{ bs.title }}</span></p>
+                    {%- endif -%}
+                    {% if bs.subtitle != blank %}
+                        <p class='brands-featured__wrapper-subtitle' style="color: #fff;     max-width: 400px;">{{ bs.subtitle }}</p>
+                    {%- endif -%}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% style %}
+    #shopify-section-{{ section.id }}.brands-featured {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+        background-color: #000;
+        margin-top: -1px;
+    }
+
+    @media screen and (max-width: 834px) {
+      #shopify-section-{{ section.id }}.brands-featured {
+          padding-top: {{ ss.padding_top_tablet }}px;
+          padding-bottom: {{ ss.padding_bottom_tablet }}px;
+      }
+    }
+
+    #shopify-section-{{ section.id }} .brands-featured__wrapper .image-element-wrapper {
+      border-radius: 4px;
+      padding-bottom: 15%;
+      width: 40%;
+    }
+    .brands-featured__wrapper-title {
+      font-size: 28px !important;
+    }
+    .brands-featured__wrapper-subtitle {
+      color: #A2A4A3;
+      font-size: 17px !important;
+    }
+    .brands-featured__wrapper-subtitle, .brands-featured__wrapper-title {
+      text-align: left;
+      margin-top: 20px;
+    }
+    .brands-featured__wrapper-item {
+        display: flex;
+        margin-bottom: 40px;
+    }
+    .brands-featured__wrapper-title__container {
+        width: 60%;
+        padding-left: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    @media screen and (max-width: 834px) {
+        .brands-featured__wrapper-item {
+            flex-direction: column;
+        }
+    #shopify-section-{{ section.id }} .brands-featured__wrapper .image-element-wrapper {
+      padding-bottom: 40%;
+      width: 100%;
+      order: 2;
+    }
+    .brands-featured__wrapper-title__container {
+        width: 100%;
+        padding: 0 0 20px;
+    }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - About Pillars",
+        "tag": "section",
+        "class": "brands-featured",
+        "max_blocks": 6,
+        "settings": [
+            {
+                "type": "header",
+                "content": "Header"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "subtitle",
+                "label": "Subtitle"
+            },
+            {
+                "type": "range",
+                "id": "slides_per_view",
+                "label": "Slides per view divided by 10",
+                "unit": "num",
+                "min": 20,
+                "max": 40,
+                "step": 1,
+                "default": 40
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 60
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 30
+            }
+        ],
+        "blocks":[
+            {
+                "name":"Brand",
+                "type":"item",
+                "settings":[
+                    {
+                        "type":"text",
+                        "id":"title",
+                        "label":"Title"
+                    },
+                    {
+                        "type":"text",
+                        "id":"subtitle",
+                        "label":"Subtitle"
+                    },
+                    {
+                        "type":"url",
+                        "id":"link",
+                        "label":"Link"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"image",
+                        "label":"Image"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - About Pillars"
+            }
+        ]
+    }
+{% endschema %}

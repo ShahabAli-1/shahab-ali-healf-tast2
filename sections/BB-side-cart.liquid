@@ -1,0 +1,409 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+        "slidesPerView": 2.3,
+        "autoplay": false,
+        "autoAdjustSlidesPerView": false,
+        "loop": false,
+        "spacing": 18
+    }
+{% endcapture %}
+
+
+<section class="side-cart loading" data-cart-mount data-side-cart rv-class-loading="data.cart.loading"
+    data-class-change='
+        [
+            {
+                "target": ".side-cart",
+                "class": "shown",
+                "method": "remove",
+                "on": "click",
+                "onlyThisElem": true,
+                "preventDefault": true
+            },
+            {
+                  "target": "body",
+                  "class": "overflow-hidden",
+                  "method": "remove",
+                  "on": "click",
+                  "onlyThisElem": true,
+                  "preventDefault": true
+            },
+            {
+                "target": ".cart-trigger",
+                "class": "active",
+                "method": "remove",
+                "on": "click",
+                "onlyThisElem": true,
+                "preventDefault": true
+            }
+        ]'
+    data-lock-scroll='
+        [
+            {
+                "target": "[data-side-cart-scroll]",
+                "method": "unlockScroll",
+                "on": "click",
+                "onlyThisElem": true,
+                "preventDefault": true
+            }
+        ]
+    '>
+
+    <div rv-class-shown="data.errorMessage" class="error-popup">
+        <div class="popup-inner">
+            <p rv-html="data.errorMessage"></p>
+            <a href="#" rv-on-click="controller.clearError" class="btn btn--full">Close</a>
+        </div>
+    </div>
+
+    <div data-test-name="new-cart-drawer" class="inner has-loader mini__cart__container" data-loading-text="Updating...">
+        <header>
+            <!-- <div class="healf-cart-announcement-bar">£20 OFF when you spend over £100 - JUNE20</div> -->
+            <!-- <h4 style="display: none;">Your Cart</h4> -->
+
+          <!-- AB TEST -->
+            <div id="announcementBar-replacement"></div>
+          <!-- end test -->
+            <a class="close" href="#"
+                data-class-change='[
+                    {
+                        "target": ".side-cart",
+                        "class": "shown",
+                        "method": "remove",
+                        "on": "click",
+                        "preventDefault": true
+                    },
+                    {
+                        "target": "body",
+                        "class": "overflow-hidden",
+                        "method": "remove",
+                        "on": "click",
+                        "preventDefault": true
+                    }
+                ]'
+                data-lock-scroll='[
+                    {
+                        "target": ".side-cart .main-items",
+                        "method": "unlockScroll",
+                        "on": "click",
+                        "preventDefault": true
+                    }
+                ]'
+            >{% render 'icon-close' %}</a>
+        </header>
+
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(replaceAnnouncementBar, 600)
+          })
+
+          function replaceAnnouncementBar() {
+            try {
+                /*
+                  THE CLICK ACTION IS HARD CODED, and not connected ot original element.
+                  The original element uses script tag on the specific selector to create, and overengineering to get it working for test
+                */
+                let announcementBarButton = document.querySelector("#announcementBarButton");
+                let activeAnnouncementBar = document.querySelector("#announcementBarButton.ab__test");
+
+                let announcementBar = announcementBarButton.closest('.shopify-app-block');
+                let replacementElement = document.querySelector('#announcementBar-replacement')
+
+                if (!announcementBar || !replacementElement) return;
+
+                replacementElement.style.width = "100%";
+                replacementElement.innerHTML = announcementBar.innerHTML;
+
+                replacementElement.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  e.stopPropagation();
+
+                  {% if request.path contains '/en-uk' %}
+                    window.location = '/en-uk/collections/bfcm24'
+                  {% else %}
+                    announcementBarButton.dispatchEvent(new Event('click'))
+                  {% endif %}
+                })
+
+              } catch (e) {
+                console.error(e)
+              }
+          }
+        </script>
+
+        <p class="empty-cart" rv-unless="data.cart.item_count | gt 0" data-side-cart-scroll>
+          {{ 'sections.cart.empty' | t }}
+        </p>
+
+        <div class="main-items">
+            <div class="main-items-scroll" data-side-cart-scroll>
+                {% comment %}
+                <div class='threshold-container threshold-container-new'>
+                  {% include 'threshold-upsell-new' %}
+                </div>
+                {% endcomment %}
+                <div class='threshold-container threshold-container--choose-a-gift'>
+                  {% include 'threshold-upsell-choose-a-gift' %}
+                </div>
+                <div rv-if="data.cart.item_count | gt 0" data-side-cart-items>
+                    {% include 'bb-cart-item--rivets' %}
+                </div>
+
+                <div rv-if="data.cart.item_count | gt 0" class="ab__test" data-test-name="maximize-benefit-cart">
+                {% render 'maximise-the-benefit' %}
+                </div>
+
+                <div class="recommended-title ab__test" data-test-name="maximize-benefit-cart">
+                  <p style="text-align: left;">On Trend</p>
+                </div>
+                <div class="findify-element findify-cart-sidebar-recommendation hide-scroll" id="findify-cart-sidebar-recommendation"></div>
+
+                <div class="ab__test" data-test-name="maximize-benefit-cart">
+                {% include 'side-cart-updates' %}
+                </div>
+            </div>
+        </div>
+
+        <footer rv-if="data.cart.item_count | gt 0">
+            <div class="total-footer" rv-if="data.cart.item_count | gt 0">
+                <div class="total-area">
+                    <span class="total-price-label">{{ 'sections.cart.subtotal' | t }}</span>
+                    <span class="money" rv-data-money='data.cart.total_price' rv-html='data.cart.total_price | money'></span>
+                </div>
+
+                <div data-test-name="new-cart-drawer" class="notice ab__test-hide">
+                    <p>{{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}</p>
+                </div>
+            </div>
+
+            <div class="free-delivery__container" style="display: none;">
+                {% if ss.shipping_threshold_enabled %}
+                    <div class="free-shipping-notice" rv-if="data.cart.item_count | gt 0">
+                        <p rv-html='data.cart.total_price | getShippingNotice'></p>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="button-container" rv-class-disabled="data.cart.item_count | eq 0">
+                <a href="/checkout" class="btn">
+                    {% render 'icon-padlock' %}{{ ss.checkout_button_text }}
+                </a>
+            </div>
+
+
+            <ul data-test-name="new-cart-drawer" class="list list-payment ab__test-hide" role="list">
+              {% assign enabled_payment_types = 'american_express,apple_pay,google_pay,master,paypal,visa' | remove: ' ' | split: ',' %}
+              {%- for type in enabled_payment_types -%}
+                  <li class="list-payment__item">
+                      {{ type | payment_type_svg_tag: class: "icon icon--full-color" }}
+                  </li>
+              {%- endfor -%}
+            </ul>
+
+            <div data-test-name="new-cart-drawer" class="ab__test footer-details">
+              <div class="notice">
+                <p>{{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}</p>
+              </div>
+              <ul class="list list-payment" role="list">
+                {% assign enabled_payment_types = 'american_express,apple_pay,google_pay,master,paypal,visa' | remove: ' ' | split: ',' %}
+                {%- for type in enabled_payment_types -%}
+                    <li class="list-payment__item">
+                        {{ type | payment_type_svg_tag: class: "icon icon--full-color" }}
+                    </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+        </footer>
+    </div>
+</section>
+
+<script type="application/json" data-upsell-options>
+  {
+    "limit": {{ ss.upsell_limit | json }},
+    "enabled": {{ ss.enable_upsell | json }},
+    "handles": {{ ss.membership_product | map: 'settings' | map: 'product' | json }}
+  }
+</script>
+
+<script type="application/json" data-shipping-threshold-options="">
+  {
+    "enabled": true,
+    "threshold": 50,
+    "threshold2": 150,
+    "threshold3": 250,
+    "percentage": "100%",
+    "header": "Unlock free gifts",
+    "header2": "You've unlocked free delivery",
+    "header3": "You've unlocked free Hu Chocolate",
+    "header4": "You've unlocked all gifts",
+    "under": "Spend an extra [x] to qualify for free delivery!",
+    "under2": "Spend an extra [x] for free hu chocolate",
+    "under3": "Spend an extra [x] for a free Ombar!",
+    "free": "You've earned free shipping!",
+    "reached": ""
+  }
+</script>
+<script type="application/json" data-shipping-threshold-options-2="">
+  {
+    "enabled": true,
+    "threshold": 50,
+    "threshold2": 75,
+    "threshold3": 150,
+    "percentage": "100%",
+    "header": "Unlock free gifts",
+    "header2": "You've unlocked free delivery",
+    "header3": "You've unlocked free Hu Chocolate",
+    "header4": "You've unlocked all gifts",
+    "under": "Spend an extra [x] to qualify for free delivery!",
+    "under2": "Spend an extra [x] for free hu chocolate",
+    "under3": "Spend an extra [x] for a free Ombar!",
+    "free": "You've earned free shipping!",
+    "reached": ""
+  }
+</script>
+<script type="application/json" data-choose-your-gift="">
+  {
+    "enabled": true,
+    "threshold": 50,
+    "threshold2": 75,
+    "threshold3": 150,
+    "percentage": "100%",
+    "header": "Unlock free gifts",
+    "header2": "You've unlocked free delivery",
+    "header3": "You've unlocked a free gift",
+    "header4": "You've unlocked all gifts",
+    "under": "Spend an extra [x] to qualify for free delivery!",
+    "under2": "Spend an extra [x] to unlock your first free gift!",
+    "under3": "Spend an extra [x] to unlock your second free gift!",
+    "free": "You've earned free shipping!",
+    "reached": ""
+  }
+</script>
+
+<script type="application/json" data-split-test-40-shipping="">
+  {
+    "enabled": true,
+    "threshold": 40,
+    "threshold2": 75,
+    "threshold3": 150,
+    "percentage": "100%",
+    "header": "Unlock free gifts",
+    "header2": "You've unlocked free delivery",
+    "header3": "You've unlocked a free gift",
+    "header4": "You've unlocked all gifts",
+    "under": "Spend an extra [x] to qualify for free delivery!",
+    "under2": "Spend an extra [x] to unlock your first free gift!",
+    "under3": "Spend an extra [x] to unlock your second free gift!",
+    "free": "You've earned free shipping!",
+    "reached": ""
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "Side Cart",
+    "settings": [
+      {
+        "type": "text",
+        "id": "sidecart_title",
+        "label": "Sidecart Title",
+        "default": "Your Cart"
+      },
+      {
+        "type": "checkbox",
+        "id": "shipping_threshold_enabled",
+        "label": "Enabled",
+        "default": false
+      },
+      {
+        "type": "number",
+        "id": "shipping_threshold",
+        "label": "Price required",
+        "default": 200
+      },
+      {
+        "type": "text",
+        "id": "shipping_threshold_under",
+        "label": "Threshold under",
+        "default": "Order [x] more for free shipping"
+      },
+      {
+        "type": "text",
+        "id": "shipping_threshold_reached",
+        "label": "Text threshold reached",
+        "default": "You've qualified for free shipping!"
+      },
+      {
+        "type": "text",
+        "id": "checkout_button_text",
+        "label": "Checkout Button Text",
+        "default": "Process to Checkout"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_additional_buttons",
+        "label": "Enable Additional Checkout Buttons",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Membership Section"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_membership",
+        "label": "Enable Upsell",
+        "default": true
+      },
+      {
+        "type": "product",
+        "id": "membership_product1",
+        "label": "Threshold Product 1"
+      },
+      {
+        "type": "product",
+        "id": "membership_product2",
+        "label": "Threshold Product 2"
+      },
+      {
+        "type": "header",
+        "content": "Upsell Section"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_upsell",
+        "label": "Enable Upsell",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "upsell_title",
+        "label": "Upsell Title",
+        "default": "Why not also add..."
+      },
+      {
+        "type": "number",
+        "id": "upsell_limit",
+        "label": "Upsell Product Limit",
+        "default": 2,
+        "info": "Will prevent more than x upsell items showing at once"
+      }
+    ],
+    "blocks":[
+      {
+        "type":"blocks",
+        "name":"Upsell Item",
+        "settings":[
+          {
+            "type":"product",
+            "id":"product",
+            "label":"Upsell Product"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

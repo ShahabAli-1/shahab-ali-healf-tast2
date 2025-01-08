@@ -1,0 +1,431 @@
+{% if ss.enable_membership %}
+  {% assign product1 = ss.membership_product1 %}
+  {% assign product2 = ss.membership_product2 %}
+  <div class="free-shipping-header" rv-if="data.cart.item_count | gt 0">
+      <h3 rv-html='data.cart.total_price | getShippingHeader2' style="font-weight: 400; font-family: 'Avenir';"></h3>
+  </div>
+  <div class="free-shipping-notice" rv-if="data.cart.item_count | gt 0">
+      <p rv-html='data.cart.total_price | getThresholdNotice2' style="color: #666; margin-bottom: 20px;"></p>
+  </div>
+  <div class="tiered-progress-bar" rv-if="data.cart.item_count | gt 0">
+    <div class="progress-bar__outer" rv-style="data.cart.total_price | getPercentNotice">
+      <div class="tiered-bubble_container">
+        <div class="tier-wrapper">
+          <div rv-class='data.cart.total_price | getBubbleNotice1' >
+            <div class="tiered-bubble">
+              <img class="discount-pack-list-item__image" src="https://cdn.shopify.com/s/files/1/0405/7291/1765/files/image_1_1.png?v=1702572225&amp;width=120" alt="" width="40" height="40">
+            </div>
+          </div>
+          <p class="tier-bubble__title">
+            Free shipping
+          </p>
+          <p class="tier-bubble__price ship-50">
+            £50
+          </p>
+          <p class="tier-bubble__price ship-60" style="display: none;">
+            £60
+          </p>
+        </div>
+        <div class="tier-wrapper">
+          <div rv-class='data.cart.total_price | getBubbleNotice2' >
+            <div class="tiered-bubble findify-image-9">
+              <img class="discount-pack-list-item__image" src=""  style='width: 40px;
+                  height: auto;
+                  margin-left: 7px;
+                  margin-top: 8px;
+                  max-width: none;
+              '>
+            </div>
+          </div>
+          <p class="tier-bubble__title">Free <span class="tier-name9"></span></p>
+          <p class="tier-bubble__price">
+            £150
+          </p>
+        </div>
+        <div class="tier-wrapper">
+          <div rv-class='data.cart.total_price | getBubbleNotice3' >
+            <div class="tiered-bubble findify-image-10">
+              <img class="discount-pack-list-item__image" src=""  style='width: 40px;
+                  height: auto;
+                  margin-left: 7px;
+                  margin-top: 8px;
+                  max-width: none;
+              '>
+            </div>
+          </div>
+          <p class="tier-bubble__title">Free <span class="tier-name10"></span></p>
+          <p class="tier-bubble__price">
+            £250
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<hr style="border: 1px solid#f7f7f7; margin: 0;">
+
+<div class="findify-element" id="home-findify-rec-9" style="display: none;"></div>
+<div class="findify-element" id="home-findify-rec-10" style="display: none;"></div>
+
+<div id="free-item1">
+  {% if ss.enable_membership %}
+    {% assign in_cart = false %}
+    {% for item in cart.items %}
+        {% for property in item.properties %}
+          {% if property.first == '_free1' %}
+            {% assign in_cart = true %}
+          {% endif %}
+        {% endfor %}
+    {% endfor %}
+    {% unless in_cart %}
+      <div class="membership-wrapper membership-rec-9">
+        <div class="left-area">
+            <a href="{{ product.url }}" class="object-fit--cover">
+                <img loading="lazy" src="" >
+            </a>
+        </div>
+        <div style="min-width: 60px;">
+          <span class="threshold-vendor" style='font-weight: 400; margin-left: -14px; display: block;'></span>
+        </div>
+        <product-form>
+          <form method="post" action="/cart/add" accept-charset="UTF-8" class="form free-item-form" enctype="multipart/form-data" data-type="add-to-cart-form">
+            <input type="hidden" name="form_type" value="product">
+            <input type="hidden" name="utf8" value="✓">
+            <input type="hidden" name="properties[_free1]" value="true">
+            <div style="font-weight: 400;">
+              <p class="findify-upsell-title"></p>
+            </div>
+            <div class="selectors__container">
+              <input class="free-variant-id" type="hidden" name="id" value="">
+              <div class="product-form__buttons">
+                <button type="submit" name="add" class="product-form__submit btn" style='
+                  margin-right: 10px;
+                  margin-top: 20px;
+                  justify-content: space-between;
+                  background-color: #000 !important;
+                  color: #fff !important;
+                  font-weight: 400;
+                  padding: 4px 30px;
+                  width: fit-content !important;
+                  margin-top: 10px !important;'>
+                  <span>Add to cart</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </product-form>
+      </div>
+    {% endunless %}
+  {% endif %}
+</div>
+<div id="free-item2">
+  {% if ss.enable_membership %}
+
+    {% assign in_cart = false %}
+    {% for item in cart.items %}
+        {% for property in item.properties %}
+          {% if property.first == '_free2' %}
+            {% assign in_cart = true %}
+          {% endif %}
+        {% endfor %}
+    {% endfor %}
+    {% unless in_cart %}
+      <div class="membership-wrapper membership-rec-10">
+          <div class="left-area">
+              <a href="{{ product.url }}" class="object-fit--cover">
+                  <img loading="lazy" src="" >
+              </a>
+          </div>
+          <div style="min-width: 60px;">
+            <span class="threshold-vendor" style='font-weight: 400; margin-left: -14px; display: block;'></span>
+          </div>
+        <product-form>
+          <form method="post" action="/cart/add" accept-charset="UTF-8" class="form free-item-form" enctype="multipart/form-data" data-type="add-to-cart-form">
+            <input type="hidden" name="form_type" value="product">
+            <input type="hidden" name="utf8" value="✓">
+            <input type="hidden" name="properties[_free2]" value="true">
+            <div style="font-weight: 400;">
+              <p class="findify-upsell-title"></p>
+            </div>
+
+            <div class="selectors__container">
+              <input class="free-variant-id" type="hidden" name="id" value="">
+              <div class="product-form__buttons">
+                <button type="submit" name="add" class="product-form__submit btn" style='
+                  margin-right: 10px; margin-top: 20px; justify-content: space-between;     background-color: #000 !Important;
+                  color: #fff !important;
+                  font-weight: 400;
+                  padding: 4px 30px;
+                  margin-top: 10px !important;
+                  width: fit-content !important;'>
+                  <span>Add to cart</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </product-form>
+      </div>
+    {% endunless %}
+  {% endif %}
+</div>
+
+<script>
+  var forms = document.querySelectorAll('.free-item-form');
+
+  forms.forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+        var membershipWrapper = this.closest('.membership-wrapper');
+
+        fetch('/cart/add', {
+            method: 'post',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                if (membershipWrapper) {
+                    membershipWrapper.remove();
+                }
+            }
+        });
+    });
+  });
+</script>
+<script>
+  // Setup an observer for a specific target with image container classes, vendor classes, title classes, and ID update locations
+  function setupObserver(targetId, imageContainerClasses, vendorClasses, titleClasses, idClasses) {
+    const targetNode = document.querySelector(targetId);
+    const thresholdConfig = { attributes: false, childList: true, subtree: true };
+    const thresholdCallback = function(mutationsList, observer) {
+      for (let mutation of mutationsList) {
+        if (mutation.type === 'childList' && mutation.addedNodes.length) {
+          mutation.addedNodes.forEach(node => {
+            if (node.matches && node.matches('.findify-container')) {
+              setTimeout(() => {
+                console.log("FOUND CONTAINER in " + targetId);
+                const product = node.querySelector('.findify-components--cards--product');
+                if (product) {
+                  const imgSrc = product.querySelector('.findify-components--cards--product__image img')?.src;
+                  const vendor = product.querySelector('.findify-product-brand')?.textContent;
+                  const title = product.querySelector('.findify-components--cards--product__title')?.textContent;
+                  const id = product.querySelector('[findify-bundle-variant-id]');
+                  console.log("ID:" + id.getAttribute('findify-bundle-variant-id'));
+
+                  // Update each image container's img src
+                  imageContainerClasses.forEach(classSelector => {
+                    const imageElement = document.querySelector(classSelector + ' img');
+                    if (imageElement) {
+                      imageElement.src = imgSrc || '';
+                      console.log("Image src set in " + classSelector, imgSrc);
+                    } else {
+                      console.error('Image element not found in ' + classSelector);
+                    }
+                  });
+
+                  // Update vendor details in specified classes
+                  vendorClasses.forEach(classSelector => {
+                    const vendorElements = document.querySelectorAll(classSelector);
+                    vendorElements.forEach(element => {
+                      element.textContent = vendor || 'Not specified';
+                      console.log("Vendor set in " + classSelector, vendor);
+                    });
+                  });
+
+                  // Update title details in specified classes
+                  titleClasses.forEach(classSelector => {
+                    const titleElements = document.querySelectorAll(classSelector);
+                    titleElements.forEach(element => {
+                      element.textContent = title || 'No title';
+                      console.log("Title set in " + classSelector, title);
+                    });
+                  });
+
+                  // Update ID in specified classes
+                  idClasses.forEach(classSelector => {
+                    const idElements = document.querySelectorAll(classSelector);
+                    idElements.forEach(element => {
+                      if ('value' in element) {
+                        element.value = id.getAttribute('findify-bundle-variant-id');;
+                      } else {
+                        element.textContent = id.getAttribute('findify-bundle-variant-id'); // Fallback in case it's not an input
+                      }
+                      console.log("ID set in " + classSelector, id);
+                    });
+                  });
+                } else {
+                  console.error('Product not found after delay in ' + targetId);
+                }
+              }, 2000); // Delay can be adjusted based on actual performance needs
+            }
+          });
+        }
+      }
+    };
+
+    const observer = new MutationObserver(thresholdCallback);
+    observer.observe(targetNode, thresholdConfig);
+  }
+
+  // Set up observers with multiple targets for images, vendors, titles, and IDs
+  setupObserver('#home-findify-rec-9', ['.findify-image-9', '.membership-rec-9'], ['.tier-bubble__title .tier-name9', '.membership-rec-9 .threshold-vendor'], ['.membership-rec-9 .findify-upsell-title'], ['.membership-rec-9 .selectors__container .free-variant-id']);
+  setupObserver('#home-findify-rec-10', ['.findify-image-10', '.membership-rec-10'], ['.tier-bubble__title .tier-name10', '.membership-rec-10 .threshold-vendor'], ['.membership-rec-10 .findify-upsell-title'], ['.membership-rec-10 .selectors__container .free-variant-id']);
+</script>
+<style>
+  .membership-wrapper .findify-components-common--grid__column {
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+  }
+  .membership-wrapper .findify-components-common--grid__column  .findify-components--cards--product {
+    flex-direction: row !important;
+  }
+  .membership-wrapper .findify-components-common--grid__column .findify-components--cards--product__image {
+    min-width: 60px;
+  }
+  .membership-wrapper .product-form__submit {
+    min-width: 130px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    justify-content: center !important;
+  }
+  .membership-wrapper .findify-components-common--grid__column  .findify-components--cards--product--price__price-wrapper, .membership-wrapper .findify-components-common--grid__column .findify-product-add-to-cart, .membership-wrapper .findify-components-common--grid__column .findify-components--cards--product__title {
+    display: none;
+  }
+  .membership-wrapper .findify-components-common--grid__column .findify-product-brand {
+    color: #000 !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    text-transform: capitalize !important;
+  }
+  .product-form__buttons {
+    display: flex;
+    justify-content: end;
+  }
+  .tiered-progress-bar .progress-bar__outer {
+    background: #c7c7c7;
+    height: 2px;
+    position: relative;
+    overflow: visible;
+    margin-top: 32px;
+    margin-bottom: 80px;
+  }
+  .tiered-progress-bar .progress-bar__outer .tier-wrapper {
+    width: fit-content;
+    position: relative;
+    background-color: #fff;
+  }
+  .tiered-progress-bar .progress-bar__outer .tiered-bubble__outer {
+    position: absolute;
+    top: -6px;
+    right: 0;
+    left: 0;
+    margin: -20px auto 0;
+    width: fit-content;
+    z-index: 2;
+    background: #c7c7c7;
+    padding: 2px;
+  }
+  .tiered-progress-bar .tiered-bubble {
+    background-color: #f7f7f7;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+  }
+  .tiered-progress-bar .tiered-bubble img {
+    margin: 6px auto 0;
+    border-radius: 20%;
+    opacity: 0.95;
+  }
+  .tiered-progress-bar .tier-bubble__title {
+    padding-top: 40px;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  .tiered-progress-bar .tier-bubble__price {
+    color: #666;
+    letter-spacing: 0;
+    max-width: 100px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .tiered-progress-bar .tiered-bubble_container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tiered-progress-bar .tiered-bubble_half-filled {
+    background: linear-gradient(to right, #000 50%, #c7c7c7 50%) !important;
+  }
+
+  .tiered-progress-bar .tiered-bubble_filled {
+    background: #000 !important;
+  }
+  .tiered-progress-bar .tiered-bubble_filled img {
+    opacity: 1;
+  }
+  .tiered-progress-bar .progress-bar__inner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    direction: rtl;
+    z-index: 0;
+    border-radius: 0 100px 100px 0;
+  }
+  .membership-wrapper {
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 16px;
+    margin-bottom: 10px;
+  }
+  .membership-wrapper .left-area {
+    width: 64px;
+    height: 64px;
+  }
+  .membership-wrapper .left-area a {
+    padding-bottom: 100%;
+  }
+  .membership-wrapper .btn {
+    text-align: left;
+    color: #000 !important;
+    background-color: transparent !important;
+    font-weight: bold;
+    border: none;
+    padding: 0;
+    width: 150px !important;
+  }
+  .membership-wrapper .btn svg {
+    margin-left: 40px;
+    width: 20px !important;
+  }
+  .cart-item--rivets[extra-class="£0"] .cart-item-quantity-selector {
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .product-variant-name {
+    position: relative;
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 400;
+  }
+  .product-variant-name::before {
+    content: "";
+    background-color: #000;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+</style>

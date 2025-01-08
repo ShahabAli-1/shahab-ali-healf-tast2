@@ -1,0 +1,321 @@
+{% if ss.enable_membership %}
+  {% assign product1 = ss.membership_product1 %}
+  {% assign product2 = ss.membership_product2 %}
+  <div class="free-shipping-header" rv-if="data.cart.item_count | gt 0">
+      <h3 rv-html='data.cart.total_price | getShippingHeader2' style="font-weight: 400; font-family: 'Avenir';"></h3>
+  </div>
+  <div class="free-shipping-notice" rv-if="data.cart.item_count | gt 0">
+      <p rv-html='data.cart.total_price | getThresholdNotice2' style="color: #666; margin-bottom: 20px;"></p>
+  </div>
+  <div class="tiered-progress-bar" rv-if="data.cart.item_count | gt 0">
+    <div class="progress-bar__outer" rv-style="data.cart.total_price | getPercentNotice2">
+      <div class="tiered-bubble_container">
+        <div class="tier-wrapper">
+          <div rv-class='data.cart.total_price | getBubbleNotice12' >
+            <div class="tiered-bubble">
+              <img style="width: 100%; height: 100%; margin: 0; border-radius: 0;" class="discount-pack-list-item__image" src="https://cdn.shopify.com/s/files/1/0405/7291/1765/files/bf48ab5a42c71f354d060cdb8845681b.png" alt="" width="40" height="40">
+            </div>
+          </div>
+          <p class="tier-bubble__title">
+            Free shipping
+          </p>
+          <p class="tier-bubble__price ship-50">
+            £50
+          </p>
+        </div>
+        <div class="tier-wrapper">
+          <div rv-class='data.cart.total_price | getBubbleNotice22' >
+            <div class="tiered-bubble" style='background-color: #f7f7f7'>
+              <img class="discount-pack-list-item__image" src="{{ product1.featured_image | img_url: '120x' }}" style='width: 36px;
+                  height: auto;
+                  margin-left: 7px;
+                  margin-top: 8px;
+                  max-width: none;
+              '>
+            </div>
+          </div>
+          <p class="tier-bubble__title">Free Hu chocolate</p>
+          <p class="tier-bubble__price">
+            £75
+          </p>
+        </div>
+        <div class="tier-wrapper">
+          <div rv-class='data.cart.total_price | getBubbleNotice32' >
+            <div class="tiered-bubble">
+              <img class="discount-pack-list-item__image" src="{{ product2.featured_image | img_url: '120x' }}" style='width: 40px;
+                  height: auto;
+                  margin-left: 6px;
+                  margin-top: 8px;
+                  max-width: none;
+              '>
+            </div>
+          </div>
+          <p class="tier-bubble__title">Free Ombar</p>
+          <p class="tier-bubble__price">
+            £150
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<hr style="border: 1px solid#f7f7f7; margin: 0;">
+<div rv-if="data.cart.total_price | gt  7500">
+  {% if ss.enable_membership %}
+
+    {% assign product = ss.membership_product1 %}
+    {% assign in_cart = false %}
+    {% for item in cart.items %}
+      {% if item.product.id == product.id %}
+        {% assign in_cart = true %}
+      {% endif %}
+    {% endfor %}
+    {% unless in_cart %}
+      <div class="membership-wrapper">
+          <div class="left-area">
+              <a href="{{ product.url }}" class="object-fit--cover" href="/products/maui-nui-all-natural-venison-jerky?variant=44232454340847">
+                  <img loading="lazy" src="{{ product.featured_image | img_url: '400x' }}" >
+              </a>
+          </div>
+          <div style="min-width: 60px;">
+          <span style='font-weight: 400; margin-left: -14px; display: block;'>{{ product.vendor }}</span><br>
+          <span class='product-variant-name'>{{ product.selected_or_first_available_variant.title }}</span>
+          </div>
+          <product-form>
+            <form method="post" action="/cart/add" accept-charset="UTF-8" class="form free-item-form" enctype="multipart/form-data" data-type="add-to-cart-form">
+              <input type="hidden" name="form_type" value="product">
+              <input type="hidden" name="utf8" value="✓">
+              <input type="hidden" name="properties[_free1]" value="true">
+              <div style="font-weight: 400;">
+                <p>{{ product.title }}</p>
+              </div>
+
+              <div class="selectors__container">
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <div class="product-form__buttons">
+                  <button type="submit" name="add" class="product-form__submit btn" style='
+    margin-right: 10px; margin-top: 20px; justify-content: space-between;     background-color: #000 !Important;
+    color: #fff !important;
+    font-weight: 400;
+    padding: 4px 30px;
+    width: fit-content !important;
+    margin-top: 10px !important;'>
+                    <span>Add to cart</span>
+                  </button>
+                </div>
+              </div>
+              <input type="hidden" name="product-id" value="{{ product.id }}">
+            </form>
+          </product-form>
+      </div>
+    {% endunless %}
+  {% endif %}
+</div>
+<div rv-if="data.cart.total_price | gt 15000">
+  {% if ss.enable_membership %}
+
+    {% assign product = ss.membership_product2 %}
+    {% assign in_cart = false %}
+    {% for item in cart.items %}
+      {% if item.product.id == product.id %}
+        {% assign in_cart = true %}
+      {% endif %}
+    {% endfor %}
+    {% unless in_cart %}
+      <div class="membership-wrapper">
+          <div class="left-area">
+              <a href="{{ product.url }}" class="object-fit--cover" href="/products/maui-nui-all-natural-venison-jerky?variant=44232454340847">
+                  <img loading="lazy" src="{{ product.featured_image | img_url: '400x' }}" >
+              </a>
+          </div>
+          <div style="min-width: 60px;">
+            <span style='font-weight: 400; margin-left: -14px; display: block;'>{{ product.vendor }}</span><br>
+            <span class='product-variant-name'>{{ product.selected_or_first_available_variant.title }}</span>
+          </div>
+          <product-form>
+            <form method="post" action="/cart/add" accept-charset="UTF-8" class="form free-item-form" enctype="multipart/form-data" data-type="add-to-cart-form">
+              <input type="hidden" name="form_type" value="product">
+              <input type="hidden" name="utf8" value="✓">
+              <input type="hidden" name="properties[_free2]" value="true">
+              <div style="font-weight: 400;">
+                <p>{{ product.title }}</p>
+              </div>
+
+              <div class="selectors__container">
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <div class="product-form__buttons">
+                  <button type="submit" name="add" class="product-form__submit btn" style='
+    margin-right: 10px; margin-top: 20px; justify-content: space-between;     background-color: #000 !Important;
+    color: #fff !important;
+    font-weight: 400;
+    padding: 4px 30px;
+    margin-top: 10px !important;
+    width: fit-content !important;'>
+                    <span>Add to cart</span>
+                  </button>
+                </div>
+              </div>
+              <input type="hidden" name="product-id" value="{{ product.id }}">
+            </form>
+          </product-form>
+      </div>
+    {% endunless %}
+  {% endif %}
+</div>
+
+<script>
+  var forms = document.querySelectorAll('.free-item-form');
+
+  forms.forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+        var membershipWrapper = this.closest('.membership-wrapper');
+
+        fetch('/cart/add', {
+            method: 'post',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                if (membershipWrapper) {
+                    membershipWrapper.remove();
+                }
+            }
+        });
+    });
+  });
+</script>
+
+<style>
+  .product-form__buttons {
+    display: flex;
+    justify-content: end;
+  }
+  .tiered-progress-bar .progress-bar__outer {
+    background: #c7c7c7;
+    height: 2px;
+    position: relative;
+    overflow: visible;
+    margin-top: 32px;
+    margin-bottom: 80px;
+  }
+  .tiered-progress-bar .progress-bar__outer .tier-wrapper {
+    width: fit-content;
+    position: relative;
+    background-color: #fff;
+  }
+  .tiered-progress-bar .progress-bar__outer .tiered-bubble__outer {
+    position: absolute;
+    top: -6px;
+    right: 0;
+    left: 0;
+    margin: -20px auto 0;
+    width: fit-content;
+    z-index: 2;
+    background: #c7c7c7;
+    padding: 2px;
+  }
+  .tiered-progress-bar .tiered-bubble {
+    background-color: #f7f7f7;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+  }
+  .tiered-progress-bar .tiered-bubble img {
+    margin: 6px auto 0;
+    border-radius: 20%;
+    opacity: 0.95;
+  }
+  .tiered-progress-bar .tier-bubble__title {
+    padding-top: 40px;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  .tiered-progress-bar .tier-bubble__price {
+    color: #666;
+    letter-spacing: 0;
+    max-width: 100px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .tiered-progress-bar .tiered-bubble_container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tiered-progress-bar .tiered-bubble_half-filled {
+    background: linear-gradient(to right, #000 50%, #c7c7c7 50%) !important;
+  }
+
+  .tiered-progress-bar .tiered-bubble_filled {
+    background: #000 !important;
+  }
+  .tiered-progress-bar .tiered-bubble_filled img {
+    opacity: 1;
+  }
+  .tiered-progress-bar .progress-bar__inner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    direction: rtl;
+    z-index: 0;
+    border-radius: 0 100px 100px 0;
+  }
+  .membership-wrapper {
+    background-color: #f7f7f7;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 16px;
+    margin-bottom: 10px;
+  }
+  .membership-wrapper .left-area {
+    width: 64px;
+    height: 64px;
+  }
+  .membership-wrapper .left-area a {
+    padding-bottom: 100%;
+  }
+  .membership-wrapper .btn {
+    text-align: left;
+    color: #000 !important;
+    background-color: transparent !important;
+    font-weight: bold;
+    border: none;
+    padding: 0;
+    width: 150px !important;
+  }
+  .membership-wrapper .btn svg {
+    margin-left: 40px;
+    width: 20px !important;
+  }
+  .cart-item--rivets[extra-class="£0"] .cart-item-quantity-selector {
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .product-variant-name {
+    position: relative;
+    font-size: 10px;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 400;
+  }
+  .product-variant-name::before {
+    content: "";
+    background-color: #000;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+</style>

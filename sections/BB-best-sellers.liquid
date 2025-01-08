@@ -1,0 +1,322 @@
+{% assign ss = section.settings %}
+
+
+<div class="wrapper scroll-trigger">
+  <div class="best-seller__container">
+    <div class="best-seller__grid flex">
+      <div class="best-seller__content--left">
+        <h3>{{ss.title_left}}</h3>
+        <a href="{{ss.cta_link}}" class="best-seller__heading__cta btn">{{ss.cta_text}}</a>
+      </div>
+      
+      <div class="best-seller__content--right">
+        <div class="best-seller__heading--right">
+          <div class="best-seller__title">{{ss.title}}</div>
+        </div>
+        <div class="best-seller__content__images hide-scroll-bar">
+          {%- if section.blocks != empty -%}
+            {% assign i = 9 %}
+            {%- for block in section.blocks -%}
+              {% assign bs = block.settings %}
+              <div class="best-seller__block">
+               
+                <div class="best-seller__image">
+                  <a href="{{ bs.url }}">
+                  {% render 'image-element',
+                    image: bs.new_image,
+                    image_mobile: bs.new_image,
+                    size: '1920x',
+                    extra_class: 'object-fit--cover blocks-image'
+                  %}
+                  </a>
+                 
+                </div>
+                 <div class="best-seller__block_content">
+                 <a href="{{ bs.url }}">
+                    <div class="best-seller_content__title">{{ bs.title }}</div>
+                    <div class="best-seller_content__desc">
+                      {{ bs.description }}
+                      <a href="{{ bs.url }}" class="best-seller_content__link">
+                        {% render 'icon-circle' %}
+                      </a>
+                    </div>
+                  </a>
+                </div>
+              </div>
+                
+              {% assign i = i | minus: 1 %}
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        <div class="flex justify-center">
+          <a href="{{ss.cta_link}}" class="best-seller__heading__cta btn mobile">{{ss.cta_text}}</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<style>
+  @media screen and (max-width: 834px) {
+    .best-seller__container {
+      padding: 0 12px;
+    }
+
+    .best-sellers-title {
+      font-size: 20px;
+      margin-bottom: 11px;
+      padding-left: 12px;
+    }
+
+    .best-seller-content .liquid-title {
+      font-size: 33px;
+      line-height: 120%;
+      letter-spacing: -1px;
+    }
+
+    .best-seller-content:first-of-type {
+      width: unset !important;
+    }
+
+    .best-seller-content:last-of-type {
+      display: block;
+    }
+
+    .best-seller__image-container {
+      margin-left: auto;
+      aspect-ratio: 1 / 2;
+    }
+
+    .best-seller__image-container:first-of-type {
+      display: block;
+    }
+
+    .best-seller__image-container .best-seller__image {
+      display: none;
+    }
+
+    .best-seller__image-container .best-seller__image:first-of-type {
+      width: 100%;
+      display: block;
+    }
+
+    .best-seller-content .liquid-title.active {
+      text-decoration: underline;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Select all elements with the data-best-seller-card attribute
+    var cards = document.querySelectorAll('.best-seller-brands [data-best-seller-card]');
+
+    cards.forEach(function (card) {
+      // Mouseover event
+      card.addEventListener('mouseover', function () {
+        // Reset z-index for all cards
+        cards.forEach(function (otherCard) {
+          var otherClassName = otherCard.getAttribute('data-best-seller-card').replace(' ', '-');
+          var otherImageDiv = document.querySelector('.best-seller-content_images .' + otherClassName);
+          if (otherImageDiv) {
+            otherImageDiv.style.zIndex = '1';
+          }
+        });
+
+        // Increase z-index for the hovered card
+        var className = this.getAttribute('data-best-seller-card');
+        var imageDiv = document.querySelector('.' + className);
+        if (imageDiv) {
+          imageDiv.style.zIndex = '10';
+        }
+      });
+    });
+
+    if (window.innerWidth < 865) {
+      let count = 0;
+
+      const interval = setInterval(() => {
+        cards.forEach(function (otherCard) {
+          var otherClassName = otherCard.getAttribute('data-best-seller-card').replace(' ', '-');
+          var otherImageDiv = document.querySelector('.best-seller-content_images .' + otherClassName);
+          if (otherImageDiv) {
+            otherImageDiv.style.zIndex = '1';
+          }
+        });
+
+        // Increase z-index for the hovered card
+        var className = cards[count].getAttribute('data-best-seller-card');
+        var imageDiv = document.querySelector('.' + className);
+
+        if (imageDiv) {
+          imageDiv.style.zIndex = '10';
+        }
+
+        if (count === cards.length - 1) {
+          count = 0;
+        } else {
+          count++;
+        }
+      }, 3000);
+
+      cards.forEach(function (card) {
+        card.onClick = () => {
+          clearInterval(interval);
+        };
+      });
+    }
+  });
+</script>
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    background: {{ss.bg_color}}
+  }
+  #shopify-section-{{ section.id }}.bb-image-with-text {
+      padding-top: {{ ss.padding_top }}px;
+      padding-bottom: {{ ss.padding_bottom }}px;
+  }
+
+  @media screen and (max-width: 750px) {
+      #shopify-section-{{ section.id }}.bb-image-with-text {
+          padding-top: {{ ss.padding_top_tablet }}px;
+          padding-bottom: {{ ss.padding_bottom_tablet }}px;
+      }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "BB - Best Sellers",
+  "tag": "section",
+  "class": "bb-image-with-text",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image with text"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "title_left",
+      "label": "Title Left",
+      "default": "Our mission is to inspire wellbeing by connecting people to the best global health brands."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Shop best-sellers"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "unit": "px",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Paddings - Tablet"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_tablet",
+      "label": "Padding top",
+      "unit": "px",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_tablet",
+      "label": "Padding bottom",
+      "unit": "px",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "blocks",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Brand link"
+        },
+        {
+          "type": "image_picker",
+          "id": "new_image",
+          "label": "New Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image2",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image3",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BB - Best Sellers"
+    }
+  ]
+}
+{% endschema %}

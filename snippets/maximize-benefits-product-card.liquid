@@ -1,0 +1,112 @@
+{% comment %}
+    product: product
+    benefit_name: string
+{% endcomment %}
+
+{% assign character_limit = 75 %}
+
+<div class="maximize-benefits__product">
+  <div class="maximise-benefits__product-image-container">
+    {% render 'image-element',
+      image: product.featured_image,
+      image_mobile: blank,
+      size: '400x',
+      alt: product.title,
+      show_placeholder: true,
+      extra_class: 'object-fit--contain'
+    %}
+  </div>
+  <div class="maximize-benefits__product-content">
+    <p data-test-name="maximize_custom-prod-tags" class="benefit ab__test-hide">{{ benefit_name }}</p>
+
+    {% capture benefits %}
+        {% for tag in product.tags %}
+            {% if tag contains 'benefit-' or tag contains 'goal:' %}
+                {{ tag | split: ":" | last }}|
+            {% endif %}
+        {% endfor %}
+    {% endcapture %}
+
+    <p data-test-name="maximize_custom-prod-tags" class="ab__test benefit">{{ benefits | split: "|" | slice: 0, 2 | join: " / " }}</p>
+
+    {% comment %} FUTURE test with product own tags (not selected tag) {% endcomment %}
+    <h3 style="font-size: 16px; margin-bottom: 2px;">{{ product.title }}</h3>
+    {% assign description = product.metafields.my_fields.product_description_first_line.value %}
+
+    <!-- Script / JS functionality for this lives in side-cart-updates.liquid -->
+    <div class="description">
+      {% if description.size > character_limit %}
+        {{ description | slice: 0, character_limit }}...
+        <span class="hidden expandable-text">{{ description | slice: character_limit, description.size }}</span>
+        <div class="read-more">
+            <a>Read More</a>
+        </div>
+      {% else %}
+        {{ description }}
+      {% endif %}
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-top: auto; align-items: flex-end;">
+      <p style="font-size: 14px; font-weight: medium;">{{ product.price | money }}</p>
+      <div class="quick-add no-js-hidden" style="height: unset;">
+        {%- assign product_form_id = 'quick-add-' | append: section_id | append: product.id -%}
+        <product-form>
+          {%- form 'product',
+            product,
+            data-productid: product.id,
+            id: product_form_id,
+            class: 'form',
+            novalidate: 'novalidate',
+            data-type: 'add-to-cart-form'
+          -%}
+            <input
+              type="hidden"
+              name="id"
+              data-productid="{{ product.id }}"
+              value="{{ product.selected_or_first_available_variant.id }}"
+              disabled
+            >
+            <button
+              id="{{ product_form_id }}-submit"
+              type="submit"
+              name="add"
+              class="product__btn quick-add__submit {% if buy_again %}product__btn--buy-again{% endif %}"
+              aria-haspopup="dialog"
+              aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ product.id }}"
+              aria-live="polite"
+              data-sold-out-message="true"
+              {% if product.selected_or_first_available_variant.available == false %}
+                disabled
+              {% endif %}
+            >
+              {%- render 'icon-cart' -%}
+              <span>
+                {% if buy_again == true %}
+                  Buy again
+                {%- elsif product.selected_or_first_available_variant.available -%}
+                  {{ 'products.product.add_to_cart' | t }}
+                {%- else -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- endif -%}
+              </span>
+              <span class="sold-out-message hidden">
+                {{ 'products.product.sold_out' | t }}
+              </span>
+              <div class="loading-overlay__spinner hidden">
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  role="presentation"
+                  class="spinner"
+                  viewBox="0 0 66 66"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                </svg>
+              </div>
+            </button>
+          {%- endform -%}
+        </product-form>
+      </div>
+    </div>
+  </div>
+</div>

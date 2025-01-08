@@ -1,0 +1,225 @@
+<div class='journal-spacer unfixed'></div>
+<!-- Search Form -->
+
+<div class='journal-categories'>
+  <div id="search-container">
+    <div id="search-results" class='wrapper'></div>
+    <div id="search-results__container">
+      <input type="text" id="search-input" placeholder="Search articles..." aria-label="Search Articles">
+      <button id="search-button">Search</button>
+    </div>
+  </div>
+  <ul>
+    <li><a href="/blogs/health-journal/tagged/eat">Eat</a></li>
+    <li><a href="/blogs/health-journal/tagged/mind">Mind</a></li>
+    <li><a href="/blogs/health-journal/tagged/move">Move</a></li>
+    <li><a href="/blogs/health-journal/tagged/sleep">Sleep</a></li>
+    <li class='journal-search'>
+      <svg xmlns="http://www.w3.org/2000/svg" width="15.207" height="15.207" viewBox="0 0 15.207 15.207">
+        <g id="search_8_" data-name="search (8)" transform="translate(-2.5 -2.5)">
+          <circle id="Ellipse_2" data-name="Ellipse 2" cx="6.222" cy="6.222" r="6.222" transform="translate(3 3)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></circle>
+          <line id="Line_2" data-name="Line 2" x1="3.383" y1="3.383" transform="translate(13.617 13.617)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></line>
+        </g>
+      </svg>
+    </li>
+  </ul>
+</div>
+
+<style>
+.journal-spacer.unfixed {
+  display: block !important;
+  margin-bottom: 120px !important;
+}
+.journal-categories {
+  width: 480px;
+  position: fixed;
+  flex-direction: column;
+  margin: 0 auto;
+  bottom: 40px;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  right: 0;
+}
+.journal-categories.unfixed {
+  position: static;
+  margin-bottom: 40px;
+}
+.journal-categories ul {
+  justify-content: space-around;
+  display: flex;
+  border-radius: 4px;
+  background: #000;
+}
+.journal-categories li {
+  padding: 20px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: Avenir;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+}
+#gorgias-chat-container {
+  display: none;
+}
+#search-container {
+  max-width: 480px;
+  display: none;
+}
+#search-results {
+  height: 600px;
+  overflow: scroll;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 4px 4px 0 0;
+}
+#search-results__container {
+  display: flex;
+  background-color: white;
+  padding: 5px;
+  border-radius: 4px 4px 0 0;
+  border: 2px solid #f7f7f7;
+  position: relative;
+}
+#search-results__container input {
+  flex-basis: 100%;
+  padding-left: 7px;
+  border: none;
+  font-size: 14px;
+}
+#search-results__container button {
+  background-color: #000;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+  border: 1px solid #000;
+  transition: ease 0.3s;
+}
+#search-results .article-content {
+  display: flex;
+}
+#search-results .article-card__image {
+  width: 25%;
+}
+#search-results .article-card__info {
+  width: 75%;
+}
+#search-results .article-card__title {
+  height: 100%;
+  font-family: 'Avenir';
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
+}
+.journal-search {
+  cursor: pointer;
+}
+@media (max-width: 834px) {
+  .journal-categories {
+    width: 100%;
+    max-width: calc(100% - 20px);
+  }
+  #search-results {
+    height: 400px;
+  }
+  #search-results .article-card__image {
+    width: 33%;
+  }
+  #search-results .article-card__info {
+    width: 66%;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var searchInput = document.getElementById('search-input');
+  var searchButton = document.getElementById('search-button');
+  var resultsContainer = document.getElementById('search-results');
+
+  searchInput.addEventListener('input', function() {
+      var searchQuery = searchInput.value;
+
+      if (searchQuery.trim() !== '') {
+          fetch(`/search?type=article&q=${encodeURIComponent(searchQuery)}`)
+              .then(response => response.text())
+              .then(htmlText => {
+                  displayResults(htmlText);
+              })
+              .catch(error => console.error('Error:', error));
+      } else {
+          resultsContainer.innerHTML = '<p>Please enter a search term.</p>';
+      }
+  });
+
+  function displayResults(htmlText) {
+    resultsContainer.innerHTML = '';
+    var updatedHtmlText = htmlText.replace(/_30x30/g, '_400x400').replace(/class="placeholder"/g, '');
+
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(updatedHtmlText, 'text/html');
+
+    var articles = doc.querySelectorAll('article');
+    if (articles.length > 0) {
+        var limitedArticles = Array.from(articles).slice(0, 4); // Get only first 4 articles
+        var articlesHtml = limitedArticles.map(article => article.outerHTML).join('');
+        resultsContainer.innerHTML = articlesHtml;
+    } else {
+        resultsContainer.innerHTML = '<p>No articles found.</p>';
+    }
+  }
+  document.querySelector('.journal-search').addEventListener('click', function() {
+    var searchContainer = document.querySelector('#search-container');
+    var journalSpacer = document.querySelector('.journal-spacer');
+    if (searchContainer.style.display === 'none') {
+        searchContainer.style.display = 'block';
+        journalSpacer.classList.remove('unfixed');
+    } else {
+        searchContainer.style.display = 'none';
+        journalSpacer.classList.add('unfixed');
+    }
+  });
+});
+</script>
+
+<script>
+  function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return rect.top <= (window.innerHeight || document.documentElement.clientHeight);
+  }
+
+  // Scroll event listener
+  // window.addEventListener('scroll', function() {
+  //     const sectionFooter = document.querySelector('.section-footer');
+  //     const journalCategories = document.querySelector('.journal-categories');
+
+  //     if (isInViewport(sectionFooter)) {
+  //         console.log("I can see");
+  //         // Add class to .journal-categories when .section-footer is in the viewport
+  //       setTimeout(() => {
+  //         journalCategories.classList.add('unfixed');
+  //       }, 100);
+  //     } else {
+  //         // Optionally, remove the class when .section-footer is not in the viewport
+  //       setTimeout(() => {
+  //         journalCategories.classList.remove('unfixed');
+  //       }, 200);
+  //     }
+  // });
+</script>
+{% schema %}
+{
+  "name": "BB - Blog Bar",
+  "settings": [],
+  "presets": [
+    {
+    "name": "BB - Blog Bar"
+    }
+  ]
+}
+{% endschema %}

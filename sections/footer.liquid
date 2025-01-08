@@ -1,0 +1,236 @@
+{% assign ss = section.settings %}
+
+<footer>
+    <div class="wrapper">
+
+        {% include "logo-minimal" %}
+
+        <div class="footer-nav__container">
+            <ul class="desktop-only">
+                {%- for block in section.blocks -%}
+                    {% assign bs = block.settings %}
+                    <li class="footer-nav__blocks">
+                        <h4>
+                            {{ bs.title }}
+                        </h4>
+                        <ul>
+                            {% for link in bs.list.links %}
+                                <li>
+                                    <a href="{{ link.url }}">
+                                        {{ link.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {%- endfor -%}
+            </ul>
+
+            <div id="accordion__container" class="accordion__container footer-accordion">
+                <ul class="accordion accordion-width accordion__sub-container tablet-only" data-toggle-group>
+                    {%- for block in section.blocks -%}
+                        {% assign bs = block.settings %}
+                        <li class="footer-nav__blocks accordion-item accordion__content" data-toggle-item>
+                            <h4 class="accordion-header" data-toggle-trigger>
+                                {{ bs.title }}
+                                {% include 'icon-chevron' %}
+                            </h4>
+                            <ul class="accordion-content" data-toggle-elem>
+                                {% for link in bs.list.links %}
+                                    <li>
+                                        <a href="{{ link.url }}">
+                                            {{ link.title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {%- endfor -%}
+                </ul>
+            </div>
+
+            <div class="footer-description__container">
+                <h3>{{ ss.description }}</h3>
+                {% comment %}
+                <ul class="list list-payment" role="list">
+                    {% assign enabled_payment_types = 'american_express,apple_pay,google_pay,master,paypal,visa' | remove: ' ' | split: ',' %}
+                    {%- for type in enabled_payment_types -%}
+                        <li class="list-payment__item">
+                            {{ type | payment_type_svg_tag: class: "icon icon--full-color" }}
+                        </li>
+                    {%- endfor -%}
+                </ul>
+                {% endcomment %}
+                {%- if ss.show_social -%}
+                    <div class="footer-social__container">
+                        <ul class="footer__list-social" role="list">
+                            {%- if settings.social_twitter_link != blank -%}
+                                <li class="list-social__item">
+                                    <a
+                                        class="list-social__link"
+                                        href="{{ settings.social_twitter_link }}"
+                                        target="_blank">
+                                        {%- render "icon-twitter" -%}
+                                        <span class="visually-hidden">{{ "general.social.links.twitter" | t }}</span>
+                                    </a>
+                                </li>
+                            {%- endif -%}
+                            {%- if settings.social_facebook_link != blank -%}
+                                <li class="list-social__item">
+                                    <a
+                                        class="list-social__link"
+                                        href="{{ settings.social_facebook_link }}"
+                                        target="_blank">
+                                        {%- render "icon-facebook" -%}
+                                        <span class="visually-hidden">{{ "general.social.links.facebook" | t }}</span>
+                                    </a>
+                                </li>
+                            {%- endif -%}
+                            {%- if settings.social_pinterest_link != blank -%}
+                                <li class="list-social__item">
+                                    <a
+                                        class="list-social__link"
+                                        href="{{ settings.social_pinterest_link }}"
+                                        target="_blank">
+                                        {%- render "icon-pinterest" -%}
+                                        <span class="visually-hidden">{{ "general.social.links.pinterest" | t }}</span>
+                                    </a>
+                                </li>
+                            {%- endif -%}
+                            {%- if settings.social_instagram_link != blank -%}
+                                <li class="list-social__item">
+                                    <a
+                                        class="list-social__link"
+                                        href="{{ settings.social_instagram_link }}"
+                                        target="_blank">
+                                        {%- render "icon-instagram" -%}
+                                        <span class="visually-hidden">{{ "general.social.links.instagram" | t }}</span>
+                                    </a>
+                                </li>
+                            {%- endif -%}
+                            {%- if settings.social_tiktok_link != blank -%}
+                                <li class="list-social__item">
+                                    <a
+                                        class="list-social__link"
+                                        href="{{ settings.social_tiktok_link }}"
+                                        target="_blank">
+                                        {%- render "icon-tiktok" -%}
+                                        <span class="visually-hidden">{{ "general.social.links.tiktok" | t }}</span>
+                                    </a>
+                                </li>
+                            {%- endif -%}
+                            {%- if settings.social_tumblr_link != blank -%}
+                                <li class="list-social__item">
+                                    <a
+                                        class="list-social__link"
+                                        href="{{ settings.social_tumblr_link }}"
+                                        target="_blank">
+                                        {%- render "icon-tumblr" -%}
+                                        <span class="visually-hidden">{{ "general.social.links.tumblr" | t }}</span>
+                                    </a>
+                                </li>
+                            {%- endif -%}
+                            {%- if settings.social_snapchat_link != blank -%}
+                                <li class="list-social__item">
+                                    <a
+                                        class="list-social__link"
+                                        href="{{ settings.social_snapchat_link }}"
+                                        target="_blank">
+                                        {%- render "icon-snapchat" -%}
+                                        <span class="visually-hidden">{{ "general.social.links.snapchat" | t }}</span>
+                                    </a>
+                                </li>
+                            {%- endif -%}
+                            {%- if settings.social_youtube_link != blank -%}
+                                <li class="list-social__item">
+                                    <a
+                                        class="list-social__link"
+                                        href="{{ settings.social_youtube_link }}"
+                                        target="_blank">
+                                        {%- render "icon-youtube" -%}
+                                        <span class="visually-hidden">{{ "general.social.links.youtube" | t }}</span>
+                                    </a>
+                                </li>
+                            {%- endif -%}
+                            {%- if settings.social_vimeo_link != blank -%}
+                                <li class="list-social__item">
+                                    <a
+                                        class="list-social__link"
+                                        href="{{ settings.social_vimeo_link }}"
+                                        target="_blank">
+                                        {%- render "icon-vimeo" -%}
+                                        <span class="visually-hidden">{{ "general.social.links.vimeo" | t }}</span>
+                                    </a>
+                                </li>
+                            {%- endif -%}
+                        </ul>
+                    </div>
+                {%- endif -%}
+            </div>
+        </div>
+
+        <div class="footer-bottom__container">
+            <div class="copyright">
+                {{ ss.copyright }}
+            </div>
+            <span class="trust-pilot__container">{% render 'trustpilot-logo' %}</span>
+        </div>
+    </div>
+</footer>
+
+
+{% schema %}
+    {
+        "name": "Footer",
+        "class": "section-footer",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Top section"
+            },
+            {
+                "type": "header",
+                "content": "Bottom section"
+            },
+            {
+                "type": "richtext",
+                "id": "copyright",
+                "label": "Copyright text"
+            },
+            {
+                "type": "richtext",
+                "id": "description",
+                "label": "Footer text"
+            },
+            {
+                "type": "header",
+                "content": "Checkboxes"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_social",
+                "label": "Show social links",
+                "default": true
+            }
+        ],
+        "blocks": [
+            {
+                "type": "block",
+                "name": "Block",
+                "limit": 4,
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "link_list",
+                        "id": "list",
+                        "label": "Nav link"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

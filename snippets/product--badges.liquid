@@ -1,0 +1,21 @@
+{% assign tag_badge_split = settings.badge_text_tags | newline_to_br | split: "<br />" %}
+<ul class="product-text-badges">
+{% for split_item in tag_badge_split %}
+  {% assign split_item_split = split_item | split: "|" %}
+  {% assign tag_to_check = split_item_split[0] %}
+  {% assign badge_text = split_item_split[1] %}
+
+  {% if product.tags contains tag_to_check %}
+    <li>
+      {{ badge_text }}
+    </li>
+  {% endif %}
+{% endfor %}
+
+{% if product.compare_at_price > product.price %}
+  {% assign difference = product.compare_at_price | minus: product.price %}
+  <li>
+    Save {{ difference | money_without_trailing_zeros }}
+  </li>
+{% endif %}
+</ul> 

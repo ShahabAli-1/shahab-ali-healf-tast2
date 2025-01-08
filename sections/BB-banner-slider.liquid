@@ -1,0 +1,180 @@
+{% assign ss = section.settings %}
+
+{% capture arrow_svg %}
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.329508 1.19813C0.689466 0.838172 1.27307 0.838172 1.63303 1.19813L6.51165 6.07675L11.3903 1.19813C11.7502 0.838173 12.3338 0.838173 12.6938 1.19813C13.0538 1.55809 13.0538 2.1417 12.6938 2.50165L7.16341 8.03203C6.80345 8.39199 6.21985 8.39199 5.85989 8.03203L0.329508 2.50165C-0.0304497 2.1417 -0.0304496 1.55809 0.329508 1.19813Z" fill="black"/>
+</svg>
+{% endcapture %}
+
+{% capture slider_settings %}
+    {
+      "autoplay": true,
+      "autoplaySpeed": 8000,
+      "slidesPerView": 1,
+      "autoAdjustSlidesPerView": false,
+      "fade": true,
+      "loop": true,
+      "arrows": true,
+      "arrowSvg":  {{arrow_svg | json}},
+      "appendArrows": "#shopify-section-{{ section.id }} [data-arrows]",
+      "dotsContainer": "#shopify-section-{{ section.id }} [data-keen-dots]"
+    }
+{% endcapture %}
+
+<div class="banner-slider__container">
+    <div data-keen-slider='{{ slider_settings }}'>
+        {%- for block in section.blocks -%}
+        {% assign bs = block.settings %}
+            <div class="banner-slider__card">
+                <div class="banner-slider__content">
+                    {% if bs.title != blank %}
+                        <h2 class="banner-slider__title">{{ bs.title }}</h2>
+                    {%- endif -%}
+                    {% if bs.description != blank %}
+                        <p class="banner-slider__description">{{ bs.description  | strip_html | escape }}</p>
+                    {%- endif -%}
+                    {% if bs.button_text != blank %}
+                        <a href="{{ bs.button_link }}" class="btn">{{ bs.button_text }}</a>
+                    {%- endif -%}
+                </div>
+                {% if bs.image != blank %}
+                    {% render 'image-element', image: bs.image, image_mobile: bs.image_mobile, size: '1920x', extra_class: 'object-fit--cover banner-slider__img'%}
+                {%- endif -%}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="custom-slide-nav" data-arrows></div>
+
+    <ul class="custom-dots" data-keen-dots>
+        <style>
+            #shopify-section-{{ section.id }} .custom-dots li:after{
+            animation-duration: 8s;
+        }
+        </style>
+
+        {% for block in section.blocks %}
+        {% assign bs = block.settings %}
+
+        <li class="feature" data-dot="{{ forloop.index0 }}" data-dot-animate="false">
+        </li>
+
+        {% endfor %}
+
+    </ul>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.banner-slider {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.banner-slider {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Banner Slider",
+        "tag": "section",
+        "class": "banner-slider",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 0
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 0
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 0
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 0
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Brand",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "description",
+                        "label": "Description"
+                    },
+                    {
+                        "type": "text",
+                        "id": "button_text",
+                        "label": "Button Text"
+                    },
+                    {
+                        "type": "url",
+                        "id": "button_link",
+                        "label": "Button Link"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Image"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image_mobile",
+                        "label": "Image Mobile"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Banner Slider"
+            }
+        ]
+    }
+{% endschema %}

@@ -1,0 +1,110 @@
+{{ 'component-multiple-columns-award.css' | asset_url | stylesheet_tag }}
+{%  liquid
+    assign ss = section.settings
+    assign banner_image = ss.banner_image
+    assign blocks = section.blocks
+%}
+
+{% capture slider_settings %}
+    {
+        "autoplay": false,
+        "slidesPerView": 3,
+        "autoAdjustSlidesPerView": false,
+        "loop": true,
+        "arrows": false,
+        "spacing": 28,
+        "responsive": [
+            {
+                "breakpoint": "749px",
+                "settings": {
+                  "slidesPerView": 1,
+                  "spacing": 0,
+                  "autoplay": true,
+                  "autoplaySpeed": 3000,
+                  "drag": false
+                }
+            }
+        ]
+    }
+{% endcapture %}
+
+<section class="bs-devshop__award">
+    <div class="bs-devshop__award__wrapper">
+        {% if banner_image != blank %}
+            <div class="bs-devshop__award__banner">
+                {% render 'image-element', image: banner_image, size: '1920x', extra_class: 'object-fit--cover'%}
+            </div>
+        {% endif %}
+        {% if blocks != blank %}
+            <div class="bs-devshop__award__content">
+                <div class="bs-devshop__award__columns page-width" data-keen-slider='{{slider_settings}}'>
+                    {% for block in blocks %}
+                        {%  liquid
+                            assign year = block.settings.year
+                            assign title = block.settings.title
+                            assign award = block.settings.award
+                        %}
+                        {% if year != blank or title != blank or award != blank%}
+                            <div class="bs-devshop__award__column">
+                                <div class="bs-devshop__award__column--box">
+                                    {% if year != blank %}
+                                        <p class="bs-devshop__award__year">{{year}}</p>
+                                    {% endif %}
+                                    {% if title != blank %}
+                                        <h3 class="bs-devshop__award__title">{{title}}</h3>
+                                    {% endif %}
+                                    {% if award != blank %}
+                                        <p class="bs-devshop__award__award">{{award}}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Multiple Columns Award",
+  "class": "section",
+  "settings": [
+    {
+        "type": "image_picker",
+        "id": "banner_image",
+        "label": "Banner Image"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "Column",
+      "name": "Column",
+      "settings": [
+        {
+            "type": "number",
+            "id": "year",
+            "label": "Year"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+        },
+        {
+            "type": "text",
+            "id": "award",
+            "label": "Award"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multiple Columns Award"
+    }
+  ]
+}
+{% endschema %}

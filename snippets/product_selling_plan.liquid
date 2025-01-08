@@ -1,0 +1,125 @@
+{% liquid
+    assign target = product.selected_or_first_available_variant
+    assign current_date = 'now' | date: '%Y%m%d' | plus: 0
+    assign target_date = product.metafields.custom.preorder | date: '%Y%m%d' | plus: 0
+    assign isPreOrder = false
+    if current_date < target_date and target.inventory_quantity < 1 
+        assign isPreOrder = true
+    endif
+    assign gift_product_handle = settings.product_gift_recharge 
+    if gift_product_handle != blank
+        assign gift_product = all_products[gift_product_handle]
+    endif
+%}
+
+{%- if product.selling_plan_groups.size > 0 and isPreOrder == false -%}
+    {%- if settings.first_available_variant or settings.remove_sold_out -%}
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+    {%- elsif product.selected_variant != blank  -%}
+    {%- assign current_variant = product.selected_variant -%}
+    {%- else -%}
+    {%- assign current_variant = product.variants.first -%}
+    {%- endif -%}
+    {% assign selling_plan_id = '' %}
+    {% for subscription in product.selling_plan_groups %}
+        {% for subscription_plan in subscription.selling_plans limit:1 %}
+            {% if subscription_plan.price_adjustments[0].value != blank %}
+                    {% if subscription_plan.price_adjustments[0].value_type == 'percentage' %}
+                        {% assign remaining_percentage = 100 | minus: subscription_plan.price_adjustments[0].value %}
+                        {% assign percentage_value = subscription_plan.price_adjustments[0].value %}
+                        {% assign selling_plan_id = subscription_plan.id %}
+                    {% endif %}
+            {% endif %}
+        {% endfor %}
+        {% break %}
+    {% endfor %}
+
+    {% liquid
+        assign price = target.price | default: 1999
+        assign percentPrice = 100 | minus: percentage_value 
+        assign purchasePrice = price | times: percentPrice | divided_by: 100
+    %}
+
+    <product-selling-plan>
+        <div class="product__selling__plan {% if gift_product != blank %}has__gift__product{% endif %}" data-selling-plan data-variant-id="{{ current_variant.id }}">
+            <div class="product__selling__plan__container">
+                <div 
+                    class="radio--button radio--button__subscribe" 
+                    data-selling-plan-radio data-selling-plan-price="{{purchasePrice | money}}" 
+                    data-selling-plan-id="{{selling_plan_id}}" 
+                    {% if gift_product != blank %}data-gift-product-id="{{ gift_product.selected_or_first_available_variant.id }}"{% endif %}
+                >
+                    <div class="radio__icon">
+                        <span class="radio__icon__normal">
+                            {% render 'radio-icon' %}
+                        </span>
+                        <span class="radio__icon__active">
+                            {% render 'radio-checked-icon' %}
+                        </span>
+                    </div>
+                    <div for="radio--subscribe" class="radio--subscribe radio__content">
+                        <div class="radio__text">
+                            <span>{{ 'products.product.purchase.subscribe_save' | t }}<span class="percentage__price"> {{ percentage_value }}%</span></span>
+                            <div class="price__container">
+                                <span class="normal__price">{{ price | money}}</span>
+                                <span class="purchase__price">{{ purchasePrice | money }}</span>
+                            </div>
+                            
+                        </div>
+                        <div class="radio--subscribe__row">
+                            {% if gift_product != blank %}
+                                <div class="radio__product__gift" >
+                                    <div class="radio__product__gift--content">
+                                        <div class="radio__product__gift--head">
+                                            {% render 'icon-gift' %}
+                                            <span>{{'Welcome Gift'}}</span>
+                                        </div>
+                                        <p class="radio__product__gift--desc">
+                                            {{'Recieve a free '}}{{gift_product.title}}{{' when you subscribe'}}
+                                        </p>
+                                    </div>
+                                    <div class="radio__product__gift--image">
+                                         {% render 'image-element', image: gift_product.featured_image, size: '200x', extra_class: 'object-fit--cover'%}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="radio--subscribe__list">
+                                <div>
+                                    {% render 'icon-check' %}
+                                    <span>{{ 'products.product.purchase.free_samples' | t }}</span>
+                                </div>                       
+                                <div>
+                                    {% render 'icon-check' %}
+                                    <span>{{ 'products.product.purchase.pause_cancel' | t }}</span>
+                                </div>
+                                <div>
+                                    {% render 'icon-check' %}
+                                    <span>{{ 'products.product.purchase.returns' | t }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                                    
+                </div>
+                <div class="radio--button" data-selling-plan-radio data-selling-plan-price="{{price | money}}" data-selling-plan-id="">
+                    <div class="radio__icon">
+                        <span class="radio__icon__normal">
+                            {% render 'radio-icon' %}
+                        </span>
+                        <span class="radio__icon__active">
+                            {% render 'radio-checked-icon' %}
+                        </span>
+                     </div>
+                    <div for="radio--one" class="radio--one radio__content">
+                        <div class="radio__text">
+                            <span>{{ 'products.product.purchase.one_time' | t }}</span>
+                            <span class="normal__price">{{ price | money }}</span>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </product-selling-plan>
+
+    {{ 'component-product-selling-plan.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'product-selling-plan.js' | asset_url }}" defer="defer"></script>
+{% endif %}

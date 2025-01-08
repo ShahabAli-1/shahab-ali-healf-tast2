@@ -1,0 +1,175 @@
+html {
+  font-size: 10px;
+}
+
+.bs-devshop__benefits__content {
+  display: grid;
+  grid-template-columns: 1fr 67%;
+  align-items: center;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  gap: 6rem;
+}
+
+.bs-devshop__benefits__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  color: #000000;
+  gap: 2rem;
+}
+
+.bs-devshop__benefits__heading {
+  font-weight: 500;
+  font-size: 20rem;
+  line-height: 1;
+}
+
+.bs-devshop__benefits__sub__heading {
+  font-size: 4.8rem;
+  line-height: 5.4rem;
+}
+
+.bs-devshop__benefits__description {
+  font-size: 2.4rem;
+  line-height: 2.8rem;
+}
+
+.bs-devshop__benefits__link {
+  padding: 1.5rem 3.2rem;
+  border-radius: 3.2rem;
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  transition: ease 0.3s;
+  margin-top: 2.4rem;
+}
+
+.benefits__image--mobile {
+  display: none;
+}
+
+.bs-devshop__benefits__search {
+  display: none;
+  margin-top: 2rem;
+}
+
+.bs-devshop__benefits__search .search__field {
+  border: solid 1px #000;
+  display: flex;
+  align-items: center;
+  border-radius: 3rem;
+  padding: 0.8rem 1.5rem;
+}
+
+.bs-devshop__benefits__search svg {
+  width: 1.8rem;
+}  
+
+.bs-devshop__benefits__search .search__input {
+  padding-right: 0.3rem;
+  padding-left: 0;
+  border: 0;
+  background: none;
+  color: #000;
+}
+
+.bs-devshop__benefits__search .search__input::placeholder {
+  color: #000;
+}
+
+.bs-devshop__benefits__search .search {
+  max-width: 22rem;
+  margin-right: 0;
+  padding: 0;
+}
+
+@media (max-width: 1199px) {
+  .bs-devshop__benefits__heading {
+    font-size: 12rem;
+  }
+
+  .bs-devshop__benefits__sub__heading {
+    font-size: 3.2rem;
+    line-height: 3.8rem;
+  }
+
+  .bs-devshop__benefits__description {
+    font-size: 2rem;
+    line-height: 2.6rem;
+  }
+
+  .bs-devshop__benefits__link {
+    padding: 1rem 1.6rem;
+    border-radius: 3.2rem;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    margin-top: 1.6rem;
+  }
+}
+
+@media (max-width: 989px) {
+  .bs-devshop__benefits__content {
+    grid-template-columns: 1fr 55%;
+    padding-top: 2rem;
+  }
+
+  .bs-devshop__benefits__description {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+  }
+
+  .bs-devshop__benefits__search {
+    display: flex;
+  }
+}
+
+
+@media (max-width: 749px) {
+  .bs-devshop__benefits__content {
+    grid-template-columns: 1fr;
+    padding-bottom: 4rem;
+  }
+
+  .bs-devshop__benefits__text {
+    order: 1;
+    gap: 4rem
+  }
+
+  .bs-devshop__benefits__image {
+    display: none;
+  }
+
+  .benefits__image--mobile {
+    display: block;
+  }
+
+}
+
+@media (max-width: 639px) {
+  .bs-devshop__benefits__heading {
+    font-size: 5rem;
+    line-height: 4rem;
+    white-space: nowrap;
+  }
+
+  .bs-devshop__benefits__sub__heading {
+    font-size: 2rem;
+    line-height: 1;
+    max-width: 22rem;
+  }
+
+  .bs-devshop__benefits__text--top {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .bs-devshop__benefits__link {
+    padding: 1.2rem 4.4rem;
+  }
+
+  .bs-devshop__benefits__text--bottom {
+    max-width: 27rem;
+  }
+}

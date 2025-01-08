@@ -1,0 +1,319 @@
+{% assign ss = section.settings %}
+
+<div data-overflow-type="{{ ss.overflow_type }}"></div>
+
+<script data-bundle-builder-json type="application/json"> 
+  {
+    "stage_order": 1,
+    "header": {
+      "title": {{ ss.header_title | json }},
+      "text": {{ ss.header_text | json }}
+    },
+    "questions": [
+      {% for block in section.blocks %}
+        {% assign bs = block.settings %}
+        {% assign step = forloop.index %}
+        {% assign options = bs.options | newline_to_br | split: '<br />' %}
+
+        {
+          "step": {{ step | json }},
+          "question": {{ bs.title | json }},
+          "ometria": {{ bs.ometria | json }},
+          "answers": [
+            {% for option in options %}
+              {% assign option_text = option | split: '|' | first | strip %}
+              {% assign option_products = option | split: '|' | last | strip | split: ',' %}
+
+              {
+                "answer": {{ option_text | json }},
+                "products_to_recommend": [
+
+                  {% for prod in option_products %}
+                    {% assign product_step = step %}
+                    {% assign product_handle = prod | strip %}
+
+                    {% if prod contains '[' and prod contains ']' %}
+                      {% assign product_step = prod | split: '[' | last | replace: ']', '' | strip | times: 1 %}
+                      {% assign product_handle = prod | split: '[' | first | strip %}
+                    {% endif %}
+                    "{{ product_handle }}|{{ product_step }}"{% unless forloop.last %},{% endunless %}
+                  {% endfor %}
+                ]
+              }{% unless forloop.last %},{% endunless %}
+
+            {% endfor %}
+          ]
+        }
+        {% unless forloop.last %},{% endunless %}
+
+      {% endfor %}
+    ]
+  }
+</script>
+
+<div class="bundle-builder-quiz" rv-if="data.current_stage.stage_order | eq 1">
+
+  <div class="wrapper">
+    {% include 'BB-bundle-builder-quiz-question' %}
+  
+    <div class="text-center">
+      <button class="button button--next" rv-if="data.current_stage.all_answers_checked" rv-on-click="controller.nextStage">{{ ss.cta_text_selected }}</button>
+    </div>
+  </div>
+
+</div>
+
+<script data-bundle-builder-json type="application/json"> 
+  {
+    "stage_order": 2,
+    "header": {
+      "title": {{ ss.header_title | json }},
+      "text": {{ ss.header_text | json }}
+    },
+    "questions": [
+      {% for block in section.blocks %}
+        {% assign bs = block.settings %}
+        {% assign step = forloop.index %}
+        {% assign options = bs.options | newline_to_br | split: '<br />' %}
+
+        {
+          "step": {{ step | json }},
+          "question": {{ bs.title | json }},
+          "ometria": {{ bs.ometria | json }},
+          "answers": [
+            {% for option in options %}
+              {% assign option_text = option | split: '|' | first | strip %}
+              {% assign option_products = option | split: '|' | last | strip | split: ',' %}
+
+              {
+                "answer": {{ option_text | json }},
+                "products_to_recommend": [
+
+                  {% for prod in option_products %}
+                    {% assign product_step = step %}
+                    {% assign product_handle = prod | strip %}
+
+                    {% if prod contains '[' and prod contains ']' %}
+                      {% assign product_step = prod | split: '[' | last | replace: ']', '' | strip | times: 1 %}
+                      {% assign product_handle = prod | split: '[' | first | strip %}
+                    {% endif %}
+                    {
+                      "product_handle": {{ product_handle | json }},
+                      "step": {{ product_step | json }}
+                    }{% unless forloop.last %},{% endunless %}
+                  {% endfor %}
+                ]
+              }{% unless forloop.last %},{% endunless %}
+
+            {% endfor %}
+          ]
+        }
+        {% unless forloop.last %},{% endunless %}
+
+      {% endfor %}
+    ],
+    "steps": [
+      {% for block in section.blocks %}
+        {% assign bs = block.settings %}
+        {% assign step = forloop.index %}
+        
+        {
+          "step": {{ step | json }},
+          "step_title": {{ bs.compare_title | json }},
+          "header_title": {{ bs.header_title | json }},
+          "is_required": {{ bs.required | json }},
+          "products_to_compare": [
+            {% assign products_to_compare = bs.products_to_compare | newline_to_br | split: '<br />' %}
+
+            {% for prod in products_to_compare %}
+              {
+                "product_handle": {{ prod | split: '|' | first | strip | json }},
+                "product_variant": {{ prod | split: '|' | last | strip | json }}
+              }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          ]
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "buttons": {
+      "compare_cta_text": {{ ss.compare_cta_text | json }},
+      "compare_cta_text_optional": {{ ss.compare_cta_text_optional | json }},
+      "compare_cta_text_required": {{ ss.compare_cta_text_required | json }}
+    }
+  }
+</script>
+
+<div class="bundle-builder-compare" rv-if="data.current_stage.stage_order | eq 2">
+  {% include 'BB-bundle-builder-quiz-compare' %}
+</div>
+
+{% schema %}
+  {
+    "name": "Quiz",
+    "settings": [
+      {
+        "type":"header",
+        "content":"Header"
+      },
+      {
+        "type":"text",
+        "id":"header_title",
+        "label":"Header Title",
+        "default": "Questions"
+      },
+      {
+        "type":"text",
+        "id":"header_text",
+        "label":"Header Text",
+        "default": "Answer the following questions to get personalised recommendations."
+      },
+      {
+        "type":"header",
+        "content":"Content"
+      },
+      {
+        "type":"text",
+        "id":"cta_text",
+        "label":"CTA Text",
+        "default":"Choose answers"
+      },
+      {
+        "type":"text",
+        "id":"cta_text_selected",
+        "label":"CTA (Selected)",
+        "default":"Next"
+      },
+      {
+        "type":"header",
+        "content":"Compare page"
+      },
+      {
+        "type":"checkbox",
+        "id":"details",
+        "label":"Show details chart?",
+        "default":false
+      },
+      {
+        "type": "select",
+        "id":"overflow_type",
+        "label":"Overflow Style",
+        "default": "slider",
+        "options": [
+         { "value": "slider", "label": "Slider"},
+         { "value": "scroll", "label": "Scroll"}
+        ]
+      },
+      {
+        "type":"text",
+        "id":"compare_cta_text",
+        "label":"CTA",
+        "default":"Next"
+      },
+      {
+        "type":"text",
+        "id":"compare_cta_text_optional",
+        "label":"CTA (Optional)",
+        "default":"Skip"
+      },
+      {
+        "type":"text",
+        "id":"compare_cta_text_required",
+        "label":"CTA (Required)",
+        "default":"Select products"
+      }
+    ],
+    "blocks":[
+      {
+        "name":"Question",
+        "type":"question",
+        "settings":[
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Title"
+          },
+          {
+            "type":"text",
+            "id":"ometria",
+            "label":"Ometria Custom Field ID"
+          },
+          {
+            "type":"textarea",
+            "id":"options",
+            "label":"Options",
+            "info":"Each option on a new line, answer and product separated by |"
+          },
+          {
+            "type":"header",
+            "content":"Compare page"
+          },
+          {
+            "type":"checkbox",
+            "id":"required",
+            "label":"Is this product required?"
+          },
+          {
+            "type":"text",
+            "id":"header_title",
+            "label":"Header title"
+          },
+          {
+            "type":"textarea",
+            "id":"products_to_compare",
+            "label":"Products to compare",
+            "info":"Each product on a new line, product and variant separated by |"
+          },
+          {
+            "type":"text",
+            "id":"compare_title",
+            "label":"Compare page title"
+          },
+          {
+            "type":"header",
+            "content":"Compare page content block"
+          },
+          {
+            "type":"image_picker",
+            "id":"content_image",
+            "label":"Image"
+          },
+          {
+            "type":"image_picker",
+            "id":"content_image_mobile",
+            "label":"Image (Mobile)"
+          },
+          {
+            "type":"textarea",
+            "id":"content_video",
+            "label":"Video MP4 URL"
+          },
+          {
+            "type":"textarea",
+            "id":"content_video_mobile",
+            "label":"Video MP4 URL (Mobile)"
+          },
+          {
+            "type":"textarea",
+            "id":"content_title",
+            "label":"Title"
+          },
+          {
+            "type":"richtext",
+            "id":"content_content",
+            "label":"Content"
+          },
+          {
+            "type":"text",
+            "id":"content_button_text",
+            "label":"Link Text"
+          },
+          {
+            "type":"url",
+            "id":"content_button_url",
+            "label":"Link URL"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,362 @@
+{{ 'collapsible-content.css' | asset_url | stylesheet_tag }}
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+
+<div style="background-color: {{  section.settings.background_color }};">
+  <div class="bs-devshop__expandable-faq__container page-width" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+    <div class="bs-devshop__expandable-faq__heading__container">
+      <div class="bs-devshop__expandable-faq__heading-wrapper">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="bs-devshop__expandable-faq__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {%- else -%}
+          <h2 class="visually-hidden">{{ 'accessibility.collapsible_content_title' | t }}</h2>
+        {% endif %}
+      </div>
+      <div class="bs-devshop__landing-expandable-faq__button-wrapper">
+        <a href="{{ section.settings.faq_redirect_link | default: 'https://healf.com/pages/healf-zone-faq' }}" class="bs-devshop__landing-expandable-faq__button">
+          {{ section.settings.button_text | default: 'Learn More' }}
+        </a>
+      </div>
+    </div>
+    <div class="grid grid--1-col grid--2-col-tablet collapsible-content__grid">
+      <div class="grid__item">
+        {%- for block in section.blocks limit:4 -%}
+          <div
+            class="bs-devshop__expandable-faq__accordion {% if forloop.last %} last-row{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+
+            <details
+              id="Details-{{ block.id }}-{{ section.id }}"
+              {% if section.settings.open_first_collapsible_row and forloop.first %}
+                open
+              {% endif %}
+              class="bs-devshop__expandable-faq__details"
+            >
+              <summary
+                id="Summary-{{ block.id }}-{{ section.id }}"
+                class="bs-devshop__expandable-faq__summary-div"
+              >
+                <h3
+                  class="bs-devshop__expandable-faq__row-title accordion__title inline-richtext"
+                  style="color: {{ block.settings.heading_color }}"
+                >
+                  {{ block.settings.heading }}
+                </h3>
+                {% render 'bs-devshop__icon-caret' %}
+              </summary>
+              <div
+                class="accordion__content bs-devshop__expandable-faq__row-content rte"
+                id="CollapsibleAccordion-{{ block.id }}-{{ section.id }}"
+                role="region"
+                aria-labelledby="Summary-{{ block.id }}-{{ section.id }}"
+                style="padding: 0 1rem; color: {{ block.settings.content_color }}"
+              >
+                {{ block.settings.row_content }}
+              </div>
+            </details>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Landing Page FAQ",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FAQs"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first_collapsible_row",
+      "default": false,
+      "label": "Open first collapsible row"
+    },
+    {
+      "type": "header",
+      "content": "Section Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "url",
+      "id": "faq_redirect_link",
+      "label": "FAQ Redirect Link",
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_redirect_link",
+      "label": "Button Redirect Link",
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "default": 50,
+      "min": 20,
+      "max": 200,
+      "step": 10
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "default": 50,
+      "min": 20,
+      "max": 200,
+      "step": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collapsible_row",
+      "name": "Collapsible row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Row Heading",
+          "label": "Heading"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading Color",
+          "default": "#FFFFFF"
+        },
+        {
+          "type": "richtext",
+          "id": "row_content",
+          "label": "Row Content"
+        },
+        {
+          "type": "color",
+          "id": "content_color",
+          "label": "Content Color",
+          "default": "#FFFFFF"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing Page FAQ",
+      "blocks": [
+        {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What does Healf Zone do for you?",
+            "row_content": "<p>Collapsible row content</p>"
+          }
+        },
+        {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Where do Healf Zone’s personalised insights come from?",
+            "row_content": "<p>Collapsible row content</p>"
+          }
+        },
+        {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What are optimal blood test ranges?",
+            "row_content": "<p>Collapsible row content</p>"
+          }
+        },
+        {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Data Protection & Ethics",
+            "row_content": "<p>Collapsible row content</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+  .bs-devshop__expandable-faq__container {
+    padding: 4.7rem 0;
+  }
+
+  .bs-devshop__expandable-faq__heading__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .bs-devshop__expandable-faq__heading-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .bs-devshop__landing-expandable-faq__button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bs-devshop__landing-expandable-faq__button {
+    padding: 1.6rem 3.3rem;
+    text-decoration: none;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-radius: 2.6rem;
+    overflow: hidden;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 1.9rem;
+    letter-spacing: -0.025rem;
+  }
+  .bs-devshop__expandable-faq__heading {
+    font-size: 5.6rem;
+    font-weight: 500;
+    letter-spacing: -0.09em;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .bs-devshop__expandable-faq__accordion {
+    border-top: 1px solid #FFFFFF;
+  }
+
+  .bs-devshop__expandable-faq__accordion.last-row {
+    border-bottom: 1px solid #FFFFFF;
+  }
+
+  .bs-devshop__expandable-faq__summary-div {
+    position: relative;
+    padding: 3.1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .bs-devshop__expandable-faq__summary-div icon-caret {
+    color: #000000;
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+
+  .bs-devshop__expandable-faq__icon-caret-wrapper {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+
+  .bs-devshop__expandable-faq__row-title {
+    font-size: 2.8rem;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 3.1rem;
+    color: #FFFFFF
+  }
+
+  .bs-devshop__expandable-faq__row-content {
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 3.1rem;
+    color: #FFFFFF;
+  }
+
+  summary .icon-caret.bs-devshop__icon-caret {
+    position: absolute;
+    height: 0.8rem;
+    width: 1.4rem;
+    right: 0;
+    top: calc(50%);
+  }
+
+  .bs-devshop__expandable-faq__accordion details[open] > summary .icon-caret.bs-devshop__icon-caret {
+    transform: rotate(180deg);
+  }
+
+  .bs-devshop__expandable-faq__link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .icon-caret-wrapper {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .icon-caret-wrapper .icon-caret {
+    height: 0.8rem;
+    width: 1.4rem;
+  }
+
+  @media (max-width: 768px) {
+    .bs-devshop__expandable-faq__heading {
+      font-size: 4.5rem;
+    }
+
+    .bs-devshop__expandable-faq__button {
+      font-size: 1.6rem;
+      padding: 1rem 2rem;
+    }
+
+    .bs-devshop__expandable-faq__summary-div {
+      padding: 2.5rem 0;
+    }
+
+    .bs-devshop__expandable-faq__row-title {
+      font-size: 2.4rem;
+      line-height: 2.8rem;
+    }
+
+    .bs-devshop__expandable-faq__row-content {
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+    }
+  }
+
+  @media (max-width: 350px) {
+    .bs-devshop__expandable-faq__heading__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .bs-devshop__expandable-faq__button-wrapper {
+      margin-top: 2.5rem;
+    }
+  }
+{% endstylesheet %}

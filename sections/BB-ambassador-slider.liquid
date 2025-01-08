@@ -1,0 +1,464 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+      "slidesPerView": 4,
+      "autoAdjustSlidesPerView": true,
+      "arrows": false,
+      "selector": ".ambassador-slide",
+      "spacing": 40,
+      "loop": true,
+      {% comment %} "dotsContainer": ".brands-featured__container .slider-dots", {% endcomment %}
+      "responsive": [
+        {
+          "breakpoint": "864px",
+          "settings": {
+            "slidesPerView": 1.4,
+            "spacing": 16
+          }
+        }
+      ]
+    }
+{% endcapture %}
+
+<div class="brands-featured__container-outer" style="background: #000;">
+<div class="brands-featured__header" style="padding: 20px 0;">
+    {% if ss.title != blank %}
+        <h2 class='liquid-title' style="color: #fff;">{{ ss.title }}</h2>
+    {%- endif -%}
+</div>
+<div class="brands-featured__container ambassadors" style="position: relative; overflow: hidden">
+    {% comment %} <ul class="slider-dots ambassador-title__container">
+        {%- for block in section.blocks -%}
+        {% assign bs = block.settings %}
+
+            <li class="product-image-thumbs__item liquid-title ambassador-title{%  if forloop.first %} ambassador-title__underline{% endif %}" data-dot="{{ forloop.index0 }}">
+                {{ bs.title }}
+            </li>
+        {% endfor %}
+    </ul> {% endcomment %}
+    <div class="brands-featured__wrapper brands-featured__wrapper-slider" data-keen-slider='{{ slider_settings }}'>
+        {% for block in section.blocks %}
+        {% assign bs = block.settings %}
+            <a href="{{ bs.link }}" class="ambassador-slide">
+                <p class="pillar-color" style="display: none;">{{ bs.subtitle | remove: "PILLAR" }}</p>
+                {% if bs.image != blank %}
+                    {% render 'image-element', image: bs.image, image_mobile: ss.image_mobile, size: 'master', extra_class: 'object-fit--cover ambassador-cover'%}
+                {%- endif -%}
+
+                {% if bs.title != blank %}
+                    <div class="ambassador-info">
+                        <div class="ambassador-subtext">
+                            <p style='color: #fff; font-size: 16px; margin-bottom: 10px;'>{{ bs.subtitle }}</p>
+                            <h3 class='liquid-title' style="color: #fff; display: flex; align-items: center;"><span>{{ bs.title }}</span>{% include 'icon-chevron' %}</h3>
+                            <button class="btn liquid-button">Shop Collection</button>
+                        </div>
+                    </div>
+                    <div class="ambassador-product__container">
+                    <div class="ambassador-product">
+                        {% render "image-element", image: bs.product1.featured_image, image_mobile: blank, size: "400x", alt: bs.product1.title, show_placeholder: true, extra_class: "object-fit--contain" %}
+                        <div class="ambassador-product__product">
+                        <p class="ambassador-product__vendor">{{ bs.product1.vendor }}</p>
+                        <p class="ambassador-product__title">{{ bs.product1.title }}</p>
+                        <p class="ambassador-product__title">{{ bs.product1.price | money }}</p>
+                        </div>
+                    </div>
+                    <div class="ambassador-product">
+                        {% render "image-element", image: bs.product2.featured_image, image_mobile: blank, size: "400x", alt: bs.product2.title, show_placeholder: true, extra_class: "object-fit--contain" %}
+                        <div class="ambassador-product__product">
+                        <p class="ambassador-product__vendor">{{ bs.product2.vendor }}</p>
+                        <p class="ambassador-product__title">{{ bs.product2.title }}</p>
+                        <p class="ambassador-product__title">{{ bs.product2.price | money }}</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="ambassador-info-new" style="display: none;">
+                        <h3 class='liquid-title' style="color: #fff; display: flex; align-items: center;"><span>{{ bs.title }}</span>{% include 'icon-chevron' %}</h3>
+                        <button class="btn liquid-button ambassador-product__button" style="background-color: #fff; color: #000; border-color: #fff; margin-top: 20px; width: fit-content;height: fit-content; display: inherit;">Shop Collection</button>
+                    </div>                  
+                    <button class="btn liquid-button ambassador-product__button" style="background-color: #fff; color: #000; border-color: #fff; margin-top: 20px; width: fit-content;">Shop Collection</button>
+                {%- endif -%}
+            </a>
+        {% endfor %}
+    </div>
+    <div style="max-width: 932px; padding: 0 16px; margin: 0 20px; margin: 0 auto;">
+        <p style="color: #fff; text-align: center;" class="liquid-subtitle">{{ ss.subtitle |strip_html|escape }}</p>
+    </div>
+</div>
+</div>
+{% style %}
+   .brands-featured__container.ambassadors {
+     padding: 0 40px 40px;
+   }
+   .brands-featured__container .keen-slider .keen-nav {
+    padding: 0 10px !important;
+   }
+    .slider-dots {
+        display: none;
+    }
+    .ambassador-product__container, .ambassador-product__button {
+        display: none;
+    }
+    #shopify-section-{{ section.id }}.brands-featured .brands-featured__container-outer {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+    .ambassador-cover {
+        padding-bottom: 100%;
+    }
+    .ambassador-title__container {
+        position: absolute;
+        z-index: 2;
+        width: 90%;
+        top: 20%;
+        left: 0;
+        right: 0;
+        transform: translate(0%, -20%);
+        margin: 0 auto;
+        padding-left: 36px;
+    }
+    .ambassador-info {
+        text-align: left;
+        margin-top: 20px;
+        position: absolute;
+        bottom: 5%;
+        left: 5%;
+        width: 156px;
+        margin: 0 auto;
+        display: flex;
+        align-items: end;
+    }
+
+    .ambassador-product {
+        width: 30%;
+        margin-left: 20px;
+        height: 160px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 4px;
+        display: flex;
+    }
+    .ambassador-product__vendor {
+        font-size: 28px !important;
+    }
+    .ambassador-product__title {
+        font-size: 20px !important;
+        padding-top: 10px !important;
+    }
+    .ambassador-title {
+        color: #fff;
+        display: block;
+        line-height: 1;
+        text-align: left;
+        font-size: 40px;
+        width: fit-content;
+        margin-bottom: 20px;
+    }
+    .ambassador-subtext svg {
+        display: none;
+    }
+    .ambassador-subtext .liquid-title {
+        text-align: left;
+        font-size: 32px;
+    }
+    .ambassador-subtext .liquid-button {
+        background-color: #fff;
+        color: #000;
+        border-color: #fff;
+        margin-top: 20px;
+    }
+    .ambassador-subtext .liquid-button:hover {
+        background-color: #000;
+        color: #fff;
+        border-color: #000;
+    }
+    .ambassador-title__underline {
+        border-bottom: 2px solid #fff;
+    }
+    .ambassador-product .image-element-wrapper {
+        --aspect-desktop: 0% !important;
+        --aspect-tablet: 0% !important;
+        padding-top: 120px;
+        width: 120px;
+    }
+    .ambassador-product__product {
+        padding-left: 20px;
+        display: flex;
+        justify-content: end;
+        flex-direction: column;
+    }
+    @media screen and (max-width: 834px) {
+        #shopify-section-{{ section.id }}.brands-featured .brands-featured__container-outer {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+        .ambassador-product__container {
+            display: flex;
+            flex-grow: 1;
+            margin-top: 20px;
+        }
+        .brands-featured__container.ambassadors {
+            padding: 0 4px;
+        }
+        .ambassador-product__button {
+            display: inherit;
+        }
+        .ambassador-slide {
+            display: flex;
+            flex-direction: column;
+        }
+        .brands-featured__container .keen-slider .keen-nav {
+            padding: 0 !important;
+        }
+        .ambassador-info {
+            padding-left: 0;
+            flex-wrap: wrap;
+            top: 60vw;
+            width: 90%;
+            bottom: inherit;
+        }
+        .ambassador-cover {
+            padding-bottom: 150%;
+        }
+        .ambassador-product {
+            height: 99%;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 1%;
+            padding: 10px;
+            width: 48%;
+        }
+        .ambassador-product .image-element-wrapper {
+            padding-top: 100%;
+            width: 100%;
+        }
+        .ambassador-title__container {
+            transform: translate(0%, 0%);
+            top: 20px;
+            padding-left: 0;
+        }
+        .ambassador-product__product {
+            padding: 0;
+        }
+        .ambassador-product__vendor {
+            font-size: 18px !important;
+        }
+        .ambassador-product__title {
+            font-size: 12px !important;
+            padding-top: 4px !important;
+            line-height: 1.2 !important;
+        }
+        .brands-featured__header .liquid-title {
+            font-size: 20px;
+            padding-left: 20px;
+        }
+        .ambassador-title {
+            font-size: 40px !important;
+            padding-left: 0 !important;
+            margin-left: 20px;
+        }
+        .ambassador-subtext .liquid-title {
+            font-size: 48px;
+        }
+        .ambassador-subtext {
+            width: 100%;
+        }
+        .ambassador-subtext h3 {
+            font-size: 48px;
+        }
+        .ambassador-subtext h3 {
+            font-size: 48px;
+        }
+        .ambassador-subtext svg {
+            transform: rotate(-90deg);
+            display: inherit;
+            width: 24px;
+            height: 24px;
+            fill: #fff;
+        }
+        .ambassador-subtext svg path {
+            fill: #fff;
+        }
+        .ambassador-subtext .liquid-button {
+            display: none;
+        }
+    }
+.pillar-color {
+    display: inherit !important;
+}
+.ambassador-info-new { 
+    display: flex !important;
+}
+.ambassador-info, .ambassador-slide>.ambassador-product__button, .ambassador-product__container {
+    display: none !important;
+}
+
+.pillar-color {
+    border-radius: 62px;
+    border: 1px solid #000;
+    color: #fff;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 15px;
+    width: fit-content;
+    padding: 2px 20px;
+    margin-bottom: 20px;
+    letter-spacing: -0.25px;
+}
+.ambassador-slide:nth-child(1) .pillar-color {
+    background: linear-gradient(177deg, #BF7D43 14.38%, #F9D685 108.11%);
+}
+.ambassador-slide:nth-child(2) .pillar-color {
+    background: linear-gradient(178deg, #2A735D 3.93%, #8E8E76 101.5%);
+}
+.ambassador-slide:nth-child(3) .pillar-color {
+    background: linear-gradient(190deg, #D25E2B -4.17%, #C38F91 102.9%)
+}
+.ambassador-slide:nth-child(4) .pillar-color {
+    background: linear-gradient(351deg, #577AD4 -2.16%, #486D7F 96.04%);
+}
+.ambassador-info-new {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    margin-top: 16px;
+}
+.ambassador-info-new .liquid-title {
+    font-size: 38px;
+    max-width: 200px;
+}
+@media screen and (max-width: 834px) {
+    .ambassador-cover {
+        padding-bottom: 100% !important;
+    }
+    .ambassador-info-new {
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    .ambassador-info-new .liquid-title {
+        font-size: 32px;
+        max-width: 100%;
+    }
+    .brands-featured__header .liquid-title {
+        font-size: 32px !important;
+        line-height: 42px !important;
+    }
+}  
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Ambasasador Slider",
+        "tag": "section",
+        "class": "brands-featured",
+        "max_blocks": 6,
+        "settings": [
+            {
+                "type": "header",
+                "content": "Header"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "subtitle",
+                "label": "Subtitle"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 60
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 30
+            }
+        ],
+        "blocks":[
+            {
+                "name":"Brand",
+                "type":"item",
+                "settings":[
+                    {
+                        "type":"text",
+                        "id":"title",
+                        "label":"Title"
+                    },
+                    {
+                        "type":"text",
+                        "id":"subtitle",
+                        "label":"Title"
+                    },
+                    {
+                        "type":"url",
+                        "id":"link",
+                        "label":"Link"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"image",
+                        "label":"Image"
+                    },
+                    {
+                        "type":"product",
+                        "id":"product1",
+                        "label":"Product 1"
+                    },
+                    {
+                        "type":"product",
+                        "id":"product2",
+                        "label":"Product 1"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Ambasasador Slider"
+            }
+        ]
+    }
+{% endschema %}

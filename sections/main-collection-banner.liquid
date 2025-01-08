@@ -1,0 +1,391 @@
+{% assign ss = section.settings %}
+{{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
+
+{% assign image = collection.metafields.custom.banner_image %}
+{% assign image_mobile = collection.metafields.custom.banner_image_mobile %}
+
+
+<div class="collection-hero">
+  <div class="wrapper">
+    <div class="collection-hero__box">
+      <div class="content__container content__container-new">
+          {%- if collection.title != blank and ss.hide_title != true -%}
+              <h2>{{ collection.title }}</h2>
+          {%- endif -%}
+
+          {%- if collection.description != blank -%}
+              <div class="collection__description--first">
+                  <div class='desk-descr'>
+                    {% assign paragraphs = collection.description | split: '</p>' %}
+                    {% for paragraph in paragraphs limit: 2 %}
+                      {{ paragraph | append: '</p>' }}
+                    {% endfor %}
+                  </div>
+                  <div class='mobile-descr'>
+                    {% assign paragraphs = collection.description | split: '</p>' %}
+                    {% if paragraphs.size > 0 %}
+                      {{ paragraphs.first | append: '</p>' }}
+                    {% endif %}
+                  </div>
+                  {% if paragraphs.size > 2 %}
+                  <span
+                      class="read-more desk-descr"
+                      data-class-change='[
+                      {
+                          "target": ".collection__description--last, .collection__description--first",
+                          "method": "add",
+                          "class": "show",
+                          "on": "click"
+                      }
+                  ]'>Read More</span>
+                  <span
+                      class="read-more mobile-descr"
+                      data-class-change='[
+                      {
+                          "target": ".collection__description--last, .collection__description--first",
+                          "method": "add",
+                          "class": "show",
+                          "on": "click"
+                      }
+                  ]'>Read More</span>
+                  {% endif %}
+              </div>
+              <div class="collection__description--last">
+                  {{ collection.description }}
+                  <div class="collection-metafields">
+                      <div style="display: flex;">
+                          {% if collection.metafields.custom.subcollection1 != blank -%}
+                              {%  assign image = collection.metafields.custom.subcollection1 %}
+                              {% render 'image-element', image: image, image_mobile: image, size: '400x', extra_class: 'object-fit--cover'%}
+                          {% endif %}
+                          {% if collection.metafields.custom.subcollection1_text != blank -%}
+                              {% assign text = collection.metafields.custom.subcollection1_text.value %}
+                              {% assign text = text.children[0].children[0].value %}
+                              {% assign parts = text | split: '-' %}
+                              <div class="metafield-text" style="padding-left: 10px;">
+                                  <p style="font-weight: bold; font-size: 16px;">{{ parts[0] | strip }}</p>
+                                  <p style="color: #838383">{{ parts[1] }}</p>
+                                  <a href="{{ collection.metafields.custom.subcollection_1_url }}" class="metafield-url">
+                                      Shop Now
+                                  </a>
+                              </div>
+                          {% endif %}
+                      </div>
+                      <div style="display: flex;">
+                          {% if collection.metafields.custom.subcollection2_image != blank -%}
+                              {%  assign image = collection.metafields.custom.subcollection2_image %}
+                              {% render 'image-element', image: image, image_mobile: image, size: '400x', extra_class: 'object-fit--cover'%}
+                          {% endif %}
+                          {% if collection.metafields.custom.subcollection2_text != blank -%}
+                              {% assign text = collection.metafields.custom.subcollection2_text.value %}
+                              {% assign text = text.children[0].children[0].value %}
+                              {% assign parts = text | split: '-' %}
+                              <div class="metafield-text" style="padding-left: 10px;">
+                                  <p style="font-weight: bold; font-size: 16px;">{{ parts[0] | strip }}</p>
+                                  <p style="color: #838383">{{ parts[1] }}</p>
+                                  <a href="{{ collection.metafields.custom.subcollection2_url }}" class="metafield-url">
+                                      Shop Now
+                                  </a>
+                              </div>
+                          {% endif %}
+                      </div>
+                  </div>
+                  <span
+                      class="read-more"
+                      data-class-change='[
+                      {
+                          "target": ".collection__description--last, .collection__description--first",
+                          "method": "remove",
+                          "class": "show",
+                          "on": "click"
+                      }
+                  ]'>Read Less</span>
+              </div>
+          {%- endif -%}
+      </div>
+      <div class="content__container content__container-new--test">
+          {%- if collection.title != blank and ss.hide_title != true -%}
+            <h2>{{ collection.title }}</h2>
+          {%- endif -%}
+
+          {%- if collection.description != blank -%}
+            <div class="collection__description--first">
+              <span
+                class="read-more read-more--new"
+                data-class-change='
+                  [
+                      {
+                          "target": ".collection__description--last, .collection__description--first",
+                          "method": "add",
+                          "class": "show",
+                          "on": "click"
+                      }
+                  ]
+                '
+                >Tell me more {% include 'icon-chevron' -%}
+              </span>
+            </div>
+            <div class="collection__description--last">
+              {{ collection.description }}
+              <div class="collection-metafields">
+                <div style="display: flex;">
+                  {% if collection.metafields.custom.subcollection1 != blank -%}
+                    {% assign image = collection.metafields.custom.subcollection1 %}
+                    {% render 'image-element',
+                      image: image,
+                      image_mobile: image,
+                      size: '400x',
+                      extra_class: 'object-fit--cover'
+                    %}
+                  {% endif %}
+                  {% if collection.metafields.custom.subcollection1_text != blank -%}
+                    {% assign text = collection.metafields.custom.subcollection1_text.value %}
+                    {% assign text = text.children[0].children[0].value %}
+                    {% assign parts = text | split: '-' %}
+                    <div class="metafield-text" style="padding-left: 10px;">
+                      <p style="font-weight: bold; font-size: 16px;">{{ parts[0] | strip }}</p>
+                      <p style="color: #838383">{{ parts[1] }}</p>
+                      <a href="{{ collection.metafields.custom.subcollection_1_url }}" class="metafield-url"> Shop Now </a>
+                    </div>
+                  {% endif %}
+                </div>
+                <div style="display: flex;">
+                  {% if collection.metafields.custom.subcollection2_image != blank -%}
+                    {% assign image = collection.metafields.custom.subcollection2_image %}
+                    {% render 'image-element',
+                      image: image,
+                      image_mobile: image,
+                      size: '400x',
+                      extra_class: 'object-fit--cover'
+                    %}
+                  {% endif %}
+                  {% if collection.metafields.custom.subcollection2_text != blank -%}
+                    {% assign text = collection.metafields.custom.subcollection2_text.value %}
+                    {% assign text = text.children[0].children[0].value %}
+                    {% assign parts = text | split: '-' %}
+                    <div class="metafield-text" style="padding-left: 10px;">
+                      <p style="font-weight: bold; font-size: 16px;">{{ parts[0] | strip }}</p>
+                      <p style="color: #838383">{{ parts[1] }}</p>
+                      <a href="{{ collection.metafields.custom.subcollection2_url }}" class="metafield-url"> Shop Now </a>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              <span
+                class="read-more read-more--new tell-me-less"
+                data-class-change='
+                  [
+                      {
+                          "target": ".collection__description--last, .collection__description--first",
+                          "method": "remove",
+                          "class": "show",
+                          "on": "click"
+                      }
+                  ]
+                '
+                >Tell me less {% include 'icon-chevron' -%}
+              </span>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <style>
+          .content__container-new--test {
+            display: none;
+          }
+        </style>
+
+      {% render 'trust-pilot', layout: 'collection'%}
+    </div>
+  </div>
+</div>
+
+{% unless template.suffix == 'sale' %}
+ <style>
+    .findify-product-sticker {
+      display: none;
+    }
+  </style>
+{% endunless %}
+<style>
+.content__container-new {
+  display: inherit;
+}
+
+.content__container-old, .collection-hero__inner {
+  display: none;
+}
+.content__container h2 {
+  letter-spacing: -1px;
+  font-size: 40px;
+  font-family: 'Avenir';
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+.content__container p {
+  color: #000;
+}
+.read-more {
+    margin-top: 10px;
+    font-weight: 400;
+    border-bottom: 1px solid #000;
+    line-height: 1;
+    width: fit-content;
+    cursor: pointer;
+}
+.collection__description--first.show {
+    display: none;
+}
+.collection__description--last {
+    display: none;
+}
+.collection__description--last.show {
+    display: block;
+}
+.collection__description--last .image-element-wrapper {
+    padding-bottom: 150px;
+    width: 300px;
+}
+.metafield-url {
+    background-color: #f7f7f7;
+    color: #162411;
+    border: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    padding: 10px 26px;
+    line-height: 1;
+    transition: ease 0.3s;
+    border-radius: 4px;
+}
+.collection-metafields {
+  display: none;
+}
+@media (min-width: 835px) {
+    .mobile-descr {
+      display: none;
+    }
+    .collection-metafields {
+        {% comment %} display: flex; {% endcomment %}
+    }
+    .collection-metafields>div {
+        width: 50%;
+    }
+    .metafield-url {
+        width: 50%;
+    }
+}
+@media (max-width: 834px) {
+    .desk-descr {
+      display: none;
+    }
+  .collection-metafields>div {
+    margin-bottom: 20px;
+  }
+  .metafield-text {
+    width: 100%;
+  }
+  .metafield-text p {
+    margin-bottom: 0;
+  }
+}
+
+.read-more--new {
+    font-size: 17px;
+    line-height: 120%;
+    letter-spacing: -1px;
+    border-bottom: unset;
+    text-decoration: underline;
+  }
+
+  .read-more--new svg {
+    display: inline-block;
+    margin-left: 5px;
+    transform: rotate(-90deg) translateX(1px);
+    height: 6px;
+  }
+
+  .tell-me-less svg {
+    transform: rotate(-180deg) translateY(2px);
+  }
+</style>
+{% style %}
+
+.collection-hero.collection-hero-with-image .collection-hero__title {
+  color: {{ collection.metafields.custom.text_color }};
+}
+
+.collection-hero.collection-hero-with-image .collection-hero__title+.collection-hero__description * {
+  color: {{ collection.metafields.custom.text_color }};
+}
+
+{% endstyle %}
+
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+  // Array to hold keys of all functions containing "scroll"
+  var scrollHandlerKeys = [];
+
+  // Function to override any global function containing "scroll" and collect keys
+  function overrideScrollFunctions() {
+    for (var key in window) {
+      if (typeof window[key] === 'function' && key.includes('scroll')) {
+        // Override the function
+        window[key] = function() {
+          console.log("SCROLL:" + scrollHandlerKeys)
+        };
+        // Add the key to the array if not already present
+        if (!scrollHandlerKeys.includes(key)) {
+          scrollHandlerKeys.push(key);
+        }
+      }
+    }
+  }
+
+  // Run the override function periodically to catch any late-loading scripts
+  var checkInterval = setInterval(overrideScrollFunctions, 100);
+
+  // Stop checking after a certain period to avoid infinite loop
+  setTimeout(function() {
+    clearInterval(checkInterval);
+    // Log the keys of overridden functions containing "scroll"
+    console.log('Overridden scroll-related function keys:', scrollHandlerKeys);
+  }, 5000); // Adjust the timeout as necessary
+});
+
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-collection-banner.name",
+  "class": "section",
+  "settings": [
+    {
+        "type": "header",
+        "content": "Header"
+    },
+    {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
+    },
+    {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Background Image - Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "default": true,
+      "label": "Show collection description"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_title",
+      "default": false,
+      "label": "Hide title"
+    }
+  ]
+}
+{% endschema %}

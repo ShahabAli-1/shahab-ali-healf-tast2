@@ -1,0 +1,191 @@
+{% assign ss = section.settings %}
+
+<div class="higherdose-breakdown__container">
+    <div class="wrapper">
+        {% if ss.title != blank %}
+            <h2>
+                {{ ss.title }}
+            </h2>
+        {%- endif -%}
+
+        <div class="content__container">
+            <ul class="first_block">
+                {%- for block in section.blocks -%}
+                {% assign bs = block.settings %}
+
+                    <li class="content content-{{ forloop.index }}" data-class-change='[
+                                {
+                                    "target": ".second_block .content",
+                                    "method": "remove",
+                                    "class": "show",
+                                    "on": "click"
+                                },
+                                {
+                                    "target": ".second_block .content-{{ forloop.index }}",
+                                    "method": "add",
+                                    "class": "show",
+                                    "on": "click"
+                                },
+                                 {
+                                    "target": ".first_block .content",
+                                    "method": "remove",
+                                    "class": "active",
+                                    "on": "click"
+                                },
+                                {
+                                    "target": ".first_block .content-{{ forloop.index }}",
+                                    "method": "add",
+                                    "class": "active",
+                                    "on": "click"
+                                }
+                            ]'>
+                            <h5>
+                                {{ bs.title }}
+                            </h5>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div>
+                {% render 'image-element', image: ss.image, image_mobile: ss.image_mobile, size: '1000x', extra_class: 'object-fit--contain'%}                
+            </div>
+
+            <ul class="second_block">
+                {%- for block in section.blocks -%}
+                {% assign bs = block.settings %}
+
+                    <li class="content content-{{ forloop.index }}{% if forloop.index == 1 %} show{% endif %}">
+                        {% if bs.title != blank %}
+                            <h5>{{ bs.title }}</h5>
+                        {%- endif -%}
+
+                        {% if bs.content != blank %}
+                            <p>
+                                {{ bs.content }}
+                            </p>
+                        {%- endif -%}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.higherdose-breakdown {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.higherdose-breakdown {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - HigherDOSE Breakdown",
+        "tag": "section",
+        "class": "higherdose-breakdown",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Text area"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "THE BREAKDOWN"
+            },
+            {
+                "type": "header",
+                "content": "Image area"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "image_picker",
+                "id": "image_mobile",
+                "label": "Image Mobile"
+            },
+                        {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Blocks",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "content",
+                        "label": "Content"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - HigherDOSE Breakdown"
+            }
+        ]
+    }
+{% endschema %}

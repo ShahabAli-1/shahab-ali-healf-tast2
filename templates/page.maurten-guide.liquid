@@ -1,0 +1,45 @@
+{{ 'maurten.css' | asset_url | stylesheet_tag }}
+<div class="section bicarb-public">
+  <div
+    class="section-content panel first-panel"
+    data-index="1"
+  >
+    <h1 class="liquid-title">Are you purchasing the Bicarb System for an individual athlete or multiple athletes (e.g. a team)?</h1>
+    <div class="bottom-content">
+      <ul>
+        <li>
+          <label class="radio">
+            <span class="radio__label">Individual athlete</span>
+            <span class="radio__input">
+              <input type="radio" name="type" value="Single athlete" data-url="/athlete-weight.html" checked>
+              <span class="radio__control"></span>
+            </span>
+          </label>
+        </li>
+        <li>
+          <label class="radio">
+            <span class="radio__label">Multiple athletes</span>
+            <span class="radio__input">
+              <input type="radio" name="type" value="Multiple athletes" data-url="/multiple-sports.html">
+              <span class="radio__control"></span>
+            </span>
+          </label>
+        </li>
+      </ul>
+      <button class="btn btn--white continue">Continue</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('.btn.continue').addEventListener('click', function () {
+      var selectedValue = document.querySelector('input[name="type"]:checked').value;
+      if (selectedValue === 'Single athlete') {
+        window.location.href = '/pages/maurten-athlete-weight';
+      } else if (selectedValue === 'Multiple athletes') {
+        window.location.href = '/pages/maurten-athlete-sports';
+      }
+    });
+  });
+</script>

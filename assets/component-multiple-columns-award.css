@@ -1,0 +1,128 @@
+.bs-devshop__award__wrapper {
+    position: relative;
+}
+
+.bs-devshop__award__content {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bs-devshop__award__column {
+    /* aspect-ratio: 1; */
+    width: 100%;
+}
+
+.bs-devshop__award__column--box {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    border: solid 2px #000;
+    text-align: center;
+    padding: 4rem 1.6rem;
+    display: flex;
+    color: #000;
+    flex-direction: column;
+    max-height: 100%;
+}
+
+.bs-devshop__award__title {
+    flex: 1;
+    font-size: 4.2rem;
+    line-height: 4.6rem;
+    padding: 1rem 0;
+    padding-bottom: 14rem;
+}
+
+.bs-devshop__award__year,
+.bs-devshop__award__award {
+    font-size: 2.1rem;
+    line-height: 2.6rem;
+}
+
+@media (min-width: 1200px) {
+    .bs-devshop__award__column {
+        max-width: 37rem !important;
+    }    
+}
+
+@media (min-width: 750px) {
+    .bs-devshop__award__column {
+        width: 100%;
+        max-width: 30% !important;
+        min-width: auto !important;
+        transform: none !important;
+    }    
+
+    .bs-devshop__award__columns {
+        justify-content: center;
+        display: flex;
+        gap: 28px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .bs-devshop__award__column--box {
+        padding: 2.4rem 1.6rem
+    }
+
+    .bs-devshop__award__title {
+        font-size: 2.8rem;
+        line-height: 3.4rem;
+    }
+}
+
+@media (max-width: 989px) {
+    .bs-devshop__award__columns {
+        gap: 14px;
+    }
+
+    .bs-devshop__award__column--box {
+        padding: 1.6rem
+    }
+
+    .bs-devshop__award__title {
+        font-size: 2rem;
+        line-height: 2.6rem;
+    }
+
+    .bs-devshop__award__year,
+    .bs-devshop__award__award {
+        font-size: 1.6rem;
+        line-height: 2rem;
+    }
+}
+
+@media (max-width: 749px) {
+    .bs-devshop__award__columns {
+        gap: 0;
+        padding: 0;
+    }
+
+    .bs-devshop__award__banner .image-element-wrapper {
+        padding-bottom: 125%;
+    }
+
+    .bs-devshop__award__column {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 0 0 1.8rem
+    }
+
+    .bs-devshop__award__title {
+        font-size: 3rem;
+        line-height: 3.4rem;
+    }
+
+    .bs-devshop__award__column--box {
+        padding: 2.8rem 0.6rem;
+        max-width: 70%;
+        width: 100%;
+    }
+}

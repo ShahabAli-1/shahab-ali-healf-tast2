@@ -1,0 +1,35 @@
+<script>
+async function handleQuizEvent(e) {
+    console.log('Quiz event triggered');
+    console.log(e.type); // This will log whether it's 'completed' or 'accessed'
+    console.log(e.detail);
+
+    // Extract the answers from the event detail
+    const userAnswers = e.detail.answers;
+
+    // Call the testQuizLogic function with the extracted answers
+    console.log("Here are the quiz answers: " + userAnswers);
+    //testQuizLogic(userAnswers);
+
+    
+    //document.getElementById('quiz').style.display = 'none';
+    //document.getElementById('quiz_results').style.display = 'block';
+
+    // Change the URL without reloading the page
+    //window.history.pushState({ path: e.detail.quiz_results_url }, '', e.detail.quiz_results_url);
+
+}
+
+// Attach the event listener for both 'octane.quiz.completed' and 'octane.quiz.accessed'
+document.addEventListener('octane.quiz.completed', handleQuizEvent, false);
+document.addEventListener('octane.quiz.accessed', handleQuizEvent, false);
+
+// Check if the current URL contains #r=
+if (!window.location.hash.includes('#r=')) {
+    // If it does not contain #r=, redirect to the specified URL
+    window.location.href = "https://healf.com/pages/test-your-dopamine";
+}
+  
+</script>
+
+<div class="octane-ai-quiz " data-quiz-id="amsmyk2zCPaIk6mW" data-embed-type="fullpage" data-mobile-height="match_browser" data-desktop-height="match_browser"></div><script src="https://app.octaneai.com/wyes7217h6xlj0vq/quiz.js" async defer></script>

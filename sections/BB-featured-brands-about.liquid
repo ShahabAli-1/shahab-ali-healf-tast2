@@ -1,0 +1,163 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+      "enableWhen": "(max-width: 1024px)",
+      "slidesPerView": 1.3,
+      "autoAdjustSlidesPerView": false,
+      "loop": true,
+      "nav": true,
+      "dots": true,
+      "spacing": 16
+    }
+{% endcapture %}
+
+<div id="four-pillars" class="featured-brands__container wrapper{% if template.name == 'page' %} featured-brands__container-page{% endif %}" data-keen-slider='{{ slider_settings }}'>
+    {%- for block in section.blocks -%}
+        {% assign bs = block.settings %}
+            <a href="{{ bs.url }}" class="brand__card" style="position: relative; overflow: visible;">
+                {% render 'image-element', image: bs.image, image_mobile: bs.image_mobile, size: '1920x', extra_class: 'object-fit--cover'%}
+
+                {%- if bs.title != blank -%}
+                    <p class="brand__title">
+                        {{ bs.title  }}
+                    </p>
+                {%- endif -%}
+                {%- if bs.text != blank -%}
+                    <p class="brand__button">
+                        {{ bs.text | upcase }}
+                        {% include 'icon-chevron-circle' %}
+                    </p>
+                {%- endif -%}
+            {%- if bs.sub_text != blank -%}
+                <p class="brand__subtext">
+                    {{ bs.sub_text }}
+                </p>
+            {%- endif -%}
+            </a>
+    {% endfor %}
+</div>
+<div class="featured-brands__bar">&nbsp;</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.featured-brands {
+        background: #000;
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.featured-brands {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+  /* .featured-brands__container-page .brand__button {
+    bottom: 42% !important;
+  } */
+  @media screen and (max-width: 834px) {
+    .featured-brands__container-page .brand__button {
+      bottom: 22% !important;
+    }
+    .brand__subtext {
+      top: 80%;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Four Pillars About",
+        "tag": "section",
+        "class": "featured-brands",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Brand",
+                "limit": 4,
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Brand Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "text",
+                        "label": "Brand link text"
+                    },
+                    {
+                        "type": "text",
+                        "id": "sub_text",
+                        "label": "Brand sub text"
+                    },
+                    {
+                        "type": "url",
+                        "id": "url",
+                        "label": "Brand link"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Brand image"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Four Pillars About"
+            }
+        ]
+    }
+{% endschema %}

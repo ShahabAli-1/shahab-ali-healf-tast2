@@ -1,0 +1,182 @@
+.bs-devshop__bfcm-collection-carousel {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  
+  .splide__track {
+    overflow: visible;
+  }
+
+  .bs-devshop__bfcm-collection-carousel__splide-track {
+    --container-padding: calc((100vw - var(--page-width)) / 2.7);
+    /* --padding-left: max(var(--container-padding), 2rem); */
+    --padding-horizontal: calc(calc(calc(100vw - var(--page-width)) / 3) + 2rem);
+    padding-right: max(var(--padding-horizontal), 3rem) !important;
+    /* padding-left: calc((100vw - var(--max-width)) / 2); */
+  }
+  
+  .splide {
+    overflow: hidden;
+  }
+  
+  .splide__list {
+    padding: 0;
+  }
+  
+  .splide__slide {
+    margin-right: 1.4rem !important;
+    width: unset !important;
+  }
+
+  .bs-devshop__bfcm-collection-carousel-image.is-slow-zoom {
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 24px;
+    }
+    .bs-devshop__bfcm-collection-carousel-image.is-slow-zoom .image-element-wrapper {
+      transition-duration: 4s;
+      transition-property: all;
+      transition-timing-function: linear;
+    }
+    .bs-devshop__bfcm-collection-carousel-image.is-slow-zoom .image-element-wrapper:hover {
+      transform: scale(1.1);
+    }
+  
+  .bs-devshop__bfcm-collection-carousel__collection .image-element-wrapper {
+    border-radius: 24px;
+  }
+  
+  
+  .bs-devshop__bfcm-collection-carousel-image .image-element-wrapper {
+    min-height: 37rem;
+    min-width: 24rem;
+  }
+  
+  .bs-devshop__bfcm-collection-carousel-image .image-element-wrapper picture img {
+    border-radius: 24px;
+  }
+  
+  .bs-devshop__bfcm-collection-carousel-title {
+    position: absolute;
+    top: 2.75rem;
+    left: 1.7rem;
+    right: 1rem;
+    color: #fff;
+    margin: 0;
+    font-size: 3.5rem !important;
+    font-weight: 500;
+    font-weight: 400;
+    line-height: 31px !important;
+    letter-spacing: -2px;
+    z-index: 1;
+  }
+
+  .bs-devshop__bfcm-collection-carousel__collection-link {
+      font-weight: 500;
+      position: absolute;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1;
+  }
+
+  .bs-devshop__bfcm-collection-carousel__collection-link svg {
+    width: 5rem;
+    height: 5rem;
+  }
+  
+  .bs-devshop__bfcm-collection-carousel__arrows {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 10;
+  }
+  
+  .splide__arrow.splide__arrow--next,
+  .splide__arrow.splide__arrow--prev {
+    background: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 3px 6px rgba(22, 36, 17, 0.0431373);
+    z-index: 10;
+  }
+
+  .splide__arrow--prev {
+    left: 5rem;
+  }
+
+  .splide__arrow--next {
+    right: 5rem;
+  }
+  
+  @media screen and (max-width: 834px) {
+    .bs-devshop__bfcm-collection-carousel {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .bs-devshop__bfcm-collection-carousel__splide-track {
+      /* padding-left: 20px; */
+    }
+  
+    .splide__arrows {
+      display: none;
+    }
+  
+    .splide__slide {
+      margin-right: 1.4rem !important;
+      width: unset !important;
+    }
+  
+    .bs-devshop__bfcm-collection-carousel-image .image-element-wrapper {
+      min-height: 28.5rem;
+      min-width: 18rem;
+      width: 100%;
+    }
+  
+    .bs-devshop__bfcm-collection-carousel-title {
+        top: 1.6rem !important;
+        left: 1.6rem !important;
+        font-size: 2.5rem !important;
+        font-weight: 40 !important;
+        line-height: 2.4rem !important;
+        letter-spacing: -1.57px !important;
+    }
+  }
+  
+  @media screen and (min-width: 835px) {
+    .splide__track {
+      overflow: hidden;
+    }
+  }
+
+@media screen and (min-width: 835px) and (max-width: 1440px) {
+  .bs-devshop__bfcm-collection-carousel__splide-track {
+    /* padding-left: 40px; */
+    }
+}
+
+@media screen and (min-width: 1441px) {
+  .bs-devshop__bfcm-collection-carousel__splide-track {
+    --max-width: 1390px;
+    }
+}
+
+@media screen and (min-width: 1921px) {
+  .bs-devshop__bfcm-collection-carousel__splide-track {
+    --max-width: 1610px;
+    }
+}
+  
+
+  

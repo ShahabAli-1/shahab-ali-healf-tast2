@@ -1,0 +1,600 @@
+<nav class="desktop-only new-desktop-header ab__test-hide" data-test-name="floating-menu">
+    <ul>
+        {%- for link in ss.menu.links -%}
+            {%- if link.links == blank -%}
+                <li>
+                    <a class="main_link" href="{{ link.url }}">
+                        <span>
+                        {{ link.title | escape }}
+                        </span>
+                    </a>
+                </li>
+            {%- else -%}
+                <li class="mega-menu-links {{ link.title }}" id="link-{{ forloop.index }}">
+                    <a class="main_link" href="{{ link.url }}"
+                    data-class-change='[
+                          {
+                              "target": "#link-{{ forloop.index }} .mega-menu",
+                              "class": "open",
+                              "method": "add",
+                              "on": "mouseenter",
+                              "preventDefault": true
+                          },
+                          {
+                              "target": "#link-{{ forloop.index }} .mega-menu",
+                              "class": "open",
+                              "method": "remove",
+                              "on": "mouseleave",
+                              "preventDefault": true
+                          },
+                          {
+                              "target": "#link-{{ forloop.index }}",
+                              "class": "current-mega",
+                              "method": "add",
+                              "on": "mouseenter",
+                              "preventDefault": true
+                          },
+                          {
+                              "target": "#link-{{ forloop.index }}",
+                              "class": "current-mega",
+                              "method": "remove",
+                              "on": "mouseleave",
+                              "preventDefault": true
+                          }
+                      ]
+                    '>
+                        <span>
+                        {{ link.title | escape }}
+                        </span>
+                    </a>
+                    <div class="mega-menu mega-menu-{{ link.title | handleize }}" data-class-change='[
+                          {
+                              "target": "#link-{{ forloop.index }} .mega-menu",
+                              "class": "open",
+                              "method": "add",
+                              "on": "mouseenter",
+                              "preventDefault": true
+                          },
+                          {
+                              "target": "#link-{{ forloop.index }} .mega-menu",
+                              "class": "open",
+                              "method": "remove",
+                              "on": "mouseleave",
+                              "preventDefault": true
+                          },
+                          {
+                              "target": "#link-{{ forloop.index }}",
+                              "class": "current-mega",
+                              "method": "add",
+                              "on": "mouseenter",
+                              "preventDefault": true
+                          },
+                          {
+                              "target": "#link-{{ forloop.index }}",
+                              "class": "current-mega",
+                              "method": "remove",
+                              "on": "mouseleave",
+                              "preventDefault": true
+                          }
+                      ]
+                    '>
+                        <div class="mega-menu-inner">
+                            {%- for childlink in link.links -%}
+                              {% unless childlink.title == 'Category' %}
+                                <div class="childlink__container childlink__container--{{ childlink.title }}{% if forloop.first %} childlink__container-border{% endif %}">
+                                    <h3>
+                                        {{ childlink.title | escape }}
+                                    </h3>
+
+                                    {%- if childlink.links != blank -%}
+                                      <ul>
+                                        {%- for grandchildlink in childlink.links -%}
+                                          {% unless grandchildlink.title contains "Take the Healf Quiz" or grandchildlink.title contains "About us" %}
+                                          {%- assign stripped_url = grandchildlink.url | replace: "https://healf.com", "" -%}
+                                          <li>
+                                              <a href="{{ stripped_url }}" class="rte" {% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                                  {{ grandchildlink.title | escape }}
+                                              </a>
+                                          </li>
+                                          {% endunless %}
+                                        {%  endfor  %}
+                                        {%if childlink.title == 'Brands' %}
+                                          <li>
+                                            <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/pages/brands" class="rte" {% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                              View all brands
+                                            </a>
+                                          </li>
+                                        {% endif %}
+                                      </ul>
+                                    {%  endif %}
+                                </div>
+                              {% endunless %}
+                            {%  endfor  %}
+                        </div>
+                        <div class="mega-menu-general mega-menu-general-new">
+                          {% if link.title == "Black Friday" %}
+                            <a class="btn" style="background-color:#000; color: #fff;" href="{{ link.url }}">Shop all {{ link.title }}</a>
+                          {% else %}
+                            <a class="btn" href="{{ link.url }}">Shop all {{ link.title | upcase }}</a>
+                          {% endif %}
+                          <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/new-arrivals">Shop latest arrivals</a>
+                          <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/best-sellers">Shop best sellers</a>
+                        </div>
+                        {% unless link.title == "Black Friday" %}
+                        <div class="mega-menu__trending">
+                          {%- for block in section.blocks -%}
+                            {% assign bs = block.settings %}
+
+                            {%- if block.type == 'list' and bs.show_under == link.title %}
+                              <h3>Trending</h3>
+                              {% assign input = bs.trending %}
+                              {% assign items = input | split: ',' %}
+
+                              {% for item in items %}
+                                {% assign formatted_item = item | replace: '-', ' ' | replace: '1', '' | capitalize %}
+                                  {% if formatted_item == 'Whoop' %}
+                                    {% assign formatted_item = 'WHOOP' %}
+                                  {% elsif formatted_item == 'Lmnt electrolytes' %}
+                                    {% assign formatted_item = 'LMNT Electrolytes' %}
+                                  {% elsif formatted_item == 'Vitamin d' %}
+                                    {% assign formatted_item = 'Vitamin D' %}
+                                  {% elsif formatted_item == 'Andrew huberman approved' %}
+                                    {% assign formatted_item = 'Andrew Huberman approved' %}
+                                  {% elsif formatted_item == 'Lions mane' %}
+                                    {% assign formatted_item = "Lion's mane" %}
+                                  {% endif %}
+                                <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/{{item}}" class="btn liquid-button">{{ formatted_item }}</a>
+                              {% endfor %}
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </div>
+                        <div class="mega-menu-categories">
+                            {%- for childlink in link.links -%}
+                              {% if childlink.title == 'Category' %}
+                                <h3>Collections</h3>
+                                    {%- if childlink.links != blank -%}
+                                        <div style="display: flex; overflow: scroll;">
+                                        {%- for grandchildlink in childlink.links -%}
+                                          {% unless grandchildlink.title == "Shop All" or grandchildlink.title == "Healf Journals" %}
+                                            {%- assign stripped_url = grandchildlink.url | replace: "https://healf.com", "" -%}
+                                            {%- assign collection_handle = stripped_url | split: '/' | last -%}
+                                            {%- assign collection_image = collections[collection_handle] -%}
+                                            <a class="image__area" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}{{ stripped_url }}">
+                                            {% render 'image-element', image: collection_image.image, image_mobile: bs.image_mobile, size: '1600x', extra_class: 'object-fit--cover'  %}
+                                            <p>{{ collection_image.title }}</p>
+                                            </a>
+                                          {% endunless %}
+                                        {%- endfor -%}
+                                        </div>
+                                    {% endif %}
+                              {% endif %}
+                            {%- endfor -%}
+                        </div>
+                        <div class="mega-menu-blogs">
+                          <h3>Latest journals</h3>
+
+                          <div style="display: flex; overflow: scroll;">
+                            {% assign recent_articles = ss.blog.articles %}
+                            {% assign i = 0 %}
+                            {%  assign tag = link.title | upcase %}
+                            {% for article in recent_articles %}
+                              {% if i < 6 and article.tags contains tag %}
+                                <div class="blog__post">
+                                    {% render 'BB-article-card', blog: ss.blog, article: article, media_aspect_ratio: 1.66, show_button: true %}
+                                </div>
+                                {% assign i = i | plus: 1 %}
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                        </div>
+                        {% endunless %}
+                        <div class="mega-menu-general">
+                          <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/pages/quiz">Find your perfect products</a>
+                          <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/pages/about-us">About us</a>
+                          <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/blogs/health-journal">Explore all journals</a>
+                        </div>
+                    </div>
+                </li>
+            {%- endif -%}
+        {% endfor %}
+    </ul>
+</nav>
+<nav class="desktop-only new-desktop-header ab__test" data-test-name="floating-menu">
+  <ul>
+      {%- for link in ss.menu.links -%}
+          {%- if link.links == blank -%}
+              <li>
+                  <a class="main_link" href="{{ link.url }}">
+                      <span>
+                      {{ link.title | escape }}
+                      </span>
+                  </a>
+              </li>
+          {%- else -%}
+              <li class="mega-menu-links" id="link-{{ forloop.index }}">
+                  <a class="main_link" href="{{ link.url }}"
+                  data-class-change='[
+                        {
+                            "target": "#link-{{ forloop.index }} .mega-menu",
+                            "class": "open",
+                            "method": "add",
+                            "on": "mouseenter",
+                            "preventDefault": true
+                        },
+                        {
+                            "target": "#link-{{ forloop.index }} .mega-menu",
+                            "class": "open",
+                            "method": "remove",
+                            "on": "mouseleave",
+                            "preventDefault": true
+                        },
+                        {
+                            "target": "#link-{{ forloop.index }}",
+                            "class": "current-mega",
+                            "method": "add",
+                            "on": "mouseenter",
+                            "preventDefault": true
+                        },
+                        {
+                            "target": "#link-{{ forloop.index }}",
+                            "class": "current-mega",
+                            "method": "remove",
+                            "on": "mouseleave",
+                            "preventDefault": true
+                        }
+                    ]
+                  '>
+                      <span>
+                      {{ link.title | escape }}
+                      </span>
+                  </a>
+                    <div class="bs-devshop__mega-menu mega-menu mega-menu-{{ link.title | handleize }}" data-class-change='[
+                          {
+                            "target": "#link-{{ forloop.index }} .mega-menu",
+                            "class": "open",
+                            "method": "add",
+                            "on": "mouseenter",
+                            "preventDefault": true
+                        },
+                        {
+                            "target": "#link-{{ forloop.index }} .mega-menu",
+                            "class": "open",
+                            "method": "remove",
+                            "on": "mouseleave",
+                            "preventDefault": true
+                        },
+                        {
+                            "target": "#link-{{ forloop.index }}",
+                            "class": "current-mega",
+                            "method": "add",
+                            "on": "mouseenter",
+                            "preventDefault": true
+                        },
+                        {
+                            "target": "#link-{{ forloop.index }}",
+                            "class": "current-mega",
+                            "method": "remove",
+                            "on": "mouseleave",
+                            "preventDefault": true
+                        }
+                    ]
+                  '>
+                  <div class="mega-menu-container">
+                      <div class="mega-menu-inner">
+                          {%- for childlink in link.links -%}
+                            {% unless childlink.title == 'Category' %}
+                              <div class="childlink__container childlink__container--{{ childlink.title }}{% if forloop.first %} childlink__container-border{% endif %}">
+                                  <h3>
+                                      {{ childlink.title | escape }}
+                                  </h3>
+
+                                  {%- if childlink.links != blank -%}
+                                    <ul>
+                                      {%- for grandchildlink in childlink.links -%}
+                                        {% unless grandchildlink.title contains "Take the Healf Quiz" or grandchildlink.title contains "About us" %}
+                                        {%- assign stripped_url = grandchildlink.url | replace: "https://healf.com", "" -%}
+                                        <li>
+                                            <a href="{{ stripped_url }}" class="rte" {% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                                {{ grandchildlink.title | escape }}
+                                            </a>
+                                        </li>
+                                        {% endunless %}
+                                      {%  endfor  %}
+                                      {%if childlink.title == 'Brands' %}
+                                        <li>
+                                          <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}pages/brands" class="rte" {% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                            View all brands
+                                          </a>
+                                        </li>
+                                      {% endif %}
+                                    </ul>
+                                  {%  endif %}
+                              </div>
+                            {% endunless %}
+                          {%  endfor  %}
+                      </div>
+                      <div class="mega-menu-general mega-menu-general-new">
+                        <a class="btn" href="{{ link.url }}">Shop all {{ link.title | upcase }}</a>
+                        <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/new-arrivals">Shop latest arrivals</a>
+                        <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/best-sellers">Shop best sellers</a>
+                      </div>
+                      <div class="mega-menu__trending">
+                        {%- for block in section.blocks -%}
+                          {% assign bs = block.settings %}
+
+                          {%- if block.type == 'list' and bs.show_under == link.title %}
+                            <h3>Trending</h3>
+                            {% assign input = bs.trending %}
+                            {% assign items = input | split: ',' %}
+
+                            {% for item in items %}
+                              {% assign formatted_item = item | replace: '-', ' ' | replace: '1', '' | capitalize %}
+                                {% if formatted_item == 'Whoop' %}
+                                  {% assign formatted_item = 'WHOOP' %}
+                                {% elsif formatted_item == 'Lmnt electrolytes' %}
+                                  {% assign formatted_item = 'LMNT Electrolytes' %}
+                                {% elsif formatted_item == 'Vitamin d' %}
+                                  {% assign formatted_item = 'Vitamin D' %}
+                                {% elsif formatted_item == 'Andrew huberman approved' %}
+                                  {% assign formatted_item = 'Andrew Huberman approved' %}
+                                {% elsif formatted_item == 'Lions mane' %}
+                                  {% assign formatted_item = "Lion's mane" %}
+                                {% endif %}
+                              <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/{{item}}" class="btn liquid-button">{{ formatted_item }}</a>
+                            {% endfor %}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </div>
+                      <div class="mega-menu-categories">
+                          {%- for childlink in link.links -%}
+                            {% if childlink.title == 'Category' %}
+                              <h3>Collections</h3>
+                                  {%- if childlink.links != blank -%}
+                                      <div style="display: flex; overflow: scroll;">
+                                      {%- for grandchildlink in childlink.links -%}
+                                        {% unless grandchildlink.title == "Shop All" or grandchildlink.title == "Healf Journals" %}
+                                          {%- assign stripped_url = grandchildlink.url | replace: "https://healf.com", "" -%}
+                                          {%- assign collection_handle = stripped_url | split: '/' | last -%}
+                                          {%- assign collection_image = collections[collection_handle] -%}
+                                          <a class="image__area" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}{{ stripped_url }}">
+                                          {% render 'image-element', image: collection_image.image, image_mobile: bs.image_mobile, size: '1600x', extra_class: 'object-fit--cover'  %}
+                                          <p>{{ collection_image.title }}</p>
+                                          </a>
+                                        {% endunless %}
+                                      {%- endfor -%}
+                                      </div>
+                                  {% endif %}
+                            {% endif %}
+                          {%- endfor -%}
+                      </div>
+                      <div class="mega-menu-blogs">
+                        <h3>Latest journals</h3>
+
+                        <div style="display: flex; overflow: scroll;">
+                          {% assign recent_articles = ss.blog.articles %}
+                          {% assign i = 0 %}
+                          {%  assign tag = link.title | upcase %}
+                          {% for article in recent_articles %}
+                            {% if i < 6 and article.tags contains tag %}
+                              <div class="blog__post">
+                                  {% render 'BB-article-card', blog: ss.blog, article: article, media_aspect_ratio: 1.66, show_button: true %}
+                              </div>
+                              {% assign i = i | plus: 1 %}
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                      </div>
+                      <div class="mega-menu-general">
+                        <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/pages/quiz">Find your perfect products</a>
+                        <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/pages/about-us">About us</a>
+                        <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/blogs/health-journal">Explore all journals</a>
+                      </div>
+                    </div>
+                  </div>
+              </li>
+          {%- endif -%}
+      {% endfor %}
+  </ul>
+</nav>
+
+
+<style>
+  .bs-devshop__mega-menu {
+    margin-left: 2%;
+    border-radius: 15px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: transparent !important;
+  }
+  .bs-devshop__mega-menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .new-desktop-header .mega-menu h3 {
+    font-size: 26px;
+    letter-spacing: -0.5px;
+  }
+
+  .mega-menu-container {
+    padding-top: 2%;
+    background-color: #fff !important;
+    border-radius: 15px;
+  }
+
+  .new-desktop-header .mega-menu__trending {
+    padding: 0 40px 30px;
+  }
+  .new-desktop-header .mega-menu__trending h3, .new-desktop-header .mega-menu-categories h3, .new-desktop-header .mega-menu-blogs h3 {
+    padding-bottom: 10px;
+  }
+  .new-desktop-header .mega-menu-general {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: start;
+    padding: 10px 40px;
+    width: 50%;
+    min-width: 1000px;
+    background-color: #fff;
+  }
+  .new-desktop-header .mega-menu-general-new {
+    position: relative;
+    bottom: auto;
+    margin: 20px 0;
+  }
+  .new-desktop-header .mega-menu-general .btn {
+    background-color: #f6f6f6;
+    border-color: #f6f6f6;
+    color: #000;
+    margin-right: 20px;
+  }
+  .new-desktop-header .mega-menu-general .btn:hover {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+  }
+  .new-desktop-header .childlink__container:not(.childlink__container-border) {
+    margin-left: 20px;
+  }
+  .new-desktop-header .childlink__container-border {
+    margin-right: 20px;
+    position: relative;
+  }
+  .new-desktop-header .mega-menu-links .main_link {
+    position: relative;
+  }
+  .new-desktop-header .childlink__container-border .main_link:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(100% - 20px);
+    width: 0;
+    border-right: 1px solid #ccc;
+  }
+  .new-desktop-header .childlink__container li a{
+    color: #838383 !important;
+  }
+  .new-desktop-header .childlink__container li a:hover {
+    font-weight: bold;
+    color: #000 !important;
+  }
+  .new-desktop-header .current-mega .main_link::after {
+    content: "";
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+  }
+  .new-desktop-header .mega-menu-links:nth-of-type(1) .main_link::after {
+    background: linear-gradient(to right, #2A735D calc(100% - 30px), white calc(100% - 30px));
+  }
+  .new-desktop-header .mega-menu-links:nth-of-type(2) .main_link::after {
+    background: linear-gradient(to right, #577AD4 calc(100% - 30px), white calc(100% - 30px));
+  }
+  .new-desktop-header .mega-menu-links:nth-of-type(3) .main_link::after {
+    background: linear-gradient(to right, #F9D685 calc(100% - 30px), white calc(100% - 30px));
+  }
+  .new-desktop-header .mega-menu-links:nth-of-type(4) .main_link::after {
+    background: linear-gradient(to right, #D25E2B calc(100% - 30px), white calc(100% - 30px));
+  }
+  .new-desktop-header .mega-menu-links span {
+    padding-bottom: 9px !important;
+  }
+  .new-desktop-header li .main_link {
+    padding-right: 30px;
+  }
+  header.header .new-desktop-header .mega-menu-inner ul {
+    flex-direction: row !important;;
+    flex-wrap: wrap;
+    height: fit-content;
+  }
+  header.header .new-desktop-header .mega-menu-inner ul li {
+    width: 50%;
+  }
+  header.header .new-desktop-header>ul li .mega-menu {
+    width: 50% !important;
+    min-width: 1000px;
+  }
+  header.header .new-desktop-header>ul li .mega-menu .mega-menu-inner .childlink__container {
+    width: 50% !important;
+  }
+  .new-desktop-header .mega-menu-categories {
+    padding: 20px 40px 40px;
+  }
+  .new-desktop-header .mega-menu-blogs {
+    padding: 0px 40px 60px;
+  }
+  .new-desktop-header .mega-menu-categories>div::-webkit-scrollbar, .new-desktop-header .mega-menu-blogs>div::-webkit-scrollbar {
+    display: none;
+  }
+  .new-desktop-header .mega-menu-categories .image__area, .new-desktop-header .mega-menu-blogs .blog__post {
+    min-width: 20%;
+    margin-right: 2%;
+    position: relative;
+  }
+  .new-desktop-header .mega-menu-blogs a.btn.article__btn {
+    padding: 0;
+    width: fit-content;
+    border: none;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  .new-desktop-header .mega-menu-categories .image__area p {
+    position: absolute;
+    display: block;
+    transform: translateY(-50%);
+    top: 50%;
+    text-align: center;
+    color: #fff;
+    left: 0;
+    right: 0;
+  }
+  .new-desktop-header .mega-menu-blogs .article-card__image .image-element-wrapper {
+    padding-bottom: 50% !important;
+  }
+  .new-desktop-header .mega-menu-categories .image-element-wrapper {
+    padding-bottom: 150% !important;
+    border-radius: 4px;
+  }
+  .new-desktop-header .childlink__container:not(.childlink__container-border) {
+      margin-left: 0 !important;
+  }
+
+  .new-desktop-header .childlink__container-border:after {
+      right: inherit !important;
+      left: 0 !important;
+  }
+
+  .new-desktop-header .mega-menu:not(.mega-menu-black-friday) .childlink__container-border {
+      margin-right: 0;
+      position: relative;
+      order: 2;
+      padding-left: 20px;
+      border-left: 1px solid rgba(0, 0, 0, .5);
+  }
+  .mega-menu-black-friday .childlink__container--Shop {
+    border-left: 1px solid rgba(0, 0, 0, .5);
+    padding-left: 20px;
+  }
+  header.header nav>ul li .mega-menu.mega-menu-black-friday {
+    bottom: inherit !important;
+    border-radius: 0 0 32px 32px;
+  }
+  {% comment %} header.header .mega-menu-black-friday h3 {
+    background: var(--Full-gradient, linear-gradient(90deg, #32755F 0%, #5377BB 5.12%, #CB8F51 10.88%, #CE6C47 100%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  } {% endcomment %}
+  header.header .mega-menu-links.Black .main_link span {
+    text-transform: none;
+    background: linear-gradient(90deg, #CB8F51 34%, #C9B26B 66%, #6AA087 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>

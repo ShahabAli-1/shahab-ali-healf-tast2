@@ -1,0 +1,172 @@
+{% schema %}
+{
+  "name": "Advisory Board Carousel",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Title Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "<p>Our Advisory Board:<br> Leaders in Wellbeing</p>"
+    },
+    {
+      "type": "color",
+      "id": "section_title_color",
+      "label": "Section Title Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Container Padding"
+    },
+    {
+      "type": "range",
+      "id": "container_top_padding",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Container Top Padding",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "container_bottom_padding",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Container Bottom Padding",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Cards Spacing"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "advisor_card",
+      "name": "Advisor Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+            "type": "text",
+            "id": "list_item_1",
+            "label": "Title 1"
+          },
+          {
+            "type": "text",
+            "id": "list_item_2",
+            "label": "Title 2"
+          },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#000000"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Advisory Board Carousel",
+    }
+  ]
+}
+{% endschema %}
+
+{{ 'bs-devshop__advisory-board.css' | asset_url | stylesheet_tag }}
+
+<bs-devshop-splide-carousel>
+  <section
+    style="background-color: {{ section.settings.background_color }}"
+  >
+    {% assign advisor_cards = section.blocks | where: 'type', 'advisor_card' %}
+
+    <div
+      class="bs-devshop__advisory-board__container"
+      style="
+        --padding-top: {{ section.settings.container_top_padding }}px;
+        --padding-bottom: {{ section.settings.container_bottom_padding }}px;
+      "
+    >
+      <div class="" style="height: auto;">
+        <div class="bs-devshop__advisory-board__title-div page-width">
+          {% if section.settings.section_title != blank %}
+            <div
+              class="bs-devshop__advisory-board__section-title"
+              style="color: {{ section.settings.section_title_color }}"
+            >
+              {{ section.settings.section_title }}
+            </div>
+          {% endif %}
+          <div class="bs-devshop__advisory-board__arrows">
+            <button
+              id="btnPrev"
+              class="bs-devshop__advisory-board__arrow-prev"
+              style="color: white"
+            >
+              {% render 'icon-chevron-left' %}
+            </button>
+            <button
+              id="btnNext"
+              class="bs-devshop__advisory-board__arrow-next"
+              style="color: white"
+            >
+              {% render 'icon-chevron-right' %}
+            </button>
+          </div>
+        </div>
+
+        <div id="bs-devshop__advisory-board__slider-container" class="bs-devshop__advisory-board__slider-container splide" id="splide-image-carousel" >
+          <div class="splide__track bs-devshop__advisory-board__cards-container">
+            <ul class="splide__list bs-devshop__advisory-board__cards-ul">
+              {% assign custom_class = 'bs-devshop__advisory-board-card__custom-class splide__slide' %}
+
+              {% for block in advisor_cards %}
+                {% render 'bs-devshop__advisory-board-card',
+                  image: block.settings.image,
+                  title: block.settings.title,
+                  content: block.settings.content,
+                  list_item_1: block.settings.list_item_1,
+                  list_item_2: block.settings.list_item_2,
+                  custom_class: custom_class
+                %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</bs-devshop-splide-carousel>
+

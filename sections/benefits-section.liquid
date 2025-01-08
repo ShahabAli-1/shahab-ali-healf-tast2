@@ -1,0 +1,101 @@
+{{ 'component-benefits.css' | asset_url | stylesheet_tag }}
+{%  liquid 
+    assign ss = section.settings 
+    assign heading = ss.heading
+    assign sub_heading = ss.sub_heading
+    assign description = ss.description
+    assign button_text = ss.button_text
+    assign button_link = ss.button_link
+    assign image_right = ss.image
+%}
+
+<section class="bs-devshop__benefits">
+    <div class="bs-devshop__benefits__wrapper page-width">
+        <div class="bs-devshop__benefits__search hidden">
+            {% render 'component-search' %}
+        </div>
+        <div class="bs-devshop__benefits__content">
+            <div class="bs-devshop__benefits__text">
+                {% if heading != blank and sub_heading != blank %}
+                    <div class="bs-devshop__benefits__text--top">
+                        <h1 class="bs-devshop__benefits__heading">{{ heading }}</h1>
+                        <p class="bs-devshop__benefits__sub__heading">{{ sub_heading }}</p>
+                    </div>
+                {% endif %}
+                {% if image_right != blank %}
+                    <div class="bs-devshop__benefits__image benefits__image--mobile">
+                        {% render 'image-element', image: image_right, size: '1920x', extra_class: 'object-fit--cover'%}
+                    </div>
+                {% endif %}
+                {% if description != blank and button_text != blank %}
+                    <div class="bs-devshop__benefits__text--bottom">
+                        <p class="bs-devshop__benefits__description">{{ description }}</p>
+                        <a class="bs-devshop__benefits__link btn" href="{{button_link}}">{{ button_text }}</a>
+                    </div>
+                {% endif %}
+            </div>
+            {% if image_right != blank %}
+                <div class="bs-devshop__benefits__image">
+                    {% render 'image-element', image: image_right, size: '1920x', extra_class: 'object-fit--cover'%}
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Benefits Section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Left Content"
+    },
+    {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "3X"
+    },
+    {
+        "type": "text",
+        "id": "sub_heading",
+        "label": "Sub Heading",
+        "default": "more cellular benefits than omega-3"
+    },
+    {
+        "type": "text",
+        "id": "description",
+        "label": "Description",
+        "default": "With 36+ cellular benefits, these tiny pills pack a whole lot of goodness."
+    },
+    {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Learn more"
+    },
+    {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Right Content"
+    },
+    {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image on the right section"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefits Section"
+    }
+  ]
+}
+{% endschema %}

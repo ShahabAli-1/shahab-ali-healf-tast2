@@ -1,0 +1,246 @@
+<div class="bs-devshop__biometric-markers-buttons">
+  <a href="#healfzone-signup-form" class="bs-devshop__biometric-markers-snippet__button" style="--gradient-border: {{ button_gradient_border }}; --button-background-color: {{ button_background_color }}; --button-text-color: {{ button_text_color }};">
+    <span>{{ button_text }}</span>
+  </a> 
+  <div class="bs-devshop__biometric-markers-buttons__grid">
+    {% for category in main_categories %}
+      <div class="bs-devshop__biometric-markers-buttons__item main-category">
+        {{ category }}
+      </div>
+      {% for block in section.blocks %}
+        {% if block.type == 'child' and block.settings.category == category %}
+          <div class="bs-devshop__biometric-markers-buttons__item sub-category">
+            {{ block.settings.name }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+  
+  <div class="bs-devshop__biometric-markers-accordion">
+    {% for category in main_categories %}
+      <div class="bs-devshop__biometric-markers-accordion__item {% if forloop.last %}last-row{% endif %}" data-category="{{ category | handleize }}">
+        <details class="bs-devshop__biometric-markers-accordion__details">
+          <summary class="bs-devshop__biometric-markers-accordion__summary-div">
+            <h3 class="bs-devshop__biometric-markers-accordion__row-title">
+              {{ category }}
+            </h3>
+            <span class="bs-devshop__biometric-markers-accordion__icon">
+              {% render 'bs-desvhop__chevron-right' %}
+            </span>
+          </summary>
+          <div class="bs-devshop__biometric-markers-accordion__row-content">
+            {% for block in section.blocks %}
+              {% if block.type == 'child' and block.settings.category == category %}
+                <div class="bs-devshop__biometric-markers-accordion__sub-category">
+                  <p>{{ block.settings.name }}:<span>{{ block.settings.content }}</span></p>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </details>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+.bs-devshop__biometric-markers-buttons__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  justify-content: space-between; 
+}
+
+.bs-devshop__biometric-markers-buttons__item {
+  padding: 0.1rem 1rem;
+  border: 1px solid #000;
+  border-radius: 2rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.01rem;
+  pointer-events: none;
+  flex-grow: 1;
+  flex-shrink: 0;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.bs-devshop__biometric-markers-buttons__item.main-category {
+  background-color: #000;
+  color: #fff;
+}
+
+.bs-devshop__biometric-markers-buttons__item.sub-category {
+  background-color: #fff;
+  color: #000;
+}
+
+.bs-devshop__biometric-markers-accordion {
+    margin-top: 7.6rem;
+    display: block;
+}
+
+.bs-devshop__biometric-markers-accordion__item {
+  border-bottom: 1px solid #000000;
+}
+
+.bs-devshop__biometric-markers-accordion__item[open] {
+  border-bottom: none;
+}
+
+.bs-devshop__biometric-markers-accordion__details[open] + .bs-devshop__biometric-markers-accordion__item {
+  border-top: none;
+}
+
+.bs-devshop__biometric-markers-accordion__item:has(.bs-devshop__biometric-markers-accordion__details[open]) {
+  border-bottom: none;
+}
+
+.bs-devshop__biometric-markers-accordion__summary-div {
+  padding: 1.1rem 0;
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+}
+
+.bs-devshop__biometric-markers-accordion__row-title {
+  font-size: 2.8rem;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 3.1rem;
+  color: #000000;
+}
+
+.bs-devshop__biometric-markers-accordion__row-content {
+  font-size: 1.8rem;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  line-height: 3.1rem;
+  color: #000000;
+  padding: 0;
+}
+
+.bs-devshop__biometric-markers-accordion__icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+.bs-devshop__biometric-markers-accordion__details[open] .bs-devshop__biometric-markers-accordion__icon {
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.bs-devshop__biometric-markers-snippet__button {
+    position: relative;
+    display: none;
+    padding: 1rem 3rem;
+    text-decoration: none;
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    border-radius: 10rem;
+    overflow: hidden;
+    cursor: pointer;
+    width: fit-content;
+    font-size: 1.8rem;
+    align-self: flex-start;
+    margin-top: 3.7rem;
+  }
+  
+  .bs-devshop__biometric-markers-snippet__button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10rem;
+    padding: 0.2rem;
+    background: var(--gradient-border);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  
+  .bs-devshop__biometric-markers__button span {
+    position: relative;
+  }
+
+  .bs-devshop__biometric-markers-accordion__sub-category {
+    border-top: 1px solid #000000;
+    padding: 1.7rem 0 2.1rem 0;
+}
+
+.bs-devshop__biometric-markers-accordion__sub-category h4 {
+  font-size: 1.8rem;
+}
+
+.bs-devshop__biometric-markers-accordion__sub-category p {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 2.5rem;
+  color: #000000CF;
+  letter-spacing: -0.01rem;
+  word-spacing: -0.04rem;
+
+}
+
+.bs-devshop__biometric-markers-accordion__sub-category span {
+  font-weight: 350;
+  color: #000000;
+  margin-left: 0.7rem;
+}
+  
+
+@media screen and (max-width: 768px) {
+    .bs-devshop__biometric-markers-buttons {
+    display: flex;
+    flex-direction: column;
+    }
+  .bs-devshop__biometric-markers-buttons__grid {
+    gap: 0.5rem;
+    margin-top: 5.3rem;
+  }
+
+  .bs-devshop__biometric-markers-accordion {
+    margin-top: 3rem;
+    display: block; 
+  }
+
+  .bs-devshop__biometric-markers-buttons__item {
+    font-size: 1.35rem;
+    padding: 0.15rem 0.8rem;
+  }
+
+  .bs-devshop__biometric-markers-accordion__summary-div {
+    padding: 1.5rem 0;
+  }
+
+  .bs-devshop__biometric-markers-accordion__row-title {
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+  }
+
+  .bs-devshop__biometric-markers-accordion__row-content {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+  }
+
+  .bs-devshop__biometric-markers-snippet__button {
+    display: inline-block;
+    font-size: 1.7rem;
+    padding: 1.1rem 3.1rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .bs-devshop__biometric-markers-buttons__item {
+    {% comment %} padding: 0.2rem 0.5rem; {% endcomment %}
+    font-size: 1rem;
+  }
+}
+
+</style>
+
+

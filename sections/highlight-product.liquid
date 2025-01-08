@@ -1,0 +1,62 @@
+{{ 'component-highlight-product.css' | asset_url | stylesheet_tag }}
+
+{%  liquid 
+    assign ss = section.settings 
+    assign banner_image = ss.banner_image
+    assign blocks = section.blocks
+%}
+
+<section class="bs-devshop__highlight__product">
+    <div class="bs-devshop__highlight__product__wrapper page-width">
+        <div class="bs-devshop__highlight__product__content">
+            {% if banner_image != blank %}
+                <div class="bs-devshop__highlight__product__banner">
+                    {% render 'image-element', image: banner_image, size: '1920x', extra_class: 'object-fit--cover'%}
+                </div>
+            {% endif %}
+            {% if blocks != blank %}
+                <div class="bs-devshop__highlight__product__columns">
+                    {%- for block in blocks -%}
+                        <div class="bs-devshop__product">
+                            {% render 'BB-product-card', template: 'product', product: block.settings.product %}
+                        </div>
+                    {%- endfor -%}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+      "name": "Highlight Product",
+      "class": "section",
+      "settings": [
+        {
+            "type": "image_picker",
+            "id": "banner_image",
+            "label": "Banner on the left"
+        }
+      ],
+      "max_blocks": 2,
+      "blocks": [
+        {
+          "type": "product",
+          "name": "Product",
+          "settings": [
+            {
+                "type": "product",
+                "id": "product",
+                "label": "Select Product"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Highlight Product"
+        }
+      ]
+    }
+{% endschema %}
+    

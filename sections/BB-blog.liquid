@@ -1,0 +1,252 @@
+{% assign ss = section.settings %}
+{% if template.name == 'article' %}
+{% capture slider_settings %}
+    {
+      "enableWhen": "(min-width: 835px)",
+      "slidesPerView": 3,
+      "autoAdjustSlidesPerView": true,
+      "loop": true,
+      "arrows": true,
+      "spacing": 20,
+      "responsive": [
+        {
+          "breakpoint": "1280px",
+          "settings": {
+            "slidesPerView": 2
+          }
+        }
+      ]
+    }
+{% endcapture %}
+{% else %}
+{% capture slider_settings %}
+    {
+      "enableWhen": "(min-width: 835px)",
+      "slidesPerView": 5,
+      "autoAdjustSlidesPerView": true,
+      "loop": true,
+      "arrows": true,
+      "spacing": 20,
+      "responsive": [
+        {
+          "breakpoint": "1280px",
+          "settings": {
+            "slidesPerView": 4
+          }
+        }
+      ]
+    }
+{% endcapture %}
+{% endif %}
+
+{% capture slider_settings_homepage %}
+    {
+      "slidesPerView": 4,
+      "autoAdjustSlidesPerView": true,
+      "loop": true,
+      "arrows": true,
+      "spacing": 24,
+      "responsive": [
+          {
+          "breakpoint": "834px",
+          "settings": {
+            "slidesPerView": 2.2,
+            "autoAdjustSlidesPerView": false,
+            "spacing": 16
+          }
+        }
+      ]
+    }
+{% endcapture %}
+
+<div class="blog__container wrapper">
+    <div class="blog__box">
+        <div class="blog__header">
+            {% if ss.title != blank %}
+                <h3 class="blog__header__title liquid-title">
+                    {{ ss.title }}
+                </h3>
+            {%- endif -%}
+
+            {% if ss.subtitle != blank %}
+                <div class="blog__header__subtitle liquid-subtitle">
+                    {{ ss.subtitle }}
+                </div>
+            {%- endif -%}
+        </div>
+
+        <div class="blog__posts" data-keen-slider='{{ slider_settings_homepage }}'>
+            {% for block in section.blocks %}
+                <div class="blog__post{% if i > 4 %} mobile-hide{% endif %}">
+                    {% render 'BB-article-card', card_image_class: 'is-slow-zoom', show_button: true, blog: ss.blog, article: block.settings.article, media_aspect_ratio: 1.66, show_date: ss.show_date, show_author: ss.show_author, show_tags: ss.show_tags, show_excerpt: false, excerpt_word_count: ss.excerpt_word_count %}
+                </div>
+                {% assign i = i | plus: 1 %}
+            {% endfor %}
+        </div>
+
+        {%- if ss.button_text != blank -%}
+            <div class="blog__link btn">
+                <a href="{{ ss.button_link | strip_html | escape }}">{{ ss.button_text }}</a>
+            </div>
+        {%- endif -%}
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.blog {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 834px) {
+        #shopify-section-{{ section.id }}.blog {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Blog",
+        "tag": "section",
+        "class": "blog section-blog",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Header"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "subtitle",
+                "label": "Subtitle",
+                "default": "<p>Journals are supplements for your mind. We’ve got a range of articles written by experts that we offer to our community as a complimentary service.</p>"
+            },
+            {
+                "type": "text",
+                "id": "button_text",
+                "label": "Button Text"
+            },
+            {
+                "type": "url",
+                "id": "button_link",
+                "label": "Button Link"
+            },
+            {
+                "type": "header",
+                "content": "Blog"
+            },
+            {
+                "type": "blog",
+                "id": "blog",
+                "label": "Blog"
+            },
+            {
+                "type": "number",
+                "id": "post_limit",
+                "label": "Post Limit"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_excerpt",
+                "default": true,
+                "label": "Show Excerpt"
+            },
+            {
+                "type": "number",
+                "id": "excerpt_word_count",
+                "default": 10,
+                "label": "Excerpt word count"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_date",
+                "default": true,
+                "label": "Show Date"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_author",
+                "default": false,
+                "label": "Show Author"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_tags",
+                "default": false,
+                "label": "Show Tags"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 200,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 200,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks":[
+            {
+                "name":"Articles",
+                "type":"article",
+                "settings":[
+                    {
+                        "type":"article",
+                        "id":"article",
+                        "label":"Article"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Blog"
+            }
+        ]
+    }
+{% endschema %}

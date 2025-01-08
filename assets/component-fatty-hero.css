@@ -1,0 +1,176 @@
+.bs-devshop__fattyhero__container {
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    padding: 4rem 1.6rem 0 0
+}  
+
+.bs-devshop__fattyhero__image {
+    width: 80%;
+    margin-right: 0;
+}
+
+.bs-devshop__fattyhero__content {
+    position: absolute;
+    left: 0;
+    bottom: 6rem;
+    top: 14%;
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1;
+    gap: 2rem
+}
+
+.bs-devshop__fattyhero__logo {
+    max-width: 26rem;
+}
+
+.bs-devshop__fattyhero__text {
+    color: #000;
+    font-size: 2.2rem;
+    line-height: 3rem;
+}
+
+.bs-devshop__fattyhero__links {
+    display: flex;
+    gap: 1.6rem;
+}
+
+.btn--white {
+    background-color: #FFF;
+    color: #000;
+    border: 1px solid #FFF;
+    transition: ease 0.3s;
+    display: inline-block;
+}
+
+.bs-devshop__fattyhero__link {
+    padding: 1.9rem 3.2rem;
+    border-radius: 3.2rem;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+}
+
+.btn--white:hover {
+    background-color: #000;
+    color: #FFF;
+    border: 1px solid #000;
+}
+
+.bs-devshop__fattyhero__search {
+    position: absolute;
+    bottom: 6rem;
+    right: 0;
+}
+  
+.bs-devshop__fattyhero__search .search__field {
+    border: solid 1px #000;
+    display: flex;
+    align-items: center;
+    border-radius: 3rem;
+    padding: 1.5rem;
+}
+
+.bs-devshop__fattyhero__search .search {
+    padding: 0
+}
+
+.bs-devshop__fattyhero__container svg {
+    width: 1.8rem;
+}  
+
+.bs-devshop__fattyhero__search .search__input {
+    padding-right: 1.5rem;
+    padding-left: 0;
+    border: 0;
+    background: none;
+    color: #000;
+}
+
+.bs-devshop__fattyhero__search .search__input::placeholder {
+    color: #000;
+}
+  
+  
+@media (max-width: 1199px) {
+    .bs-devshop__fattyhero__text {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+    }
+
+    .bs-devshop__fattyhero__link {
+        padding: 1.2rem 2rem;
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+    }
+}
+
+@media (max-width: 989px) {
+    .bs-devshop__fattyhero__content {
+        max-width: 50%;
+    }
+
+    .bs-devshop__fattyhero__image {
+        width: 70%;
+    }
+
+    .bs-devshop__fattyhero__search .search__field {
+        padding: 0 1.5rem;
+    }
+
+    .bs-devshop__fattyhero__search {
+        display: none;
+    }
+}
+
+
+@media (max-width: 749px) {
+    .bs-devshop__fattyhero__wrapper {
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+    }
+    
+    .bs-devshop__fattyhero__container {
+        justify-content: flex-start;
+        height: 100%;
+        padding: 5.8rem 0 2.4rem 0;
+    }  
+
+    .bs-devshop__fattyhero__content {
+        position: static;
+    }
+
+    .bs-devshop__fattyhero__image {
+        position: absolute;
+        bottom: 0;
+        right: -40%;
+        left: 20%;
+        width: auto;
+    }
+
+    .bs-devshop__fattyhero__image  .image-element-wrapper {
+        --aspect-tablet: 100% !important;
+    }
+
+    .fattyhero__link--mobile--hidden {
+        display: none;
+    }
+
+    .bs-devshop__fattyhero__logo {
+        max-width: 17rem;
+    }
+
+    .bs-devshop__fattyhero__text {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    .bs-devshop__fattyhero__link {
+        width: 90%;
+        text-align: center;
+    }
+}
+
+  

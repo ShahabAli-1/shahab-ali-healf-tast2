@@ -1,0 +1,186 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+      "slidesPerView": "auto",
+      "autoAdjustSlidesPerView": true,
+      "selector": ".spotlight__card",
+      "spacing": 0,
+      "loop": false,
+      "responsive": [
+        {
+          "breakpoint": "834px",
+          "settings": {
+            "slidesPerView": 1.4,
+            "spacing": 0,
+            "arrows": true
+          }
+        }
+      ]
+    }
+{% endcapture %}
+
+<div class="wrapper">
+    <div class="spotlight__container">
+        {%- if ss.title != blank-%}
+            <h3 class="spotlight__title liquid-title">{{ ss.title }}</h3>
+        {%- endif -%}
+
+        <div class="spotlight__grid" data-keen-slider='{{ slider_settings }}'>
+            {%- for block in section.blocks -%}
+                {% assign bs = block.settings %}
+                <div class="spotlight__card {% if bs.is_square %}is-square{% endif %}">
+                    {% render 'image-element', image: bs.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--cover'%}
+                    {%- if bs.button_text != blank-%}
+                        <p class="spotlight__card__title">
+                            {{ bs.title }}
+                        </p>
+                    {%- endif -%}
+                    {%- if bs.button_text != blank-%}
+                        <div class="spotlight__card__desc">
+                            {{ bs.text }}
+                        </div>
+                    {%- endif -%}
+                    {%- if bs.button_text != blank-%}
+                        <a class="spotlight__card__btn" href="{{ bs.button_link }}">
+                            {{ bs.button_text }}
+                        </a>
+                    {%- endif -%}
+                    {%- if bs.tag != blank-%}
+                        <div class="spotlight__card__tag">
+                            {{ bs.tag }}
+                        </div>
+                    {%- endif -%}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }} {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }} {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Spotlight",
+        "tag": "section",
+        "class": "section-spotlight",
+        "max_blocks": 2,
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "Spotlight"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "item",
+                "name": "Item",
+                "settings": [
+                    {
+                        "type": "checkbox",
+                        "id": "is_square",
+                        "label": "Square Image",
+                        "default": false
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Image"
+                    },
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "text",
+                        "label": "Text"
+                    },
+                    {
+                        "type":"text",
+                        "id":"button_text",
+                        "label":"Button Text"
+                    },
+                    {
+                        "type":"url",
+                        "id":"button_link",
+                        "label":"Button Link"
+                    },
+                    {
+                        "type": "text",
+                        "id": "tag",
+                        "label": "Tag"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Spotlight"
+            }
+        ]
+    }
+{% endschema %}

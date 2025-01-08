@@ -1,0 +1,407 @@
+{% assign google_tag = '' %}
+{% assign gift_product_handle = '' %}
+
+{%- for tag in product.tags -%}
+  {%- if tag contains 'google:salt' -%}
+    {% assign google_tag = tag | split: ':' | last %}
+    {% break %}
+  {%- endif -%}
+{%- endfor -%}
+{% if google_tag != '' %}
+  {% assign gift_tag = 'gift:' | append: google_tag %}
+  {% assign gift_product_found = false %}
+
+  {%- for product in collections['google-gifts'].products -%}
+    {%- if gift_product_found -%}
+      {% break %}
+    {%- endif -%}
+
+    {%- for tag in product.tags -%}
+      {%- if tag == gift_tag -%}
+        {% assign gift_product_handle = product.handle %}
+        {% assign gift_product_id = product.id %}
+        {% assign gift_product_variant = product.first_available_variant.id %}
+        {% assign gift_product_found = true %}
+        {% break %}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+{% endif %}
+
+{% if gift_product_handle != '' %}
+<product-form>
+  <form method="post" action="/cart/add" accept-charset="UTF-8"
+    class="form google-form hidden" enctype="multipart/form-data" data-type="add-to-cart-form">
+
+    <input type="hidden" name="form_type" value="product">
+    <input type="hidden" name="utf8" value="✓">
+    <input value="{{gift_product_variant}}" type="hidden" name="id">
+    <input type="hidden" type="number" name="quantity" value="1">
+    <input value="{{gift_product_id}}" type="hidden" name="product-id">
+
+    <div class="product-form__buttons">
+      <button type="submit" name="add" class="product-form__submit btn google-form">
+        <span>Add to cart</span>
+      </button>
+    </div>
+  </form>
+</product-form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const productForm = document.querySelector('.product-form__buttons-container form');
+  const googleFormButton = document.querySelector('.google-form .product-form__submit');
+
+  if (productForm && googleFormButton) {
+    productForm.addEventListener('submit', function (event) {
+      setTimeout(function () {
+        googleFormButton.click();
+        console.log('Google form button triggered.');
+      }, 1000);
+    });
+  }
+});
+</script>
+{% endif %}
+
+<div class="bundle__container findify-bundle"{% if product.vendor == 'HRD // KLL' or product.vendor == 'Mamoosh' %} style="display: none;"{% endif %}>
+  <h5 class="old-bundle">
+    {{ meta_obj.bundle_title | default: "Frequently bought together" }}
+  </h5>
+  <h5 class="new-bundle" style="display: none;">
+    Save 5% with bundles
+  </h5>
+
+  <ul class="bundle-products">
+
+    <li data-bundle-product class="findify-bundle-product">
+      <div class="findify-element" id="product-findify-rec-1"></div>
+    </li>
+    <li></li>
+    <li data-bundle-product class="findify-bundle-product">
+      <div class="findify-element" id="product-findify-rec-2"></div>
+    </li>
+    <style>
+      .pdp-page__wrapper .bundle__container .bundle-products li.findify-bundle-product--new {
+        display: none;
+      }
+    </style>
+
+    <div class="button-area">
+      <p class="old-button-area">
+          <span class="sep"> Buy both for</span>
+          <span class="money bundle-total"></span>
+      </p>
+      <p class="new-button-area">
+          <span class="sep" style="font-weight: 500;">Total</span>
+      </p>
+      <p class="new-button-area">
+        <span class="money bundle-total-discount" style="font-size: 18px;"></span>
+      </p>
+      <p class="new-button-area">
+        <small><span class="money bundle-total" style="color: #AEAEAE; text-decoration: line-through"></span></small>
+      </p>      
+      <button type="submit" class="product-form__submit btn">
+          + Add bundle to cart
+      </button>
+    </div>
+
+  </ul>
+<product-form>
+  <form method="post" action="/cart/add" accept-charset="UTF-8"
+    class="form bundle-form hidden" enctype="multipart/form-data" data-type="add-to-cart-form">
+
+    <input type="hidden" name="form_type" value="product">
+    <input type="hidden" name="utf8" value="✓">
+    <input id="bundle-variant1" type="hidden" name="id">
+    <input type="hidden" type="number" name="quantity" value="1">
+    <input id="bundle-id1" type="hidden" name="product-id">
+
+    <div class="product-form__buttons">
+      <button type="submit" name="add" class="product-form__submit btn bundle-form">
+        <span>Add to cart</span>
+      </button>
+    </div>
+  </form>
+</product-form>
+
+<product-form>
+  <form method="post" action="/cart/add" accept-charset="UTF-8"
+    class="form bundle-form hidden" enctype="multipart/form-data" data-type="add-to-cart-form">
+
+    <input type="hidden" name="form_type" value="product">
+    <input type="hidden" name="utf8" value="✓">
+    <input id="bundle-variant2" type="hidden" name="id">
+    <input type="hidden" type="number" name="quantity" value="1">
+    <input id="bundle-id2" type="hidden" name="product-id">
+
+    <div class="product-form__buttons">
+      <button type="submit" name="add" class="product-form__submit btn bundle-form">
+        <span>Add to cart</span>
+      </button>
+    </div>
+  </form>
+</product-form>  
+
+<product-form>
+  <form method="post" action="/cart/add" accept-charset="UTF-8"
+    class="form bundle-form hidden" enctype="multipart/form-data" data-type="add-to-cart-form">
+
+    <input type="hidden" name="form_type" value="product">
+    <input type="hidden" name="utf8" value="✓">
+    <input id="new-bundle-variant1" type="hidden" name="id">
+    <input type="hidden" type="number" name="quantity" value="1">
+    <input id="new-bundle-id1" type="hidden" name="product-id">
+    <input type="hidden" name="properties[_bundle]" value="true">
+
+    <div class="product-form__buttons">
+      <button type="submit" name="add" class="product-form__submit btn bundle-form">
+        <span>Add to cart</span>
+      </button>
+    </div>
+  </form>
+</product-form>
+
+<product-form>
+  <form method="post" action="/cart/add" accept-charset="UTF-8"
+    class="form bundle-form hidden" enctype="multipart/form-data" data-type="add-to-cart-form">
+
+    <input type="hidden" name="form_type" value="product">
+    <input type="hidden" name="utf8" value="✓">
+    <input id="new-bundle-variant2" type="hidden" name="id">
+    <input type="hidden" type="number" name="quantity" value="1">
+    <input id="new-bundle-id2" type="hidden" name="product-id">
+    <input type="hidden" name="properties[_bundle]" value="true">
+
+    <div class="product-form__buttons">
+      <button type="submit" name="add" class="product-form__submit btn bundle-form">
+        <span>Add to cart</span>
+      </button>
+    </div>
+  </form>
+</product-form>  
+</div>
+
+{% assign current_date = "now" | date: "%Y%m%d" | plus: 0 %}
+{% assign target_date = product.metafields.custom.preorder | date: "%Y%m%d" | plus: 0 %}
+
+{% if current_date < target_date and product.selected_or_first_available_variant.inventory_quantity < 1 %}
+  <style>
+    .rc-widget {
+      visibility: hidden;
+      height: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+  </style>
+{% endif %}
+<style>
+  .bundle-ship {
+    display: none;
+  }
+  .new-button-area {
+    display: none;
+  }
+</style>
+<script>
+window.updatePricing = () => {
+  if (window.location.href.indexOf('selling_plan') > -1) {
+    var rcWidgetElementDropdown = document.querySelector('.rc-selling-plans-dropdown__select');
+
+    {% comment %} if (window.new_sub_price == false) { {% endcomment %}
+    var _document$querySelect, _document$querySelect2;
+    document.querySelectorAll('.price.price--large .price-item--last')[0].innerHTML = (_document$querySelect = document.querySelectorAll('.subscription-radio .rc-radio__price')[0]) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.innerHTML;
+    {% comment %} } {% endcomment %}
+
+    // On click of Subscription purchase change price
+    document.querySelectorAll('.subscription-radio')[0].addEventListener('click', e => {
+      document.querySelectorAll('.price.price--large .price-item--last')[0].innerHTML = document.querySelectorAll('.subscription-radio .rc-radio__price')[0].innerHTML;
+    });
+
+    // On click of One-Time purchase change price
+    document.querySelectorAll('.onetime-radio')[0].addEventListener('click', e => {
+      const priceString = document.querySelectorAll('.onetime-radio .rc-radio__label')[0].innerHTML;
+      const poundSignIndex = priceString.indexOf('£');
+      document.querySelectorAll('.price.price--large .price-item--last')[0].innerHTML = priceString.slice(poundSignIndex);
+    });
+
+    document.querySelectorAll('.price.price--large .price-item--last')[2].innerHTML = (_document$querySelect2 = document.querySelectorAll('.subscription-radio .rc-radio__price')[0]) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.innerHTML;
+
+    document.querySelectorAll('.subscription-radio')[0].addEventListener('click', e => {
+      document.querySelectorAll('.price.price--large .price-item--last')[2].innerHTML = document.querySelectorAll('.subscription-radio .rc-radio__price')[0].innerHTML;
+    });
+
+    // On click of One-Time purchase change price
+    document.querySelectorAll('.onetime-radio')[0].addEventListener('click', e => {
+      const priceString = document.querySelectorAll('.onetime-radio .rc-radio__label')[0].innerHTML;
+      const poundSignIndex = priceString.indexOf('£');
+      document.querySelectorAll('.price.price--large .price-item--last')[2].innerHTML = priceString.slice(poundSignIndex);
+    });
+  }
+};
+
+let attempts = 0;
+const maxAttempts = 25;
+const intervalTime = 200;
+
+const intervalId = setInterval(() => {
+  const rcWidgetElementDropdown = document.querySelector('.rc-widget');
+
+  if (rcWidgetElementDropdown) {
+    {% if current_date < target_date and preorder == true and product.selected_or_first_available_variant.inventory_quantity < 1 %}
+      document.getElementById('rc-radio2').click();
+    {% else %}
+      window.updatePricing();
+    {% endif %}
+    clearInterval(intervalId);
+  } else if (attempts >= maxAttempts) {
+    clearInterval(intervalId);
+  }
+
+  attempts++;
+}, intervalTime);
+</script>
+
+<script>
+  var observer; // Observer declared at a higher scope
+  var calculateCounter = 0; // Counter to track the number of calculations
+  function calculateTotalPrice(observer) {
+    var bundleElements = document.querySelectorAll('.findify-product-add-to-cart');
+    var bundleTotalSpan = document.querySelectorAll('.money.bundle-total');
+    var bundleTotalSpanDiscount = document.querySelector('.money.bundle-total-discount');
+    var fetchPromises = []; // Array to hold all fetch promises
+
+    bundleElements.forEach(function(bundleElement, index) {
+      var variantId = bundleElement.getAttribute('findify-bundle-variant-id');
+      // Push each fetch promise into the array
+      fetchPromises.push(
+        fetch(`/variants/${variantId}.js`)
+          .then(response => response.json())
+          .then(variant => variant.price) // Resolve each promise with the price
+          .catch(error => {
+            console.error('Error fetching variant details:', error);
+            return 0; // Return 0 in case of error to keep the promise chain
+          })
+      );
+    });
+
+    // Use Promise.all to wait for all fetch requests to complete
+    Promise.all(fetchPromises).then(prices => {
+      var totalPrice = 0;
+      var totalPriceDiscount = 0;
+      var count = 0;
+      prices.forEach(price => {
+        if (count < 2) {
+          console.log("PRICE:" + price);
+          totalPrice += parseFloat(price);
+          totalPriceDiscount += Math.ceil(parseFloat(price * 0.95) * 100) / 100; // Round up to nearest penny with discount
+          count++;
+        }
+      });
+      var pElement = document.querySelector('.findify-bundle .button-area p');
+      bundleTotalSpan.forEach(total => {
+        total.textContent = '£' + (totalPrice / 100).toFixed(2); // Update the total price display
+      });
+      bundleTotalSpanDiscount.textContent = '£' + (totalPriceDiscount / 100).toFixed(2);
+      {% unless cart.total_price < 5000 %}
+      if (totalPrice > 5000 && !pElement.textContent.includes('Shipping')) {
+        var span = document.createElement('span');
+        var br = document.createElement('br');
+        span.textContent = ' + Free Shipping';
+        span.className = 'bundle-ship';
+
+        pElement.appendChild(br);
+        pElement.appendChild(span);
+      }
+      {% endunless %}
+      if (observer && calculateCounter >= 20) {
+        observer.disconnect();
+      }
+    });
+  }
+
+  function bundleForm(observer) {
+    var bundleElements = document.querySelectorAll('.findify-product-add-to-cart');
+    var bundleNumber = 1;
+    bundleElements.forEach(function(bundleElement) {
+      var productId = bundleElement.getAttribute('findify-bundle-product-id');
+      var variantId = bundleElement.getAttribute('findify-bundle-variant-id');
+      if (window.NewBundle) {
+        var bundleIdElement = document.getElementById(`new-bundle-id${bundleNumber}`);
+        var bundleVariantElement = document.getElementById(`new-bundle-variant${bundleNumber}`);
+      } else {
+        var bundleIdElement = document.getElementById(`bundle-id${bundleNumber}`);
+        var bundleVariantElement = document.getElementById(`bundle-variant${bundleNumber}`);
+      }
+
+      if (bundleIdElement && bundleVariantElement) {
+          bundleIdElement.value = productId;
+          bundleVariantElement.value = variantId;
+          bundleNumber++;
+      }
+    });
+    calculateCounter++;
+    if (calculateCounter >= 10 && observer) {
+      observer.disconnect();
+    }
+  }
+
+  function observePriceElements() {
+    observer = new MutationObserver(function(mutationsList) {
+      mutationsList.forEach(function(mutation) {
+        if (mutation.addedNodes) {
+          if (document.querySelector('.findify-bundle .findify-components--cards--product--price__price')) {
+            calculateTotalPrice(observer);
+          }
+          if (document.querySelector('.findify-product-add-to-cart')) {
+            bundleForm(observer);
+          }
+        }
+      });
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  if (screen.width < 835) {
+    setTimeout(() => {
+      observePriceElements();
+    }, 2000);
+  }
+  else {
+    observePriceElements();
+  }
+</script>
+
+<script>
+  var bundleButton = document.querySelector('.findify-bundle .product-form__submit');
+
+  var clicks = 0;
+
+  function clickWithDelay(index) {
+    var addToCartButtons = document.querySelectorAll('.bundle-form .product-form__submit');
+    if (window.NewBundle) {
+      var targets = [2, 3];
+    } else {
+      var targets = [0, 1]; // Indices for the first and third buttons
+    }
+
+    if (clicks < targets.length) {
+      var targetIndex = targets[clicks];
+      if (targetIndex < addToCartButtons.length) {
+        addToCartButtons[targetIndex].click();
+        clicks++;
+
+        setTimeout(function () {
+          clickWithDelay(index);
+        }, 1250);
+      }
+    }
+  }
+
+  bundleButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    clicks = 0;
+    clickWithDelay(0);
+  });
+</script>

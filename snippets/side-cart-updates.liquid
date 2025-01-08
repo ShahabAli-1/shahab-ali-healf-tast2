@@ -1,0 +1,169 @@
+{% comment %} Cut this out for now because it just ends up being duplicate of 'on trend' {% endcomment %}
+
+{% comment %} {% unless customer %}
+<div class="recommended-title">
+  <p style="text-align: left;">Community Favourites</p>
+</div>
+<div class="findify-element findify-cart-sidebar-recommendation" id="product-findify-rec-14"></div>
+{% endunless %} {% endcomment %}
+
+{% if customer %}
+<div class="recommended-title">
+  <p style="text-align: left;">Buy Again</p>
+</div>
+
+  {% assign count = 0 %}
+
+  <section class="buy-again__cart">
+    <div class="product-slider__list slider-not__accordion">
+      {% assign first_order = customer.orders | first %}
+      {% assign first_product = first_order.line_items | first %}
+      <div
+        class="products show buy-again__recommendations"
+        data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ first_product.product.id }}&limit=10&intent=related"
+      >
+        {%- for order in customer.orders -%}
+          {% for item in order.line_items %}
+            {% if count == 6 %}
+              {% break %}
+            {% endif %}
+            {% if item.product.available %}
+              {% assign count = count | plus: 1 %}
+              <div class="product">
+                {% render 'BB-product-card',
+                  template: 'product',
+                  product: item.product,
+                  override_with_standard_image: true,
+                  reviews: false,
+                  buy_again: true
+                %}
+              </div>
+            {% endif %}
+          {% endfor %}
+          {% if count == 6 %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if count < 6 %}
+          {% assign remaining = 6 | minus: count | plus: 1 %}
+          {%- if recommendations.performed? and recommendations.products_count > 0 -%}
+            {%- for product in recommendations.products -%}
+              {% assign index = forloop.index %}
+              {% if index < remaining %}
+                <div class="product">
+                  {% render 'BB-product-card',
+                    template: 'product',
+                    product: product,
+                    override_with_standard_image: true
+                  %}
+                </div>
+              {% endif %}
+            {%- endfor -%}
+          {%- endif -%}
+          <script>
+            const wrapper = document.querySelector('.buy-again__cart');
+            const productRecommendationsSection = document.querySelector('.buy-again__recommendations');
+            const url = productRecommendationsSection.dataset.url;
+
+            fetch(url)
+              .then((response) => response.text())
+              .then((text) => {
+                const html = document.createElement('div');
+                html.innerHTML = text;
+                const recommendations = html.querySelector('.buy-again__cart');
+
+                if (recommendations && recommendations.innerHTML.trim().length) {
+                  wrapper.innerHTML = recommendations.innerHTML;
+                }
+              })
+              .catch((e) => {
+                console.error(e);
+              });
+          </script>
+        {% endif %}
+      </div>
+    </div>
+    <div class="custom-slide-nav" data-arrows></div>
+  </section>
+
+  <style>
+    #MainContent #shopify-section-{{ section.id }} {
+        order: initial !important;
+    }
+    .buy-again__cart {
+      max-width: 1460px;
+      margin: 10px auto 24px 0;
+    }
+
+    .buy-again__cart .buy-again__recommendations {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow: scroll;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .buy-again__cart .product-grid-item .image-element-wrapper {
+      padding-bottom: 100%;
+    }
+    .buy-again__cart .product-grid-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .buy-again__cart .product-grid-item .product-vendor {
+      color: #162411;
+      font-size: 12px;
+      font-weight: 800 !important;
+      line-height: 16px;
+      margin-bottom: 5px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+    .buy-again__cart .product-grid-item .product-title {
+      line-height: 1 !important;
+      font-size: 14px !important;
+      color: #162411;
+      font-family: Avenir, Arial, sans-serif;
+      font-size: 14px !important;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: .6px;
+      margin-bottom: 2px;
+    }
+
+    .buy-again__cart .product-grid-item .product__btn {
+      height: 35px;
+      background: #f7f7f7 !important;
+      color: #000 !important;
+      font-size: 14px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .buy-again__cart .product-grid-item .product__btn:hover {
+      background: #000 !important;
+      color: #fff !important;
+    }
+    .buy-again__cart .product-grid-item .price__wrapper .money {
+      line-height: 22px;
+      font-size: 14px;
+    }
+    .buy-again__cart .product-grid-item .price__wrapper .money.compare-product-price {
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .product-grid-item .product-image-area {
+      height: auto;
+    }
+    .buy-again__cart .product {
+      flex-basis: 30%;
+      min-width: calc(30% - 16px);
+    }
+    .buy-again__cart .product-grid-item .product-grid-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .buy-again__cart .product-grid-item .product-info-area {
+      flex-grow: 1;
+      justify-content: space-around;
+    }
+  </style>
+{% endif %}

@@ -1,0 +1,185 @@
+{% assign ss = section.settings %}
+<link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'section-product-recommendations.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-card.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-price.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'section-product-recommendations.css' | asset_url | stylesheet_tag }}</noscript>
+
+{% capture slider_settings %}
+    {
+      "autoplay": false,
+      "autoplaySpeed": 8000,
+      "slidesPerView": 5,
+      "autoAdjustSlidesPerView": false,
+      "loop": true,
+      "arrows": true,
+      "appendArrows": "#shopify-section-{{ section.id }} [data-arrows]",
+      "spacing": 30,
+      "responsive": [
+        {
+          "breakpoint": "1024px",
+          "settings": {
+            "slidesPerView": 2,
+            "spacing": 12,
+            "arrows": false,
+            "dots": false
+          }
+        }
+      ]
+    }
+{% endcapture %}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="product-recommendations__wrapper wrapper gradient no-js-hidden">
+  <product-recommendations class="product-recommendations pdp-page__wrapper section-{{ section.id }}-padding isolate" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ ss.products_to_show | plus: 2 }}">
+    {% if recommendations.performed and recommendations.products_count > 0 %}
+        <div class="heading-wrapper">
+            <h2 class="product-recommendations__heading">{{ ss.heading | escape }}</h2>
+        </div>
+
+        <ul class="product-grid">
+            {% assign hide_organifi = false %}
+            {% for recommendation in recommendations.products %}
+              {%  if recommendation.vendor == 'Organifi' and product.vendor == 'HRD // KLL' %}
+                {% assign hide_organifi = true %}
+              {% elsif recommendation.tags contains 'upsell' %}
+                {% assign hide_organifi = true %}
+              {% else %}
+                {% assign hide_organifi = false %}
+              {% endif %}
+              {% unless recommendation.metafields.custom.product_recommendation contains 'Exclude' or hide_organifi %}
+                  <li class="product-grid__item">
+                      {% render 'card-product',
+                        card_product: recommendation,
+                        media_aspect_ratio: section.settings.image_ratio,
+                        show_secondary_image: section.settings.show_secondary_image,
+                        show_vendor: section.settings.show_vendor,
+                        show_rating: section.settings.show_rating,
+                        show_quick_add: true,
+                        delivery_date: false
+                      %}
+                  </li>
+              {% endunless %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+  </product-recommendations>
+</div>
+
+{% include 'linked-brands' %}
+
+{% schema %}
+{
+  "name": "Product recommendations",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.related-products.settings.paragraph__1.content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "You may also like",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4,
+      "label": "Maximum products to show"
+    },
+    {
+      "type": "header",
+      "content": "Product card"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "portrait",
+          "label": "Portait"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ],
+      "default": "adapt",
+      "label": "Image ratio"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "Show second image on hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "Show vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "Show product rating",
+      "info": "To display a rating, add a product rating app."
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+    "presets": [
+      {
+          "name": "Product recommendations"
+      }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,402 @@
+{% schema %}
+{
+  "name": "How It Works",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "How it works"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>All results and devices tracked in the Health Zone. <br>Get to know your body today. Monitor changes over time.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Apply for Healf Zone BETA"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color_background",
+      "id": "button_gradient_border",
+      "label": "Button Gradient Border",
+      "default": "linear-gradient(90deg, #CB8F51 34%, #C9B26B 66%, #6AA087 100%)"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "range",
+          "id": "card_1_width",
+          "min": 1,
+          "max": 6,
+          "step": 0.1,
+          "default": 2,
+          "label": "Card 1 Width"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "text",
+          "id": "step_1",
+          "label": "Step Number 1"
+        },
+        {
+          "type": "richtext",
+          "id": "title_1",
+          "label": "Title 1"
+        },
+        {
+          "type": "richtext",
+          "id": "title_1_mobile",
+          "label": "Title 1 Mobile"
+        },
+        {
+          "type": "richtext",
+          "id": "content_1",
+          "label": "Content 1"
+        },
+        {
+          "type": "richtext",
+          "id": "content_1_mobile",
+          "label": "Content 1 Mobile"
+        },
+        {
+          "type": "range",
+          "id": "card_2_width",
+          "min": 1,
+          "max": 6,
+          "step": 0.1,
+          "default": 5,
+          "label": "Card 2 Width"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "text",
+          "id": "step_2",
+          "label": "Step Number 2"
+        },
+        {
+          "type": "richtext",
+          "id": "title_2",
+          "label": "Title 2"
+        },
+        {
+          "type": "richtext",
+          "id": "title_2_mobile",
+          "label": "Title 2 Mobile"
+        },
+        {
+          "type": "richtext",
+          "id": "content_2",
+          "label": "Content 2"
+        },
+        {
+          "type": "richtext",
+          "id": "content_2_mobile",
+          "label": "Content 2 Mobile"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works",
+      "blocks": [
+        {
+          "type": "row"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<div class="bs-devshop__landing-how-it-works" style="background-color: {{ section.settings.background_color }};">
+  <div class="page-width">
+    <div class="bs-devshop__landing-how-it-works__container">
+    <div class="bs-devshop__landing-how-it-works__header">
+      <h2 class="bs-devshop__landing-how-it-works__title">{{ section.settings.title }}</h2>
+      <div class="bs-devshop__landing-how-it-works__subtitle">{{ section.settings.subtitle }}</div>
+    </div>
+    {% for block in section.blocks %}
+      <div class="bs-devshop__landing-how-it-works__row" style="--card-1-width: {{ block.settings.card_1_width }}; --card-2-width: {{ block.settings.card_2_width }};">
+        <div class="bs-devshop__landing-how-it-works__card bs-devshop__landing-how-it-works__card--1">
+          {% if block.settings.image_1 %}
+            <img src="{{ block.settings.image_1 | img_url: 'master' }}" alt="{{ block.settings.title_1 }}" class="bs-devshop__landing-how-it-works__card-image" width="100%" height="455px">
+          {% endif %}
+          <div class="bs-devshop__landing-how-it-works__card-content">
+            <p class="bs-devshop__landing-how-it-works__card-step">{{ block.settings.step_1 }}</p>
+            <h3 class="bs-devshop__landing-how-it-works__card-title">{{ block.settings.title_1 }}</h3>
+            <h3 class="bs-devshop__landing-how-it-works__card-title-mobile">{{ block.settings.title_1_mobile }}</h3>
+            <div class="bs-devshop__landing-how-it-works__card-text">{{ block.settings.content_1 }}</div>
+            <div class="bs-devshop__landing-how-it-works__card-text-mobile">{{ block.settings.content_1_mobile }}</div>
+          </div>
+        </div>
+
+        <div class="bs-devshop__landing-how-it-works__card bs-devshop__landing-how-it-works__card--2">
+          {% if block.settings.image_2 %}
+            <img src="{{ block.settings.image_2 | img_url: 'master' }}" alt="{{ block.settings.title_2 }}" class="bs-devshop__landing-how-it-works__card-image" width="100%" height="455px">
+          {% endif %}
+          <div class="bs-devshop__landing-how-it-works__card-content">
+            <p class="bs-devshop__landing-how-it-works__card-step">{{ block.settings.step_2 }}</p>
+            <h3 class="bs-devshop__landing-how-it-works__card-title">{{ block.settings.title_2 }}</h3>
+            <h3 class="bs-devshop__landing-how-it-works__card-title-mobile">{{ block.settings.title_2_mobile }}</h3>
+            <div class="bs-devshop__landing-how-it-works__card-text">{{ block.settings.content_2 }}</div>
+            <div class="bs-devshop__landing-how-it-works__card-text-mobile">{{ block.settings.content_2_mobile }}</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="bs-devshop__landing-how-it-works__button-div">
+      <a href="#healfzone-signup-form" class="bs-devshop__landing-how-it-works__button" style="--gradient-border: {{ section.settings.button_gradient_border }}; --button-background-color: {{ section.settings.button_background_color }}; --button-text-color: {{ section.settings.  button_text_color }};">
+        <span>{{ section.settings.button_text }}</span>
+      </a>
+    </div>
+  </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.bs-devshop__landing-how-it-works {
+  color: white;
+}
+
+.bs-devshop__landing-how-it-works__container {
+  /* border-bottom: 0.2rem solid #FFFFFF; */
+}
+
+.bs-devshop__landing-how-it-works__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.bs-devshop__landing-how-it-works__title {
+  font-size: 6.5rem;
+  text-align: center;
+}
+
+.bs-devshop__landing-how-it-works__subtitle p {
+  font-size: 2.5rem;
+  text-align: center;
+  line-height: 3.5rem;
+}
+
+.bs-devshop__landing-how-it-works__row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3rem;
+}
+
+.bs-devshop__landing-how-it-works__card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 5.8rem;
+}
+
+.bs-devshop__landing-how-it-works__card--1 {
+  grid-column: span calc(var(--card-1-width, 2));
+}
+
+.bs-devshop__landing-how-it-works__card--2 {
+  grid-column: span calc(var(--card-2-width, 5));
+}
+
+.bs-devshop__landing-how-it-works__card-image {
+  width: 100%;
+  height: 51.5rem;
+  object-fit: cover;
+  border-radius: 2.3rem;
+}
+
+.bs-devshop__landing-how-it-works__card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+
+.bs-devshop__landing-how-it-works__card-step {
+  font-size: 3.3rem;
+  font-weight: 400;
+  line-height: 4.6rem;
+  margin-top: 4.2rem;
+}
+
+.bs-devshop__landing-how-it-works__card-title {
+  font-size: 4rem;
+  font-weight: 400;
+  /* line-height: 4.1rem; */
+  margin: 2.2rem 0 4.7rem 0;
+}
+
+.bs-devshop__landing-how-it-works__card-title-mobile {
+  display: none;
+}
+
+.bs-devshop__landing-how-it-works__card-text {
+  font-size: 3.17rem;
+  font-weight: 350;
+  line-height: 4.2rem;
+}
+
+.bs-devshop__landing-how-it-works__card-text-mobile {
+  display: none;
+}
+
+  .bs-devshop__landing-how-it-works__button-div {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .bs-devshop__landing-how-it-works__card-title {
+    font-size: 3.4rem;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .bs-devshop__landing-how-it-works__title {
+    font-size: 3.2rem;
+    line-height: 4.2rem;
+  }
+
+  .bs-devshop__landing-how-it-works__subtitle p {
+    font-size: 2rem;
+    line-height: 3rem;
+    text-align: center;
+  }
+
+  .bs-devshop__landing-how-it-works__subtitle p br {
+    display: none;
+  }
+
+  .bs-devshop__landing-how-it-works__card-image {
+    height: 38.5rem;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .bs-devshop__landing-how-it-works__row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .bs-devshop__landing-how-it-works__card--1,
+  .bs-devshop__landing-how-it-works__card--2 {
+    grid-column: 1 / -1;
+  }
+
+  .bs-devshop__landing-how-it-works__card-step {
+    font-size: 2.5rem;
+    line-height: 3.5rem;
+    margin-top: 2.7rem;
+  }
+
+  .bs-devshop__landing-how-it-works__card-title {
+    font-size: 3rem;
+    line-height: 3.1rem;
+    margin-bottom: 2.7rem;
+    display: none;
+  }
+
+  .bs-devshop__landing-how-it-works__card-title-mobile {
+    display: block;
+    font-size: 3rem;
+    line-height: 3.1rem;
+    margin-bottom: 2.7rem;
+    margin-top: 2.8rem;
+  }
+
+  .bs-devshop__landing-how-it-works__card-text {
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    display: none;
+  }
+
+  .bs-devshop__landing-how-it-works__card-text-mobile {
+    display: block;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+  }
+
+  .bs-devshop__landing-how-it-works__button-div {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 3.2rem;
+  }
+
+  .bs-devshop__landing-how-it-works__button {
+    position: relative;
+    padding: 1rem 3rem;
+    text-decoration: none;
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    border-radius: 10rem;
+    overflow: hidden;
+    cursor: pointer;
+    width: fit-content;
+    font-size: 1.8rem;
+    align-self: flex-start;
+  }
+
+  .bs-devshop__landing-how-it-works__button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10rem;
+    padding: 0.2rem;
+    background: var(--gradient-border);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .bs-devshop__biometric-markers__button span {
+    position: relative;
+  }
+}
+{% endstylesheet %}

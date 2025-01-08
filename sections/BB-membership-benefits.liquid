@@ -1,0 +1,134 @@
+{% assign ss = section.settings %}
+
+<div class="image-with-text__container membership-benefits__container">
+    {% if ss.image != blank %}
+        {% render 'image-element', image: ss.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--cover image-with-text-image'%}                
+    {%- endif -%}
+
+    <div class="image-with-text-content">
+        {% if ss.title != blank %}
+            <h3>{{ ss.title }}</h3>
+        {%- endif -%}
+        {% if ss.description != blank %}
+            <p>{{ ss.description }}</p>
+        {%- endif -%}
+
+        <div class="benefits-wrapper">
+            {%- if section.blocks  != empty -%}
+                {%- for block in section.blocks -%}
+                    {% assign bs = block.settings %}
+                    <div class="collection__card">
+                        {% render 'image-element', image: bs.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--contain'%}                
+                        {{ bs.title }} 
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.bb-image-with-text {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.bb-image-with-text {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Membership benefits",
+        "tag": "section",
+        "class": "wrapper bb-image-with-text",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "description",
+                "label": "Description"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Benefit",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Image"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "title",
+                        "label": "Title"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Membership benefits"
+            }
+        ]
+    }
+{% endschema %}

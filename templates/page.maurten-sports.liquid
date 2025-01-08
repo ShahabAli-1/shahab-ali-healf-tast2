@@ -1,0 +1,199 @@
+{{ 'maurten.css' | asset_url | stylesheet_tag }}
+    <div class="section bicarb-public">
+        <div
+            class="section-content panel sport-disciplines-panel turbo-panel"
+            data-controller="turbo-navigate"
+            data-turbo-navigate-current-panel-value="sports"
+            data-index="2"
+        >
+            <div>
+                <h1 class="liquid-title">Sport disciplines</h1>
+                <p>What sports will you intend to use the Bicarb System with? Please select multiple if needed.</p>
+            </div>
+
+            <div class="bottom-content" data-controller="bicarb-public">
+                <h2>Sports</h2>
+                <form method="POST" class="sport-diciplines-form">
+                    <input type="hidden" name="action" value=""/>
+                    <div class="disciplines-wrapper">
+                        <ul class="disciplines">
+                            <li>Individual sports:</li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Cycling</span>
+                                    <span class="checkbox__input">
+                                        <input id="Cycling" value="Cycling" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Running - Short</span>
+                                    <span class="checkbox__input">
+                                        <input id="running-short" value="running-short" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Running - Long</span>
+                                    <span class="checkbox__input">
+                                        <input id="running-long" value="running-long" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Boxing</span>
+                                    <span class="checkbox__input">
+                                        <input id="boxing" value="boxing" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Track & Field</span>
+                                    <span class="checkbox__input">
+                                        <input id="track-and-field" value="track-and-field" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Crossfit</span>
+                                    <span class="checkbox__input">
+                                        <input id="crossfit" value="crossfit" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Martial Arts</span>
+                                    <span class="checkbox__input">
+                                        <input id="martial-arts" value="martial-arts" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                        </ul>
+                        <ul class="disciplines">
+                            <li>Team sports:</li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">American football</span>
+                                    <span class="checkbox__input">
+                                        <input id="football" value="football" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Basketball</span>
+                                    <span class="checkbox__input">
+                                        <input id="basketball" value="basketball" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Handball</span>
+                                    <span class="checkbox__input">
+                                        <input id="handball" value="handball" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Soccer</span>
+                                    <span class="checkbox__input">
+                                        <input id="soccer" value="soccer" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Hockey</span>
+                                    <span class="checkbox__input">
+                                        <input id="hockey" value="hockey" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Rowing</span>
+                                    <span class="checkbox__input">
+                                        <input id="rowing" value="rowing" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged"/>
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="checkbox" data-bicarb-public-target="input">
+                                    <span class="checkbox__label">Other</span>
+                                    <span class="checkbox__input">
+                                        <input id="other" value="other" name="sport[]" type="checkbox" data-action="bicarb-public#checkboxChanged bicarb-public#toggleOtherSport" />
+                                        <span class="checkbox__control">
+                                            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden="true" focusable="false">
+                                            <path fill='none' stroke='#ffffff' stroke-width='2' d='M1.73 12.91l6.37 6.37L22.79 4.59'/></svg>
+                                        </span>
+                                    </span>
+                                </label>
+                                <input type="text" name="sportOther" class="other-sport" value="" style="border-radius: 6px; background: #000; border: 1px solid #fff; color: #fff; display: none" />
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="/pages/maurten-how-to" class="btn btn--white continue" style=" line-height: 24px;">Continue</a>
+                </form>
+            </div>
+        </div>
+    </div>

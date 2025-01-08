@@ -1,0 +1,258 @@
+{% assign ss = section.settings %}
+
+<script data-bundle-builder-json type="application/json">
+  {
+    "stage_order": 3,
+    "header": {
+      "title": {{ ss.header_title | json }},
+      "text": {{ ss.header_text | json }}
+    },
+    "texts": {
+      "title": {{ ss.title | json }},
+      "subtitle": {{ ss.subtitle | json }},
+      "success_title": {{ ss.success_title | json }},
+      "success_text": {{ ss.success_text | json }}
+    },
+    "discount_percent": {{ ss.discount | json }}
+  }
+</script>
+
+<div class="wrapper" rv-if="data.current_stage.stage_order | eq 3">
+
+  <div>
+    <h2 class="bundle-builder-section-title h2" rv-if="data.current_stage.texts.title" rv-text="data.current_stage.texts.title"></h2>
+    <p class="bundle-builder-section-subtitle" rv-if="data.current_stage.texts.subtitle" rv-text="data.current_stage.texts.subtitle"></p>
+
+    <div class="bundle-builder-cart-items">
+      <div class="bundle-builder-item-wrapper" rv-each-item="data.display_results.products">
+        <div class="bundle-builder-item flex" rv-data-question-step="item.step">
+          
+          <div class="left-area" rv-on-click="controller.returnToStep"> 
+            <div class="object-fit--cover" rv-if="item.product.images.0" rv-aria-label="item.product.title">
+              <img loading="lazy" rv-alt="item.product.title" rv-src="item.product.images.0">
+            </div>
+          </div>
+
+          <div class="right-area flex f-d-column">
+            <h3 class="title" rv-text="item.product.title" rv-aria-label="item.product.title" rv-on-click="controller.returnToStep" rv-data-question="item.questionIndex"></h3>
+            <p class="bottom-title" rv-if="item.metafields.bottom_title" rv-html="item.metafields.bottom_title"></p>
+            <div class="yotpo bottomLine yotpo-small" rv-if="item.yotpo.bottomline" rv-html="item.yotpo.bottomline"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="bundle-builder-total-area">
+      <div class="individual-total flex f-a-center f-j-between">
+        <span class="label">Individual Price:</span>
+        <span class="money" rv-data-money='data.display_results.total_price' rv-text='data.display_results.total_price | money'></span>  
+      </div>
+      <div class="bundle-total flex f-a-center f-j-between">
+        <span class="label">Bundle Price:</span>
+        <span class="money" rv-data-money='data.display_results.total_price_discounted' rv-text='data.display_results.total_price_discounted | money'></span>  
+      </div>
+      <div class="bundle-save flex f-a-center f-j-end">
+        <span>Save</span>
+        <span rv-text='data.display_results.total_save | money'></span>
+        <span>(<span class="percent" rv-text='data.display_results.total_save_percents'></span>%)</span>
+      </div>
+    </div>
+
+    <button class="button button--next" rv-on-click="controller.addToCart" rv-disabled="data.addingItems">
+      <span rv-unless="data.addingItems">{{ ss.cta_text }}</span>
+      <span rv-if="data.addingItems">{{ 'products.product.adding_to_cart' | t }}</span>
+    </button>
+
+    <div class="text-center">
+
+      {% assign message = ss.message %}
+      {% if message != blank %}
+        <div class="order-message hide" data-check-day-and-time='{
+          "dayFrom": "{{ ss.start_day }}",
+          "dayTo": "{{ ss.end_day }}",
+          "hoursFrom": {{ ss.start_time_of_the_day | split: ':' | first | times: 1 }},
+          "minutesFrom": {{ ss.start_time_of_the_day | split: ':' | last | times: 1 }},
+          "hoursTo": {{ ss.end_time_of_the_day | split: ':' | first | times: 1 }},
+          "minutesTo": {{ ss.end_time_of_the_day | split: ':' | last | times: 1 }},
+          "time_zone": "{{ ss.time_zone }}"
+        }'>
+
+          {% if message contains '[COUNTDOWN]' and ss.countdown_time != blank %}
+            {% assign message_split = message | split: '[COUNTDOWN]' %}
+
+            {{ message_split[0] }}
+            
+            {% if ss.show_countdown %}
+              <span class="countdown-timer" data-countdown-timer='{
+                "time": "{{ ss.countdown_time }}",
+                "time_zone": "{{ ss.time_zone }}",
+                "hideParentElement": ".product-atc-bar-banner--{{block.id}}"
+              }'>
+                <span data-time="days"></span>
+                <span data-time="hours"></span>
+                <span data-time="minutes"></span>
+                <span data-time="seconds"></span>
+              </span>
+            {% endif %}
+
+            {{ message_split[1] }}
+          {% else %}
+            <span>{{ message }}</span>
+          {% endif %}
+
+        </div>
+      {% endif %}
+
+      <div class="save-for-later">
+        <p rv-unless="data.saved_for_later">
+          <a href="#" rv-on-click="controller.saveForLater">{{ ss.save_later }}</a>
+        </p>
+        <p rv-if="data.saved_for_later">{{ ss.save_later_success }}</p>
+      </div>
+
+      <div class="start-again">
+        <a href="#" rv-on-click="controller.startAgain" class="btn btn--dark">{{ ss.start_again }}</a>
+      </div>
+
+    </div>
+  </div>
+  
+  <div class="success-text" rv-if="data.display_results.product.item_count | eq 0">
+    <h2 class="h2" rv-text="data.current_stage.texts.success_title"></h2>
+    <div class="rte" rv-text="data.current_stage.texts.success_text"></div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Results",
+    "class": "bundle-builder-results",
+    "settings": [
+      {
+        "type":"header",
+        "content":"Header"
+      },
+      {
+        "type":"text",
+        "id":"header_title",
+        "label":"Header Title",
+        "default": "Your Routine Bundle"
+      },
+      {
+        "type":"text",
+        "id":"header_text",
+        "label":"Header Text",
+        "default": "Results"
+      },
+      {
+        "type":"header",
+        "content":"Content"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title"
+      },
+      {
+        "type":"text",
+        "id":"subtitle",
+        "label":"Subtitle"
+      },
+      {
+        "type":"number",
+        "id":"discount",
+        "label":"Discount Value (%)"
+      },
+      {
+        "type":"text",
+        "id":"cta_text",
+        "label":"ATC",
+        "default":"Add routine to cart"
+      },
+      {
+        "type":"text",
+        "id":"save_later",
+        "label":"Save For Later Text",
+        "default":"Save Products for later"
+      },
+      {
+        "type":"text",
+        "id":"save_later_success",
+        "label":"Saved For Later Successfully Text",
+        "default":"Products were saved on your device"
+      },
+      {
+        "type":"text",
+        "id":"start_again",
+        "label":"Start Again Text",
+        "default":"Start again"
+      },
+      {
+        "type":"header",
+        "content":"Countdown Message"
+      },
+      {
+        "type": "text",
+        "id": "message",
+        "label": "Under Threshold Message",
+        "default": "Order within [COUNTDOWN] for same day dispatch!"
+      },
+      {
+        "type":"text",
+        "id":"time_zone",
+        "label":"Time Zone",
+        "info":"TZ database name here: https:\/\/en.wikipedia.org\/wiki\/List_of_tz_database_time_zones#Time_Zone_abbreviations"
+      },
+      {
+        "type":"text",
+        "id":"start_time_of_the_day",
+        "label":"From (time of the day)",
+        "info":"24-hour time format should be used here"
+      },
+      {
+        "type":"text",
+        "id":"end_time_of_the_day",
+        "label":"To (time of the day)",
+        "info":"24-hour time format should be used here"
+      },
+      {
+        "type":"text",
+        "id":"start_day",
+        "label":"From (day of the week)",
+        "info":"Day number (Monday - 1, Tuesday - 2, ...); will be displayed on all days, if empty"
+      },
+      {
+        "type":"text",
+        "id":"end_day",
+        "label":"To (day of the week)",
+        "info":"Day number (Monday - 1, Tuesday - 2, ...); will be displayed on all days, if empty"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_countdown",
+        "label": "Show countdown?"
+      },
+      {
+        "type": "text",
+        "id": "countdown_time",
+        "label": "Countdown Time",
+        "info": "Use 24h format here (14:00, 23:30, etc)"
+      },
+      {
+        "type":"header",
+        "content":"Added Products"
+      },
+      {
+        "type": "text",
+        "id": "success_title",
+        "label": "Added Products Title"
+      },
+      {
+        "type": "text",
+        "id": "success_text",
+        "label": "Added Products Text"
+      }
+    ]
+  }
+{% endschema %}

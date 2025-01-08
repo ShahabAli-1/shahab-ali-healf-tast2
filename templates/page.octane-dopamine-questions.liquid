@@ -1,0 +1,118 @@
+<script>
+
+const votingSystem = {
+    "Octane: What role do you think dopamine plays in your life?": {
+        "It helps me stay motivated and focused": "creator",
+        "It’s just a chemical related to happiness": "thrill",
+        "It’s something that affects how I feel, but I’m not sure how": "calm",
+        "It’s important for learning and memory": "dependent"
+    },
+    "Octane: How do you typically approach challenges?": {
+        "I dive in headfirst and love the thrill of overcoming them": "thrill",
+        "I plan carefully and take them on methodically": "creator",
+        "I observe and analyse before making a move": "calm",
+        "I see challenges as opportunities to innovate": "dependent"
+    },
+    "Octane: How do you recharge after a busy day?": {
+        "I like to unwind with a book, meditation, or a creative hobby": "dependent",
+        "I need to disconnect from everything and just relax": "calm",
+        "I enjoy reflecting on the day’s accomplishments and planning for tomorrow": "creator",
+        "I seek out something exciting, like a new show or a challenging workout": "thrill"
+    },
+    "Octane: What’s your go-to way to boost your energy?": {
+        "A quick workout or a walk in nature": "creator",
+        "Trying something new or exciting to shake things up": "thrill",
+        "I take a break and reset with some quiet time": "calm",
+        "Engaging in a creative project or brainstorming session": "dependent"
+    },
+    "Octane: How long after waking do you pick up your phone?": {
+        "I immediately check my phone": "dependent",
+        "0 - 30 Minutes": "thrill",
+        "30 - 60 Minutes": "calm",
+        "1 - 2 Hours": "creator"
+    },
+    "Octane: You have 30 minutes free what do you do?": {
+        "Scroll for a bit on social media": "dependent",
+        "Look for snacks in the fridge": "thrill",
+        "Daydream or take a nap": "calm",
+        "Read, meditate, yoga": "creator"
+    },
+    "Octane: How many servings a week do you have of foods rich in vitamins and minerals that support dopamine production?": {
+        "0-3": "dependent",
+        "4-5": "thrill",
+        "6-7": "calm",
+        "7+": "creator"
+    },
+    "Octane: You have 30 minutes free, what will you typically do?": {
+        "I wake at sunrise and sleep within 2-3 hours of sunset every day": "creator",
+        "0-1 Hours": "calm",
+        "0-2": "thrill",
+        "2+": "dependent"
+    },
+    "Octane: In the hour before bed, what do you typically do?": {
+        "Yes.": "calm",
+        "No, I need hard workouts/ extreme sports to feel good.": "thrill"
+    }
+};
+
+function pointsQuiz(userAnswers) {
+  let votes = {
+    creator: 0,
+    dependent: 0,
+    thrill: 0,
+    calm: 0
+  };
+  
+  for (let question in userAnswers) {
+      let answer = userAnswers[question];
+      if (votingSystem[question] && votingSystem[question][answer]) {
+          let resultPage = votingSystem[question][answer];
+          votes[resultPage]++;
+      }
+  }
+  
+  let selectedResultPage = Object.keys(votes).reduce((a, b) => votes[a] > votes[b] ? a : b);
+  
+  console.log("The selected result page is:", selectedResultPage);
+
+  if (selectedResultPage == "creator") {
+    window.location.href = "https://healf.com/pages/test-your-dopamine-results#r=6HICWUPOaG7Le2jf";
+  } else if (selectedResultPage == "dependent") {
+    window.location.href = "https://healf.com/pages/test-your-dopamine-results#r=WvyEDFXLYLKP1D5k";
+  } else if (selectedResultPage == "thrill") {
+    window.location.href = "https://healf.com/pages/test-your-dopamine-results#r=F79pYn1xr1ovGnRi";
+  } else if (selectedResultPage == "calm") {
+    window.location.href = "https://healf.com/pages/test-your-dopamine-results#r=oJ4UhkHVM1q07l0c";
+  }
+  
+}
+
+  
+async function handleQuizEvent(e) {
+    console.log('Quiz event triggered');
+    console.log(e.type); // This will log whether it's 'completed' or 'accessed'
+    console.log(e.detail);
+
+    // Extract the answers from the event detail
+    const userAnswers = e.detail.answers;
+
+    // Call the testQuizLogic function with the extracted answers
+    console.log("Here are the quiz answers: " + userAnswers);
+    pointsQuiz(userAnswers);
+
+    
+    //document.getElementById('quiz').style.display = 'none';
+    //document.getElementById('quiz_results').style.display = 'block';
+
+    // Change the URL without reloading the page
+    //window.history.pushState({ path: e.detail.quiz_results_url }, '', e.detail.quiz_results_url);
+
+}
+
+// Attach the event listener for both 'octane.quiz.completed' and 'octane.quiz.accessed'
+document.addEventListener('octane.quiz.completed', handleQuizEvent, false);
+document.addEventListener('octane.quiz.accessed', handleQuizEvent, false);
+  
+</script>
+
+<div class="octane-ai-quiz " data-quiz-id="8puvc4QLf0DChvGN" data-embed-type="fullpage" data-mobile-height="match_browser" data-desktop-height="match_browser"></div><script src="https://app.octaneai.com/wyes7217h6xlj0vq/quiz.js" async defer></script>

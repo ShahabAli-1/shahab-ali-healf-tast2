@@ -1,0 +1,169 @@
+{% assign ss = section.settings %}
+
+<div class="refer__container">
+    {%- if ss.guardian-title != blank or ss.guardian-description != blank or ss.guardian-button-text != blank -%}
+        <div class="guardian-community__wrapper">
+            {%- if ss.guardian-title != blank -%}
+                <h3>{{ ss.guardian-title }}</h3>
+            {%- endif -%}
+            
+            {%- if ss.guardian-description != blank -%}
+                <p>{{ ss.guardian-description }}</p>
+            {%- endif -%}
+
+            {%- if ss.guardian-button-text != blank -%}
+                <a href="{{ ss.guardian-button-link }}">{{ ss.guardian-button-text }} {%  render 'icon-arrow' %}</a>
+            {%- endif -%}
+
+            {%- if ss.guardian-image != blank -%}
+                <img src="{{ ss.guardian-image }}" alt="">
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+
+    {%- if ss.refer-title != blank or ss.refer-description != blank or ss.refer-button-text != blank -%}
+        <div class="refer-a-friend__wrapper">
+            {%- if ss.refer-title != blank -%}
+                <h3>{{ ss.refer-title }}</h3>
+            {%- endif -%}
+
+            {%- if ss.refer-description != blank -%}
+                <p>{{ ss.refer-description }}</p>
+            {%- endif -%}
+
+            {%- if ss.refer-button-text != blank -%}
+                <a href="{{ ss.refer-button-link | strip_html | escape }}" class="btn">{{ ss.refer-button-text }}</a>
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.refer {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.refer {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Refer a friend",
+        "tag": "section",
+        "class": "refer wrapper",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Guardian community"
+            },
+            {
+                "type": "text",
+                "id": "guardian-title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "guardian-description",
+                "label": "Description"
+            },
+            {
+                "type": "text",
+                "id": "guardian-button-text",
+                "label": "Button Text"
+            },
+            {
+                "type": "url",
+                "id": "guardian-button-link",
+                "label": "Button Link"
+            },
+            {
+                "type": "text",
+                "id": "guardian-image",
+                "label": "Image"
+            },
+            {
+                "type": "header",
+                "content": "Refer a friend"
+            },
+            {
+                "type": "text",
+                "id": "refer-title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "refer-description",
+                "label": "Description"
+            },
+            {
+                "type": "text",
+                "id": "refer-button-text",
+                "label": "Button Text"
+            },
+            {
+                "type": "url",
+                "id": "refer-button-link",
+                "label": "Button Link"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Refer a friend"
+            }
+        ]
+    }
+{% endschema %}

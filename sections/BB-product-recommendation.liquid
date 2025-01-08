@@ -1,0 +1,50 @@
+{% assign limit = ss.product_limit %}
+
+{% capture slider_settings %}
+    {
+      "slidesPerView": 4.1,
+      "autoAdjustSlidesPerView": false,
+      "arrows": true,
+      "loop": true,
+      "appendArrows": ".section-{{ section.id }} [data-arrows]",
+      "responsive": [
+        {
+          "breakpoint": "1100px",
+          "settings": {
+            "slidesPerView": 3.2
+          }
+        },
+        {
+          "breakpoint": "480px",
+          "settings": {
+            "slidesPerView": 1.2,
+            "mode": "free-snap"
+          }
+        }
+      ]
+    }
+{% endcapture %}
+    
+      
+<div data-recommended-products='{
+    “baseUrl”: {{ routes.product_recommendations_url | json }},
+    “productId”: {{ product.id | json }},
+    “limit”: 7
+}'>
+    <div class="keen-slider-wrap">
+        <ul class="flex f-grid--m--desktop f-grid--s--tablet" data-recommended-products-container data-keen-slider='{{ slider_settings }}'></ul>
+    </div>
+</div>
+
+      
+{% schema %}
+    {
+        "name":"BB - Recommendations",
+        "presets":[
+            {
+                "name":"BB - Recommendations"
+            }
+        ]
+    }
+{% endschema %}
+    

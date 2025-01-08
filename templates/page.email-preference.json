@@ -1,0 +1,68 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "bs_desvhop_email_preferences_TTXdqE": {
+      "type": "bs-desvhop__email-preferences",
+      "blocks": {
+        "button_FHPkhd": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop latest arrivals",
+            "button_url": "shopify:\/\/collections\/new-arrivals"
+          }
+        },
+        "button_UG9YBq": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop best-sellers",
+            "button_url": "shopify:\/\/collections\/best-sellers"
+          }
+        },
+        "button_qgn3ge": {
+          "type": "button",
+          "settings": {
+            "button_text": "Find your perfect product",
+            "button_url": "shopify:\/\/pages\/quiz"
+          }
+        },
+        "button_8U3tt4": {
+          "type": "button",
+          "settings": {
+            "button_text": "Explore journals",
+            "button_url": "shopify:\/\/blogs\/health-journal"
+          }
+        },
+        "text_link_7TiidD": {
+          "type": "text_link",
+          "settings": {
+            "link_text": "Close",
+            "link_url": "\/"
+          }
+        }
+      },
+      "block_order": [
+        "button_FHPkhd",
+        "button_UG9YBq",
+        "button_qgn3ge",
+        "button_8U3tt4",
+        "text_link_7TiidD"
+      ],
+      "settings": {
+        "background_image": "shopify:\/\/shop_images\/Eat_Immunity_213_1.png",
+        "logo": "shopify:\/\/shop_images\/Healf_NewLogo_v2_3.png",
+        "title": "<p>Thank you for updating<\/p><p> your preferences<\/p>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "bs_desvhop_email_preferences_TTXdqE"
+  ]
+}

@@ -1,0 +1,333 @@
+{% assign ss = section.settings %}
+
+{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+{%- paginate blog.articles by 10 -%}
+  <div class="main-blog page-width section-{{ section.id }}-padding">
+    <button class="tapcart-back" style="margin-top: 20px;">{% include 'icon-chevron' %}Back</button>
+    <div class="blog-title__container">
+      <h1 class="title--primary">{{ ss.title }}</h1>
+      <div id="search-container">
+        <div id="search-results" class="wrapper"></div>
+        <div id="search-results__container">
+          <input type="text" id="search-input" placeholder="Search articles..." aria-label="Search Articles">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15.207" height="15.207" viewBox="0 0 15.207 15.207">
+            <g id="search_8_" data-name="search (8)" transform="translate(-2.5 -2.5)">
+            <circle id="Ellipse_2" data-name="Ellipse 2" cx="6.222" cy="6.222" r="6.222" transform="translate(3 3)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></circle>
+            <line id="Line_2" data-name="Line 2" x1="3.383" y1="3.383" transform="translate(13.617 13.617)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></line>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
+      {%- for article in blog.articles -%}
+        <div class="blog-articles__article article">
+          {%- if forloop.index == 1 -%}
+            {% render 'BB-article-card',
+              article: article,
+              media_aspect_ratio: 1.66,
+              show_date: ss.show_date,
+              show_author: ss.show_author,
+              show_excerpt: ss.show_excerpt,
+              excerpt_word_count: ss.excerpt_word_count_first,
+              show_tags: ss.show_tags,
+              show_button: true
+            %}
+          {%- else -%}
+            {% render 'BB-article-card',
+              article: article,
+              media_aspect_ratio: 1.66,
+              show_date: ss.show_date,
+              show_author: ss.show_author,
+              show_excerpt: ss.show_excerpt,
+              excerpt_word_count: ss.excerpt_word_count,
+              show_tags: ss.show_tags
+            %}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}
+<script type="text/javascript">
+  window.onload = function() {
+    var button = document.querySelector('.tapcart-back');
+    if(window.Tapcart && window.Tapcart.isInitialized){
+      button.addEventListener('click', function() {
+        Tapcart.actions.openScreen({
+            destination: { type: "internal", url: "/home" }
+        });
+      });
+    } else {
+      button.addEventListener('click', function() {
+        window.location.href = 'https://healf.com/';
+      });
+    }
+  };
+</script>
+<style>
+  .tapcart-back svg {
+      transform: rotate(90deg);
+  }
+  #search-container {
+    width: 280px;
+    position: relative;
+  }
+  #search-results {
+  position: absolute;
+    z-index: 2;
+    top: 52px;
+    height: 430px;
+    overflow: scroll;
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-radius: 4px 4px 0 0;
+  }
+  #search-results__container {
+    display: flex;
+    background-color: white;
+    padding: 5px;
+    align-items: center;
+    border-radius: 4px 4px 0 0;
+    border: 2px solid #f7f7f7;
+    position: relative;
+  }
+  #search-results__container input {
+    flex-basis: 100%;
+    padding-left: 7px;
+    border: none;
+    font-size: 14px;
+  }
+  #search-results .article-content {
+    display: flex;
+  }
+  #search-results .article-card__image {
+    width: 25%;
+  }
+  #search-results .article-card__info {
+    width: 75%;
+  }
+  #search-results .article-card__title {
+    height: 100%;
+    font-family: 'Avenir';
+    font-weight: 400;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+  }
+  @media (max-width: 834px) {
+    #search-results .article-card__image {
+      width: 50%;
+    }
+    #search-results .article-card__image .image-element-wrapper {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
+</style>
+
+<script>
+  let searchThrottle;
+  let searchThrottleTimeout = 200; // 200ms before firing search (so typing doesnt count as multiple searches)
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var searchInput = document.getElementById('search-input');
+    var resultsContainer = document.getElementById('search-results');
+
+    searchInput.addEventListener('input', function() {
+        if (searchThrottle) {
+          clearTimeout(searchThrottle)
+        }
+        searchThrottle = setTimeout(runSearch, searchThrottleTimeout);
+    });
+
+    function runSearch() {
+      var searchQuery = searchInput.value;
+      console.log('run search fired')
+
+      if (searchQuery.trim() !== '') {
+        console.log(`/search?type=article&q=${encodeURIComponent(searchQuery)}`)
+          fetch(`/search?type=article&q=${encodeURIComponent(searchQuery)}`)
+              .then(response => response.text())
+              .then(htmlText => {
+                  displayResults(htmlText);
+              })
+              .catch(error => console.error('Error:', error));
+      } else {
+          resultsContainer.innerHTML = '<p>Please enter a search term.</p>';
+      }
+    }
+
+    function displayResults(htmlText) {
+      resultsContainer.innerHTML = '';
+      var updatedHtmlText = htmlText.replace(/_30x30/g, '_400x400').replace(/class="placeholder"/g, '');
+
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(updatedHtmlText, 'text/html');
+
+      var articles = doc.querySelectorAll('#ProductGridContainer article');
+      if (articles.length > 0) {
+          var limitedArticles = Array.from(articles).slice(0, 4); // Get only first 4 articles
+          limitedArticles.map((n) => console.log(n))
+          var articlesHtml = limitedArticles.map(article => article.outerHTML).join('');
+          resultsContainer.innerHTML = articlesHtml;
+      } else {
+          resultsContainer.innerHTML = '<p>No articles found.</p>';
+      }
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-blog.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-blog.settings.header.content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.main-blog.settings.layout.options__1.label"
+        },
+        {
+          "value": "collage",
+          "label": "t:sections.main-blog.settings.layout.options__2.label"
+        }
+      ],
+      "default": "collage",
+      "label": "t:sections.main-blog.settings.layout.label",
+      "info": "t:sections.main-blog.settings.layout.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_image.label"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-blog.settings.image_height.options__1.label"
+        },
+        {
+          "value": "small",
+          "label": "t:sections.main-blog.settings.image_height.options__2.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.main-blog.settings.image_height.options__3.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.main-blog.settings.image_height.options__4.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.main-blog.settings.image_height.label",
+      "info": "t:sections.main-blog.settings.image_height.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "default": true,
+      "label": "t:sections.main-blog.settings.show_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "default": false,
+      "label": "t:sections.main-blog.settings.show_author.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "default": false,
+      "label": "Show Tags"
+    },
+    {
+        "type": "checkbox",
+        "id": "show_excerpt",
+        "default": true,
+        "label": "Show Excerpt"
+    },
+    {
+        "type": "number",
+        "id": "excerpt_word_count",
+        "default": 10,
+        "label": "Excerpt word count"
+    },
+    {
+        "type": "number",
+        "id": "excerpt_word_count_first",
+        "default": 10,
+        "label": "Excerpt word count first article"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-blog.settings.paragraph.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}

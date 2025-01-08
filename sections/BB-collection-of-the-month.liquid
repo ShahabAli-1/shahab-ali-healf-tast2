@@ -1,0 +1,78 @@
+{% assign ss = section.settings %}
+
+<div class="collection-month__container {{ ss.class }}">
+    {% if ss.image != blank %}
+        {% render 'image-element', image: ss.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--contain'%}
+    {%- endif -%}
+
+    <div class="wrapper">
+        <div class="collection-month__card">
+            {% if ss.title != blank %}
+                <h3>{{ ss.title }}</h3>
+            {%- endif -%}
+            {% if ss.text != blank %}
+                {{ ss.text }}
+            {%- endif -%}
+            {% if ss.button_text != blank %}
+                <a href="{{ ss.button_link }}">
+                    {{ ss.button_text }}
+                    {% render 'icon-arrow' %}
+                </a>
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+    {
+        "name": "BB - Collection of month",
+        "tag": "section",
+        "class": "collection-month",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Collection of month"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "image_picker",
+                "id": "image_mobile",
+                "label": "Image Mobile"
+            },
+            {
+                "type": "text",
+                "id": "class",
+                "label": "Custom class"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "text",
+                "label": "Text"
+            },
+            {
+                "type": "text",
+                "id": "button_text",
+                "label": "Button Text"
+            },
+            {
+                "type": "url",
+                "id": "button_link",
+                "label": "Button Link"
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Collection of month"
+            }
+        ]
+    }
+{% endschema %}

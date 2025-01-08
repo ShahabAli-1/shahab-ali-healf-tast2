@@ -1,0 +1,96 @@
+.free-shipping-header[data-test-name="new-cart-drawer"].ab__test--active-test h3 {
+    font-size: 1.7rem;
+    line-height: 20.78px;
+    letter-spacing: -0.9px;
+    margin-bottom: 0px;
+}
+
+.free-shipping-notice[data-test-name="new-cart-drawer"].ab__test--active-test p {
+    font-size: 18px;
+    line-height: 23.16px;
+    letter-spacing: 0.2px;
+    margin: 0 !important;
+}
+
+.mini__cart__container[data-test-name="new-cart-drawer"].ab__test--active-test {
+    margin: 20px;
+    margin-left: 0;
+    width: 562px;
+    border-radius: 10px;
+    padding: 0;
+}
+
+.mini__cart__container[data-test-name="new-cart-drawer"].ab__test--active-test>header {
+    margin: 0;
+    padding: 0;
+}
+
+.mini__cart__container[data-test-name="new-cart-drawer"].ab__test--active-test #announcementBarButton {
+    background: linear-gradient(252.53deg, #4285F4 5.5%, #000000 87.79%);
+    font-size: 1.4rem;
+    line-height: 21.86px;
+}
+
+.mini__cart__container[data-test-name="new-cart-drawer"].ab__test--active-test>header .close {
+    position: absolute;
+    right: 20px;
+    top: 65px;
+    padding: 0;
+    width: 29px;
+    display: flex;
+    height: 29px;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+}
+
+.mini__cart__container[data-test-name="new-cart-drawer"].ab__test--active-test>header .close svg {
+    color: black
+}
+
+.mini__cart__container[data-test-name="new-cart-drawer"].ab__test--active-test .main-items-scroll {
+    padding: 35px;
+    padding-bottom: 15px;
+}
+
+.continue-shopping-prompt[data-test-name="new-cart-drawer"].ab__test--active-test {
+    display: block !important;
+    margin-bottom: 12px;
+    padding: 0
+}
+
+.continue-shopping-prompt[data-test-name="new-cart-drawer"].ab__test--active-test a {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 23.16px;
+    letter-spacing: 0.2px;
+}
+
+.ab__test--active-test[data-test-name="new-cart-drawer"] .choose-your-gift--border[data-test-name="new-cart-drawer"],
+.choose-your-gift--border[data-test-name="new-cart-drawer"].ab__test--active-test {
+    display: none;
+}
+
+.ab__test--active-test[data-test-name="new-cart-drawer"] .choose-your-gift[data-test-name="new-cart-drawer"],
+.choose-your-gift[data-test-name="new-cart-drawer"].ab__test--active-test {
+    font-family: Avenir;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 23.16px;
+    letter-spacing: -0.03em;
+}
+
+.choose-your-gift[data-test-name="new-cart-drawer"].ab__test--active-test p {
+    max-width: 50%;
+}
+
+@media (max-width: 450px) {
+    .mini__cart__container[data-test-name="new-cart-drawer"].ab__test--active-test .main-items-scroll {
+        padding: 35px 15px;
+    }
+
+
+    .mini__cart__container[data-test-name="new-cart-drawer"].ab__test--active-test {
+        margin: 5px;
+    }
+}

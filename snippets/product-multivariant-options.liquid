@@ -1,0 +1,76 @@
+{% comment %}
+  Renders product variant options
+
+  Accepts:
+  - product: {Object} product object.
+  - option: {Object} current product_option object.
+  - block: {Object} block object.
+
+  Usage:
+  {% render 'product-variant-options',
+    product: product,
+    option: option,
+    block: block
+  %}
+{% endcomment %}
+{%- liquid
+  assign variants_available_arr = product.variants | map: 'available'
+  assign variants_image_arr = product.variants | map: 'image'
+  assign variants_id_arr = product.variants | map: 'id'
+  assign variants_option_arr = product.variants | map: 'option1'
+  assign product_form_id = 'product-form-' | append: section.id
+-%}
+
+{%- for value in option.values -%}
+  {%- liquid
+    assign value_image = ''
+    assign value_id = ''
+    assign option_disabled = true
+    for option_name in variants_option_arr
+      if variants_option_arr[forloop.index0] == value and variants_image_arr[forloop.index0]
+        assign value_image = variants_image_arr[forloop.index0]
+        assign value_id = variants_id_arr[forloop.index0]
+      endif
+      if variants_option_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
+        assign option_disabled = false
+      endif
+    endfor
+  -%}
+
+  {% unless option_disabled %}
+    <div class='swiper-slide'>
+        <div class="product-image-area">
+          {% render "image-element", image: value_image, image_mobile: blank, size: "400x", alt: product.title, show_placeholder: true, extra_class: "object-fit--contain" %}
+        </div>
+        <label class='swiper-slide label-{{ value_id }}' for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+          {{ value }}
+          <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
+        </label>
+        <div class='swiper-background'></div>
+    </div>
+  {% endunless %}
+{%- endfor -%}
+
+<script>
+const currentUrl = window.location.href;
+const pattern = /variant=(\d+)/;
+const match = currentUrl.match(pattern);
+
+if (match) {
+  const variantNumbers = match[1];
+  const className = `id-${variantNumbers}`;
+  const labelName = `label-${variantNumbers}`;
+
+  const element = document.querySelector(`.${className}`);
+  const label = document.querySelector(`.${labelName}`);
+
+  if (element) {
+    setTimeout(() => {
+    element.click();
+    label.click();
+    }, 1000); // 1000 milliseconds = 1 second
+  }
+} else {
+  console.log("No match found");
+}
+</script>

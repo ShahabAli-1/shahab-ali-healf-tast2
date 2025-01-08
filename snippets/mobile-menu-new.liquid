@@ -1,0 +1,578 @@
+<!-- mobile menu button -->
+{%- if ss.menu_mobile_new != blank -%}
+  <header-drawer data-breakpoint="tablet" class="new-header-drawer">
+    <details class="menu-drawer-container">
+      <summary
+        class="header__icon header__icon--menu header__icon--summary link focus-inset"
+        aria-label="{{ 'sections.header.menu' | t }}"
+      >
+        <span class="burger-menu-inner"> </span>
+      </summary>
+      <div id="menu-drawer" class="new-menu-drawer menu-drawer motion-reduce" tabindex="-1">
+        <div class="menu-drawer__inner-container ab__test-hide" data-test-name="floating-menu">
+          <div class="menu-drawer__navigation-container">
+            <nav class="menu-drawer__navigation">
+              <ul class="top-menu-drawer__menu menu-drawer__menu list-menu" role="list">
+                {% assign i = 1 %}
+                {%- for link in ss.menu_mobile_new.links -%}
+                  <li
+                    {% if link.title == 'Eat'
+                      or link.title == 'Move'
+                      or link.title == 'Mind'
+                      or link.title == 'Sleep'
+                    %}
+                      class="special-menu-item{% if forloop.first %} special-menu-item__first{% endif %}"
+                    {% endif %}
+                  >
+                    {%- if link.links != blank -%}
+                      <div
+                        id="main-menu__container-{{ forloop.index }}"
+                        class="main-menu__container{% if forloop.first %} menu-opening open{% endif %}"
+                      >
+                        <p
+                          class="menu-drawer__menu-item menu-list"
+                          data-class-change='
+                            [
+                                {
+                                    "target": ".main-menu__container",
+                                    "class": "open",
+                                    "method": "remove",
+                                    "on": "click",
+                                    "preventDefault": true
+                                },
+                                {
+                                    "target": "#main-menu__container-{{ forloop.index }}",
+                                    "class": "open",
+                                    "method": "add",
+                                    "on": "click",
+                                    "preventDefault": true
+                                }
+                            ]
+                          '
+                        >
+                          {{ link.title | escape }}
+                        </p>
+
+                        <div
+                          id="link-{{ link.title | escape }}"
+                          class="menu-drawer__submenu menu-drawer__submenu-main motion-reduce"
+                          tabindex="-1"
+                        >
+                          <div class="menu-drawer__inner-submenu">
+                            <ul class="menu-drawer__menu-main list-menu" role="list" tabindex="-1">
+                                <li>
+                                  <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/bfcm24">
+                                    <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
+                                      style='background: var(--BF, linear-gradient(90deg, #EEAA4D 0%, #A8B59B 48.79%, #7585D4 98.8%));
+                                      background-clip: text;
+                                      -webkit-background-clip: text;
+                                      -webkit-text-fill-color: transparent;'>
+                                    Black Friday
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.329508 1.19813C0.689466 0.838172 1.27307 0.838172 1.63303 1.19813L6.51165 6.07675L11.3903 1.19813C11.7502 0.838173 12.3338 0.838173 12.6938 1.19813C13.0538 1.55809 13.0538 2.1417 12.6938 2.50165L7.16341 8.03203C6.80345 8.39199 6.21985 8.39199 5.85989 8.03203L0.329508 2.50165C-0.0304497 2.1417 -0.0304496 1.55809 0.329508 1.19813Z" fill="black"></path>
+                                    </svg>
+                                    </summary>
+                                    </a>
+                                </li>
+                              {%- for childlink in link.links -%}
+                                <li>
+                                  {%- unless childlink.links == blank or childlink.title contains 'Discover' -%}
+                                    <details {% if childlink.title contains 'Health Goal' %}class="menu-opening" open{% endif %}>
+                                      <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                        {{ childlink.title | escape | split: '[Collection]' | first }}
+                                          {% render 'icon-chevron' %}
+                                      </summary>
+
+                                      <ul>
+                                        {%- for grandchildlink in childlink.links -%}
+                                          {% assign the_product = grandchildlink.object %}
+                                          <li class="grandchild-li">
+                                            {% if childlink.title contains '[Collection]' %}
+                                              <div>
+                                                {% include 'collection-item',
+                                                  product: the_product,
+                                                  extra_class: 'simple-item'
+                                                %}
+                                              </div>
+                                            {% endif %}
+                                            <a
+                                              href="{{ grandchildlink.url }}"
+                                              class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                              {% if grandchildlink.current %}
+                                                aria-current="page"
+                                              {% endif %}
+                                            >
+                                              {{ grandchildlink.title | escape }}
+                                            </a>
+                                          </li>
+                                        {%- endfor -%}
+                                      </ul>
+                                    </details>
+                                  {%- endunless -%}
+                                </li>
+                              {%- endfor -%}
+                                <li>
+                                  <a href="{{ link.url }}">
+                                    <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                    Shop All {{ link.title }}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.329508 1.19813C0.689466 0.838172 1.27307 0.838172 1.63303 1.19813L6.51165 6.07675L11.3903 1.19813C11.7502 0.838173 12.3338 0.838173 12.6938 1.19813C13.0538 1.55809 13.0538 2.1417 12.6938 2.50165L7.16341 8.03203C6.80345 8.39199 6.21985 8.39199 5.85989 8.03203L0.329508 2.50165C-0.0304497 2.1417 -0.0304496 1.55809 0.329508 1.19813Z" fill="black"></path>
+                                    </svg>
+                                    </summary>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="mega-menu-general" style='padding: 10px 0; flex-wrap: wrap;'>
+                              <a class="btn" style="width: 100%; margin-bottom: 10px;" href="{{ link.url }}">Shop all {{ link.title | upcase }}</a>
+                              <a class="btn" style="margin-right: 5px !important; width: calc(50% - 10px);" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/new-arrivals">Shop latest arrivals</a>
+                              <a class="btn" style="margin-right: 0px !important; margin-left: 5px !important; width: calc(50% - 10px);"  href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/best-sellers">Shop best sellers</a>
+                            </div>
+                            <div class="mega-menu__trending">
+                              {%- for block in section.blocks -%}
+                                {% assign bs = block.settings %}
+
+                                {%- if block.type == 'list' and bs.show_under == link.title %}
+                                  <h3>Trending</h3>
+                                  {% assign input = bs.trending %}
+                                  {% assign items = input | split: ',' %}
+                                  <div class="trending-buttons">
+                                  {% for item in items %}
+                                    {% assign formatted_item = item | replace: '-', ' ' | capitalize %}
+                                    {% if formatted_item == 'Whoop' %}
+                                      {% assign formatted_item = 'WHOOP' %}
+                                    {% elsif formatted_item == 'Lmnt electrolytes' %}
+                                      {% assign formatted_item = 'LMNT Electrolytes' %}
+                                    {% elsif formatted_item == 'Vitamin d' %}
+                                      {% assign formatted_item = 'Vitamin D' %}
+                                    {% elsif formatted_item == 'Andrew huberman approved' %}
+                                      {% assign formatted_item = 'Andrew Huberman approved' %}
+                                    {% elsif formatted_item == 'Lions mane' %}
+                                      {% assign formatted_item = "Lion's mane" %}
+                                    {% endif %}
+                                    <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/{{item}}" class="btn liquid-button">{{ formatted_item }}</a>
+                                  {% endfor %}
+                                  </div>
+                                {%- endif -%}
+                              {%- endfor -%}
+                            </div>
+                            <div class="mega-menu-categories" style="margin: 0 16px;">
+                              <div class="mega-menu-categories__container">
+                              {%- for childlink in link.links -%}
+                                  {%- if childlink.links == blank -%}
+                                    {%- assign stripped_url = childlink.url | replace: "https://healf.com", "" -%}
+                                    {%- assign collection_handle = stripped_url | split: '/' | last -%}
+                                    {%- assign collection_image = collections[collection_handle] -%}
+                                    <a class="image__area category-slide" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}{{ stripped_url }}">
+                                    {% render 'image-element', image: collection_image.image, `image_mobile: bs.image_mobile, size: '1600x', extra_class: 'object-fit--cover'  %}
+                                    <p>{{ collection_image.title }}</p>
+                                    </a>
+                                  </a>
+                                {% endif %}
+                              {% endfor %}
+                              </div>
+                            </div>
+                            <div class="mega-menu-general" style='padding: 20px 0 90px;'>
+                              <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/pages/quiz">Find your perfect products</a>
+                              <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/pages/about-us">About us</a>
+                            </div>
+                            <div class="mega-menu-blogs" style="display: none;">
+                              <h3 style="font-size: 24px; padding-bottom: 8px; letter-spacing: -.5px;">Latest journals</h3>
+
+                              <div>
+                                {% assign recent_articles = ss.blog.articles %}
+                                {% assign i = 0 %}
+                                {%  assign tag = link.title | upcase %}
+                                {% for article in recent_articles %}
+                                  {% if i < 3 and article.tags contains tag %}
+                                    <div class="blog__post">
+                                        {% render 'BB-article-card', blog: ss.blog, article: article, media_aspect_ratio: 1.66, show_button: true %}
+                                    </div>
+                                    <hr style="border-top: 1px solid #000; margin: 8px 0 16px;">
+                                    {% assign i = i | plus: 1 %}
+                                  {% endif %}
+                                {% endfor %}
+                              </div>
+                            </div>
+                            <div class="mega-menu-general" style="border-bottom: none; display: none;">
+                              <a class="btn" href="/blogs/health-journal">Explore all journals</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="menu-drawer__inner-container ab__test" data-test-name="floating-menu">
+          <div class="menu-drawer__navigation-container">
+            <nav class="menu-drawer__navigation">
+              <ul class="top-menu-drawer__menu menu-drawer__menu list-menu" role="list">
+                {% assign i = 1 %}
+                {%- for link in ss.menu_mobile_new.links -%}
+                  <li
+                    {% if link.title == 'Eat'
+                      or link.title == 'Move'
+                      or link.title == 'Mind'
+                      or link.title == 'Sleep'
+                    %}
+                      class="special-menu-item{% if forloop.first %} special-menu-item__first{% endif %}"
+                    {% endif %}
+                  >
+                    {%- if link.links != blank -%}
+                      <div
+                        id="main-menu__container-{{ forloop.index }}"
+                        class="main-menu__container{% if forloop.first %} menu-opening open{% endif %}"
+                      >
+                        <p
+                          class="menu-drawer__menu-item menu-list"
+                          data-class-change='
+                            [
+                                {
+                                    "target": ".main-menu__container",
+                                    "class": "open",
+                                    "method": "remove",
+                                    "on": "click",
+                                    "preventDefault": true
+                                },
+                                {
+                                    "target": "#main-menu__container-{{ forloop.index }}",
+                                    "class": "open",
+                                    "method": "add",
+                                    "on": "click",
+                                    "preventDefault": true
+                                }
+                            ]
+                          '
+                        >
+                          {{ link.title | escape }}
+                        </p>
+
+                        <div
+                          id="link-{{ link.title | escape }}"
+                          class="menu-drawer__submenu menu-drawer__submenu-main motion-reduce"
+                          tabindex="-1"
+                        >
+                          <div class="menu-drawer__inner-submenu">
+                            <ul class="menu-drawer__menu-main list-menu" role="list" tabindex="-1">
+                              {%- for childlink in link.links -%}
+                                <li>
+                                  {%- unless childlink.links == blank or childlink.title contains 'Discover' -%}
+                                    <details {% if childlink.title contains 'Health Goal' %}class="menu-opening" open{% endif %}>
+                                      <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                        {{ childlink.title | escape | split: '[Collection]' | first }}
+                                          {% render 'icon-chevron' %}
+                                      </summary>
+
+                                      <ul>
+                                        {%- for grandchildlink in childlink.links -%}
+                                          {% assign the_product = grandchildlink.object %}
+                                          <li class="grandchild-li">
+                                            {% if childlink.title contains '[Collection]' %}
+                                              <div>
+                                                {% include 'collection-item',
+                                                  product: the_product,
+                                                  extra_class: 'simple-item'
+                                                %}
+                                              </div>
+                                            {% endif %}
+                                            <a
+                                              href="{{ grandchildlink.url }}"
+                                              class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                              {% if grandchildlink.current %}
+                                                aria-current="page"
+                                              {% endif %}
+                                            >
+                                              {{ grandchildlink.title | escape }}
+                                            </a>
+                                          </li>
+                                        {%- endfor -%}
+                                      </ul>
+                                    </details>
+                                  {%- endunless -%}
+                                </li>
+                              {%- endfor -%}
+                                <li>
+                                  <a href="{{ link.url }}">
+                                    <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
+                                    Shop All {{ link.title }}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.329508 1.19813C0.689466 0.838172 1.27307 0.838172 1.63303 1.19813L6.51165 6.07675L11.3903 1.19813C11.7502 0.838173 12.3338 0.838173 12.6938 1.19813C13.0538 1.55809 13.0538 2.1417 12.6938 2.50165L7.16341 8.03203C6.80345 8.39199 6.21985 8.39199 5.85989 8.03203L0.329508 2.50165C-0.0304497 2.1417 -0.0304496 1.55809 0.329508 1.19813Z" fill="black"></path>
+                                    </svg>
+                                    </summary>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="mega-menu-general" style='padding: 10px 0; flex-wrap: wrap;'>
+                              <a class="btn" style="width: 100%; margin-bottom: 10px;" href="{{ link.url }}">Shop all {{ link.title | upcase }}</a>
+                              <a class="btn" style="margin-right: 5px !important; width: calc(50% - 10px);" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/new-arrivals">Shop latest arrivals</a>
+                              <a class="btn" style="margin-right: 0px !important; margin-left: 5px !important; width: calc(50% - 10px);"  href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/best-sellers">Shop best sellers</a>
+                            </div>
+                            <div class="mega-menu__trending">
+                              {%- for block in section.blocks -%}
+                                {% assign bs = block.settings %}
+
+                                {%- if block.type == 'list' and bs.show_under == link.title %}
+                                  <h3>Trending</h3>
+                                  {% assign input = bs.trending %}
+                                  {% assign items = input | split: ',' %}
+                                  <div class="trending-buttons">
+                                  {% for item in items %}
+                                    {% assign formatted_item = item | replace: '-', ' ' | capitalize %}
+                                    {% if formatted_item == 'Whoop' %}
+                                      {% assign formatted_item = 'WHOOP' %}
+                                    {% elsif formatted_item == 'Lmnt electrolytes' %}
+                                      {% assign formatted_item = 'LMNT Electrolytes' %}
+                                    {% elsif formatted_item == 'Vitamin d' %}
+                                      {% assign formatted_item = 'Vitamin D' %}
+                                    {% elsif formatted_item == 'Andrew huberman approved' %}
+                                      {% assign formatted_item = 'Andrew Huberman approved' %}
+                                    {% elsif formatted_item == 'Lions mane' %}
+                                      {% assign formatted_item = "Lion's mane" %}
+                                    {% endif %}
+                                    <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/{{item}}" class="btn liquid-button">{{ formatted_item }}</a>
+                                  {% endfor %}
+                                  </div>
+                                {%- endif -%}
+                              {%- endfor -%}
+                            </div>
+                            <div class="mega-menu-categories" style="margin: 0 16px;">
+                              <div class="mega-menu-categories__container">
+                              {%- for childlink in link.links -%}
+                                  {%- if childlink.links == blank -%}
+                                    {%- assign stripped_url = childlink.url | replace: "https://healf.com", "" -%}
+                                    {%- assign collection_handle = stripped_url | split: '/' | last -%}
+                                    {%- assign collection_image = collections[collection_handle] -%}
+                                    <a class="image__area category-slide" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}{{ stripped_url }}">
+                                    {% render 'image-element', image: collection_image.image, `image_mobile: bs.image_mobile, size: '1600x', extra_class: 'object-fit--cover'  %}
+                                    <p>{{ collection_image.title }}</p>
+                                    </a>
+                                  </a>
+                                {% endif %}
+                              {% endfor %}
+                              </div>
+                            </div>
+                            <div class="mega-menu-general" style='padding: 20px 0 90px;'>
+                              <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/pages/quiz">Find your perfect products</a>
+                              <a class="btn" href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/pages/about-us">About us</a>
+                            </div>
+                            <div class="mega-menu-blogs" style="display: none;">
+                              <h3 style="font-size: 24px; padding-bottom: 8px; letter-spacing: -.5px;">Latest journals</h3>
+
+                              <div>
+                                {% assign recent_articles = ss.blog.articles %}
+                                {% assign i = 0 %}
+                                {%  assign tag = link.title | upcase %}
+                                {% for article in recent_articles %}
+                                  {% if i < 3 and article.tags contains tag %}
+                                    <div class="blog__post">
+                                        {% render 'BB-article-card', blog: ss.blog, article: article, media_aspect_ratio: 1.66, show_button: true %}
+                                    </div>
+                                    <hr style="border-top: 1px solid #000; margin: 8px 0 16px;">
+                                    {% assign i = i | plus: 1 %}
+                                  {% endif %}
+                                {% endfor %}
+                              </div>
+                            </div>
+                            <div class="mega-menu-general" style="border-bottom: none; display: none;">
+                              <a class="btn" href="/blogs/health-journal">Explore all journals</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </details>
+  </header-drawer>
+{%- endif -%}
+
+<style>
+.menu-drawer__inner-submenu .menu-drawer__menu-main>li:last-of-type {
+  display: none !important;
+}
+.menu-drawer__menu-main details.menu-opening svg {
+  transition: all 0.35s ease;
+}
+.menu-drawer__menu-main details.menu-opening[open] svg {
+  transform: rotate(0deg) !important;
+}
+details.menu-opening[open] ul .grandchild-li{
+ padding-left: 16px;
+ color: #838383;
+}
+.new-header-drawer .mega-menu-general {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0 20px;
+  margin: 0 16px;
+}
+.new-header-drawer .mega-menu-general:last-of-type {
+  justify-content: start;
+  padding: 10px 0 90px;
+}
+.new-header-drawer .mega-menu-general::-webkit-scrollbar {
+    display: none;
+}
+.new-header-drawer .mega-menu-general .btn {
+  background-color: #f6f6f6;
+  border-color: #f6f6f6;
+  color: #000;
+  min-width: fit-content;
+  margin-right: 10px;
+}
+.new-header-drawer .mega-menu__trending h3, .new-header-drawer .mega-menu-categories h3 {
+  font-size: 24px;
+  padding: 8px 16px 8px;
+  letter-spacing: -.5px;
+}
+.new-header-drawer .mega-menu__trending {
+  padding-bottom: 12px;
+}
+.new-header-drawer .mega-menu-categories .image__area p {
+  position: absolute;
+  display: block;
+  transform: translateY(-50%);
+  top: 50%;
+  text-align: center;
+  color: #fff;
+  left: 0;
+  right: 0;
+}
+.new-header-drawer .mega-menu-categories__container {
+    display: flex;
+    overflow: scroll;
+}
+.new-header-drawer .mega-menu-categories__container::-webkit-scrollbar {
+    display: none;
+}
+.new-header-drawer .category-slide {
+  position: relative;
+  min-width: 35%;
+  margin-right: 16px;
+}
+.new-header-drawer .mega-menu-categories__container .category-slide .image-element-wrapper {
+  border-radius: 4px;
+  padding-bottom: 100%;
+}
+.new-header-drawer .mega-menu-blogs {
+  padding: 20px 16px 0;
+}
+.new-header-drawer .mega-menu-blogs .article-card {
+  display: flex;
+}
+.new-header-drawer .mega-menu-blogs .article-card__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+}
+.new-header-drawer .mega-menu-blogs a.btn.article__btn {
+  padding: 0;
+  width: fit-content;
+  border: none;
+  background-color: #fff;
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.new-header-drawer .mega-menu-blogs .article-card .article-content {
+  min-width: 50%;
+}
+.new-header-drawer .mega-menu-blogs .blog__post {
+  margin-right: 0;
+}
+.new-header-drawer .mega-menu-blogs .article-card .article-card__title {
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 10px;
+}
+.new-header-drawer .mega-menu-blogs .article-card .article-card__image .image-element-wrapper {
+  margin: 0;
+}
+.new-header-drawer .mega-menu-categories h3 {
+  padding: 16px 0;
+  letter-spacing: -.5px;
+}
+.new-header-drawer .trending-buttons {
+  display: flex;
+  padding: 0 16px;
+  overflow: scroll;
+}
+.new-header-drawer .trending-buttons::-webkit-scrollbar {
+    display: none;
+}
+.new-header-drawer .trending-buttons .liquid-button {
+  min-width: fit-content;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.new-header-drawer .new-menu-drawer .main-menu__container .menu-drawer__menu-item {
+  font-size: 24px !important;
+}
+.new-header-drawer .new-menu-drawer .main-menu__container .menu-list {
+  font-size: 24px !important;
+}
+.new-header-drawer .new-menu-drawer .top-menu-drawer__menu .special-menu-item {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: fit-content !important;
+}
+.new-header-drawer .menu-drawer__menu-main li {
+  border-bottom: none !important;
+}
+.new-header-drawer .menu-drawer-container #menu-drawer .menu-drawer__navigation .top-menu-drawer__menu::before {
+  left: 0 !important;
+  right: 0 !important;
+  top: 52px !important;
+  margin: 0 auto !important;
+  background-color: #000;
+  width: calc(100% - 32px) !important;
+}
+.new-header-drawer .menu-drawer-container #menu-drawer .menu-drawer__navigation .top-menu-drawer__menu .special-menu-item .menu-drawer__submenu-main .menu-drawer__menu-main details .menu-drawer__close-button {
+  justify-content: inherit !important;
+  padding: 12px 0px !important;
+  font-size: 24px !important;
+  width: 90% !important;
+  margin: 0 auto !important;
+  font-weight: 400 !important;
+}
+.new-header-drawer .main-menu__container.open>.menu-drawer__menu-item {
+  padding-bottom: 15px !important;
+}
+.new-header-drawer .special-menu-item:nth-of-type(1) .main-menu__container.open>.menu-drawer__menu-item {
+  border-bottom: 2px solid #2A735D !important;
+}
+.new-header-drawer .special-menu-item:nth-of-type(2) .main-menu__container.open>.menu-drawer__menu-item {
+  border-bottom: 2px solid #577AD4!important;
+}
+.new-header-drawer .special-menu-item:nth-of-type(3) .main-menu__container.open>.menu-drawer__menu-item {
+  border-bottom: 2px solid #F9D685 !important;
+}
+.new-header-drawer .special-menu-item:nth-of-type(4) .main-menu__container.open>.menu-drawer__menu-item {
+  border-bottom: 2px solid #D25E2B !important;
+}
+.new-header-drawer .main-menu__container>.menu-drawer__menu-item {
+  justify-content: center !important;
+}
+.new-header-drawer .menu-drawer-container #menu-drawer .menu-drawer__navigation .top-menu-drawer__menu .special-menu-item summary.menu-drawer__menu-item>svg, .menu-drawer-container #menu-drawer .menu-drawer__navigation .top-menu-drawer__menu .special-menu-item a.menu-drawer__menu-item>svg {
+    width: 20px !important;
+    height: 11px !important;
+    transform: rotate(-90deg);
+}
+.new-header-drawer .menu-drawer-container #menu-drawer .menu-drawer__navigation .top-menu-drawer__menu .special-menu-item .menu-drawer__menu-item {
+    gap: 8px !important;
+    line-height: 19px !important;
+}
+
+.menu-drawer__inner-container .ab__test .menu-drawer-container #menu-drawer .menu-drawer__navigation .top-menu-drawer__menu {
+  border-radius: 15px;
+}
+</style>

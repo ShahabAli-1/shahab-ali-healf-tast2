@@ -1,0 +1,147 @@
+{% comment %}
+Stoked Inventory collection file, do not remove. Manage this through the stoked inventory & Sold app
+{% endcomment %}
+
+{% capture seperatorStyle %}
+  color:{{shop.metafields.stoked_inventory.collection_styles.value.separatorColor}};font-size:{{shop.metafields.stoked_inventory.collection_styles.value.seperatorTextSize}}px;font-weight:{{shop.metafields.stoked_inventory.collection_styles.value.separatorTextFontWeight}}
+{% endcapture %}
+
+{% capture inventoryTextStyle %}
+  color:{{shop.metafields.stoked_inventory.collection_styles.value.inventoryColor}};font-size:{{shop.metafields.stoked_inventory.collection_styles.value.inventoryTextSize}}px;font-weight:{{shop.metafields.stoked_inventory.collection_styles.value.inventoryTextFontWeight}}
+{% endcapture %}
+
+{% capture inventoryNumberStyle %}
+  color:{{shop.metafields.stoked_inventory.collection_styles.value.inventoryColor}};font-size:{{shop.metafields.stoked_inventory.collection_styles.value.inventoryTextSize}}px;font-weight:{{shop.metafields.stoked_inventory.collection_styles.value.inventoryNumberFontWeight}}
+{% endcapture %}
+
+{% capture soldTextStyle %}
+  color:{{shop.metafields.stoked_inventory.collection_styles.value.soldColor}};font-size:{{shop.metafields.stoked_inventory.collection_styles.value.soldTextSize}}px;font-weight:{{shop.metafields.stoked_inventory.collection_styles.value.soldTextFontWeight}}
+{% endcapture %}
+
+{% capture soldNumberStyle %}
+  color:{{shop.metafields.stoked_inventory.collection_styles.value.soldColor}};font-size:{{shop.metafields.stoked_inventory.collection_styles.value.soldTextSize}}px;font-weight:{{shop.metafields.stoked_inventory.collection_styles.value.soldNumberFontWeight}}
+{% endcapture %}
+
+{%- liquid
+  assign displayInventoryCount = shop.metafields.stoked_inventory.collection_styles.value.displayInventoryCount
+-%}
+
+{%- liquid
+  assign displaySoldCount = shop.metafields.stoked_inventory.collection_styles.value.displaySoldCount
+  assign soldLowerLimit = shop.metafields.stoked_inventory.collection_styles.value.soldShowLimitNumber | plus: 0
+  if shop.metafields.stoked_inventory.collection_styles.value.soldShowLimitEnabled
+    if product.metafields.stoked_inventory.sold_count <= soldLowerLimit
+     assign displaySoldCount = 'none'
+    endif
+  endif
+-%}
+
+{%- liquid
+  assign displaySeparator = ''
+  if displaySoldCount == 'none' or displayInventoryCount == 'none'
+    assign displaySeparator = 'none'
+  endif
+-%}
+
+{%- liquid
+   assign moreThanStockLimitNumber = shop.metafields.stoked_inventory.collection_styles.value.moreThanStockLimitNumber | plus: 0
+   assign lessThanStockLimitNumber = shop.metafields.stoked_inventory.collection_styles.value.lessThanStockLimitNumber | plus: 0
+-%}
+
+{%- liquid
+  assign overAllDisplay = "block"
+  if displaySoldCount == "none" and displaySeparator == "none" and displayInventoryCount == "none"
+    assign overAllDisplay = "none"
+  endif
+-%}
+
+{% capture topDivStyle %}
+  text-align:{{shop.metafields.stoked_inventory.collection_styles.value.textPosition}};padding-left:{{shop.metafields.stoked_inventory.collection_styles.value.paddingLeft}}px;padding-right:{{shop.metafields.stoked_inventory.collection_styles.value.paddingRight}}px;padding-top:{{shop.metafields.stoked_inventory.collection_styles.value.paddingTop}}px;padding-bottom:{{shop.metafields.stoked_inventory.collection_styles.value.paddingBottom}}px;display:{{overAllDisplay}}
+{% endcapture %}
+
+
+{%- if shop.metafields.stoked_inventory.collection_styles.value.arrangment == 'sold_first' -%}
+  <div class="inventory-alert stoked-badge {{ shop.metafields.stoked_inventory.collection_styles.value.labelDesignClass }}" id="stoked-inventory-alerts-collection-product-{{ product.id }}" style={{ topDivStyle }}>
+    <div class="stoked-badge-content animate__animated {{shop.metafields.stoked_inventory.collection_styles.value.boxAnimateClass}}" style="background: {{ shop.metafields.stoked_inventory.collection_styles.value.labelBackground }}">
+      <p>
+        <span style="display:{{ displaySoldCount }};word-break:break-word;white-space:normal">
+          <span style={{ soldTextStyle }}>
+             {{shop.metafields.stoked_inventory.collection_styles.value.soldCountPrefix}}
+          </span>
+          <span style={{ soldNumberStyle }}>
+            {{ product.metafields.stoked_inventory.sold_count }}
+          </span>
+          <span style={{ soldTextStyle }}>
+            {{shop.metafields.stoked_inventory.collection_styles.value.soldCountSuffix}}
+          </span>
+        </span>
+        <span style="display: {{displaySeparator}};word-break:break-word;white-space:normal">
+          <span style={{ seperatorStyle }}>{{shop.metafields.stoked_inventory.collection_styles.value.separatorText}}</span>
+        </span>
+        <span style="display: {{displayInventoryCount}};word-break:break-word;white-space:normal">
+          {%- if shop.metafields.stoked_inventory.collection_styles.value.outOfStockEnabled and product.metafields.stoked_inventory.inventory_count == 0 -%}
+            <span style={{ inventoryTextStyle }}>{{shop.metafields.stoked_inventory.collection_styles.value.outOfStockText}}</span>
+          {%- elsif  shop.metafields.stoked_inventory.collection_styles.value.oneStockTextEnabled and product.metafields.stoked_inventory.inventory_count == 1 -%}
+            <span style={{ inventoryTextStyle }}>{{shop.metafields.stoked_inventory.collection_styles.value.oneStockText}}</span>
+          {%- elsif  shop.metafields.stoked_inventory.collection_styles.value.oneStockTextEnabled and product.metafields.stoked_inventory.inventory_count >  moreThanStockLimitNumber -%}
+            <span style={{ inventoryTextStyle }}>{{shop.metafields.stoked_inventory.collection_styles.value.moreThanStockLimitText}}</span>
+          {%- elsif  shop.metafields.stoked_inventory.collection_styles.value.oneStockTextEnabled and product.metafields.stoked_inventory.inventory_count <  lessThanStockLimitNumber -%}
+            <span style={{ inventoryTextStyle }}>{{shop.metafields.stoked_inventory.collection_styles.value.lessThanStockLimitText}}</span>
+          {%- else -%}
+            <span style={{ inventoryTextStyle }}>
+              {{shop.metafields.stoked_inventory.collection_styles.value.inventoryCountPrefix}}
+            </span>
+            <span style={{ inventoryNumberStyle }}>
+              {{ product.metafields.stoked_inventory.inventory_count }}
+            </span>
+            <span style={{ inventoryTextStyle }}>
+              {{shop.metafields.stoked_inventory.collection_styles.value.inventoryCountSuffix}}
+            </span>
+          {%- endif -%}
+        </span>
+      </p>
+    </div>
+  </div>
+{%- else -%}
+  <div class="inventory-alert stoked-badge {{ shop.metafields.stoked_inventory.collection_styles.value.labelDesignClass }}" id="stoked-inventory-alerts-collection-product-{{ product.id }}" style={{ topDivStyle }}>
+    <div class="stoked-badge-content animate__animated {{shop.metafields.stoked_inventory.collection_styles.value.boxAnimateClass}}" style="background: {{ shop.metafields.stoked_inventory.collection_styles.value.labelBackground }}">
+      <p>
+        <span style="display: {{displayInventoryCount}};word-break:break-word;white-space:normal">
+          {%- if shop.metafields.stoked_inventory.collection_styles.value.outOfStockEnabled and product.metafields.stoked_inventory.inventory_count == 0 -%}
+            <span style={{ inventoryTextStyle }}>{{shop.metafields.stoked_inventory.collection_styles.value.outOfStockText}}</span>
+          {%- elsif  shop.metafields.stoked_inventory.collection_styles.value.oneStockTextEnabled and product.metafields.stoked_inventory.inventory_count == 1 -%}
+            <span style={{ inventoryTextStyle }}>{{shop.metafields.stoked_inventory.collection_styles.value.oneStockText}}</span>
+          {%- elsif  shop.metafields.stoked_inventory.collection_styles.value.moreThanStockEnabled and product.metafields.stoked_inventory.inventory_count >  moreThanStockLimitNumber -%}
+            <span style={{ inventoryTextStyle }}>{{shop.metafields.stoked_inventory.collection_styles.value.moreThanStockLimitText}}</span>
+          {%- elsif  shop.metafields.stoked_inventory.collection_styles.value.lessThanStockEnabled and product.metafields.stoked_inventory.inventory_count <  lessThanStockLimitNumber -%}
+            <span style={{ inventoryTextStyle }}>{{shop.metafields.stoked_inventory.collection_styles.value.lessThanStockLimitText}}</span>
+          {%- else -%}
+            <span style={{ inventoryTextStyle }}>
+              {{shop.metafields.stoked_inventory.collection_styles.value.inventoryCountPrefix}}
+            </span>
+            <span style={{ inventoryNumberStyle }}>
+              {{ product.metafields.stoked_inventory.inventory_count }}
+            </span>
+            <span style={{ inventoryTextStyle }}>
+              {{shop.metafields.stoked_inventory.collection_styles.value.inventoryCountSuffix}}
+            </span>
+          {%- endif -%}
+        </span>
+        <span style="display: {{displaySeparator}};word-break:break-word;white-space:normal">
+          <span style={{ seperatorStyle }}>{{shop.metafields.stoked_inventory.collection_styles.value.separatorText}}</span>
+        </span>
+        <span style="display:{{ displaySoldCount }};word-break:break-word;white-space:normal">
+          <span style={{ soldTextStyle }}>
+             {{shop.metafields.stoked_inventory.collection_styles.value.soldCountPrefix}}
+          </span>
+          <span style={{ soldNumberStyle }}>
+            {{ product.metafields.stoked_inventory.sold_count }}
+          </span>
+          <span style={{ soldTextStyle }}>
+            {{shop.metafields.stoked_inventory.collection_styles.value.soldCountSuffix}}
+          </span>
+        </span>
+      </p>
+    </div>
+  </div>
+{%- endif -%}

@@ -1,0 +1,170 @@
+<div class="compare">
+  <div class="wrapper">
+    
+    <h2 class="bundle-builder-section-title h2 {{ ss.overflow_type }}" rv-text="data.current_step_title"></h2>
+
+    <div class="products flex f-a-end">
+      {% comment %}
+      {% assign table_captions = 'Price Before Bundle Discount|1,Skin type|1,Active Compounds|7,Texture|1,Range|1,Fragrance free|1,Essential Oil|1,Nut Oil Free|1,Suitable for Pregnancy|2,Patch Tested for|2,Certifications|23' | split: ',' %}
+      {% endcomment %}
+      {% comment %} {% assign table_captions = 'Price Before Bundle Discount|1,Skin type|1,Active Compounds|7,Texture|1,Range|1,Fragrance free|1,Essential Oil|1,Nut Oil Free|1,Suitable for Pregnancy|2,Patch Tested for|2' | split: ',' %} {% endcomment %}
+      {% comment %}Second argument is a number of lines - that is how height of cells is changed{% endcomment %}
+
+      <div class="caption-area">
+        {% include 'bundle-builder-product-details-captions', table_captions: table_captions %}
+      </div>
+
+      <div class="products-area">
+
+        {% if ss.overflow_type == 'slider' %}
+          <ul class="slick-slider products-slider {{ ss.overflow_type }}" data-slider='{ 
+            {% if ss.details %}"asNavFor": ".details-slider",{% endif %}
+            "dots": false,  
+            "slidesToShow": 3.2,  
+            "infinite": false,  
+            "adaptiveHeight": true,
+            "arrows": true,
+            "responsive": [   
+              { 
+                "breakpoint": 835,  
+                "settings": { 
+                  "arrows": true, 
+                  "slidesToShow": 1,  
+                  "initialSlide": 1,  
+                  "centerMode": true  
+                } 
+              } 
+            ] 
+          }'>
+            {% include 'bundle-builder-product-item-rivets' %}
+          </ul>
+        {% else %}
+          <ul class="products-slider {{ ss.overflow_type }}">
+            {% include 'bundle-builder-product-item-rivets' %}
+          </ul>
+        {% endif %}
+
+        {% if ss.details %}
+          <div class="details-slider-wrapper {{ ss.overflow_type }}">
+            <span class="close" data-class-change='[
+              {
+                "target": ".bundle-builder-compare",
+                "class": "open",
+                "method": "remove",
+                "on": "click"
+              }
+            ]'
+            data-scroll-to='{
+              "target": ".products-area",
+              "on": "click"
+            }'>{% include 'icon-close' %}</span>
+
+            {% if ss.overflow_type == 'slider' %}
+              <ul class="slick-slider details-slider {{ ss.overflow_type }}" data-slider='{  
+                "asNavFor": ".products-slider", 
+                "dots": false,  
+                "slidesToShow": 3.2,  
+                "infinite": false,
+                "arrows": true,
+                "adaptiveHeight": true,
+                "responsive": [   
+                  { 
+                    "breakpoint": 835,  
+                    "settings": { 
+                      "slidesToShow": 1,  
+                      "initialSlide": 1,  
+                      "centerMode": true,
+                      "arrows": false
+                    } 
+                  } 
+                ] 
+              }'> 
+              {% include 'bundle-builder-product-details-rivets' %} 
+            </ul>
+            {% else %}
+              <ul class="details-slider {{ ss.overflow_type }}">
+                {% include 'bundle-builder-product-details-rivets' %}
+              </ul>
+            {% endif %}
+          </div>
+        {% endif %}
+    
+      </div>
+    </div>
+    
+    {% if ss.details %}
+      <div class="toggle-buttons flex f-a-center f-j-center {{ ss.overflow_type }}">
+        <span class="show-more flex f-a-center" data-class-change='[
+          {
+            "target": ".bundle-builder-compare",
+            "class": "open",
+            "method": "add",
+            "on": "click"
+          }
+        ]'>{% include 'icon-compare' %}Compare Products</span>
+        <span class="show-less flex f-a-center" data-class-change='[
+          {
+            "target": ".bundle-builder-compare",
+            "class": "open",
+            "method": "remove",
+            "on": "click"
+          }
+        ]'
+        data-scroll-to='{
+          "target": ".products-area",
+          "on": "click"
+        }'>Close</span>
+      </div>
+    {% endif %}
+
+    
+    <div rv-class-hide="data.current_step | eq data.total_steps">
+      <div class="text-center next-button-wrapper {{ ss.overflow_type }}" rv-class-hide="data.current_step_is_required | not">
+        <div rv-class-hide="data.current_stage.selected_product.title | not">
+          <button class="button button--next" rv-on-click="controller.nextStep" rv-text="data.current_stage.buttons.compare_cta_text"
+          ></button>
+          <p class="selected-tip">You have selected <span rv-html="data.current_stage.selected_product.title"></span></p>
+        </div>
+        <div rv-class-hide="data.current_stage.selected_product.title">
+          <button class="button button--next button--next-disabled" disabled rv-text="data.current_stage.buttons.compare_cta_text_required"
+          ></button>
+          <p class="selected-tip">You have not selected a product</p>
+        </div>
+      </div>
+
+      <div class="text-center next-button-wrapper {{ ss.overflow_type }}" rv-class-hide="data.current_step_is_required">
+        <button class="button button--next button--next-optional" rv-class-hide="data.current_stage.selected_product.title | not" rv-on-click="controller.nextStep" rv-text="data.current_stage.buttons.compare_cta_text"
+        ></button>
+        <button class="button button--next button--next-optional" rv-class-hide="data.current_stage.selected_product.title" rv-on-click="controller.nextStep" rv-text="data.current_stage.buttons.compare_cta_text_optional"
+        ></button>
+
+        <p class="selected-tip" rv-class-hide="data.current_stage.selected_product.title | not">You have selected <span rv-html="data.current_stage.selected_product.title"></span></p>
+      </div>
+    </div>
+
+    <div rv-class-hide="data.current_step | eq data.total_steps | not">
+      <div class="text-center next-button-wrapper {{ ss.overflow_type }}" rv-class-hide="data.current_step_is_required | not">
+        <div rv-class-hide="data.current_stage.selected_product.title | not">
+          <button class="button button--next" rv-on-click="controller.nextStageResults" rv-text="data.current_stage.buttons.compare_cta_text"
+          ></button>
+          <p class="selected-tip">You have selected <span rv-html="data.current_stage.selected_product.title"></span></p>
+        </div>
+        <div rv-class-hide="data.current_stage.selected_product.title">
+          <button class="button button--next button--next-disabled" rv-on-click="controller.nextStageResults" rv-text="data.current_stage.buttons.compare_cta_text_required"
+          ></button>
+          <p class="selected-tip">You have not selected a product</p>
+        </div>
+      </div>
+
+      <div class="text-center next-button-wrapper {{ ss.overflow_type }}" rv-class-hide="data.current_step_is_required">
+        <button class="button button--next button--next-optional" rv-class-hide="data.current_stage.selected_product.title | not" rv-on-click="controller.nextStageResults" rv-text="data.current_stage.buttons.compare_cta_text"
+        ></button>
+        <button class="button button--next button--next-optional" rv-class-hide="data.current_stage.selected_product.title" rv-on-click="controller.nextStageResults" rv-text="data.current_stage.buttons.compare_cta_text_optional"
+        ></button>
+
+        <p class="selected-tip" rv-class-hide="data.current_stage.selected_product.title | not">You have selected <span rv-html="data.current_stage.selected_product.title"></span></p>
+      </div>
+    </div>
+
+  </div>
+</div>

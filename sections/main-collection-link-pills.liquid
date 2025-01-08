@@ -1,0 +1,93 @@
+<div class="wrapper">
+  <div class="collection-pills">
+    {% for block in section.blocks %}
+      {% assign bs = block.settings %}
+      {% if block.type == 'percent' %}
+        <a href="{{ bs.collection.url }}" class="btn liquid-button">{{ bs.title }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="collection-pills">
+    {% for block in section.blocks %}
+      {% assign bs = block.settings %}
+      {% if block.type == 'under' %}
+        <a href="{{ bs.collection.url }}" class="btn liquid-button">{{ bs.title }}</a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<style>
+  .collection-pills {
+    display: flex;
+    gap: 16px;
+    overflow: scroll;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  .collection-pills .liquid-button {
+    min-width: fit-content;
+    background-color: #f7f7f7;
+    border-color: #f7f7f7;
+    color: #000;
+  }
+  .collection-pills .liquid-button:hover {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+  }
+  @media (max-width: 834px) {
+    .collection-pills {
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection pills",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "name": "percent off",
+      "type": "percent",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "collection",
+          "id": "cart_drawer_collection",
+          "label": "Collection"
+        }
+      ]
+    },
+    {
+      "name": "Under X",
+      "type": "under",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "collection",
+          "id": "cart_drawer_collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection pills"
+    }
+  ]
+}
+{% endschema %}

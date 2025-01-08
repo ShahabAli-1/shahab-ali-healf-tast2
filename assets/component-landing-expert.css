@@ -1,0 +1,173 @@
+.column--item--1 { grid-area: first; }
+.column--item--2 { grid-area: second; }
+.column--item--3 { grid-area: third; }
+.column--item--4 { grid-area: last; }
+
+.bs-devshop__expert__content {
+    padding: 9rem 0 5rem;
+}
+
+.expert__content--desktop .bs-devshop__expert__columns {
+    display: grid;
+    grid-template-areas:
+        'first second third'
+        'first second last';
+    gap: 7rem;
+    grid-auto-columns: 1fr 35% 1fr;
+    align-items: flex-end;
+}
+
+.bs-devshop__expert__column--content {
+    background: #FFF;
+    border-radius: 8px;
+    padding: 1.5rem;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+    color: #000;
+}
+
+.bs-devshop__expert__column.column--item--1 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.bs-devshop__expert__heading {
+    color: #FFF;
+    font-size: 7rem;
+    line-height: 1;
+}
+
+.bs-devshop__expert__link {
+    margin-top: 3rem;
+    font-size: 2.3rem;
+    padding: 0.8rem 3rem;
+    border-radius: 3.2rem;
+}
+
+.column--size--medium .bs-devshop__expert__column--content {
+    max-width: 30rem;
+}
+
+.column--size--large .bs-devshop__expert__column--content {
+    padding: 3rem;
+    text-align: left;
+}
+
+.bs-devshop__expert__column--title {
+    font-weight: 500;
+    font-size: 2.3rem;
+    line-height: 2.8rem;
+}
+
+.bs-devshop__expert__column--link {
+    font-size: 1.7rem;
+    line-height: 2.4rem;
+    text-decoration: underline;
+}
+
+.bs-devshop__expert__column--image {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+
+@media (min-width: 750px) {
+    .expert__content--mobile {
+        display: none
+    }
+
+    .column--size--small .bs-devshop__expert__column--content {
+        max-width: 26rem;
+    }
+
+    .column--size--large .bs-devshop__expert__column--content {
+        margin-bottom: 4rem;
+    }
+
+    .column--size--large  .bs-devshop__expert__column--title {
+        font-size: 2rem;
+        position: absolute;
+        bottom: 2rem;
+        z-index: 1;
+        left: 2rem;
+        margin: 0;
+        line-height: 2.6rem;
+        border: solid 1px #000;
+        border-radius: 4rem;
+        padding: 1rem 3rem;
+    }
+}
+
+@media (max-width: 1199px) {
+    .expert__content--desktop .bs-devshop__expert__columns {
+        gap: 3rem;
+        grid-auto-columns: 1fr 38% 1fr;
+    }
+
+    .bs-devshop__expert__heading {
+        font-size: 5rem;
+    }
+
+    .column--size--large .bs-devshop__expert__column--content {
+        padding: 2rem;
+    }
+}
+
+
+@media (max-width: 989px) {
+    .bs-devshop__expert__content {
+        padding: 3.5rem 0;
+    }
+
+    .expert__content--desktop .bs-devshop__expert__columns {
+        gap: 2.4rem;
+    }
+
+    .bs-devshop__expert__heading {
+        font-size: 3.6rem;
+    }
+
+    .column--size--large .bs-devshop__expert__column--content {
+        padding: 1.6rem;
+    }
+
+    .bs-devshop__expert__link {
+        font-size: 1.5rem;
+        padding: .8rem 2rem;
+    }
+}
+
+@media (max-width: 749px) {
+    .expert__content--desktop {
+        display: none
+    }
+
+    .bs-devshop__expert__column--content {
+        height: 100%;
+    }
+
+    .column--size--medium .bs-devshop__expert__column--content {
+        max-width: unset;
+    }
+
+    .bs-devshop__expert__column--image .image-element-wrapper {
+        padding-bottom: 113%;
+    }
+
+    .column--size--large .bs-devshop__expert__column--content {
+        text-align: center;
+    }
+
+
+    .bs-devshop__expert__heading {
+        margin-bottom: 4rem;
+    }
+
+    .bs-devshop__expert__container {
+        padding-right: 0;
+    }
+}

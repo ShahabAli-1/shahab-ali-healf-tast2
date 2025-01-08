@@ -1,0 +1,88 @@
+{% assign collection_tags = collection.metafields.custom.tags | split: '|' %}
+
+{% if collection_tags.size > 0 %}
+  <div class="tag-filters-wrapper">
+    <ul class="tag-filters">
+      {% for tag in collection_tags %}
+        {% if current_tags contains tag %}
+          <li class="tag-filters__item active">
+            {{ tag | link_to_remove_tag: tag }}
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#000">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </span>
+          </li>
+        {% else %}
+          {% if current_tags.size >= 1 %}
+            {% if collection.tags contains tag %}
+              <li class="tag-filters__item">
+                {{ tag | link_to_add_tag: tag }}
+              </li>
+            {% endif %}
+          {% else %}
+            <li class="tag-filters__item">
+              {{ tag | link_to_add_tag: tag | remove: '["' | remove: '"]' }}
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+{% style %}
+  .tag-filters-wrapper {
+    overflow-x: auto;
+    flex: 1;
+  }
+
+  .tag-filters {
+    display: flex;
+    font-family: 'Avenir';
+    font-size: 1.2rem;
+    font-weight: bold;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 800px;
+  }
+
+  .tag-filters__item {
+    margin-right: 1rem;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .tag-filters__item a {
+    border: 2px solid #F0F0F0;
+    border-radius: 999px;
+    color: #000;
+    display: block;
+    padding: 0.5rem 1.5rem;
+    text-decoration: none;
+    font-size: 12px;
+  }
+
+  .tag-filters__item.active a {
+    border-color: #000;
+    padding: 0.5rem 3rem 0.5rem 1.5rem;
+  }
+
+  .tag-filters__item span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: inline-flex;
+    align-items: center;
+    width: 3rem;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .tag-filters__item svg {
+    width: 12px;
+    height: 12px;
+  }
+{% endstyle %}

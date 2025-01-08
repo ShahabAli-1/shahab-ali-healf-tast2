@@ -1,0 +1,132 @@
+{% assign ss = section.settings %}
+  
+<div class="wrapper">
+    <div class="become-a-member__container membership-banner__container">
+        <div class="content-left">
+            <div class="logo-wrapper">
+                {% render 'logo' %}<span> membership</span>
+            </div>
+            {% if ss.title != blank %}
+                <h2>{{ ss.title }}</h2>
+            {% endif %}
+            {% if ss.content != blank %}
+                {{ ss.content }}
+            {% endif %}
+
+            <a href="{{ ss.button_link }}" class="btn">{{ ss.button_text }}</a>
+            <p class="short-text">{{ ss.short_text }}</p>
+        </div>
+        <div class="content-right">
+            {% if ss.image != blank %}
+                {% render 'image-element', image: ss.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--cover member-main-image'%}                
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.membership-banner {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.membership-banner {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+{
+    "name": "BB - Membership banner",
+    "class": "membership-banner",
+    "settings": [
+        {
+            "type":"text",
+            "id":"title",
+            "label":"Title"
+        },
+        {
+            "type":"richtext",
+            "id":"content",
+            "label":"Content"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link"
+        },
+        {
+            "type":"text",
+            "id":"short_text",
+            "label":"Text",
+            "info": "This text will be displayed under the button."
+        },
+        {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+        },
+        {
+            "type": "header",
+            "content": "Paddings - Desktop"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "label": "Padding top",
+            "unit": "px",
+            "min": 0,
+            "max": 120,
+            "step": 5,
+            "default": 80
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "label": "Padding bottom",
+            "unit": "px",
+            "min": 0,
+            "max": 120,
+            "step": 5,
+            "default": 80
+        },
+        {
+            "type": "header",
+            "content": "Paddings - Tablet"
+        },
+        {
+            "type": "range",
+            "id": "padding_top_tablet",
+            "label": "Padding top",
+            "unit": "px",
+            "min": 0,
+            "max": 60,
+            "step": 5,
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_tablet",
+            "label": "Padding bottom",
+            "unit": "px",
+            "min": 0,
+            "max": 60,
+            "step": 5,
+            "default": 60
+        }
+    ],
+    "presets":[
+        {
+            "name":"BB - Membership banner"
+        }
+    ]
+}
+{% endschema %}

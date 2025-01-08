@@ -1,0 +1,314 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "disabled": true,
+      "settings": {
+        "title": "Talk to real people",
+        "subtitle": "",
+        "subtitle_new": "<p>Exceptional customer support is a foundational pillar of what we believe makes healf special. Our Customer Wellbeing team have been trained to best support your health journey and experience when shopping at healf. Please reach out through the form below or by emailing <a href=\"mailto:team@healf.com\" target=\"_blank\" title=\"mailto:team@healf.com\">team@healf.com<\/a> and we'd be delighted to help!<\/p>",
+        "image": "shopify:\/\/shop_images\/contact-us-image.jpg",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "show_form": true,
+        "padding_top_tablet": 60,
+        "padding_bottom_tablet": 60
+      }
+    },
+    "fatty_hero_eUwAyR": {
+      "type": "fatty-hero",
+      "blocks": {
+        "button_Ac6ezF": {
+          "type": "button",
+          "settings": {
+            "button_text": "Browse all",
+            "button_link": "https:\/\/healf.com\/collections\/fatty15",
+            "hide_mobile": false
+          }
+        },
+        "button_Wt8JFm": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button_text": "Sort by: Popularity",
+            "button_link": "shopify:\/\/collections\/all",
+            "hide_mobile": true
+          }
+        }
+      },
+      "block_order": [
+        "button_Ac6ezF",
+        "button_Wt8JFm"
+      ],
+      "settings": {
+        "fatty_image": "shopify:\/\/shop_images\/72f397af5bb46fc9db5aafa4ec3b32e2.png",
+        "bg_image": "shopify:\/\/shop_images\/b342a6881039605785ea608da116b8d9.png",
+        "bg_color": "#c7dbdc",
+        "description": "<p>Fatty15 is a groundbreaking, essential C15:0 supplement that strengthens your cells & protects against age-related breakdown.<\/p>"
+      }
+    },
+    "benefits_section_6TH43w": {
+      "type": "benefits-section",
+      "settings": {
+        "heading": "3X",
+        "sub_heading": "more cellular benefits than omega-3",
+        "description": "With 36+ cellular benefits, these tiny pills pack a whole lot of goodness.",
+        "button_text": "Learn more",
+        "button_link": "https:\/\/fatty15.com\/",
+        "image": "shopify:\/\/shop_images\/Col_1.png"
+      }
+    },
+    "one_in_three_benefits_section_BhrxG4": {
+      "type": "one-in-three-benefits-section",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/28f3a44ef883cf63e3b61d3b922bcfb7.png",
+        "heading": "1 in 3",
+        "sub_heading": "people are C15:0 deficient",
+        "description": "<p>When our cell membranes don’t have enough C15:0, this makes them fragile and leads to rapid aging of cells, impacting our metabolic, liver, and heart health.<\/p><p>It’s called “Cellular Deficiency Syndrome” and it’s the first nutritional deficiency discovered in 75 years. Here’s the good news: We can reverse it.<\/p>",
+        "button_text": "Read more",
+        "button_link": "https:\/\/fatty15.com\/"
+      }
+    },
+    "highlight_product_H4kafD": {
+      "type": "Highlight-product",
+      "blocks": {
+        "product_QDTUgq": {
+          "type": "product",
+          "settings": {
+            "product": "fatty15-30-caps-refill-for-the-90-day-starter-kit"
+          }
+        },
+        "product_qxBrFd": {
+          "type": "product",
+          "settings": {
+            "product": "fatty15-90-day-starter-kits"
+          }
+        }
+      },
+      "block_order": [
+        "product_QDTUgq",
+        "product_qxBrFd"
+      ],
+      "settings": {
+        "banner_image": "shopify:\/\/shop_images\/20c8544482bd61dd144855752a330d34.png"
+      }
+    },
+    "your_longevity_nutrient_TrYHHm": {
+      "type": "your-longevity-nutrient",
+      "blocks": {
+        "block_7Vf8Vi": {
+          "type": "block",
+          "settings": {
+            "percent": 80,
+            "description": "Strengthens cell membranes by 80% to protect against age-related breakdown"
+          }
+        },
+        "block_PzwxMx": {
+          "type": "block",
+          "settings": {
+            "percent": 45,
+            "description": "Repairs mitochondria and lowers damaging reactive oxygen species by 45%"
+          }
+        },
+        "block_gGMfNX": {
+          "type": "block",
+          "settings": {
+            "percent": 72,
+            "description": "Of fatty15 customers report feeling or seeing benefits within 4 months"
+          }
+        }
+      },
+      "block_order": [
+        "block_7Vf8Vi",
+        "block_PzwxMx",
+        "block_gGMfNX"
+      ],
+      "settings": {
+        "heading": "Your Longevity Nutrient",
+        "description": "Fatty15 optimises our C15:0 levels to prevent and treat Cellular Fragility Syndrome. The result? We stay healthier, longer.",
+        "banner_image": "shopify:\/\/shop_images\/e68f33ff5b594d91062d89a43302e647.png",
+        "button_text": "Read more",
+        "button_link": ""
+      }
+    },
+    "multiple_columns_award_dA8CEn": {
+      "type": "multiple-columns-award",
+      "blocks": {
+        "column_ije3gE": {
+          "type": "Column",
+          "settings": {
+            "year": 2024,
+            "title": "World Changing Ideas in Wellness",
+            "award": "Fast Company"
+          }
+        },
+        "column_wEKwyG": {
+          "type": "Column",
+          "settings": {
+            "year": 2024,
+            "title": "Best Overall Supplement",
+            "award": "Mindful Awards"
+          }
+        },
+        "column_bthb3Y": {
+          "type": "Column",
+          "settings": {
+            "year": 2024,
+            "title": "Best Healthy Aging Supplement",
+            "award": "Nutralngredients"
+          }
+        }
+      },
+      "block_order": [
+        "column_ije3gE",
+        "column_wEKwyG",
+        "column_bthb3Y"
+      ],
+      "settings": {
+        "banner_image": "shopify:\/\/shop_images\/231219_ZB_Fatty15_10_GIF_v1.gif"
+      }
+    },
+    "landing_expert_wFeDP6": {
+      "type": "landing-expert",
+      "blocks": {
+        "block_GixQgi": {
+          "type": "block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/45385ea8884166b013e98503ca1ce25b.jpg",
+            "block_size": "small",
+            "name": "Dr Cole",
+            "description": "",
+            "button_text": "Learn more",
+            "button_link": "https:\/\/drwillcole.com\/podcast\/stephanie-venn-watson"
+          }
+        },
+        "block_WEBRJb": {
+          "type": "block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/8b932b122501bb56ddedc83f3e610689.png",
+            "block_size": "large",
+            "name": "Dr. Hyman",
+            "description": "<p>“One of my favorite longevity-boosting supplements…fatty15 acts as an armor for your cells, strengthening cell membranes, repairing mitochondria, and reversing the hallmarks of aging...<\/p>",
+            "button_text": "Learn more",
+            "button_link": "https:\/\/www.youtube.com\/watch?v=ki4-LNmEi74"
+          }
+        },
+        "block_V8UP49": {
+          "type": "block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/5517b3bf9cd57522246602356b3aadc6.jpg",
+            "block_size": "medium",
+            "name": "Thomas DeLauer",
+            "description": "",
+            "button_text": "Learn more",
+            "button_link": "https:\/\/www.youtube.com\/watch?v=I81tlKn_Lb8"
+          }
+        },
+        "block_J9qqMx": {
+          "type": "block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/eea4baa72852be8b8774f7320ac4ecdd.png",
+            "block_size": "small",
+            "name": "Nat Niddam",
+            "description": "",
+            "button_text": "Learn more",
+            "button_link": "https:\/\/www.natniddam.com\/podcast\/episode-215-the-saturated-fat-you-need-for-longevity-with-stephanie-venn-watson"
+          }
+        }
+      },
+      "block_order": [
+        "block_GixQgi",
+        "block_WEBRJb",
+        "block_V8UP49",
+        "block_J9qqMx"
+      ],
+      "settings": {
+        "heading": "What the experts are saying",
+        "bg_color": "#000000",
+        "button_text": "Learn more",
+        "button_link": "https:\/\/www.youtube.com\/watch?v=ki4-LNmEi74"
+      }
+    },
+    "landing_faqs_Q69fLp": {
+      "type": "landing-faqs",
+      "blocks": {
+        "block_3p3KRy": {
+          "type": "block",
+          "settings": {
+            "title": "What is C15:0?",
+            "text": "<p>C15:0 (pentadecanoic acid) is a healthy odd-chain saturated fatty acid. Fatty15’s co-founder, Dr. Steph Venn-Watson, discovered that C15:0 is not only a good fat, but that C15:0 meets the rare criteria of being the first essential fatty acid to be discovered since omega-3, which was over 90 years ago.<\/p><p>In extensive peer-reviewed studies, C15:0 has been shown to support metabolic, heart, liver and immune health, as well as naturally activate receptors in our bodies that deepen sleep, reduce anxiety, and improve joint comfort.<\/p><p>Essential fatty acids are nutrients that our bodies need to maintain baseline health but can't make. That means we must get these essential fats from our diet or supplements. Today, there are three known essential fatty acids: alpha-linolenic acid (an omega-3), linoleic acid (an omega-6), and now, C15:0. Because C15:0 has been shown to have 3x more cellular benefits than omega-3, C15:0 is emerging as the <em>essential<\/em>, essential fatty acid.*<\/p>"
+          }
+        },
+        "block_9fdx64": {
+          "type": "block",
+          "settings": {
+            "title": "Can’t I just get C15:0 from food?",
+            "text": "<p>Our primary food-based source of C15:0 is whole fat cow’s milk, which contains trace amounts of C15:0. Dairy fat, however, contains much higher levels of pro-inflammatory even-chain saturated fatty acids (C16:0), as well as a wallop of calories. Food-based C15:0 is also tied up in complex lipids called triacylglycerides that make C15:0 less bioavailable.  We developed fatty15 to help consumers get &gt;99.5% pure C15:0 in a vegan-friendly, science-backed and readily bioavailable form. No cows or calories needed.<\/p>"
+          }
+        },
+        "block_pwpa83": {
+          "type": "block",
+          "settings": {
+            "title": "Can fatty15 replace my omega-3s?",
+            "text": "<p>You may be surprised to hear that the most recent studies show that taking omega-3 fish oil supplements does not significantly reduce the risk of developing heart disease, depression or mood disorders, frailty, autoimmune disease, dry eye disease or cognitive decline. This is likely because omega-3 fish oil supplements can be highly variable in omega-3 content and are particularly susceptible to lipid peroxidation, both of which can compromise the quality and effectiveness of omega-3 supplements. <\/p><p>In contrast, fatty15 was developed by doctors to provide a &gt;99.5% pure, science-backed, vegan-friendly, patented and award-winning C15:0 ingredient. Pure C15:0 is an essential fatty acid and a stable powder that is resistant to lipid peroxidation. Each and every batch of fatty15 is tested to guarantee its purity, helping to ensure that you are getting only the good, essential fat that you need. Further, fatty15 has been shown to have 3x more cellular benefits than even the purest, highest performing omega-3.<\/p><p>Given the above, most people can consider fatty15 as a replacement for their omega-3 supplements to support their general, long-term health. If you are taking omega-3s under the supervision of a physician, however, we recommend that you talk with your doctor before making any changes.<\/p><p>Learn more about <a href=\"https:\/\/fatty15.com\/blogs\/news\/we-can-be-better-the-why-behind-fatty15-s-latest-ad-campaign?_pos=1&_psq=why%20campaign&_ss=e&_v=1.0\"><span style=\"text-decoration:underline\">fatty15 vs. omega-3s<\/span><\/a>.<\/p>"
+          }
+        },
+        "block_Y3xx8X": {
+          "type": "block",
+          "settings": {
+            "title": "How does fatty15 protect my liver?",
+            "text": "<p>Fatty15 is an award-winning and science-backed C15:0 supplement that supports your long-term health, including your liver health, at the cellular level. Numerous studies have shown that both adults and children with higher C15:0 levels have better liver health. Beyond association, fatty15 has been shown to directly protect the liver in relevant models. Specifically, fatty15 is a PPAR-ɑ\/δ agonist that promotes liver health by improving the resilience of cell membranes, calming immune responses, and slowing the production of unhealthy liver tissue.* Learn more about fatty15 and your liver health by <a href=\"https:\/\/fatty15.com\/blogs\/news\/deep-dive-fatty15-liver-health\" target=\"_blank\">clicking here<\/a>.<\/p>"
+          }
+        },
+        "block_MRMJQ3": {
+          "type": "block",
+          "settings": {
+            "title": "How does fatty15 help rebalance metabolism?",
+            "text": "<p>Today, more than 50 peer-reviewed scientific studies have linked C15:0 (aka, pentadecanoic acid) to better metabolic, heart, immune and liver health. Our &gt;99.5% pure, vegan-friendly C15:0 fatty acid in fatty15 rebalances our metabolism <em>naturally<\/em> by 1) activating PPAR-alpha and delta receptors, the master orchestrators of our metabolism, 2) activating AMPK pathways, which regulate glucose, 3) repairing mitochondria and enabling our cells to generate energy. Heck, that’s a bunch of much-needed benefits to help keep our metabolism balanced.*<\/p><p>Learn more about the <a href=\"http:\/\/www.discoverc15.com\/\"><span style=\"text-decoration:underline\">deep science behind C15:0<\/span><\/a>.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "block_3p3KRy",
+        "block_9fdx64",
+        "block_pwpa83",
+        "block_Y3xx8X",
+        "block_MRMJQ3"
+      ],
+      "settings": {
+        "heading": "Questions, answered by\u2028doctors and scientists",
+        "button_text": "Read more",
+        "button_link": "https:\/\/fatty15.com\/pages\/faqs"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "form",
+    "fatty_hero_eUwAyR",
+    "benefits_section_6TH43w",
+    "one_in_three_benefits_section_BhrxG4",
+    "highlight_product_H4kafD",
+    "your_longevity_nutrient_TrYHHm",
+    "multiple_columns_award_dA8CEn",
+    "landing_expert_wFeDP6",
+    "landing_faqs_Q69fLp"
+  ]
+}

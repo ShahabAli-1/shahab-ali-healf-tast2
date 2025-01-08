@@ -1,0 +1,67 @@
+{{ 'bs-devshop__pdp-collection-carousel.css' | asset_url | stylesheet_tag }}
+
+  <div class="bs-devshop__pdp-collection-carousel {% if request.design_mode == false %}ab__test{% endif %}" data-test-name="pdp-collection-carousel">
+    <bs-devshop-pdp-collection-splide-carousel>
+
+    <div class="bs-devshop__pdp-collection-carousel__outer-wrapper"> 
+        <div class="wrapper">
+            <div class="splide" id="splide-collection-carousel">
+            <div class="splide__track">
+                <ul class="splide__list">
+                {% for block in section.blocks %}
+                    {% assign bs = block.settings %}
+                    <li class="splide__slide">
+                    <div class="slide-content">
+                        <a href="{{ bs.collection.url }}" class="bs-devshop__pdp-collection-carousel__collection" data-test-name="pdp-collection-carousel">
+                        <div class="bs-devshop__pdp-collection-carousel-image">
+                            {% render 'image-element',
+                            image: bs.image,
+                            image_mobile: bs.image,
+                            size: '1920x',
+                            extra_class: 'object-fit--cover blocks-image'
+                            %}
+                        </div>
+                        <h3 class="bs-devshop__pdp-collection-title">{{ bs.collection.title }}</h3>
+                        </a>
+                    </div>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            </div>
+        </div> 
+    </div>
+    </bs-devshop-pdp-collection-splide-carousel>
+    
+  </div>
+
+{% schema %}
+{
+  "name": "PDP Collection Carousel",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "blocks",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Brand image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PDP Collection Carousel",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

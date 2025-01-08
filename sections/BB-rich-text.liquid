@@ -1,0 +1,115 @@
+{% assign ss = section.settings %}
+
+<div class="rich-text__container wrapper">
+    {% if ss.top_text != blank %}
+        <p class="top_text">
+            {{ ss.top_text }}
+        </p>
+    {% endif %}
+
+    {%- if ss.title != blank -%}
+        <h2>
+            {{ ss.title }}
+        </h2>
+    {%- endif -%}
+
+    {%- if ss.subtitle != blank -%}
+        {{ ss.subtitle }}
+    {%- endif -%}
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.bb-rich-text {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.bb-rich-text {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Rich Text",
+        "tag": "section",
+        "class": "bb-rich-text",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Content"
+            },            
+            {
+                "type": "text",
+                "id": "top_text",
+                "label": "Top text"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "subtitle",
+                "label": "Subtitle"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Rich Text"
+            }
+        ]
+    }
+{% endschema %}

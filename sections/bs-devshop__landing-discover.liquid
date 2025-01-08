@@ -1,0 +1,249 @@
+{% schema %}
+{
+  "name": "Biometric Markers",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "<p>Discover over 100+ key <br>health markers with <br>advanced biometric <br>testing.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>Create your optimal <br>routine.</p>"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Apply for Healf Zone BETA"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color_background",
+      "id": "button_gradient_border",
+      "label": "Button Gradient Border",
+      "default": "linear-gradient(90deg, #CB8F51 34%, #C9B26B 66%, #6AA087 100%)"
+    },
+    {
+      "type": "text",
+      "id": "categories",
+      "label": "Main Categories",
+      "default": "Heart",
+      "info": "Comma-separated list of main categories"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "child",
+      "name": "Child",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Parent Category",
+          "default": "Heart"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Child Name",
+          "default": "Triglycerides"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "Triglycerides are a type of fat in your blood. Having high levels can increase your risk of heart disease."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Biometric Markers",
+      "blocks": [
+        {
+          "type": "child"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% assign main_categories = section.settings.categories | split: ", " %}
+
+<div class="bs-devshop__biometric-markers" style="background-color: {{ section.settings.background_color }};">
+  <div class="page-width">
+    <div class="bs-devshop__biometric-markers__container">
+      <div class="bs-devshop__biometric-markers__left">
+        <div class="bs-devshop__biometric-markers__left__content__container">
+          <h2 class="bs-devshop__biometric-markers__title">{{ section.settings.title }}</h2>
+          <h2 class="bs-devshop__biometric-markers__subtitle">{{ section.settings.subtitle }}</h2>
+          <a href="#healfzone-signup-form" class="bs-devshop__biometric-markers__button" style="--gradient-border: {{ section.settings.button_gradient_border }}; --button-background-color: {{ section.settings.button_background_color }}; --button-text-color: {{ section.settings.button_text_color }};">
+            <span>{{ section.settings.button_text }}</span>
+          </a>
+        </div>
+      </div>
+      <div class="bs-devshop__biometric-markers__right">
+
+        {% render 'bs-devshop__biometric-markers-buttons'
+            main_categories: main_categories,
+            section: section,
+            button_gradient_border: section.settings.button_gradient_border,
+            button_background_color: section.settings.button_background_color,
+            button_text_color: section.settings.button_text_color,
+            button_text: section.settings.button_text
+          %}
+    </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.bs-devshop__biometric-markers {
+  padding: 5rem 0;
+}
+
+.bs-devshop__biometric-markers__container {
+  background-color: #FFFFFF;
+  color: #000000;
+  display: flex;
+  border-radius: 2rem;
+  /* overflow: hidden; */
+  padding: 6.7rem 5.4rem;
+}
+
+.bs-devshop__biometric-markers__left,
+.bs-devshop__biometric-markers__right {
+  flex: 1;
+}
+
+.bs-devshop__biometric-markers__right {
+    padding-left: 5rem;
+}
+
+
+.bs-devshop__biometric-markers__left .bs-devshop__biometric-markers__left__content__container {
+  position: sticky;
+  top: 8rem;
+}
+
+.bs-devshop__biometric-markers__title {
+  font-size: 3.6rem;
+  margin-bottom: 3rem;
+  line-height: 3.7rem;
+  font-weight: 400;
+}
+
+.bs-devshop__biometric-markers__subtitle {
+  font-size: 3.6rem;
+  margin-bottom: 3.9rem;
+  line-height: 3.7rem;
+  font-weight: 400;
+}
+
+.bs-devshop__biometric-markers__button {
+  position: relative;
+  display: inline-block;
+  padding: 1.45rem 3.4rem;
+  text-decoration: none;
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+  border-radius: 10rem;
+  overflow: hidden;
+  cursor: pointer;
+  width: fit-content;
+  font-size: 1.7rem;
+  align-self: flex-start;
+  margin-top: 3.9rem;
+}
+
+.bs-devshop__biometric-markers__button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10rem;
+  padding: 0.2rem;
+  background: linear-gradient(90.44deg, #C38F91 3.92%, #FCBD44 66.45%, #B0CB90 99.99%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.bs-devshop__biometric-markers__button span {
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .bs-devshop__biometric-markers {
+    padding-top: 0;
+  }
+
+  .bs-devshop__biometric-markers__container {
+    flex-direction: column;
+    padding: 2.8rem 1.5rem 1.4rem;
+  }
+
+  .bs-devshop__biometric-markers__right {
+    padding-left: unset;
+}
+
+
+  .bs-devshop__biometric-markers__title {
+    font-size: 2.5rem;
+    margin-bottom: 3.5rem;
+    line-height: 3rem;
+    letter-spacing: 0.038em;
+  }
+
+  .bs-devshop__biometric-markers__title p br {
+    display: none;
+  }
+
+  .bs-devshop__biometric-markers__subtitle {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+    line-height: 3rem;
+    letter-spacing: 0.038em;
+  }
+
+  .bs-devshop__biometric-markers__subtitle p br {
+    display: none;
+  }
+
+  .bs-devshop__biometric-markers__button {
+    display: none;
+    padding: 1rem 3.2rem;
+  }
+}
+{% endstylesheet %}

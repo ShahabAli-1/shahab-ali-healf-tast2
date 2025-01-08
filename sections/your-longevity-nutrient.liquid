@@ -1,0 +1,123 @@
+{{ 'component-your-longevity-nutrient.css' | asset_url | stylesheet_tag }}
+{%  liquid 
+    assign ss = section.settings 
+    assign heading = ss.heading
+    assign description = ss.description
+    assign banner_image = ss.banner_image
+    assign blocks = section.blocks
+    assign button_text = ss.button_text
+    assign button_link = ss.button_link
+%}
+
+{%  style %}
+    #fatty__hero--{{section.id}} {
+        background-color: {{ bg_color }}
+    }
+{% endstyle %}
+
+<section class="bs-devshop__yln">
+    <div class="bs-devshop__yln__wrapper page-width">
+        <div class="bs-devshop__yln__content">
+            <div class="bs-devshop__yln__content--top">
+                {% if heading != blank %}
+                    <div class="bs-devshop__yln__heading">{{heading}}</div>
+                {% endif %}
+                {% if description != blank %}
+                    <div class="bs-devshop__yln__description">{{description}}</div>
+                {% endif %}
+            </div>
+
+            {% if banner_image != blank %}
+                <div class="bs-devshop__yln__banner">
+                    {% render 'image-element', image: banner_image, size: '1920x', extra_class: 'object-fit--cover'%}
+                </div>
+            {% endif %}
+            {% if blocks != blank %}
+                <div class="bs-devshop__yln__columns">
+                    {% for block in blocks %}
+                        {%  liquid 
+                            assign percent = block.settings.percent
+                            assign description = block.settings.description
+                            assign index = forloop.index
+                        %}
+                        <div class="bs-devshop__yln__column">
+                            {% if percent != blank %}
+                                <p class="bs-devshop__yln__percent">{{percent}}%</p>
+                            {% endif %}
+                            {% if description != blank %}
+                                <p class="bs-devshop__yln__text">{{description}}</p>
+                            {% endif %}
+                        </div>
+                        {% if index == 2 and button_text != blank %}
+                            <div class="bs-devshop__yln__column yln__column--mobile">
+                                <a class="bs-devshop__yln__link" href="{{button_link}}">{{ button_text }}</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Your Longevity Nutrient",
+  "class": "section",
+  "settings": [
+    {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Your Longevity Nutrient"
+    },
+    {
+        "type": "text",
+        "id": "description",
+        "label": "Description",
+        "default": "Fatty15 optimises our C15:0 levels to prevent and treat Cellular Fragility Syndrome. The result? We stay healthier, longer."
+    },
+    {
+        "type": "image_picker",
+        "id": "banner_image",
+        "label": "Banner Image"
+    },
+    {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Read more",
+        "info": "This button just show in mobile"
+    },
+    {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+    }
+  ],
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Block",
+      "settings": [
+        {
+            "type": "number",
+            "id": "percent",
+            "label": "Percent"
+        },
+        {
+            "type": "text",
+            "id": "description",
+            "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Your Longevity Nutrient"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,91 @@
+{% assign ss = section.settings %}
+
+<div class="contact-options__container">
+    <div class="wrapper">
+        {% if ss.title != blank %}
+            <h2>{{ ss.title }}</h2>
+        {%- endif -%}
+
+        {%- for block in section.blocks -%}
+            {% assign bs = block.settings %}
+            <div class="contact-options__card">
+                {% if bs.title != blank %}
+                    <h3>{{ bs.title }}</h3>
+                {%- endif -%}
+                {% if bs.email != blank %}
+                    <a href="mailto:{{ bs.email }}">{{ bs.email }}</a>
+                {%- endif -%}
+
+                {% if bs.subtitle != blank %}
+                    <p>
+                        {{ bs.subtitle }}
+                    </p>
+                {%- endif -%}
+
+                {% if bs.btn_label != blank %}
+                    <a href="{{ bs.btn_url }}">
+                        {{ bs.btn_label }}
+                    </a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+    {
+        "name": "BB - Contact Options",
+        "tag": "section",
+        "max_blocks": 3,
+        "class": "contact-options",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Contact Options"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Contact Options",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "email",
+                        "label": "Email"
+                    },
+                    {
+                        "type": "text",
+                        "id": "subtitle",
+                        "label": "Subtitle"
+                    },
+                    {
+                        "type": "text",
+                        "id": "btn_label",
+                        "label": "Button label"
+                    },
+                    {
+                        "type": "url",
+                        "id": "btn_url",
+                        "label": "Button URL"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Contact Options"
+            }
+        ]
+    }
+{% endschema %}

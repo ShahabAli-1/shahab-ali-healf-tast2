@@ -1,0 +1,7 @@
+{% layout none %}
+{
+  "product": {{ product | json }},
+  "metafields": {{ product.metafields.custom | json }},
+  "similar_products": {{ product.metafields.custom.similar_products.value | map: 'handle' | json }},
+  "upsell": {{ product.metafields.product.upsell.value | map: 'handle' | json }}
+}

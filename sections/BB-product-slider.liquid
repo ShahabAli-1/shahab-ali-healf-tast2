@@ -1,0 +1,204 @@
+{% assign ss = section.settings %}
+
+  <link rel="stylesheet" href="{{ 'quick-add.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{% capture slider_settings %}
+    {
+      "autoplay": false,
+      "autoplaySpeed": 8000,
+      "slidesPerView": 5,
+      "autoAdjustSlidesPerView": false,
+      "loop": true,
+      "arrows": true,
+      "appendArrows": "#shopify-section-{{ section.id }} [data-arrows]",
+      "spacing": 30,
+      "responsive": [
+        {
+          "breakpoint": "1024px",
+          "settings": {
+            "slidesPerView": 2,
+            "spacing": 12,
+            "arrows": false,
+            "dots": false
+          }
+        }
+      ]
+    }
+{% endcapture %}
+
+{% capture slider_settings_oddit %}
+    {
+      "autoplay": false,
+      "autoplaySpeed": 8000,
+      "slidesPerView": 5,
+      "autoAdjustSlidesPerView": false,
+      "loop": true,
+      "arrows": true,
+      "appendArrows": "#shopify-section-{{ section.id }} [data-arrows]",
+      "spacing": 30,
+      "enableWhen": "(min-width: 834px)"
+    }
+{% endcapture %}
+<div class="wrapper">
+  <div class="product-slider__container {% if ss.oddit %}oddit-recommendation{% endif %}">
+    <div class="product-tab__wrapper">
+      {%- if ss.collection == blank -%}
+        <div>
+          {%- for block in section.blocks -%}
+            {% assign bs = block.settings %}
+            <span class="{{ bs.select_accordion }} {%- if forloop.index == 1 -%}show{%- endif -%}" data-class-change='[
+                        {
+                            "target": ".product-slider__list .products, .product-tab__wrapper > div span",
+                            "class": "show",
+                            "method": "remove",
+                            "on": "click"
+                        },
+                        {
+                            "method": "add",
+                            "on": "click",
+                            "target": ".product-slider__list .products.{{ bs.select_accordion }}, .product-tab__wrapper > div span.{{ bs.select_accordion }}",
+                            "class": "show"
+                        }
+                    ]'>
+                        {{ bs.select_accordion }}
+                    </span>
+          {% endfor %}
+        </div>
+      {%- endif -%}
+      {%- if ss.title != blank -%}
+        <h3 class="liquid-title">{{ ss.title }}</h3>
+      {%- endif -%}
+      <a href="{{ ss.button_url }}" class="see-all">{{ ss.button_text}}</a>
+    </div>
+
+    {%- if ss.collection != blank -%}
+      <div class="product-slider__list slider-not__accordion">
+        <div class="products show" {% if ss.oddit %}data-keen-slider='{{slider_settings_oddit}}'{% else %}data-keen-slider='{{slider_settings}}'{% endif %}>
+          {%- for product in ss.collection.products limit: limit -%}
+            <div class="product">
+              {% if ss.oddit %}
+                {% render 'BB-product-card', template: 'product', product: product %}
+              {% else %}
+                {% render 'BB-product-card', template: 'product', product: product %}
+              {% endif %}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="custom-slide-nav" data-arrows></div>
+      {% if ss.oddit %}
+        <a href="{{ ss.button_url }}" class="btn shop-all">Shop All Bestsellers</a>
+      {% endif %}
+    {%- endif -%}
+  </div>
+
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.product-slider {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.product-slider {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Basic product slider",
+        "tag": "section",
+        "class": "product-slider",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Product slider"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "text",
+                "id": "button_text",
+                "label": "Button Text"
+            },
+            {
+                "type": "url",
+                "id": "button_url",
+                "label": "Button url"
+            },
+            {
+                "type": "collection",
+                "id": "collection",
+                "label": "Collection"
+            },
+            {
+                "type": "checkbox",
+                "id": "oddit",
+                "info": "Check box to enable the oddit recommendation for mobile!",
+                "label": "Oddit"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Basic product slider"
+            }
+        ]
+    }
+{% endschema %}

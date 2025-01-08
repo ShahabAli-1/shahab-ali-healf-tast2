@@ -1,0 +1,177 @@
+.bs-devshop__oit {
+  background: linear-gradient(235.52deg, #DED0C3 19.64%, #DED0C3 55.52%, #DDCFC2 102.11%);
+}
+
+.bs-devshop__oit__wrapper {
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  padding-top: 8rem;
+  padding-bottom: 6rem;
+  overflow: hidden;
+  align-items: center;
+}
+
+.bs-devshop__oit__image {
+  overflow: hidden;
+}
+
+.bs-devshop__oit__image--rotate {
+  transform: rotate(10deg);
+  margin-left: -5%;
+}
+
+.bs-devshop__oit__heading {
+  color: #FFF;
+  font-size: 19.5rem;
+  letter-spacing: -1.1rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.bs-devshop__oit__text--top {
+  display: flex;
+  align-items: flex-end;
+  gap: 2rem
+}
+
+.bs-devshop__oit__sub__heading {
+  color: #FFF;
+  font-size: 3.7rem;
+  line-height: 4.1rem;
+  width: 27rem;
+  padding-bottom: 2.6rem;
+}
+
+.bs-devshop__oit__description {
+  color: #FFF;
+  font-size: 3rem;
+  line-height: 3.9rem;
+  margin-top: 3.5rem;
+  margin-bottom: 3rem;
+}
+
+.bs-devshop__oit__description p+p {
+  margin-top: 2.2rem
+}
+
+.bs-devshop__oit__link {
+  padding: 1.9rem 3.2rem;
+  border-radius: 3.2rem;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+}
+
+.oit__image--mobile {
+  display: none;
+}
+
+@media (min-width: 1600px) {
+  .bs-devshop__oit__wrapper {
+    grid-template-columns: 1fr 1fr;
+  }  
+}
+
+@media (min-width: 1200px) {
+  .bs-devshop__oit__wrapper {
+    padding-left: 0;
+  }
+
+  .bs-devshop__oit__text {
+    padding-right: 4rem;
+  }
+}
+
+@media (min-width: 750px) {
+  .bs-devshop__oit__wrapper {
+    padding-left: 0;
+  }
+
+  .bs-devshop__oit__text {
+    max-width: 80rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (max-width: 1199px) {
+  .bs-devshop__oit__heading {
+    letter-spacing: 0;
+    font-size: 10rem;
+  }
+
+  .bs-devshop__oit__sub__heading {
+    color: #fff;
+    font-size: 3rem;
+    line-height: 3.6rem;
+    width: 22rem;
+    padding-bottom: 1.6rem;
+  }
+
+  .bs-devshop__oit__description {
+    font-size: 2.4rem;
+    line-height: 3rem;
+    margin-top: 3.5rem;
+    margin-bottom: 2.4rem;
+  }
+}
+
+@media (max-width: 989px) {
+  .bs-devshop__oit__sub__heading {
+    width: auto;
+  }
+}
+
+
+@media (max-width: 749px) {
+  .bs-devshop__oit__image {
+    display: none;
+  }
+
+  .oit__image--mobile {
+    display: block;
+    width: 80%;
+    padding: 2.4rem 0;
+  }
+
+  .bs-devshop__oit__wrapper {
+    display: block;
+    padding-top: 4rem;
+    padding-bottom: 3.6rem;
+    padding-left: 0;
+  }
+
+  .bs-devshop__oit__heading {
+    font-size: 5rem;
+    line-height: 3.2rem;
+    letter-spacing: -2.82px;
+  }
+
+  .bs-devshop__oit__sub__heading {
+    font-size: 2rem;
+    line-height: 1;
+    padding: 0;
+    width: 15rem;
+  }
+
+  .bs-devshop__oit__text--top {
+    justify-content: space-between;
+    padding-left: 2rem;
+  }
+
+  .bs-devshop__oit__description {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    margin-top: 0;
+  }
+
+  .bs-devshop__oit__text--bottom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .bs-devshop__oit__link {
+    background: transparent;
+    color: white;
+    padding: 1.1rem 3rem;
+    font-size: 1.5rem;
+  }
+}

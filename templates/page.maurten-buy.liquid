@@ -1,0 +1,372 @@
+{{ 'maurten.css' | asset_url | stylesheet_tag }}
+
+{% assign weight = request.params.weight | default: 0 | plus: 0 %}
+
+{% if weight < 56 %}
+  {% assign option_value1 = '12' %}
+{% elsif weight < 70 %}
+  {% assign option_value1 = '15' %}
+{% elsif weight < 85 %}
+  {% assign option_value1 = '19' %}
+{% elsif weight < 103 %}
+  {% assign option_value1 = '22' %}
+{% else %}
+  {% assign option_value1 = '25' %}
+{% endif %}
+
+{% if weight < 56 %}
+  {% assign option_value2 = '19' %}
+{% elsif weight < 70 %}
+  {% assign option_value2 = '19' %}
+{% elsif weight < 85 %}
+  {% assign option_value2 = '22' %}
+{% elsif weight < 103 %}
+  {% assign option_value2 = '25' %}
+{% else %}
+  {% assign option_value2 = '25' %}
+{% endif %}
+
+{% assign product = all_products['maurten-bicarb-system'] %}
+
+{% assign variant_id1 = '' %}
+{% assign variant_id2 = '' %}
+
+{% for variant in product.variants %}
+  {% if variant.option1 == option_value1 %}
+    {% assign variant_id1 = variant.id %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% for variant in product.variants %}
+  {% if variant.option1 == option_value2 %}
+    {% assign variant_id2 = variant.id %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<div
+  class="section bicarb-public overlay-container"
+  data-controller="bicarb-buy-option"
+  data-action="maurten-update-cart@window->bicarb-buy-option#cartUpdated"
+>
+  <div
+    class="section-content panel buy-panel turbo-panel"
+    data-bicarb-buy-option-target="buyPanel"
+    data-controller="turbo-navigate"
+    data-turbo-navigate-current-panel-value="buy"
+    data-index="3"
+  >
+    <div class="product-image">
+      <img
+        src="https://cdn.shopify.com/s/files/1/0405/7291/1765/files/bicarb-variant-choice-image.jpg?v=1730960284"
+        alt=""
+      >
+    </div>
+
+    <div class="systems width-2">
+      <div
+        class="recommended-notification index-1 active"
+        data-bicarb-buy-option-target="notification"
+        data-id="12345"
+      >
+        <p>We recommend <b>Bicarb System 19</b> for athletes weighing 75 kg (0.25 g/kg).</p>
+      </div>
+      <div
+        class="recommended-notification index-2"
+        data-bicarb-buy-option-target="notification"
+        data-id="12346"
+      >
+        <p>
+          To maximise buffering capacity and extend the bicarb effect window, we recommend Bicarb 22 for experienced
+          bicarb athletes weighing 75 kg(0.30 g/kg).
+        </p>
+      </div>
+
+      <button
+        class="med-dose active"
+        data-bicarb-buy-option-target="button"
+        data-action="bicarb-buy-option#show"
+        data-id="12345"
+      >
+        <span class="dose">Medium dose</span>
+        <span class="system">19</span>
+      </button>
+      <button
+        class="max-dose"
+        style="display: none;"
+        data-bicarb-buy-option-target="button"
+        data-action="bicarb-buy-option#show"
+        data-id="12346"
+      >
+        <span class="dose">Maximum Dose</span>
+        <span class="system">22</span>
+      </button>
+    </div>
+    <p class="small-text">These products are suitable for you, based on your weight and experience.</p>
+    <div
+      class="product-description med-info active"
+      data-bicarb-buy-option-target="productDescription"
+      data-id="12345"
+    >
+      <div>
+        <h1 class="liquid-title">Bicarb System 19</h1>
+        <p class="servings">Box of 4 servings</p>
+        <p>
+          The Maurten Bicarb System is an advanced sports fuel designed to help athletes push the boundaries of effort
+          and power during high-intensity exercise.
+        </p>
+      </div>
+
+      <product-form>
+        <form
+          method="POST"
+          action="/cart/add"
+          accept-charset="UTF-8"
+          enctype="multipart/form-data"
+          data-type="add-to-cart-form"
+          class="add-to-cart desktop"
+          data-controller="cart"
+          data-action="submit->cart#submit"
+        >
+          <!-- Required hidden inputs -->
+          <input type="hidden" name="form_type" value="product">
+          <input type="hidden" name="utf8" value="✓">
+          <!-- Variant ID and Product ID -->
+          <input id="bundle-variant1" type="hidden" name="id" value="{{ variant_id1 }}">
+          <input id="bundle-id1" type="hidden" name="product-id" value="{{ product.id }}">
+          <!-- Quantity input -->
+          <input type="hidden" name="quantity" value="1" class="line-item-qty" min="1" data-qty-stepper-target="input">
+
+          <div class="qty-price-container">
+            <p class="price">£60.00</p>
+            <div class="qty-wrapper" data-controller="qty-stepper">
+              <div class="cart-qty decrease" data-action="click->qty-stepper#decrease">-</div>
+              <div class="qty" data-qty-stepper-target="value">1</div>
+              <div class="cart-qty increase" data-action="click->qty-stepper#increase">+</div>
+              <!-- The quantity input is already included above -->
+            </div>
+            <div class="product-form__buttons">
+              <button
+                type="submit"
+                name="add"
+                class="btn btn--white button--primary continue product-form__submit btn bundle-form"
+                data-cart-target="submitButton"
+              >
+                <span>Add to Cart</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </product-form>
+    </div>
+    <div
+      class="product-description max-info"
+      data-bicarb-buy-option-target="productDescription"
+      data-id="12346"
+    >
+      <div>
+        <h1 class="liquid-title">Bicarb System 22</h1>
+        <p class="servings">Box of 4 servings</p>
+        <p>
+          The Maurten Bicarb System is an advanced sports fuel designed to help athletes push the boundaries of effort
+          and power during high-intensity exercise.
+        </p>
+      </div>
+      <product-form>
+        <form
+          method="POST"
+          action="/cart/add"
+          accept-charset="UTF-8"
+          enctype="multipart/form-data"
+          data-type="add-to-cart-form"
+          class="add-to-cart desktop"
+          data-controller="cart"
+          data-action="submit->cart#submit"
+        >
+          <input type="hidden" name="form_type" value="product">
+          <input type="hidden" name="utf8" value="✓">
+          <input id="bundle-variant2" type="hidden" name="id" value="{{ variant_id2 }}">
+          <input id="bundle-id2" type="hidden" name="product-id" value="8722945376495">
+          <input type="hidden" name="quantity" value="1" class="line-item-qty" min="1" data-qty-stepper-target="input">
+
+          <div class="qty-price-container">
+            <p class="price">£60.00</p>
+            <div class="qty-wrapper" data-controller="qty-stepper">
+              <div class="cart-qty decrease">-</div>
+              <div class="qty">1</div>
+              <div class="cart-qty increase">+</div>
+              <!-- The quantity input is already included above -->
+            </div>
+            <div class="product-form__buttons">
+              <button
+                type="submit"
+                name="add"
+                class="btn btn--white button--primary continue product-form__submit btn bundle-form"
+                data-cart-target="submitButton"
+              >
+                <span>Add to Cart</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </product-form>
+    </div>
+  </div>
+  <!-- - Thank you overlay - -->
+  <div
+    class="dialog hidden"
+    data-controller="bicarb-public"
+    data-bicarb-buy-option-target="thankYouMessage"
+  >
+    <div class="panel thank-you-panel dialog-content">
+      <div>
+        <h1>Thank you</h1>
+        <p>
+          The Maurten Bicarb System has been added to your cart. Once received, you can unlock the Bicarb Digital
+          System, created by our in-house nutritional scientists to make it intuitive to plan, prepare, and execute a
+          bicarb session or race.
+        </p>
+      </div>
+      <div>
+        <a class="btn btn--white continue" href="/cart" data-turbo="false">Ok, got it!</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Function to get query parameters from the URL
+    function getQueryParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return {
+        weight: parseInt(urlParams.get('weight')) || 0,
+        exp: urlParams.get('exp') === 'true',
+      };
+    }
+
+    // Function to determine the primary Bicarb System number based on weight
+    function getPrimaryBicarbSystemNumber(weight) {
+      if (weight < 56) {
+        return 12;
+      } else if (weight < 70) {
+        return 15;
+      } else if (weight < 85) {
+        return 19;
+      } else if (weight < 103) {
+        return 22;
+      } else {
+        return 25;
+      }
+    }
+
+    // Function to determine the secondary Bicarb System number based on weight
+    function getSecondaryBicarbSystemNumber(weight) {
+      if (weight < 56) {
+        return 19;
+      } else if (weight < 70) {
+        return 19;
+      } else if (weight < 85) {
+        return 22;
+      } else if (weight < 103) {
+        return 25;
+      } else {
+        return 25;
+      }
+    }
+
+    // Get the query parameters
+    const { weight, exp } = getQueryParams();
+    const primarySystemNumber = getPrimaryBicarbSystemNumber(weight);
+    const secondarySystemNumber = getSecondaryBicarbSystemNumber(weight);
+
+    // Update all relevant elements with the primary and secondary system numbers
+    document.querySelectorAll('.med-dose .system').forEach((el) => (el.textContent = primarySystemNumber));
+    document.querySelectorAll('.max-dose .system').forEach((el) => (el.textContent = secondarySystemNumber));
+    document.querySelector('.med-info .liquid-title').textContent = `Bicarb System ${primarySystemNumber}`;
+    document.querySelector('.max-info .liquid-title').textContent = `Bicarb System ${secondarySystemNumber}`;
+    document.querySelectorAll('.recommended-notification.index-1 p').forEach((el) => {
+      el.innerHTML = `We recommend <b>Bicarb System ${primarySystemNumber}</b> for athletes weighing 75 kg (0.25 g/kg).`;
+    });
+    document.querySelectorAll('.recommended-notification.index-2 p').forEach((el) => {
+      el.innerHTML = `We recommend <b>Bicarb System ${secondarySystemNumber}</b> for athletes weighing 75 kg (0.25 g/kg).`;
+    });
+
+    // Show .max-dose if exp=true in the URL
+    if (exp) {
+      document.querySelectorAll('.max-dose').forEach((el) => {
+        el.style.display = 'flex';
+        el.style.display += ' !important';
+      });
+    }
+
+    // Select all buttons
+    const buttons = document.querySelectorAll('button[data-id]');
+    const notifications = document.querySelectorAll('.recommended-notification');
+    const titles = document.querySelectorAll('.product-description');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', function () {
+        const dataId = this.getAttribute('data-id');
+
+        // Remove active class from all buttons and notifications
+        buttons.forEach((btn) => btn.classList.remove('active'));
+        notifications.forEach((notification) => notification.classList.remove('active'));
+        titles.forEach((title) => title.classList.remove('active'));
+
+        // Add active class to the clicked button
+        this.classList.add('active');
+
+        // Find and activate the matching notification
+        const matchingNotification = document.querySelector(`.recommended-notification[data-id="${dataId}"]`);
+        if (matchingNotification) {
+          matchingNotification.classList.add('active');
+        }
+        const matchingTitle = document.querySelector(`.product-description[data-id="${dataId}"]`);
+        if (matchingTitle) {
+          matchingTitle.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Select all product forms
+    var productForms = document.querySelectorAll('product-form');
+
+    productForms.forEach(function (productForm) {
+      // For each product form, get the elements within that form
+      var decreaseBtn = productForm.querySelector('.qty-wrapper .decrease');
+      var increaseBtn = productForm.querySelector('.qty-wrapper .increase');
+      var qtyDisplay = productForm.querySelector('.qty-wrapper .qty');
+      var qtyInput = productForm.querySelector('.line-item-qty');
+
+      // Initialize quantity from the hidden input's value
+      var quantity = parseInt(qtyInput.value) || 1;
+
+      // Function to update the displayed quantity and hidden input value
+      function updateDisplay() {
+        qtyDisplay.textContent = quantity;
+        qtyInput.value = quantity;
+      }
+
+      // Event listener for the decrease button
+      decreaseBtn.addEventListener('click', function () {
+        if (quantity > 1) {
+          quantity -= 1;
+          updateDisplay();
+        }
+      });
+
+      // Event listener for the increase button
+      increaseBtn.addEventListener('click', function () {
+        quantity += 1;
+        updateDisplay();
+      });
+    });
+  });
+</script>
+

@@ -1,0 +1,335 @@
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<script type="text/html" data-recharge-slot="overview.header">
+  <div id="product-search-modal" class="product-search-modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+
+      <div id="popular-products">
+        <h2>Add items to your order</h2>
+        <input type="text" id="search-input" placeholder="Search products">
+        <div id="custom-search-container">
+          <div id="search-results" class='wrapper'>
+            <ul id="search-results__grid" class="grid product-grid  grid--2-col-tablet-down grid--4-col-desktop">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/html" data-recharge-slot="overview.footer">
+    <div id="recommendations-wrapper" class="product-recommendations__wrapper gradient no-js-hidden"></div>
+</script>
+
+<style>
+  .product-recommendations {
+    visibility: hidden;
+  }
+  .product-recommendations__wrapper {
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 8px;
+  }
+  .product-recommendations__heading {
+    font-size: 20px !important;
+  }
+  .product-recommendations {
+    padding: 20px !important;
+  }
+  .card__heading a:after {
+    bottom: 100px;
+  }
+  .swiper-slide, .swiper-wrapper {
+    padding-bottom: 0;
+  }
+  .swiper-slide {
+    height: auto;
+  }
+  .product-card-wrapper .card__content {
+    justify-content: space-between;
+  }
+  .button--secondary {
+    background-color: #000;
+    color: #fff !important;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 6px;
+  }
+  .button--secondary:after, .button--secondary:before {
+    display: none;
+  }
+  #search-button {
+    background-color: #f7f7f7;
+    padding: 12px 16px;
+  }
+  .product-search-modal {
+    display: none;
+    position: fixed; z-index: 1000;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 0 10%;
+    padding: 20px;
+    min-height: 100%;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close-button:hover, .close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .modal-content .next-shipment__add.btn{
+    border-radius: 4px;
+    width: 100%;
+    font-size: 15px;
+    height: 47px;
+  }
+  #search-input {
+    width: calc(100% - 40px);
+    height: 40px;
+    margin: 20px;
+    border-radius: 4px;
+    border: 1px solid #000;
+    padding: 0 20px;
+  }
+  @media (max-width: 834px) {
+    .modal-content {
+      margin: 0;
+      width: 100%;
+    }
+    .modal-content .next-shipment__add.btn, .button--secondary {
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }  
+  .recharge-section-product-carousel {
+    display: none !important;
+  }
+  [data-testid="slot-footer"] {
+    margin-top: -20px !important;
+  }
+</style>
+
+<script>
+  let session;
+
+  async function login() {
+    session = await recharge.auth.loginShopifyAppProxy();
+  }
+
+  async function getNextShipment() {
+    const subscriptionsObj = await recharge.subscription.listSubscriptions(session);
+    const subscriptions = subscriptionsObj.subscriptions;
+
+    let nextShipmentDate = null,
+        sub = null;
+
+    subscriptions.forEach((subscription) => {
+      if (subscription.next_charge_scheduled_at) {
+        const shipmentDate = new Date(subscription.next_charge_scheduled_at);
+        if (!nextShipmentDate || shipmentDate < nextShipmentDate) {
+          nextShipmentDate = shipmentDate;
+          sub = subscription;
+        }
+      }
+    });
+
+    if (nextShipmentDate != null && sub != null) {
+      renderNextShipment(sub);
+    }
+  }
+
+  async function renderNextShipment(sub) {
+    const containers = document.querySelectorAll('.next-shipment-container');
+
+    containers.forEach(container => {
+      console.log("added");
+      const nextShipmentEl = container.querySelector('.next-shipment__add');
+      nextShipmentEl.addEventListener('click', function() {
+        addToNextShipment(sub, container);
+      });
+    });
+  }
+
+  async function addToNextShipment(sub, container) {
+    const variantId = container.getAttribute('value'),
+          productId = container.getAttribute('data-product-id'),
+          quantity = sub.quantity + 1;
+
+    if (variantId === sub.external_variant_id.ecommerce && productId === sub.external_product_id.ecommerce) {
+      await recharge.subscription.updateSubscription(session, sub.id, { quantity: quantity });
+    } else {
+      await recharge.subscription.createSubscription(session, {
+        address_id: sub.address_id,
+        charge_interval_frequency: sub.charge_interval_frequency,
+        next_charge_scheduled_at: sub.next_charge_scheduled_at,
+        order_interval_frequency: sub.order_interval_frequency,
+        order_interval_unit: sub.order_interval_unit,
+        quantity: 1,
+        external_variant_id: {
+          ecommerce: variantId
+        },
+        external_product_id: {
+          ecommerce: productId
+        }
+      });
+      document.getElementById("product-search-modal").style.display = "none";
+    }
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // This makes the scroll smooth
+    });
+    document.dispatchEvent(new CustomEvent("Affinity:refresh"));
+  }
+
+  document.addEventListener("Recharge::slot::mounted", async (event) => {
+    if (event.detail.name === "footer" && event.detail.pathname === "/overview") {
+      const placeholder = document.getElementById('recommendations-wrapper');
+      const id = window.ReCharge.subscriptions[0].product.shopify_details.options[0].shopify_product_id;
+
+      if (placeholder) {
+        placeholder.innerHTML = `
+          <product-recommendations class="product-recommendations wrapper isolate" data-url="https://healf.com/recommendations/products?section_id=template--18499428745455__recharge_recommendations_f8k8Gt&product_id=${id}&limit=10">
+          </product-recommendations>
+        `;
+
+        const observer = new MutationObserver((mutations, observer) => {
+          const productRecommendations = placeholder.querySelector('.product-recommendations');
+          if (productRecommendations && productRecommendations.children.length > 0) {
+            observer.disconnect();
+            productRecommendations.style.visibility = 'visible';
+
+            var swiper = new Swiper(".mySwiper", {
+              slidesPerView: 2.2,
+              spaceBetween: 10,
+              mousewheel: {
+                forceToAxis: true,
+                sensitivity: 0.5, // Adjust the sensitivity as needed
+                releaseOnEdges: true
+              },
+              freeMode: true,
+              direction: 'horizontal',
+              breakpoints: {
+                835: {
+                  slidesPerView: 4.2,
+                },
+                1025: {
+                  slidesPerView: 5.2,
+                },
+              }        
+            });
+          }
+        });
+
+        observer.observe(placeholder, { childList: true, subtree: true });
+      }
+    }
+    await login();
+    if (session) {
+      getNextShipment();
+    }
+  });
+
+  document.addEventListener("Recharge::slot::mounted", async (event) => {
+    if (event.detail.name === "header" && event.detail.pathname === "/overview") {
+      const placeholder = document.getElementById('recommendations-wrapper');
+
+      function setupProductSearch() {
+        console.log("MODAL STUFF");
+        var modal = document.getElementById("product-search-modal");
+        var searchInput = document.getElementById('search-input');
+        var searchButton = document.getElementById('search-button');
+        var resultsContainer = document.getElementById('search-results__grid');
+        var span = document.getElementsByClassName("close-button")[0];
+
+        searchButton.addEventListener('click', function() {
+          console.log("SEARCH STUFF");
+          modal.style.display = "block";
+          fetchPopularProducts();
+        });
+
+        span.onclick = function() {
+          modal.style.display = "none";
+        };
+
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        };
+
+        searchInput.addEventListener('input', function() {
+          const query = searchInput.value;
+          if (query.length > 2) { // Start searching after 3 characters
+            performSearch(query);
+          } else {
+            resultsContainer.innerHTML = '<p>Please enter a search term.</p>';
+          }
+        });
+
+        function fetchPopularProducts() {
+          fetch(`/search?q=healf&type=product`)
+            .then(response => response.text())
+            .then(htmlText => {
+              displayResults(htmlText);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function performSearch(query) {
+          fetch(`/search?q=${query}&type=product`)
+            .then(response => response.text())
+            .then(htmlText => {
+              displayResults(htmlText);
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function displayResults(htmlText) {
+          resultsContainer.innerHTML = '';
+
+          var updatedHtmlText = htmlText.replace(/_30x30/g, '_400x400').replace(/class="placeholder"/g, '');
+          var parser = new DOMParser();
+          var doc = parser.parseFromString(updatedHtmlText, 'text/html');
+          var products = doc.querySelectorAll('.product-grid .grid__item');
+
+          if (products.length > 0) {
+            var limitedProducts = Array.from(products).slice(0, 20);
+            var productsHtml = limitedProducts.map(product => product.outerHTML).join('');
+            resultsContainer.innerHTML = productsHtml;
+            getNextShipment();
+          } else {
+            resultsContainer.innerHTML = '<p>No products found.</p>';
+          }
+        };
+      };
+      const observer = new MutationObserver((mutations, observer) => {
+        const productRecommendations = placeholder.querySelector('.product-recommendations');
+        if (productRecommendations && productRecommendations.children.length > 0) {
+          setupProductSearch();
+        }
+      });
+      observer.observe(placeholder, { childList: true, subtree: true });
+    }
+  });
+</script>

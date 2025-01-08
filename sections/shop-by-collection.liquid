@@ -1,0 +1,73 @@
+
+<div class="shop-by-collection-bfcm wrapper">
+    <div class="shop-by-collection-wrapper {% if section.blocks.size > 2 %}shop-by-3-column{% endif %}">
+     {% for block in section.blocks limit: 3 %}
+        {% assign bs = block.settings %}
+        <div class="shop-by-collection__collection">
+          <div class="is-slow-zoom">
+            {% render 'image-element',
+              image: bs.image,
+              image_mobile: bs.image,
+              size: '1000x',
+              extra_class: 'object-fit--cover'
+            %}
+          </div>
+
+          {% if bs.title != blank%}
+            <h5 class="shop-by-collection__title">{{ bs.title }}</h5>
+          {% else %}
+            <h5 class="shop-by-collection__title">{{ bs.collection.title }}</h5>
+          {% endif %}
+          <a href="{{ bs.collection.url }}" class="shop-by-collection__btn btn">{{'Shop collection'}}</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+
+{% schema %}
+{
+  "name": "Shop by collection - BFCM",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "heading",
+      "default": "Shop by collection"
+    }
+  ],
+  "blocks": [
+    {
+        "limit": 3,
+      "type": "blocks",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Brand image"
+        },
+        {
+           "type": "text",
+           "id": "title",
+           "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by collection - BFCM",
+      "settings": {
+        "title": "Shop by collection"
+      }
+    }
+  ]
+}
+{% endschema %}

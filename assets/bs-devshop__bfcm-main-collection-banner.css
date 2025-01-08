@@ -1,0 +1,260 @@
+.bs-devshop__bfcm-main-collection-banner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.banner__box {
+  text-align: left;
+  padding: 0;
+}
+
+.bs-devshop__bfcm-main-collection-banner__media {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.bs-devshop__bfcm-main-collection-banner__media img {
+  border-radius: 20px;
+}
+
+.bs-devshop__bfcm-main-collection-banner__content {
+  padding: 0;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+  padding-left: 3rem;
+}
+
+.bs-devshop__bfcm-main-collection-banner__content-box {
+  /* display: grid; */
+  /* grid-template-rows: auto auto auto; */
+  gap: 2rem;
+  min-width: 100% !important;
+}
+
+.bs-devshop__bfcm-main-collection-banner__sale-banner-pill {
+  grid-column: 1;
+  grid-row: 1;
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.2);
+  font-family: Avenir;
+  font-size: 1.96rem;
+  line-height: 1.718rem;
+  letter-spacing: -0.03em;
+  text-align: center;
+  border-radius: 2.731rem;
+  padding: 1rem 2rem;
+  border: 0.062rem solid rgba(255, 255, 255, 1);
+  color: white;
+}
+
+.bs-devshop__bfcm-main-collection-banner__heading-wrapper {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.bs-devshop__bfcm-main-collection-banner__heading {
+  font-size: 8.3rem;
+  line-height: 1;
+  letter-spacing: -2px;
+  color: #fff;
+  grid-column: 1;
+}
+
+.bs-devshop__bfcm-main-collection-banner__heading.mobile {
+  display: none;
+}
+
+.bs-devshop__bfcm-main-collection-banner__heading.desktop {
+  display: block;
+  margin-top: 3rem;
+}
+
+.bs-devshop__bfcm-main-collection-banner__text {
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: #fff;
+  grid-column: 2;
+  text-align: right;
+}
+
+.bs-devshop__bfcm-main-collection-banner__description-wrapper {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.bs-devshop__bfcm-main-collection-banner__description {
+  font-size: 1.6rem;
+  line-height: 20px;
+  color: #fff;
+  font-weight: 400;
+  grid-column: 1;
+}
+
+.bs-devshop__bfcm-main-collection-banner__stock-notice {
+  font-size: 1.6rem;
+  color: #fff;
+  font-weight: 500;
+  grid-column: 2;
+  text-align: right;
+}
+
+.bs-devshop__bfcm-main-collection-banner__disclaimer-and-cta-wrapper {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.bs-devshop__bfcm-main-collection-banner__cta {
+  grid-column: 2;
+  text-align: right;
+}
+
+.bs-devshop__bfcm-main-collection-banner__cta-link {
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  padding: 12px 23px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 35px;
+    transition: all 0.3s ease;
+    font-weight: 450;
+
+}
+
+.bs-devshop__bfcm-main-collection-banner__cta-link:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+@media screen and (min-width: 750px) {
+  .bs-devshop__bfcm-main-collection-banner {
+    flex-direction: row;
+  }
+
+  .bs-devshop__bfcm-main-collection-banner__content {
+    padding: 3rem;
+  }
+
+  .bs-devshop__bfcm-main-collection-banner__media {
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .banner--stacked .banner__box {
+    width: 100%;
+    max-width: 90% !important;
+    padding: 2rem !important;
+  }
+}
+
+.bs-devshop__bfcm-main-collection-banner__media.desktop {
+  display: block;
+}
+
+.bs-devshop__bfcm-main-collection-banner__media.mobile {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .bs-devshop__bfcm-main-collection-banner__media.desktop {
+    display: none;
+  }
+
+  .bs-devshop__bfcm-main-collection-banner__media.mobile {
+    display: block;
+  }
+  .bs-devshop__bfcm-main-collection-banner__content {
+    padding: 2rem !important;
+  }
+
+  .bs-devshop__bfcm-main-collection-banner__heading {
+    font-size: 6rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .bs-devshop__bfcm-main-collection-banner__text {
+    font-size: 2.8rem;
+    grid-column: 1;
+    text-align: left;
+  }
+
+  .bs-devshop__bfcm-main-collection-banner__heading-wrapper,
+  .bs-devshop__bfcm-main-collection-banner__description-wrapper,
+  .bs-devshop__bfcm-main-collection-banner__disclaimer-and-cta-wrapper {
+    grid-template-columns: 1fr;
+    display: unset;
+  }
+
+  .bs-devshop__bfcm-main-collection-banner__description {
+    max-width: 80%;
+  }
+
+  .bs-devshop__bfcm-main-collection-banner__cta {
+    grid-column: 1;
+    text-align: left;
+    justify-content: flex-start;
+    margin-top: 2.5rem;
+  }
+
+  .bs-devshop__bfcm-main-collection-banner__sale-banner-pill {
+    font-size: 1.4rem;
+    margin-bottom: 0rem;
+  }
+
+  .bs-devshop__bfcm-main-collection-banner__stock-notice {
+    grid-column: 1;
+    justify-content: flex-start;
+    text-align: left;
+    margin-top: 2.5rem;
+  }
+
+  .bs-devshop__bfcm-main-collection-banner__stock-notice.bottom-disclaimer {
+    margin-top: 0rem;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .bs-devshop__bfcm-main-collection-banner__heading.desktop {
+    display: none;
+  }
+  .bs-devshop__bfcm-main-collection-banner__heading.mobile {
+    display: block;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    max-width: 70%;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1239px) {
+  .bs-devshop__bfcm-main-collection-banner__heading {
+    font-size: 7rem;
+  }
+}
+
+@media screen and (min-width: 1240px) and (max-width: 1439px) {
+  .bs-devshop__bfcm-main-collection-banner__heading {
+    font-size: 8.3rem;
+  }
+}

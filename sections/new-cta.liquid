@@ -1,0 +1,185 @@
+{% assign ss = section.settings %}
+
+<div class="">
+    <div class="image-with-text-content">
+        {% if ss.title != blank %}
+            <div style="padding-top: 10px; padding-bottom: 10px;">
+                <h2 style="text-align:left;" class="liquid-title" >{{ ss.title }}</h2>
+            </div>
+        {%- endif -%}
+        {% if ss.description1 != blank %}
+            <p style="padding: 5px 0;">{{ ss.description1 }}</p>
+        {%- endif -%}
+        {% if ss.description2 != blank %}
+            <p style="padding: 5px 0;">{{ ss.description2 }}</p>
+        {%- endif -%}
+        {% if ss.description3 != blank %}
+            <p style="padding: 5px 0;">{{ ss.description3 }}</p>
+        {%- endif -%}
+        {% if ss.btn_url != blank %}
+            <div style="padding-top: 10px;">
+                <a href="{{ ss.btn_url }}" class="btn liquid-button cta-btn">Claim {{ page.metafields.custom.discount }}% off</a>
+            </div>
+        {%- endif -%}
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.bb-image-with-text {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+    #shopify-section-{{ section.id }}.bb-image-with-text li {
+        list-style: disc;
+    }
+    #shopify-section-{{ section.id }}.bb-image-with-text ul {
+        margin-left: 20px;
+    }
+    .image-with-text-content p {
+        padding: 5px 0;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.bb-image-with-text {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+        .image-with-text-content {
+            padding-left: 0px !important;
+            margin-bottom: 20px;
+        }
+    }
+
+    .cta-btn {
+        width: 50%;
+    }
+
+    @media only screen and (max-width: 834px) {
+    .cta-btn {
+        width: 100%;
+    }
+}
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "New CTA",
+        "tag": "section",
+        "class": "wrapper bb-image-with-text",
+        "max_blocks": 4,
+        "settings": [
+            {
+                "type": "header",
+                "content": "Signup"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "description1",
+                "label": "Description-1"
+            },
+            {
+                "type": "richtext",
+                "id": "description2",
+                "label": "Description-2"
+            },
+            {
+                "type": "richtext",
+                "id": "description3",
+                "label": "Description-3"
+            },
+            {
+                "type": "url",
+                "id": "btn_url",
+                "label": "Button URL"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Collection",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "description1",
+                        "label": "Description-1"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "description2",
+                        "label": "Description-2"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "description3",
+                        "label": "Description-3"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Image"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "New CTA"
+            }
+        ]
+    }
+{% endschema %}

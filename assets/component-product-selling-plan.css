@@ -1,0 +1,243 @@
+.product__selling__plan__container {
+    display: flex;
+    flex-direction: column;
+    /* gap: 20px; */
+    border: solid 1px #E3E3E3;
+    border-radius: 4px;
+}
+
+.product__selling__plan__container .radio--button {
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    font-weight: 500;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.product__selling__plan__container .radio--button.radio--button__subscribe {
+    border-bottom: solid 1px #E3E3E3;
+}
+
+.product__selling__plan__container .radio--button.radio--button__active {
+    /* border: solid 1px #000 */
+}
+
+.product__selling__plan__container .radio--button.radio--button__active .radio__icon__normal {
+    display: none;
+}
+
+.product__selling__plan__container .radio--button:not(.radio--button__active) .radio__icon__active {
+    display: none;
+}
+
+.product__selling__plan__container .radio--button:not(.radio--button__active) {
+    background: #f7f7f7;
+}
+
+.product__selling__plan__container .radio--button:not(.radio--button__active) * {
+    /* color: #ABABAB;
+    stroke: #ababab; */
+}
+
+/* .product__selling__plan__container .radio--button:not(.radio--button__active) .percentage__price {
+    background: #808080;
+    color: #FFF;
+} */
+
+.product__selling__plan__container .radio__content {
+    flex: 1
+}
+
+.product__selling__plan__container .radio__icon span {
+    height: 20px;
+    display: block;
+    margin-top: 4px;
+}
+
+.product__selling__plan__container .radio__icon svg {
+    height: 20px;
+    width: 20px;
+}
+
+.product__selling__plan__container .radio--subscribe .normal__price {
+    color: #A1A1A1;
+    font-size: 17px;
+    text-decoration: line-through;
+    margin-right: 4px;
+}
+
+.product__selling__plan__container .percentage__price {
+    /* position: absolute;
+    top: -14px;
+    background: #000;
+    color: #fff;
+    font-size: 14px;
+    padding: 0px 15px;
+    border-radius: 20px;
+    right: 20px; */
+}
+
+.product__selling__plan__container .radio__text {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    align-items: center;
+    font-size: 1.6rem;
+}
+
+.product__selling__plan__container .radio--subscribe__list {
+    font-size: 12px;
+    line-height: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.product__selling__plan__container .radio--subscribe__list svg {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left: 0;
+    top: 6px;
+}
+
+.product__selling__plan__container .radio--subscribe__list > div {
+    padding-left: 20px;
+    position: relative;
+}
+
+
+.product__selling__plan__container .radio__product__gift {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    background: #F6F6F6;
+    padding: 15px 10px 15px 20px;
+    align-items: center;
+    border-radius: 8px;
+    flex: 3;
+    margin-left: -35px;
+}
+
+.product__selling__plan__container .radio__product__gift--image {
+    width: 90px;
+}
+
+.product__selling__plan__container .radio__product__gift--head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.product__selling__plan__container .radio__product__gift--desc {
+    line-height: 1.2;
+    font-size: 13px;
+}
+
+.has__gift__product .product__selling__plan__container .radio--subscribe__row {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 5%;
+}
+
+.product__selling__plan__container .radio__product__gift+.radio--subscribe__list {
+    flex-direction: column;
+    flex: 2;
+}
+
+.cart-item-gift-product {
+    color: #9B9B9B;
+    margin-top: -6px;
+}
+
+.cart-item-gift-product-message {
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+@media (max-width: 1199px) {
+    .product__selling__plan__container .radio__text {
+        font-size: 1.6rem;
+    }
+
+    .product__selling__plan__container .radio--subscribe .normal__price {
+        font-size: 14px;
+    }
+
+    /* .product__selling__plan__container .percentage__price {
+        right: 15px;
+    } */
+}
+
+@media (max-width: 639px) {
+    .product__selling__plan__container .radio--subscribe__list {
+        flex-direction: column;
+        line-height: 15px;
+        gap: 8px;
+    }
+
+    .product__selling__plan__container .radio--button__subscribe {
+        align-items: flex-start;
+    }
+
+    .product__selling__plan__container .radio--button__subscribe .radio__icon {
+        /* padding-top: 6px; */
+    }
+
+    .has__gift__product .product__selling__plan__container .radio--subscribe__row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-left: -36px;
+    }
+
+    .product__selling__plan__container .radio__product__gift {
+        margin-left: 0;
+    }
+
+    .product__selling__plan__container .radio__product__gift+.radio--subscribe__list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+
+    .product__selling__plan__container .radio__text {
+        align-items: flex-start;
+    }
+
+    .product__selling__plan__container .radio__product__gift--head {
+        font-size: 14px;
+    }
+
+    .product__selling__plan__container .radio__product__gift--image {
+        width: 80px;
+    }
+    .product__selling__plan__container .radio__product__gift--desc {
+        font-size: 12px;
+    }
+    .product__selling__plan__container .radio--subscribe__list svg {
+        width: 18px;
+    }
+}
+
+
+@media (max-width: 420px) {
+    .product__selling__plan__container .radio__text .price__container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .product__selling__plan__container .radio__text .normal__price {
+        margin-right: 0;
+    }
+
+    .product__selling__plan__container .radio--button__subscribe {
+        align-items: flex-start;
+    }
+}

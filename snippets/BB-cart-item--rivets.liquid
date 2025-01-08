@@ -1,0 +1,239 @@
+<div class="cart-item--rivets" rv-extra-class="item.line_price | money" rv-each-item="data.cart.items">
+    <div class="left-area" rv-if="item.selling_plan_allocation">
+        <a rv-href="item.handle | getMarket" class="object-fit--cover">
+            <img loading="lazy" loading="lazy" rv-src="item.image | getSizedImage '90x90' " rv-srcset="item.image | getSrcSet '90x90' ">
+        </a>
+        <button data-test-name="new-cart-drawer" type="button" rv-on-click="controller.removeItem" class="cart-item-remove ab__test">
+          <img src="{{ 'x-button.png' | asset_url }}" width="24.5px" height="24.5px" />
+        </button>
+    </div>
+
+    <div class="left-area" rv-unless="item.selling_plan_allocation" style="display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f7f7f7;">
+        <a rv-href="item.handle | getMarket" class="object-fit--cover">
+            <img loading="lazy" loading="lazy" rv-src="item.image | getSizedImage '90x90' " rv-srcset="item.image | getSrcSet '90x90' ">
+        </a>
+
+        <button data-test-name="new-cart-drawer" type="button" rv-on-click="controller.removeItem" class="cart-item-remove ab__test">
+          <img src="{{ 'x-button.png' | asset_url }}" width="24.5px" height="24.5px" />
+        </button>
+    </div>
+
+    <div class="right-area">
+        <header>
+            <div>
+                <a class="cart-item-product-title" rv-data-productid="item.product.id" rv-href="item.handle | getMarket" rv-text="item.product_title"></a>
+                <p data-test-name="new-recharge-block" class="cart-item-gift-product-message" rv-if="item.properties.isGift">
+                    Free welcome gift
+                </p>
+
+
+                {% comment %}
+                <div class="reviews">
+                    <div class="yotpo bottomLine"
+                        data-appkey="bgzgoRGnLi5wOF0jyQdbzIfRCFKCpcmV701bZUJP"
+                        data-domain="{{shop.permanent_domain | escape }}"
+                        data-product-id="{{ item.id }}"
+                        data-product-models="{{ item.id }}"
+                        data-name="{{ item.title | escape }}"
+                        data-url="{{ shop.url }}{{ item.url }}"
+                        data-image-url="{{ item.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+                        data-description="{{ item.description | escape }}"
+                        data-bread-crumbs="{% for tag in item.tags %}{{ tag | escape }};{% endfor %}">
+                    </div>
+                </div>
+                {% endcomment %}
+            </div>
+
+            <button data-test-name="new-cart-drawer" type="button" rv-on-click="controller.removeItem" class="cart-item-remove ab__test-hide">
+                {% include 'icon-trash' %}
+            </button>
+
+            <p data-test-name="new-cart-drawer" class="cart-item-product-price ab__test" rv-unless="item.properties.isGift">
+              <small style="display:inline;text-decoration:line-through;" rv-each-prop="item | getProps"><span rv-text="item.original_line_price | money"></span></small>
+              <span class="cart-item-line-price money" rv-data-money="item.line_price" rv-html="item.line_price | money"></span>
+            </p>
+
+            <p data-test-name="new-recharge-block" class="cart-item-gift-product" rv-if="item.properties.isGift">
+              FREE
+            </p>
+        </header>
+
+        <small style="display: none;" rv-each-prop="item | getProps"><span rv-text="prop.name"></span>{% comment %}: <span rv-html="prop.value"></span>{% endcomment %}</small>
+
+
+        <div class="info-area" rv-unless="item.properties.isGift">
+          <div class="cart-item-variant" rv-unless="item.product_has_only_default_variant">
+            <p rv-each-prop="item.options_with_values"><span rv-text="prop.value"></span></p>
+          </div>
+
+          <span
+            class="cart-product__selling-plan-name"
+            rv-if="item.selling_plan_allocation"
+            rv-text="item.selling_plan_allocation.selling_plan.name"
+          >
+          </span>
+        </div>
+
+        {% comment %}<div data-test-name="expected-delivery-vs-preorder" class="ab__test info-preorder" rv-if="item.properties.preorder">
+          Expected delivery:
+          <span class="cart-product__selling-plan-name" rv-text="item.properties.preorder"></span>
+        </div>
+        {% endcomment %}
+
+        <div class="new-remove-cart" style="display: none;
+            justify-content: space-between;">
+            <button style="font-size: 12px; text-decoration: underline;" type="button" rv-on-click="controller.removeItem" class="cart-item-remove">
+                Remove
+            </button>
+            <p class="cart-item-product-price">
+                <span class="cart-item-line-price money" rv-data-money="item.line_price" rv-html="item.line_price | money"></span>
+            </p>
+        </div>
+
+          <div data-test-name="new-cart-drawer" class="toggle-outer ab__test-hide" rv-unless="item.selling_plan_allocation" style="position: relative; padding: 22px 0 26px;">
+            <div class="subscription-toggle" rv-id="item.key" rv-if="item.product.selling_plan_groups | length | gt 0" rv-hide="item.final_price | eq 0" rv-hide="item.final_price | eq 0">
+                <label class="switch">
+                    <input type="checkbox" rv-checked="item.selling_plan_allocation" rv-on-change="controller.updateSellingPlan">
+                    <span class="slider round"></span>
+                </label>
+                <p>Subscribe & Save 10%</p>
+            </div>
+          </div>
+
+        <div class="product-price-flex" rv-unless="item.properties.isGift">
+            {% comment %}<div class="subscription-spacer" rv-id="item.key" rv-if="item.product.selling_plan_groups | length | lt 1">
+              <span>&nbsp;</span>
+            </div>{% endcomment %}
+            <div class="cart-item-quantity-selector" rv-if="item.price | gt 0">
+                <button type="button" rv-on-click="controller.decrementQuantity">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10">
+                      <path fill="#2E2E2E" d="M0 4.333h10v1H0v-1z"></path>
+                  </svg>
+                </button>
+                <input autocomplete="off" type="text" readonly min="1" max="999"rv-value="item.quantity" name="quantity">
+                <button type="button" rv-on-click="controller.incrementQuantity" rv-if="item.price | gt 0">
+                  <svg class="icon-plus" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15"><g><g><path class="horizontal-line" fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="20" d="M0 7.5h15"></path></g><g><path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="20" d="M7.5 0v15"></path></g></g></svg>
+                </button>
+            </div>
+
+            <div data-test-name="new-cart-drawer" class="ab__test toggle-outer" rv-unless="item.selling_plan_allocation">
+              <div class="subscription-toggle" rv-id="item.key" rv-if="item.product.selling_plan_groups | length | gt 0" rv-hide="item.final_price | eq 0" rv-hide="item.final_price | eq 0">
+                  <label class="switch">
+                      <p>Subscribe & Save 10%</p>
+                      <input type="checkbox" rv-checked="item.selling_plan_allocation" rv-on-change="controller.updateSellingPlan">
+                      <span class="slider round"></span>
+                  </label>
+
+              </div>
+            </div>
+
+
+            <p data-test-name="new-cart-drawer" class="cart-item-product-price ab__test-hide">
+                <span class="cart-item-line-price money" rv-data-money="item.line_price" rv-html="item.line_price | money"></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+.cart-item--rivets[extra-class='£0'] .toggle-outer {
+  display: none;
+}
+
+.ab__test--active-test[data-test-name="new-cart-drawer"] .toggle-outer[data-test-name="new-cart-drawer"] .subscription-toggle p,
+.toggle-outer[data-test-name="new-cart-drawer"].ab__test--active-test .subscription-toggle p {
+  position: static;
+}
+
+.ab__test--active-test[data-test-name="new-cart-drawer"] .toggle-outer[data-test-name="new-cart-drawer"] .subscription-toggle .switch,
+.toggle-outer[data-test-name="new-cart-drawer"].ab__test--active-test .subscription-toggle .switch {
+  position: relative;
+  width: 100%;
+  padding: 11px 22px;
+  height: 32px;
+}
+
+.ab__test--active-test[data-test-name="new-cart-drawer"] .cart-item-remove[data-test-name="new-cart-drawer"],
+.cart-item-remove[data-test-name="new-cart-drawer"].ab__test--active-test {
+  position: absolute;
+  left: -10px;
+  top: 10px;
+}
+
+@media (max-width:450px) {
+  .ab__test--active-test[data-test-name="new-cart-drawer"] .toggle-outer[data-test-name="new-cart-drawer"] .subscription-toggle .switch,
+  .toggle-outer[data-test-name="new-cart-drawer"].ab__test--active-test .subscription-toggle .switch {
+    padding: 10px 15px;
+  }
+}
+
+.subscription-toggle {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.subscription-toggle .switch {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  background-color: #000;
+  border-radius: 32px;
+  height: 26px;
+  position: absolute;
+  width: 60%;
+  margin-right: 8px;
+}
+.subscription-toggle p {
+  font-size: 11px;
+  line-height: 1;
+  color: #fff;
+  left: calc(30% - 55px);
+  pointer-events: none;
+  position: absolute;
+}
+@media (max-width: 834px) {
+.subscription-toggle p {
+  font-size: 10px;
+}
+.subscription-toggle .switch {
+  margin-right: 4px;
+}
+}
+.subscription-toggle .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.subscription-toggle .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid #000;
+  background-color: transparent;
+  -webkit-transition: .2s;
+  transition: .2s;
+  border-radius: 32px;
+}
+
+.subscription-toggle input:checked + .slider {
+  background-color: #000;
+}
+
+.subscription-toggle input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.subscription-toggle input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+</style>

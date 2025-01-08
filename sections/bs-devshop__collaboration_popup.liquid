@@ -1,0 +1,112 @@
+{{ 'bs-devshop__collaboration_popup.css' | asset_url | stylesheet_tag }}
+
+
+{%- if product.id == section.settings.target_product.id -%}
+  <div>
+<div class="bs-devshop__popup-overlay" data-popup-overlay>
+  <div class="bs-devshop__popup" data-popup>
+    <button class="bs-devshop__popup-close" data-popup-close>
+      {% render 'icon-close' %}
+    </button>
+
+    <div class="bs-devshop__popup-content">
+      <div class="bs-devshop__popup-text">
+        <h2 class="bs-devshop__popup-title">{{ section.settings.title }}</h2>
+        <div class="bs-devshop__popup-body">{{ section.settings.body_text }}</div>
+        <a href="{{ section.settings.cta_link }}" class="bs-devshop__popup-cta" target="_blank" rel="noopener noreferrer">
+          {{ section.settings.cta_text }}
+        </a>
+      </div>
+      
+      <div class="bs-devshop__popup-image">
+        {% if section.settings.popup_image %}
+          {{ section.settings.popup_image | image_url: width: 400 | image_tag: loading: 'lazy', class: 'bs-devshop__popup-img' }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+  class PopupManager {
+    constructor() {
+      this.overlay = document.querySelector('[data-popup-overlay]');
+      this.popup = document.querySelector('[data-popup]');
+      this.closeBtn = document.querySelector('[data-popup-close]');
+      
+      this.init();
+    }
+
+    init() {
+      this.closeBtn?.addEventListener('click', () => this.closePopup());
+      this.overlay?.addEventListener('click', (e) => {
+        if (e.target === this.overlay) this.closePopup();
+      });
+
+      // Show popup after a short delay
+      setTimeout(() => this.showPopup(), 500);
+    }
+
+    showPopup() {
+      this.overlay?.classList.add('active');
+    }
+
+    closePopup() {
+      this.overlay?.classList.remove('active');
+    }
+  }
+
+  // Initialize popup on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    new PopupManager();
+  });
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Collaboration Popup",
+  "settings": [
+    {
+      "type": "product",
+      "id": "target_product",
+      "label": "Target Product"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Popup Title",
+      "default": "Head to Eight Sleep"
+    },
+    {
+      "type": "richtext",
+      "id": "body_text",
+      "label": "Body Text",
+      "default": "<p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Eight Sleep"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link",
+    },
+    {
+      "type": "image_picker",
+      "id": "popup_image",
+      "label": "Popup Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collaboration Popup"
+    }
+  ]
+}
+{% endschema %}

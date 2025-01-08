@@ -1,0 +1,192 @@
+{% assign ss = section.settings %}
+  
+<div class="accordion-tabs__container">
+    {% if ss.title != blank %}
+        <div class="section-header">
+            <h2>{{ ss.title }}</h2>
+
+            {% if ss.subtitle != blank %}
+                <h3>{{ ss.subtitle }}</h3>
+            {% endif %} 
+        </div>
+    {% endif %}
+
+    <div class="accordions-tabs" data-tabs>
+        <ul class="accordions-tab-links">
+            {% for block in section.blocks %}
+            {% assign bs = block.settings %}
+                {% if block.type == 'parent' %}
+                    <li class="{% if forloop.first %}active{% endif %}" data-tab-link="tab{{forloop.index0}}">
+                        <span>{{ bs.title }}</span>
+                        {% include 'icon-arrow' %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        <div class="accordions-tab-content">
+            {% for block in section.blocks %}
+                {% assign bs = block.settings %}
+                
+                {% if block.type == 'parent' %}
+                    <div class="accordions-tab {% if forloop.first %}active{% endif %}" data-tab-content id="tab{{forloop.index0}}">
+                        <h3 class="title">{{ bs.heading }}</h3>
+                        
+                        {% if bs.content != blank %}
+                            <div>{{ bs.content }}</div>
+                        {% endif %}
+
+                        <div class="accordion-area accordion" data-toggle-group>
+                            {% assign parent_title = bs.title %}
+
+                            {% for block in section.blocks %}
+                            {% assign bs = block.settings %}
+
+                                {% if block.type == 'item' and bs.item_parent == parent_title %}
+                                    {% if bs.title == blank %}
+                                    {% continue %}
+                                    {% endif %}
+
+                                    <div class="accordion-item {% if forloop.first %}open{% endif %}" data-toggle-item>
+                                    
+                                    <div class="accordion-header" data-toggle-trigger>
+                                        <h4 class="h4">{{ bs.title }}</h4>
+                                        {% include 'icon-chevron' %}
+                                    </div>
+
+                                    <div class="accordion-content" data-toggle-elem>
+                                        <div>
+                                        {{ bs.content }}
+                                        </div>
+                                    </div>
+
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.accordions-tabs {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.accordions-tabs {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+{
+    "name": "BB - Accordion Tabs",
+    "class": "accordions-tabs wrapper",
+    "settings": [
+        {
+            "type":"text",
+            "id":"title",
+            "label":"Title"
+        },
+        {
+            "type":"text",
+            "id":"subtitle",
+            "label":"Subtitle"
+        },
+        {
+            "type": "header",
+            "content": "Paddings - Desktop"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "label": "Padding top",
+            "unit": "px",
+            "min": 0,
+            "max": 120,
+            "step": 5,
+            "default": 80
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "label": "Padding bottom",
+            "unit": "px",
+            "min": 0,
+            "max": 120,
+            "step": 5,
+            "default": 60
+        },
+        {
+            "type": "header",
+            "content": "Paddings - Tablet"
+        },
+        {
+            "type": "range",
+            "id": "padding_top_tablet",
+            "label": "Padding top",
+            "unit": "px",
+            "min": 0,
+            "max": 60,
+            "step": 5,
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_tablet",
+            "label": "Padding bottom",
+            "unit": "px",
+            "min": 0,
+            "max": 60,
+            "step": 5,
+            "default": 60
+        }
+    ],
+    "blocks":[
+        {
+            "name":"Accordion Parent",
+            "type":"parent",
+            "settings":[
+                {
+                    "type":"text",
+                    "id":"title",
+                    "label":"Title"
+                }
+            ]
+        },
+        {
+            "name":"Accordion Item",
+            "type":"item",
+            "settings":[
+                {
+                    "type":"text",
+                    "id":"item_parent",
+                    "label":"Parent Title"
+                },
+                {
+                    "type":"text",
+                    "id":"title",
+                    "label":"Item Title"
+                },
+                {
+                    "type":"richtext",
+                    "id":"content",
+                    "label":"Item Content"
+                }
+            ]
+        }
+    ],
+    "presets":[
+        {
+            "name":"BB - Accordion Tabs"
+        }
+    ]
+}
+{% endschema %}

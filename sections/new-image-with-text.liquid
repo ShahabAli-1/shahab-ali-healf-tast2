@@ -1,0 +1,198 @@
+{% assign ss = section.settings %}
+
+<div class="page-width image-with-text__container {% if ss.image_right %}image-right{% endif %}">
+    {% if page.metafields.custom.discount_image != blank %}
+        {% render 'image-element', image: page.metafields.custom.discount_image , image_mobile: page.metafields.custom.discount_image, size: '1920x', extra_class: 'object-fit--cover image-with-text-image'%}
+    {% elsif ss.image != blank %}
+        {% render 'image-element', image: ss.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--cover image-with-text-image'%}
+    {%- endif -%}
+
+    <div class="image-with-text-content-i">
+        {% if ss.title != blank %}
+            <h2 class="liquid-title" style="text-align: left;">{{ ss.title }}</h2>
+        {%- endif -%}
+        {% if ss.description != blank %}
+            <p style="color: black !important; line-height: 5">{{ ss.description }}</p>
+        {%- endif -%}
+        {% if ss.btn_url != blank %}
+            <a href="{{ ss.btn_url }}" style="text-align: center; margin-top: 20px;" class="btn liquid-button">Claim {{ page.metafields.custom.discount }}% off</a>
+        {%- endif -%}
+
+        {%- if section.blocks  != empty -%}
+            <div class="image-with-text__blocks">
+                {%- for block in section.blocks -%}
+                    {% assign bs = block.settings %}
+
+                    <div>
+                        {% render 'image-element', image: bs.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--cover blocks-image'%}
+
+                        <div class="content">
+                            <h4>{{ bs.title }}</h4>
+                            <p>{{ bs.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.bb-image-with-text {
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+    #shopify-section-{{ section.id }}.bb-image-with-text li {
+        list-style: disc;
+    }
+    #shopify-section-{{ section.id }}.bb-image-with-text ul {
+        margin-left: 20px;
+    }
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.bb-image-with-text {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+        .image-with-text-content-i {
+            padding-left: 0px !important;
+            margin-bottom: 20px;
+        }
+    }
+    .image-with-text__container .image-with-text-image {
+    padding-bottom: 400px;
+    border-radius: 4px;
+}
+
+.image-with-text__container .image-with-text-content-i {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+@media only screen and (min-width: 835px) {
+    .image-with-text__container .image-with-text-content-i {
+        padding-left: 80px;
+    }
+}
+
+.image-with-text__container .image-with-text-content-i p {
+    font-size: 1.6rem;
+    line-height: calc(1 + 0.8 / var(--font-body-scale));
+    font-weight: 400;
+}
+
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "New Image with text",
+        "tag": "section",
+        "class": "bb-image-with-text",
+        "max_blocks": 4,
+        "settings": [
+            {
+                "type": "header",
+                "content": "Image with text"
+            },
+            {
+                "type": "checkbox",
+                "id": "image_right",
+                "default": false,
+                "label": "If you want the image to be right check this!"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "description",
+                "label": "Description"
+            },
+            {
+                "type": "url",
+                "id": "btn_url",
+                "label": "Button URL"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Collection",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "description",
+                        "label": "Description"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Image"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "New Image with text"
+            }
+        ]
+    }
+{% endschema %}

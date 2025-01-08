@@ -1,0 +1,200 @@
+<script src="{{ 'grid-banners.js' | asset_url }}" defer="defer"></script>
+
+<div class="collection-grid-scroll-banners {% unless request.design_mode %}hidden{% endunless %}">
+  {% for block in section.blocks %}
+    {% assign bs = block.settings %}
+    <div
+      data-test-name="collection-doom-scroll"
+      banner-type="collection"
+      class="
+        collection-grid-scroll-banner 
+        {% unless request.design_mode %}ab__test{% endunless %}
+        collection-grid-scroll-banner--content-{{ bs.content_alignment }}
+      "
+    >
+      <div class="content-block">
+        <div class="content-inner-block">
+          <h3>{{ bs.title }}</h3>
+          <p>{{ bs.body }}</p>
+
+          <a href="{{ bs.cta_url }}" class="btn btn--white">
+            {{ bs.cta_title }}
+          </a>
+        </div>
+      </div>
+      <div class="img-container-group">
+        <div class="img-container" style='--bg-image: url(" {{ bs.image_1 | image_url: width: 800 }}")'>
+          <!-- hidden image to cache, or bg image flickers (bg image for sizing reasons) -->
+          <img src="{{ bs.image_1 | image_url: width: 800 }}" class="hidden" width=800 height=200 />
+        </div>
+        {% if bs.image_2 %}
+          <div class="img-container" style='--bg-image: url(" {{ bs.image_2 | image_url: width: 800 }}")'>
+            <!-- hidden image to cache, or bg image flickers (bg image for sizing reasons) -->
+            <img src="{{ bs.image_2 | image_url: width: 800 }}" class="hidden" width=800 height=200 />
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .collection-grid-scroll-banner {
+    width: 100%;
+    flex-basis: 100%;
+    background-color: black;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    margin-left: 12px;
+  }
+
+  .collection-grid-scroll-banner--content-left .content-block {
+    order: 0;
+  }
+  .collection-grid-scroll-banner--content-right .content-block {
+    order: 2;
+  }
+
+  .collection-grid-scroll-banner .content-block {
+    padding: 4rem 3.8rem;
+    color: white;
+    min-width: 50%;
+    min-width: 54.2rem;
+  }
+
+  .collection-grid-scroll-banner .content-inner-block {
+    position: relative;
+  }
+
+  .collection-grid-scroll-banner .content-block a {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .collection-grid-scroll-banner .content-block h3 {
+    font-size: 5.3rem;
+    margin-bottom: 3.4rem;
+    line-height: 98.1%;
+  }
+
+  .collection-grid-scroll-banner .content-block p {
+    font-size: 1.95rem;
+    line-height: 24.7px;
+  }
+
+  .collection-grid-scroll-banner .img-container-group {
+    display: flex;
+    width: 100%;
+  }
+
+  .collection-grid-scroll-banner .img-container {
+    background-image: var(--bg-image);
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    min-height: 11.5rem;
+  }
+
+
+  @media (max-width: 990px) {
+    .collection-grid-scroll-banner {
+      flex-direction: column;
+    }
+
+    .collection-grid-scroll-banner .content-block {
+      min-width: 100%;
+      max-width: 100%;
+      padding: 1.8rem;
+    }
+
+    .collection-grid-scroll-banner .content-block h3 {
+      font-size: 2.87rem;
+      margin-bottom: 2rem;
+    }
+
+    .collection-grid-scroll-banner .content-block p {
+      font-size: 1.2rem;
+    }
+
+    .collection-grid-scroll-banner .img-container {
+      width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection Scroll Banners",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "limit": 4,
+      "type": "banner",
+      "name": "Banner Config",
+      "settings": [
+        {
+          "type": "select",
+          "id": "content_alignment",
+          "label": "Content Alignment",
+          "default": "left",
+          "options": [
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "title",
+          "default": "Latest Arrivals"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "body"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "text",
+          "id": "cta_title",
+          "label": "CTA Title"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "CTA Url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Scroll Banner",
+      "blocks": [
+        {
+          "type": "banner"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

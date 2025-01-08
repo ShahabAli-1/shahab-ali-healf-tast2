@@ -1,0 +1,92 @@
+.bs-devshop__highlight__product__wrapper {
+    padding-top: 5.6rem;
+}
+
+.bs-devshop__highlight__product__content {
+    display: grid;
+    grid-template-columns: 47rem 1fr;
+    gap: 4.5rem;
+}
+
+.bs-devshop__highlight__product__columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10%;
+}
+
+.bs-devshop__product  .product-grid-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.bs-devshop__product .product-grid-item .product-image-area {
+    height: auto;
+    flex: 1
+}
+
+.bs-devshop__product .product-grid-item .product-title__wrapper>.product-vendor {
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem
+}
+
+.bs-devshop__product .product-grid-item .product-title__wrapper>.product-title {
+    margin-bottom: 1rem;
+}
+
+.bs-devshop__product .yotpo-bottomline {
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.bs-devshop__product .yotpo.bottomLine .yotpo-bottomline .yotpo-icon-star {
+    font-size: 20px;
+}
+
+.bs-devshop__product .yotpo-icon-default-star:before, .bs-devshop__product .yotpo-icon-star:before {
+    width: 20px;
+    height: 19px;
+}
+
+.bs-devshop__product  .yotpo .yotpo-bottomline .text-m {
+    margin-left: 0;
+}
+
+@media (min-width: 990px) {
+    .bs-devshop__product .image-element-wrapper {
+        padding-bottom: 100%;
+    }
+}
+
+@media (max-width: 1199px) {
+    .bs-devshop__highlight__product__content {
+        grid-template-columns: 1fr 1.5fr;
+        gap: 4rem;
+    }
+}
+
+@media (max-width: 749px) {
+    .bs-devshop__highlight__product__content {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 3rem;
+    }
+
+    .bs-devshop__product .image-element-wrapper {
+        padding-bottom: 100%;
+    }
+
+    .bs-devshop__highlight__product__columns {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .bs-devshop__highlight__product__wrapper {
+        padding-top: 3rem;
+    }
+}
+.bs-devshop__highlight__product .product-grid-item .price__wrapper .money.compare-product-price {
+    color: #8E8E8E;
+}

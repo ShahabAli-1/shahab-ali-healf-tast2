@@ -1,0 +1,50 @@
+{% comment %}
+  Renders a card with an image, title, and content.
+  Accepts:
+  - image: The image to display in the card.
+  - title: The title of the card.
+  - link: The link to navigate to when the action button is clicked.
+  - image_bg_color: The background color of the image.
+  - new: A flag to display a "New" label on the card.
+  - title_color: The color of the title.
+  - custom_class: A custom class to add to the card.
+  Usage:
+  {% render 'bs-devshop__brand-follow-card',
+    title: 'Title',
+    image: 'image.jpg',
+    link: '#',
+    image_bg_color: '#FFFFFF',
+    new: ""
+    title_color: '#000000',
+    custom_class: ''
+  %}
+{% endcomment %}
+
+{{ 'bs-devshop__brand-follow-card.css' | asset_url | stylesheet_tag }}
+
+<a href="{{ link }}" class="bs-devshop__snippet__brand-follow-card {{ custom_class }}">
+  <div class="bs-devshop__brand-follow__image-div" style="background-color: {{ image_bg_color }}">
+    {% if image %}
+      <img
+        src="{{ image | img_url: 'master' }}"
+        alt="{{ title }}"
+        class="bs-devshop__brand-follow-card-image"
+        width=""
+        height=""
+      >
+    {% endif %}
+  </div>
+  <div class="bs-devshop__brand-follow-card-content">
+    <div class="bs-devshop__brand-follow-card__text-div">
+      {% if title %}
+        <h3 class="bs-devshop__brand-follow-card-title">{{ title }}</h3>
+      {% endif %}
+      {% if new %}
+        <div class="bs-devshop__brand-follow-card__label-div">
+          <span class="bs-devshop__brand-follow-card__label-text">New</span>
+        </div>
+      {% endif %}
+    </div>
+    <button class="bs-devshop__brand-follow__button">Shop now</button>
+  </div>
+</a>

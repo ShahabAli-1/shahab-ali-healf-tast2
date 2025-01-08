@@ -1,0 +1,140 @@
+{% assign ss = section.settings %}
+
+<div class="collections-grid__container {{ section.settings.class }}">
+    {%- if ss.title != blank or ss.text != blank -%}
+        <div>
+            {%- if ss.title != blank -%}
+                <h3>{{ ss.title }}</h3>
+            {%- endif -%}
+            {%- if ss.text != blank -%}
+                <p>{{ ss.text | strip_html | escape }}</p>
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+        {% assign bs = block.settings %}
+        <div class="collection__card">
+            {% render 'image-element', image: bs.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--cover'%}
+            <a href="{{ bs.url }}">
+                {{ bs.title }}
+                {% render 'icon-arrow' %}
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.collections {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.collections {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Collections grid",
+        "tag": "section",
+        "class": "collections wrapper",
+        "settings": [
+            {
+                "type": "text",
+                "id": "class",
+                "label": "Custom class"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "richtext",
+                "id": "text",
+                "label": "Text"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Collection",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Collection Title"
+                    },
+                    {
+                        "type": "url",
+                        "id": "url",
+                        "label": "Collection link"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Collection image"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Collections grid"
+            }
+        ]
+    }
+{% endschema %}

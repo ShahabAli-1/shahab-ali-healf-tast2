@@ -1,0 +1,94 @@
+{{ 'BB-shop-by-collection.css' | asset_url | stylesheet_tag }}
+{% assign ss = section.settings %}
+
+
+<div class="shop-by-collection wrapper">
+  <h3>{{ ss.title }}</h3>
+
+  <div class="shop-by-collection-wrapper">
+    <div data-keen-slider='{
+      "autoplay": false,
+      "autoplaySpeed": 8000,
+      "slidesPerView": 5,
+      "autoAdjustSlidesPerView": false,
+      "loop": true,
+      "arrows": true,
+      "appendArrows": "#shopify-section-{{ section.id }} [data-arrows]",
+      "spacing": 30,
+      "responsive": [
+        {
+          "breakpoint": "1024px",
+          "settings": {
+            "slidesPerView": 2,
+            "spacing": 12,
+            "dots": false
+          }
+        }
+      ]
+    }'>
+      {% for block in section.blocks %}
+        {% assign bs = block.settings %}
+        <a href="{{ bs.collection.url }}" class="shop-by-collection__collection">
+          <div>
+            {% render 'image-element',
+              image: bs.image,
+              image_mobile: bs.image,
+              size: '400x',
+              extra_class: 'object-fit--contain'
+            %}
+          </div>
+          <h5>{{ bs.collection.title }}</h5>
+        </a>
+      {% endfor %}
+    </div>
+    <div class="custom-slide-nav" data-arrows></div>
+  </div>
+</div> 
+
+<style>
+  .shop-by-collection {
+    padding: 20px 16px 40px;
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "BB - Shop by collection",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "heading",
+      "default": "Shop by collection"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "blocks",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Brand image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BB - Shop by collection",
+      "settings": {
+        "title": "Shop by collection"
+      }
+    }
+  ]
+}
+{% endschema %}

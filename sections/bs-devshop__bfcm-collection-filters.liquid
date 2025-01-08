@@ -1,0 +1,157 @@
+{{ 'bs-devshop__bfcm-multiple-collections.css' | asset_url | stylesheet_tag }}
+
+<div class="bs-devshop__bfcm-multiple-collection-container">
+  <multiple-collection id="multipleCollection" class="bs-devshop__bfcm-multiple-collection">
+    <div class="bs-devshop__bfcm-multiple-collection__wrapper">
+      <div class="bs-devshop__bfcm-multi-collection-row bs-devshop__bfcm-collection-menu-desktop" style="padding-top: {{ section.settings.padding-top }}px; padding-bottom: {{ section.settings.padding-bottom }}px;">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'collection-filter' %}
+              {% assign collection = block.settings.collection %}
+                <a
+                  href="{{ block.settings.collection.url }}"
+                  class="bs-devshop__bfcm-multi-collection-item bfcm-collection-item coll-item {% if collection.handle == collection.handle %}active{% endif %}"
+                >
+                  {{- collection.title | capitalize -}}
+                </a>
+              {% when 'tag-filter' %}
+                {% assign filter_name = block.settings.title %}
+                {% assign filter_type = block.settings.filter-type %}
+                {% assign filter_value = block.settings.filter-value %}
+
+                {% assign is_active = false %}
+
+                <a
+                  href="?filters%5B{{ filter_type }}%5D%5B0%5D={{ filter_value | url_encode }}"
+                  class="bs-devshop__bfcm-multi-collection-item bfcm-collection-item coll-item {% if is_active %}active{% endif %}"
+                >
+                  {{- filter_name | capitalize -}}
+                </a>
+  
+            {% when 'price-filter' %}
+              {% assign filter_name = block.settings.filter-name %}
+              {% assign filter_min = block.settings.filter-value-min %}
+              {% assign filter_max = block.settings.filter-value-max %}
+              <a
+                href="?filters%5Bprice%5D%5B0%5D%5Bfrom%5D={{ filter_min }}&filters%5Bprice%5D%5B0%5D%5Bto%5D={{ filter_max }}"
+                class="bs-devshop__bfcm-multi-collection-item bfcm-collection-item coll-item {% if filter_min == filter_min and filter_max == filter_max %}active{% endif %}"
+              >
+                {{- filter_name | capitalize -}}
+              </a>
+          {% endcase %}
+        {% endfor %}
+      </div>
+    </div>
+  </multiple-collection>
+</div>
+
+{% schema %}
+{
+  "name": "BFCM Collection Filters",
+  "settings": [
+    {
+      "type": "range",
+      "label": "Padding Top",
+      "id": "padding-top",
+      "info": "Enter Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "label": "Padding Bottom",
+      "id": "padding-bottom",
+      "info": "Enter Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 20
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "collection-filter",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "label": "Select Collection",
+          "id": "collection",
+          "info": "Choose Collection"
+        },
+      ]
+    },
+    {
+      "type": "tag-filter",
+      "name": "Tag filter",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Title",
+          "id": "title",
+          "info": "Enter Filter Name"
+        },
+        {
+          "type": "select",
+          "label": "Filter Type",
+          "id": "filter-type",
+          "default": "custom_fields.filter_tag",
+          "options": [
+            {
+              "value": "custom_fields.filter_tag",
+              "label": "Category"
+            },
+            {
+              "value": "brand",
+              "label": "Brand"
+            },
+            {
+              "value": "custom_fields.goal_tag",
+              "label": "Goal"
+          },
+        ]
+        },
+        {
+          "type": "text",
+          "id": "filter-value",
+          "label": "Value"
+        }
+      ]
+    },
+    {
+      "type": "price-filter",
+      "name": "Price Filter",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Filter Name",
+          "id": "filter-name",
+          "info": "Enter Filter Name"
+        },
+        {
+          "type": "number",
+          "label": "Max Filter Value",
+          "id": "filter-value-max",
+          "info": "Enter Filter Value"
+        },
+        {
+          "type": "number",
+          "label": "Min Filter Value",
+          "id": "filter-value-min",
+          "info": "Enter Filter Value"
+        }
+      ]
+    }
+    
+  ],
+  "presets": [
+    {
+      "name": "BFCM Collection Filters",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

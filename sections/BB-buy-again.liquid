@@ -1,0 +1,155 @@
+{% if customer %}
+  {% assign count = 0 %}
+
+  <section class="buy-again__wrapper">
+    <h2>Recommended for you</h2>
+    <div class="product-slider__list slider-not__accordion">
+      {% assign first_order = customer.orders | first %}
+      {% assign first_product = first_order.line_items | first %}
+      <div
+        class="products show buy-again__recommendations"
+        data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ first_product.product.id }}&limit=10&intent=related"
+      >
+        {%- for order in customer.orders -%}
+          {% for item in order.line_items %}
+            {% if count == 6 %}
+              {% break %}
+            {% endif %}
+
+            {% assign count = count | plus: 1 %}
+            <div class="product">
+              {% render 'BB-product-card',
+                template: 'product',
+                product: item.product,
+                override_with_standard_image: true,
+                buy_again: true
+              %}
+            </div>
+          {% endfor %}
+          {% if count == 6 %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if count < 6 %}
+          {% assign remaining = 6 | minus: count | plus: 1 %}
+          {%- if recommendations.performed? and recommendations.products_count > 0 -%}
+            {%- for product in recommendations.products -%}
+              {% assign index = forloop.index %}
+              {% if index < remaining %}
+                <div class="product">
+                  {% render 'BB-product-card',
+                    template: 'product',
+                    product: product,
+                    override_with_standard_image: true
+                  %}
+                </div>
+              {% endif %}
+            {%- endfor -%}
+          {%- endif -%}
+          <script>
+            const wrapper = document.querySelector('.buy-again__wrapper');
+            const productRecommendationsSection = document.querySelector('.buy-again__recommendations');
+            const url = productRecommendationsSection.dataset.url;
+
+            fetch(url)
+              .then((response) => response.text())
+              .then((text) => {
+                const html = document.createElement('div');
+                html.innerHTML = text;
+                const recommendations = html.querySelector('.buy-again__wrapper');
+
+                if (recommendations && recommendations.innerHTML.trim().length) {
+                  wrapper.innerHTML = recommendations.innerHTML;
+                }
+              })
+              .catch((e) => {
+                console.error(e);
+              });
+          </script>
+        {% endif %}
+      </div>
+    </div>
+    <div class="custom-slide-nav" data-arrows></div>
+  </section>
+
+  <style>
+    #MainContent #shopify-section-{{ section.id }} {
+        order: initial !important;
+    }
+    .buy-again__wrapper {
+      padding: 32px;
+      max-width: 1460px;
+      margin: 0 auto;
+      display: none;
+    }
+
+    .buy-again__wrapper h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+      letter-spacing: -2px;
+    }
+
+    .buy-again__recommendations {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    .buy-again__recommendations::-webkit-scrollbar {
+      display: none;
+    }
+
+    .buy-again__wrapper .product {
+      flex-basis: calc(50% - 8px);
+    }
+
+    .buy-again__wrapper .product:nth-of-type(5), .buy-again__wrapper .product:nth-of-type(6) {
+        display: none;
+    }
+
+    @media screen and (min-width: 768px) {
+      .buy-again__wrapper .product {
+        flex-basis: calc(25% - 16px);
+      }
+
+      .buy-again__wrapper .product:last-of-type {
+        display: none;
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      .buy-again__wrapper h2 {
+        font-size: 45px;
+      }
+      .buy-again__wrapper {
+        padding: 44px;
+      }
+    }
+
+    @media screen and (min-width: 1220px) {
+        .buy-again__wrapper .product {
+            flex-basis: calc(16.66% - 16px);
+        }
+
+        .buy-again__wrapper .product:nth-of-type(5), .buy-again__wrapper .product:nth-of-type(6) {
+            display: block;
+        }
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "BB - Buy Again slider",
+  "tag": "section",
+
+  "presets": [
+    {
+      "name": "BB - Buy Again slider"
+    }
+  ]
+}
+{% endschema %}

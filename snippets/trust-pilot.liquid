@@ -1,0 +1,17 @@
+<div class="trustpilot__container ab__test" data-test-name="trust-pilot-block">
+    <div class="trustpilot__box">
+        {% if layout == 'product' %}
+            <div class="trustpilot__product desktop-only">
+                <img src="https://cdn.shopify.com/s/files/1/0405/7291/1765/files/Trust_pilot_Mobile_frame_4.png?v=1725628445"/>
+            </div>
+        {% elsif layout == 'collection' %}
+            <div class="trustpilot__collection desktop-only">
+                <img src="https://cdn.shopify.com/s/files/1/0405/7291/1765/files/trust-pilot-desktop.png?v=1725970649"/>
+            </div>
+        {% endif %}
+        <div class="trustpilot__mobile tablet-only">
+            <img src="https://cdn.shopify.com/s/files/1/0405/7291/1765/files/trust-pilot-gif.gif?v=1725968628" alt="">
+            {% comment %} {% render 'image-element', image: {{settings.trust_pilot_mobile}} , size: '2000x', extra_class: 'object-fit--cover'%} {% endcomment %}
+        </div>
+    </div>
+</div>

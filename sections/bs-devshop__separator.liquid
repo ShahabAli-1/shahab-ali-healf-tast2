@@ -1,0 +1,51 @@
+<div class="bs-devshop-separator-container" style="background-color: {{ section.settings.background_color }};">
+  <hr class="bs-devshop-separator" style="width: {{ section.settings.separator_width }}%; margin: 0 auto; --border-color: {{ section.settings.separator_color }};">
+</div>
+
+{% schema %}
+{
+  "name": "Separator",
+  "settings": [
+    {
+      "type": "range",
+      "id": "separator_width",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Separator Width",
+      "default": 95
+    },
+    {
+      "type": "color",
+      "id": "separator_color",
+      "label": "Separator Color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Separator",
+      "category": "Decorative"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+.bs-devshop-separator-container {
+  width: 100%;
+  padding: 0;
+}
+
+.bs-devshop-separator {
+  border: none;
+  border-top: 0.2rem solid var(--border-color);
+}
+{% endstylesheet %}

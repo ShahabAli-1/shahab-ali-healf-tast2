@@ -1,0 +1,230 @@
+{% assign ss = section.settings %}
+
+{% if template.name == 'collection' %}
+    {% if collection.metafields.custom.faq_title_1 == blank %}
+        {% continue %}
+    {% endif %}
+{% endif %}
+
+<div class="{% if ss.version == "version_1" %}wrapper{% endif %}">
+    <div class="faq__container {{ ss.version }}">
+        {% if ss.version != "version_1" %}
+            <div class="wrapper">
+                <div>
+        {% endif %}
+                    {% if ss.image != blank and ss.version == "version_3" %}
+                        {% render 'image-element', image: ss.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--cover'%}
+                    {%- endif -%}
+
+                    {% if ss.version == "version_3" or ss.version == "version_1" %}
+                        <div>
+                    {% endif %}
+                        <div class="title__container">
+
+                            {% if ss.title != blank %}
+                                <h3>{{ ss.title }}</h3>
+                            {%- endif -%}
+
+                            {% if ss.subtitle != blank %}
+                                <h4 class="content-subtitle">{{ ss.subtitle }}</h4>
+                            {%- endif -%}
+                        </div>
+
+                    {% if ss.version == "version_3" or ss.version == "version_1" %}
+                        </div>
+                    {% endif %}
+
+                {% if ss.version != "version_1" %}
+                    </div>
+
+                    {% if ss.button_text != blank %}
+                        {% if product.handle == 'healf-zone' %}
+                        <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/pages/healf-zone-faq" class="btn">{{ ss.button_text }}</a>
+                        {% else %}
+                        <a href="{{ ss.button_link }}" class="btn">{{ ss.button_text }}</a>
+                        {% endif %}
+                    {%- endif -%}
+                {% endif %}
+
+        {% if ss.version != "version_1" %}
+            </div>
+        {% endif %}
+
+
+        {% if ss.version == "version_1" %}
+            <div id="accordion__container" class="accordion__container">
+                <div class="accordion accordion-width accordion__sub-container" data-toggle-group>
+                    {%- for block in section.blocks -%}
+                        {% assign bs = block.settings %}
+                        {% if bs.title != blank %}
+                            <div class="accordion-item accordion__content" data-toggle-item>
+                                <h4 class="accordion-header" data-toggle-trigger>
+                                    {{ bs.title }}
+                                    {% render 'icon-short-arrow' %}
+                                </h4>
+                                <div class="accordion-content" data-toggle-elem>
+                                    {{ bs.text }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {%- endfor -%}
+                </div>
+            </div>
+        {% endif %}
+
+        {% if ss.version == "version_1" %}
+            {% if ss.button_text != blank %}
+                {% if product.handle == 'healf-zone' %}
+                <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/pages/healf-zone-faq" class="btn">{{ ss.button_text }}</a>
+                {% else %}
+                <a href="{{ ss.button_link }}" class="btn" style='margin-top: 20px;'>{{ ss.button_text }}</a>
+                {% endif %}
+            {%- endif -%}
+        {%- endif -%}
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.faq {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.faq {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - FAQ",
+        "tag": "section",
+        "class": "faq",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Header"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "text",
+                "id": "subtitle",
+                "label": "Subtitle"
+            },
+            {
+                "type": "text",
+                "id": "button_text",
+                "label": "Button Text"
+            },
+            {
+                "type": "url",
+                "id": "button_link",
+                "label": "Button Link"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "select",
+                "id": "version",
+                "options": [
+                    {
+                        "value": "version_1",
+                        "label": "Version 1"
+                    },
+                    {
+                        "value": "version_2",
+                        "label": "Version 2"
+                    },
+                    {
+                        "value": "version_3",
+                        "label": "Version 3"
+                    }
+                ],
+                "default": "version_1",
+                "label": "Version"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "block",
+                "name": "Block",
+                "limit": 4,
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "FAQ Title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "text",
+                        "label": "FAQ Text"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - FAQ"
+            }
+        ]
+    }
+{% endschema %}

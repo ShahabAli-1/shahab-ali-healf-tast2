@@ -1,0 +1,242 @@
+
+<div class="page-width {% if request.design_mode == false %}ab__test{% endif %}" data-test-name="pdp-quiz-banner">
+    <div class="bs-devshop__pdp-quiz-banner-container">
+        {% for block in section.blocks %}
+          {% assign bs = block.settings %}
+          <div
+            banner-type="quiz"
+            class="
+              bs-devshop__pdp-quiz-banner-scroll 
+              bs-devshop__pdp-quiz-banner-scroll--content-{{ bs.content_alignment }}
+            "
+          >
+            <div class="bs-devshop__pdp-quiz-banner-content">
+              <div class="bs-devshop__pdp-quiz-banner-content-inner">
+                <div class="bs-devshop__pdp-quiz-banner-title"><p>{{ bs.title }}</p></div>
+                <div class="bs-devshop__pdp-quiz-banner-body">{{ bs.body }}</div>
+      
+                <a href="{{ bs.cta_url }}" class="btn btn--white">
+                  {{ bs.cta_title }}
+                </a>
+              </div>
+            </div>
+            <div class="bs-devshop__pdp-quiz-banner-img-group">
+              <div class="bs-devshop__pdp-quiz-banner-img" style='--bg-image: url(" {{ bs.image_1 | image_url: width: 800 }}")'>
+                <img src="{{ bs.image_1 | image_url: width: 800 }}" class="hidden" width=800 height=200 />
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+</div>
+
+
+<style>
+  .bs-devshop__pdp-quiz-banner-container {
+    width: 100%;
+  }
+  .bs-devshop__pdp-quiz-banner-scroll {
+    width: 100%;
+    flex-basis: 100%;
+    background-color: black;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    margin-left: 1.2rem;
+    margin-right: 1.2rem;
+    border-radius: 10px;
+  }
+
+  .bs-devshop__pdp-quiz-banner-scroll--content-left .bs-devshop__pdp-quiz-banner-content {
+    order: 0;
+  }
+  .bs-devshop__pdp-quiz-banner-scroll--content-right .bs-devshop__pdp-quiz-banner-content {
+    order: 2;
+  }
+
+  .bs-devshop__pdp-quiz-banner-scroll .bs-devshop__pdp-quiz-banner-content {
+    padding: 4rem 3.8rem;
+    color: white;
+    min-width: 50%;
+    min-width: 54.2rem;
+  }
+
+  .bs-devshop__pdp-quiz-banner-scroll .bs-devshop__pdp-quiz-banner-content-inner {
+    position: relative;
+  }
+
+  .bs-devshop__pdp-quiz-banner-scroll .bs-devshop__pdp-quiz-banner-content a {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: white !important;
+    color: black !important;
+  }
+
+  .bs-devshop__pdp-quiz-banner-title p {
+    font-size: 4.9rem;
+    line-height: 98.1%;
+  }
+
+  .bs-devshop__pdp-quiz-banner-title {
+    margin-bottom: 3.4rem;
+  }
+
+  .bs-devshop__pdp-quiz-banner-body p {
+    font-size: 1.95rem;
+    line-height: 24.7px;
+    max-width: 70%;
+  }
+
+  .bs-devshop__pdp-quiz-banner-scroll .bs-devshop__pdp-quiz-banner-img-group {
+    display: flex;
+    width: 100%;
+  }
+
+  .bs-devshop__pdp-quiz-banner-scroll .bs-devshop__pdp-quiz-banner-img {
+    background-image: var(--bg-image);
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    min-height: 11.5rem;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 990px) {
+    .bs-devshop__pdp-quiz-banner-scroll {
+      flex-direction: column;
+      position: relative;
+      padding-bottom: 20rem;
+      margin-left: 0.6rem;
+    }
+
+    .bs-devshop__pdp-quiz-banner-scroll .bs-devshop__pdp-quiz-banner-content {
+      min-width: 100%;
+      max-width: 100%;
+      padding: 2.4rem 1.8rem;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .bs-devshop__pdp-quiz-banner-scroll .bs-devshop__pdp-quiz-banner-content-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bs-devshop__pdp-quiz-banner-title p {
+      font-size: 2.87rem;
+    }
+
+    .bs-devshop__pdp-quiz-banner-title {
+      margin-bottom: 1.5rem;
+    }
+
+    .bs-devshop__pdp-quiz-banner-body p {
+      font-size: 1.7rem;
+      margin: auto;
+      line-height: 18px;
+      max-width: unset;
+    }
+
+    .bs-devshop__pdp-quiz-banner-body br {
+      display: none;
+    }
+    
+    .bs-devshop__pdp-quiz-banner-scroll .bs-devshop__pdp-quiz-banner-content a {
+      position: absolute;
+      bottom: -18rem; 
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .bs-devshop__pdp-quiz-banner-scroll .bs-devshop__pdp-quiz-banner-img-group {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 20rem;
+      z-index: 1;
+    }
+
+    .bs-devshop__pdp-quiz-banner-scroll .bs-devshop__pdp-quiz-banner-img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .bs-devshop__pdp-quiz-banner-scroll .bs-devshop__pdp-quiz-banner-img:nth-child(2) {
+      display: none;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "PDP Quiz Banner",
+  "class": "section",
+  "settings": [],
+  "limit": 1,
+  "blocks": [
+    {
+      "limit": 1,
+      "type": "banner",
+      "name": "Banner Config",
+      "settings": [
+        {
+          "type": "select",
+          "id": "content_alignment",
+          "label": "Content Alignment",
+          "default": "left",
+          "options": [
+            {
+              "label": "Left",
+              "value": "left"
+            },
+            {
+              "label": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "title",
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "body"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "text",
+          "id": "cta_title",
+          "label": "CTA Title"
+        },
+        {
+          "type": "url",
+          "id": "cta_url",
+          "label": "CTA Url"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PDP Quiz Banner",
+      "blocks": [
+        {
+          "type": "banner"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

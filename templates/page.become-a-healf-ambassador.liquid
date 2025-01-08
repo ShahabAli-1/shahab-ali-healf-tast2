@@ -1,0 +1,384 @@
+{{ 'section-main-page.css' | asset_url | stylesheet_tag }}
+
+<section class="ambassador__hero">
+  {{ 'ambassador-hero-mobile.png' | file_img_url: 'master' | img_tag: '', 'amabassador-mobile' }}
+  {{ 'ambassador-hero-desktop.png' | file_img_url: 'master' | img_tag: '', 'amabassador-desktop' }}
+  <div>
+    <h1>Become a Healf Ambassador.</h1>
+    <p>Spread the joy of wellbeing, and benefit from it.</p>
+  </div>
+</section>
+
+<iframe
+  id="affiliate-sign-up-form"
+  style="border: 0; width: 100%; height: 100vh;"
+  src="https://api.socialsnowball.io/register-form/11936/34827fce-c413-4850-b889-54eca3b84f89"
+></iframe>
+<script>
+  !(async function () {
+    let e = document.querySelector('#affiliate-sign-up-form');
+    window.addEventListener('message', (t) => {
+      t.origin === new URL(e.getAttribute('src')).origin && (e.style.height = t.data.height);
+    });
+  })();
+</script>
+
+<section class="ambassador__content">
+  <div>
+    <div>
+      <h3>The More You Share, The More You Earn</h3>
+      <p>Once you generate £1,000 in revenue, your payouts will be upgraded from store credit to cash</p>
+    </div>
+    {{ 'ambassador-content-2.png' | file_img_url: 'master' | img_tag: '', 'amabassador-content' }}
+  </div>
+  <div>
+    <div>
+      <h3>Create individual product links</h3>
+      <p>
+        Want to share your favourite products? <br>
+        Simply add your unique code (e.g. using KARENJANE),<br>
+        <b>?snowball=KARENJANE</b>,<br>
+        to the end of the page you want to recommend, e.g.<br>
+        <b>https://healf.com/collections/higherdose</b><br>
+        would become<br>
+        <b>https://healf.com/collections/higherdose?snowball=KARENJANE</b>
+      </p>
+    </div>
+    {{ 'ambassador-content-1.png' | file_img_url: 'master' | img_tag: '', 'amabassador-content' }}
+  </div>
+</section>
+
+<section class="ambassador__accordions ambassador__accordions--mobile">
+  <h3>Your Healf Ambassador questions, answered</h3>
+  <details open>
+    <summary>
+      How do I access my affiliate dashboard?
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.329508 1.19813C0.689466 0.838172 1.27307 0.838172 1.63303 1.19813L6.51165 6.07675L11.3903 1.19813C11.7502 0.838173 12.3338 0.838173 12.6938 1.19813C13.0538 1.55809 13.0538 2.1417 12.6938 2.50165L7.16341 8.03203C6.80345 8.39199 6.21985 8.39199 5.85989 8.03203L0.329508 2.50165C-0.0304497 2.1417 -0.0304496 1.55809 0.329508 1.19813Z" fill="black"/>
+      </svg>
+    </summary>
+    You can create an affiliate account
+    <a href="https://affiliates.socialsnowball.io/auth/affiliate/signup" target="_blank">here</a>. You can log-in using
+    this <a href="https://affiliates.socialsnowball.io/auth/affiliate/login" target="_blank">link</a>
+  </details>
+  <details>
+    <summary>
+      My friend used my link but used another discount code. How do I get credit for this?
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.329508 1.19813C0.689466 0.838172 1.27307 0.838172 1.63303 1.19813L6.51165 6.07675L11.3903 1.19813C11.7502 0.838173 12.3338 0.838173 12.6938 1.19813C13.0538 1.55809 13.0538 2.1417 12.6938 2.50165L7.16341 8.03203C6.80345 8.39199 6.21985 8.39199 5.85989 8.03203L0.329508 2.50165C-0.0304497 2.1417 -0.0304496 1.55809 0.329508 1.19813Z" fill="black"/>
+      </svg>
+    </summary>
+    We track commissions from links even if the discount was not used. If your friend has indeed placed an order using
+    your link, it will be attributed to you and reflect on your account, regardless if they used your code or not
+  </details>
+  <details>
+    <summary>
+      I’ve tried to use my own code and don’t see any pop-up or discount appearing. Why is this?
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.329508 1.19813C0.689466 0.838172 1.27307 0.838172 1.63303 1.19813L6.51165 6.07675L11.3903 1.19813C11.7502 0.838173 12.3338 0.838173 12.6938 1.19813C13.0538 1.55809 13.0538 2.1417 12.6938 2.50165L7.16341 8.03203C6.80345 8.39199 6.21985 8.39199 5.85989 8.03203L0.329508 2.50165C-0.0304497 2.1417 -0.0304496 1.55809 0.329508 1.19813Z" fill="black"/>
+      </svg>
+    </summary>
+    Please clear cache (clear history) on your browser and try using the link again. Please notify Karen@Healf.com the
+    issue persists.
+  </details>
+  <details>
+    <summary>
+      How do I get paid via a commission?
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="9" viewBox="0 0 13 9" fill="none">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.329508 1.19813C0.689466 0.838172 1.27307 0.838172 1.63303 1.19813L6.51165 6.07675L11.3903 1.19813C11.7502 0.838173 12.3338 0.838173 12.6938 1.19813C13.0538 1.55809 13.0538 2.1417 12.6938 2.50165L7.16341 8.03203C6.80345 8.39199 6.21985 8.39199 5.85989 8.03203L0.329508 2.50165C-0.0304497 2.1417 -0.0304496 1.55809 0.329508 1.19813Z" fill="black"/>
+      </svg>
+    </summary>
+    Payouts are sent on a weekly basis. You will receive an email from Tremendous with the link to claim your payouts.
+    You can follow along the steps
+    <a
+      href="https://help.socialsnowball.io/en/articles/5551709-receiving-payouts-to-your-email-via-tremendous"
+      target="_blank"
+      >here</a
+    >
+    to cash out your commissions once you receive the email
+  </details>
+</section>
+
+<section class="ambassador__accordions ambassador__accordions--desktop">
+  <h3>
+    Your Healf Ambassador <br>
+    questions, answered
+  </h3>
+  <div>
+    <p>How do I access my affiliate dashboard?</p>
+    <div>
+      You can create an affiliate account
+      <a href="https://affiliates.socialsnowball.io/auth/affiliate/signup" target="_blank">here</a>. You can log-in
+      using this <a href="https://affiliates.socialsnowball.io/auth/affiliate/login" target="_blank">link</a>
+    </div>
+  </div>
+  <div>
+    <p>My friend used my link but used another discount code. How do I get credit for this?</p>
+    <div>
+      We track commissions from links even if the discount was not used. If your friend has indeed placed an order using
+      your link, it will be attributed to you and reflect on your account, regardless if they used your code or not
+    </div>
+  </div>
+  <div>
+    <p>I’ve tried to use my own code and don’t see any pop-up or discount appearing. Why is this?</p>
+    <div>
+      Please clear cache (clear history) on your browser and try using the link again. Please notify Karen@Healf.com the
+      issue persists.
+    </div>
+  </div>
+  <div>
+    <p>How do I get paid via a commission?</p>
+    <div>
+      Payouts are sent on a weekly basis. You will receive an email from Tremendous with the link to claim your payouts.
+      You can follow along the steps
+      <a
+        href="https://help.socialsnowball.io/en/articles/5551709-receiving-payouts-to-your-email-via-tremendous"
+        target="_blank"
+        >here</a
+      >
+      to cash out your commissions once you receive the email
+    </div>
+  </div>
+</section>
+
+<style>
+  .ambassador__hero {
+    height: calc(90dvh - 144px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 16px 16px 40px;
+    position: relative;
+  }
+
+  .amabassador-mobile,
+  .amabassador-desktop {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .amabassador-desktop {
+    display: none;
+  }
+
+  .ambassador__hero > div {
+    z-index: 1;
+  }
+
+  .ambassador__hero h1,
+  .ambassador__hero p {
+    color: white;
+    line-height: 1;
+  }
+
+  .ambassador__hero h1 {
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .ambassador__hero p {
+    max-width: 98%;
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  .ambassador__hero > div > div {
+    display: flex;
+    gap: 11px;
+  }
+
+  .ambassador__hero a,
+  .ambassador__content a {
+    z-index: 1;
+    background: white;
+    color: black;
+    border-color: white;
+    width: 170px;
+  }
+
+  .ambassador__content {
+    background: black;
+    color: white;
+    padding: 20px 16px 30px;
+  }
+
+  .ambassador__content h3 {
+    font-size: 35px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .ambassador__content p {
+    line-height: 1.2;
+  }
+
+  .ambassador__content img {
+    aspect-ratio: 5 / 3;
+  }
+
+  .ambassador__content > div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1300px;
+    margin: 0 auto 80px;
+  }
+
+  .ambassador__content > div:last-of-type {
+    margin-bottom: 33px;
+  }
+
+  .ambassador__accordions {
+    padding: 20px 16px;
+  }
+
+  .ambassador__accordions h3 {
+    font-size: 35px;
+    margin-bottom: 36px;
+  }
+
+  .ambassador__accordions summary {
+    font-size: 15px;
+    position: relative;
+    padding-right: 15px;
+  }
+
+  .ambassador__accordions details[open] summary {
+    padding-bottom: 8px;
+  }
+
+  .ambassador__accordions details[open] summary svg {
+    transform: translateY(-100%) rotate(180deg);
+  }
+
+  .ambassador__accordions details {
+    font-size: 12px;
+    line-height: 1.2;
+    padding: 8px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.17);
+  }
+
+  .ambassador__accordions summary svg {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+  }
+
+  .ambassador__accordions > div {
+    border-top: 1px solid rgba(0, 0, 0, 0.17);
+    display: flex;
+    padding: 26px;
+    gap: 100px;
+    justify-content: flex-start;
+  }
+
+  .ambassador__accordions > div > p {
+    flex-shrink: 0;
+    width: 250px;
+    font-size: 28px;
+    line-height: 31px;
+  }
+
+  .ambassador__accordions > div > div {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .ambassador__accordions--desktop {
+    display: none;
+  }
+
+  .ambassador__accordions--desktop > div {
+    padding-left: 0;
+  }
+
+  .ambassador__accordions a {
+    text-decoration: underline;
+    font-weight: 700;
+  }
+
+  @media screen and (min-width: 650px) {
+    .ambassador__content {
+      padding: 45px 50px;
+    }
+
+    .ambassador__content > div {
+      flex-direction: row;
+      gap: 80px;
+    }
+
+    .ambassador__content > div:first-of-type {
+      flex-direction: row-reverse;
+    }
+
+    .ambassador__content > div > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .ambassador__hero {
+      padding: 100px 50px 64px;
+    }
+    .ambassador__hero > div {
+      height: 100%;
+      width: 100%;
+      max-width: 90%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .ambassador__hero h1 {
+      width: 433px;
+    }
+
+    .ambassador__hero p {
+      align-self: flex-end;
+      margin-bottom: auto;
+    }
+
+    .amabassador-mobile {
+      display: none;
+    }
+
+    .amabassador-desktop {
+      display: block;
+    }
+    .ambassador__hero {
+      height: calc(100dvh - 114px);
+    }
+    .ambassador__hero h1 {
+      font-size: 70px;
+    }
+    .ambassador__accordions {
+      padding: 75px;
+    }
+    .ambassador__accordions--mobile {
+      display: none;
+    }
+    .ambassador__accordions--desktop {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .ambassador__content > div > img {
+      width: 600px;
+      flex-shrink: 0;
+    }
+  }
+</style>

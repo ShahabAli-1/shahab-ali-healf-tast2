@@ -1,0 +1,285 @@
+{% liquid 
+    assign ss = section.settings 
+%}
+
+{% style %}
+    .bs-devshop__landing-experience--{{section.id}} {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .bs-devshop__landing-experience__apply-container {
+        margin-bottom: 10rem;
+    }
+
+    .bs-devshop__landing-experience__title {
+        text-align: left;
+        font-size: 5.5rem;
+        letter-spacing: -0.2rem;
+        font-weight: 400;
+        margin-bottom: 4rem;
+    }
+
+    .bs-devshop__landing-experience__grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2.9rem;
+    }
+
+    .bs-devshop__landing-experience__item {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        width: 100%;
+    }
+
+    .bs-devshop__landing-experience__item_image-div {
+        position: relative;
+        border-radius: 1.6rem;
+        overflow: hidden;
+        text-align: center;
+        width: 100%;
+        min-height: 42.9rem; 
+    }
+
+    .bs-devshop__landing-experience__item_image-div img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 1.6rem;
+    }
+
+    .bs-devshop__landing-experience__item-image-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: start;
+        color: #fff;
+        padding: 1.8rem;
+    }
+
+    .bs-devshop__landing-experience__item-image-content h3 {
+        font-size: 3rem;
+        font-weight: 400;
+        line-height: 4.2rem;
+    }
+
+    .bs-devshop__landing-experience__item-icon {
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        /* max-height: 21rem; */
+        margin-top: 3.7rem;
+    }
+
+    .bs-devshop__landing-experience__item-icon img {
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+        /* max-height: 21rem; */
+    }
+
+    .bs-devshop__landing-experience__item-description {
+        padding: 2.5rem;
+        margin-top: 2.3rem;
+        border: 0.2rem solid #fff;
+        border-radius: 1.6rem;
+        height: 15rem;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+    }
+
+    .bs-devshop__landing-experience__item-description p {
+        color: #FFFFFF;
+        font-size: 1.8rem;
+        margin: 0;
+        line-height: 1.4;
+        max-height: 100%;
+    }
+
+    @media screen and (min-width: 1024px) {
+        .bs-devshop__landing-experience__grid {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.6rem;
+        }
+    }
+
+    @media screen and (min-width: 1023px) and (max-width: 1375px) {
+        .bs-devshop__landing-experience__item-description {
+            height: 20rem;
+            padding: 2.5rem;
+        }
+
+    }
+
+    @media screen and (max-width: 1024px) and (min-width: 769px) {
+        .bs-devshop__landing-experience__grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem 1.6rem; 
+        }
+
+        .bs-devshop__landing-experience__item:nth-child(n+3) {
+            margin-top: 3rem; 
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .bs-devshop__landing-experience__title {
+            font-size: 3.3rem;
+            margin-bottom: 3.6rem;
+        }
+
+        .bs-devshop__landing-experience__grid {
+            --padding-horizontal: calc(calc(calc(100vw - var(--page-width)) / 3) + 2rem);
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 0 max(var(--padding-horizontal), 3rem);
+            margin-top: 3.8rem;
+            gap: 2.6rem;
+        }
+
+        .bs-devshop__landing-experience__item {
+            flex: 0 0 80%; 
+            width: 100%; 
+            max-width: 42.9rem; 
+        }
+
+        .bs-devshop__landing-experience__item_image-div {
+            width: 100%;
+            height: 42.9rem; 
+            min-height: auto; 
+            aspect-ratio: auto; 
+        }
+
+        .bs-devshop__landing-experience__grid.page-width {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .bs-devshop__landing-experience__item-description {
+            padding: 1.5rem;
+        }
+
+    }
+
+{% endstyle %}
+
+<section class="bs-devshop__landing-experience bs-devshop__landing-experience--{{section.id}}">
+    <div style="
+        padding-top: {{ section.settings.container_top_padding }}px;
+        padding-bottom: {{ section.settings.container_bottom_padding }}px;">
+    <div class="page-width">
+    <h2 class="bs-devshop__landing-experience__title">{{ ss.title }}</h2>
+    </div>
+    <div class="bs-devshop__landing-experience__grid page-width">
+        {% for block in section.blocks %}
+            <div class="bs-devshop__landing-experience__item">
+                <div class="bs-devshop__landing-experience__item_image-div">
+                    <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}" width="" height="">
+                    <div class="bs-devshop__landing-experience__item-image-content">
+                        <h3>{{ block.settings.title }}</h3>
+                        <div class="bs-devshop__landing-experience__item-icon">
+                            {% if block.settings.icon != blank %}
+                                <img src="{{ block.settings.icon | img_url: 'master' }}" alt="{{ block.settings.title }} icon">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% if block.settings.description != blank %}
+                <div class="bs-devshop__landing-experience__item-description">
+                    <p>{{ block.settings.description }}</p>
+                </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Landing Experience",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "<p>A Different Kind of <br> Health Care Experience</p>"
+    },
+    {
+        "type": "header",
+        "content": "Container Padding"
+      },
+      {
+        "type": "range",
+        "id": "container_top_padding",
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "unit": "px",
+        "label": "Container Top Padding",
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "container_bottom_padding",
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "unit": "px",
+        "label": "Container Bottom Padding",
+        "default": 50
+      },
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "tags",
+          "label": "Tags (comma separated)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Landing Experience"
+    }
+  ]
+}
+{% endschema %}

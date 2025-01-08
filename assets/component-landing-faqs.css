@@ -1,0 +1,98 @@
+.bs-devshop__faqs__heading {
+    font-size: 5.6rem;
+    line-height: 6.6rem;
+    margin-bottom: 2rem;
+}
+
+.bs-devshop__faqs__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 43rem;
+}
+
+.bs-devshop__faqs__content {
+    display: flex;
+    gap: 4.2rem;
+    padding: 6rem 0;
+}
+
+.bs-devshop__faqs__accordion {
+    flex: 1;
+}
+
+.bs-devshop__faqs__link {
+    padding: 2rem;
+    font-size: 1.8rem;
+    line-height: 2rem;
+    max-width: 22rem;
+}
+
+.bs-devshop__faqs__content #accordion__container .accordion .accordion-item .accordion-header svg {
+    transform: rotate(0deg);
+}
+
+.bs-devshop__faqs__content #accordion__container .accordion .accordion-item.open .accordion-header svg {
+    transform: rotate(180deg);
+}
+
+@media (min-width: 750px) {
+    .bs-devshop__accordion__header {
+        font-size: 2.8rem;
+        line-height: 3.1rem;
+    }
+
+    .bs-devshop__faqs__content #accordion__container .accordion .accordion-item {
+        padding: 3rem 0 0;
+    }
+
+    .bs-devshop__faqs__content #accordion__container .accordion .accordion-item .accordion-content {
+        margin-bottom: 3rem;
+        font-size: 2rem;
+        line-height: 2.6rem;
+        margin-top: 0
+    }
+
+    .bs-devshop__faqs__content #accordion__container .accordion .accordion-item.open .accordion-header  {
+        padding-bottom: 2rem;
+    }
+    
+}
+
+@media (max-width: 1199px) {
+    .bs-devshop__faqs__heading {
+        font-size: 4rem;
+        line-height: 4.6rem;
+    }    
+
+    .bs-devshop__faqs__header {
+        max-width: 30rem;
+    }
+}
+
+@media (max-width: 989px) {
+    .bs-devshop__faqs__header {
+        max-width: 100%;
+    }
+    
+    .bs-devshop__faqs__content {
+        flex-direction: column;
+        gap: 2rem
+    }
+    
+    .bs-devshop__faqs__content #accordion__container .accordion {
+        padding: 0
+    }
+}
+
+@media (max-width: 749px) {
+    .bs-devshop__faqs__heading {
+        font-size: 3rem;
+        line-height: 3.6rem;
+    } 
+    .bs-devshop__faqs__link {
+        padding: 1.2rem;
+        font-size: 1.6rem;
+        line-height: 2rem;
+    }    
+}

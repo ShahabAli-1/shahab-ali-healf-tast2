@@ -1,0 +1,126 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+      "enableWhen": "(max-width: 834px)",
+      "slidesPerView": 1.9,
+      "autoAdjustSlidesPerView": false,
+      "loop": true,
+      "spacing": 16
+    }
+{% endcapture %}
+
+<div class="instagram__container">
+    {% if ss.title != blank %}
+        <h3>{% render 'icon-instagram-outline' %}{{ ss.title }}</h3>
+    {%- endif -%}
+
+    <div class="instagram__wrapper" data-keen-slider='{{ slider_settings }}'>
+        {%- for block in section.blocks -%}
+            {% assign bs = block.settings %}
+            
+            {% if bs.image != blank %}
+                <a href="{{ bs.link }}">
+                    {% render 'image-element', image: bs.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--cover'%}                
+                </a>
+            {%- endif -%}
+        {% endfor %}
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.instagram {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.instagram {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Instagram",
+        "tag": "section",
+        "class": "wrapper instagram",
+        "max_blocks": 4,
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Instagram Post",
+                "settings": [
+                    {
+                        "type": "url",
+                        "id": "link",
+                        "label": "Post Link"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Post Image"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Instagram"
+            }
+        ]
+    }
+{% endschema %}

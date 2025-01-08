@@ -1,0 +1,123 @@
+<nav class="desktop-only old-desktop-header">
+    <ul>
+        {%- for link in ss.menu.links -%}
+            {%- if link.links == blank -%}
+                <li>
+                    <a class="main_link" href="{{ link.url }}">
+                        <span>
+                        {{ link.title | escape }}
+                        </span>
+                    </a>
+                </li>
+            {%- else -%}
+                <li id="link-{{ forloop.index }}">
+                    <a class="main_link" href="{{ link.url }}"
+                    data-class-change='
+                        [
+                            {
+                                "target": "#link-{{ forloop.index }} .mega-menu",
+                                "class": "open",
+                                "method": "add",
+                                "on": "mouseenter",
+                                "preventDefault": true
+                            },
+                            {
+                                "target": "#link-{{ forloop.index }} .mega-menu",
+                                "class": "open",
+                                "method": "remove",
+                                "on": "mouseleave",
+                                "preventDefault": true
+                            }
+                        ]
+                    '>
+                        <span>
+                        {{ link.title | escape }}
+                        </span>
+                    </a>
+                    <div class="mega-menu mega-menu-{{ link.title | handleize }}" data-class-change='
+                        [
+                            {
+                                "target": "#link-{{ forloop.index }} .mega-menu",
+                                "class": "open",
+                                "method": "add",
+                                "on": "mouseenter",
+                                "preventDefault": true
+                            },
+                            {
+                            "target": "#link-{{ forloop.index }} .mega-menu",
+                            "class": "open",
+                            "method": "remove",
+                            "on": "mouseleave",
+                            "preventDefault": true
+                            }
+                        ]
+                    '>
+                        <div class="mega-menu-inner">
+                            {%- for childlink in link.links -%}
+                                <div class="childlink__container  {% unless childlink.title == "Gifts by price" %}childlink__container--{{ childlink.title }}{% endunless %}">
+                                    <h4>
+                                        {{ childlink.title | escape }}
+                                    </h4>
+
+                                    {%- if childlink.links != blank -%}
+                                            <ul class="{% unless childlink.title == "Gifts by price" %}{{- childlink.title | lstrip -}}{%  endunless %}">
+                                            {%- for grandchildlink in childlink.links -%}
+                                              {%- assign stripped_url = grandchildlink.url | replace: "https://healf.com", "" -%}
+                                              {% if forloop.last %}
+                                                <li class="last-link">
+                                                    <a href="{{ stripped_url }}" class="rte btn" {% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                                        {{ grandchildlink.title | escape }}
+                                                    </a>
+                                                </li>
+                                              {% else %}
+                                                <li>
+                                                    <a href="{{ stripped_url }}" class="rte" {% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                                        {{ grandchildlink.title | escape }}
+                                                    </a>
+                                                </li>
+                                              {% endif %}
+                                            {%- endfor -%}
+                                            </ul>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+
+                            <div class="collection-images">
+                                {%- for block in section.blocks -%}
+                                    {% assign bs = block.settings %}
+
+                                    {%- case block.type -%}
+                                    {%- when 'collection_title' -%}
+                                        {% if bs.show_under != link.title %}
+                                            {% continue %}
+                                        {% endif %}
+                                        <div class="collection-images__header">
+                                            <p>{{ bs.text }}</p>
+
+                                            <a href="{{ bs.button_link }}">
+                                                {{ bs.button_text }}
+                                            </a>
+                                        </div>
+                                    {%- when 'collection' -%}
+                                        {% if bs.show_under != link.title %}
+                                            {% continue %}
+                                        {% endif %}
+
+                                        <div>
+                                            <a class="image__area" href="{{ bs.btn_link }}">
+                                            {% render 'image-element', image: bs.image, image_mobile: bs.image_mobile, size: '1600x', extra_class: 'object-fit--cover'  %}
+                                            </a>
+                                            <a class="content-area" href="{{ bs.btn_link }}">
+                                                {{ block.settings.btn_label }}
+                                            </a>
+                                        </div>
+                                    {% endcase %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {%- endif -%}
+        {% endfor %}
+    </ul>
+</nav>

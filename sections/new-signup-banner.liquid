@@ -1,0 +1,138 @@
+{% assign ss = section.settings %}
+
+<div class="cta-body">
+    <div class="wrapper">
+        <div class="cta-copy">
+            <h2 class="liquid-title" style="color: #fff; text-align: left;">Sign up for 15% off</h2>
+            <h3>{{ ss.description }}</h3>
+        </div>
+
+        <div>
+            {% form 'customer', class: 'newsletter-form' %}
+                <div class="newsletter-form__container black-div">
+                    <input type="hidden" name="contact[tags]" value="newsletter">
+                    <input
+                        id="NewsletterForm--{{ section.id }}"
+                        type="email"
+                        name="contact[email]"
+                        value="{{ form.email }}"
+                        aria-required="true"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        autocomplete="email"
+                        {% if form.errors %}
+                            autofocus
+                            aria-invalid="true"
+                            aria-describedby="Newsletter-error--{{ section.id }}"
+                        {% elsif form.posted_successfully? %}
+                            aria-describedby="Newsletter-success--{{ section.id }}"
+                        {% endif %}
+                        placeholder="Your email"
+                        required
+                    >
+                </div>
+
+                <div class="newsletter-form__container white-div">
+                    <button class="" type="submit" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
+                        Subscribe
+                    </button>
+                </div>
+
+
+                <div>
+                    {%- if form.errors -%}
+                        <small class="newsletter-form__message form__message" id="Newsletter-error--{{ section.id }}">{% render 'icon-error' %}
+                        Error
+                        {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+                    {%- endif -%}
+                    {%- if form.posted_successfully? -%}
+                        <h6 class="newsletter-form__message newsletter-form__message--success form__message" id="Newsletter-success--{{ section.id }}" tabindex="-1" autofocus>{% render 'icon-success' %}
+                        Success
+                        {{ 'newsletter.success' | t }}
+                        </h6>
+                    {%- endif -%}
+                </div>
+            {% endform %}
+        </div>
+
+    </div>
+</div>
+
+<style>
+.newsletter-form__container.black-div input {
+    border: none;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.newsletter-form__container.black-div input::placeholder {
+    color: #fff;
+}
+
+.newsletter-form__container.black-div input[type="email"]:-webkit-autofill {
+    background-color: black !important;
+    -webkit-box-shadow: 0 0 0 30px black inset !important;
+    -webkit-text-fill-color: white !important;
+}
+
+.black-div, .white-div {
+    margin: 10px;
+    padding: 6px;
+    border-radius: 25px;
+    text-align: center;
+    width: 50%;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 834px) {
+    .black-div, .white-div {
+        margin: 10px;
+        padding: 6px;
+        border-radius: 25px;
+        text-align: center;
+        width: auto;
+        font-size: 16px;
+    }
+}
+
+.black-div {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+
+.white-div {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+.cta-body {
+    background-color: black; padding: 32px 0 32px;
+}
+
+.cta-copy {
+    padding:15px 0 30px 0;
+    color: white; line-height: 2;
+}
+</style>
+
+{% schema %}
+    {
+      "name": "New Signup Banner",
+      "class": "section",
+      "settings": [
+        {
+            "type": "richtext",
+            "id": "description",
+            "label": "New Signup Banner"
+        }
+      ],
+      "presets": [
+        {
+          "name": "New Signup Banner"
+        }
+      ]
+    }
+    {% endschema %}

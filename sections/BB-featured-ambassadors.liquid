@@ -1,0 +1,219 @@
+{% assign ss = section.settings %}
+
+<style>
+  .ambassador-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    height: 100%;
+    --aspect-desktop: inherit !important;
+    --aspect-tablet: inherit !important;
+  }
+  .ambassador-product {
+    padding: 12px;
+    border-radius: 4px;
+    background-color: #fff;
+    width: 48%;
+  }
+  .ambassador__product-container {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+  }
+</style>
+<div class="best-seller__wrapper" style="position: relative; height: 40vw;">
+  {% if ss.image != blank %}
+    {% render 'image-element', image: ss.image, image_mobile: ss.image_mobile, size: '1920x', extra_class: 'object-fit--cover image-with-text-image mobile-hide ambassador-banner'%}
+  {%- endif -%}
+  {% if ss.title != blank %}
+    <h3 style="color: #FFF;
+      text-align: center;
+      font-size: 52px;
+      font-style: normal;
+      font-weight: 400;
+    padding: 40px 0;
+      letter-spacing: -2px;">{{ ss.title }}</h3>
+  {%- endif -%}
+  <div class="best-seller__container wrapper">
+    <div class="best-seller-content ambassador-content" style="width: 50%;">
+      {% if section.blocks != empty %}
+        {% for block in section.blocks %}
+            {% assign bs = block.settings %}
+            <a href="{{ bs.url }}" class="liquid-title" style="font-size: 40px; font-style: normal; font-weight: 400; letter-spacing: -2px; color: #fff;" data-best-seller-card="best-seller__{{ bs.title }}">{{ bs.title }}</a><br>
+        {% endfor %}
+      {% endif %}
+      <div style="margin-top : 100px;">
+        {% for block in section.blocks %}
+          {% assign bs = block.settings %}
+          <p style="color:#fff; line-height: 1.2;">{{ bs.subtitle }}</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="best-seller-content best-seller-content_images">
+      {%- if section.blocks != empty -%}
+        {% assign i = 9 %}
+        {%- for block in section.blocks -%}
+          {% assign bs = block.settings %}
+          <div class='ambassador__product-container best-seller__{{ bs.title }}' style="z-index: {{ i }};">
+            {% assign product = bs.product %}
+            {% assign product2 = bs.product2 %}
+            <div class="ambassador-product">
+              {% render 'BB-product-card', template: 'product', product: product %}
+            </div>
+            <div class="ambassador-product">
+              {% render 'BB-product-card', template: 'product', product: product2 %}
+            </div>
+          </div>
+          {% assign i = i | minus: 1 %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all elements with the data-best-seller-card attribute
+    var cards = document.querySelectorAll('[data-best-seller-card]');
+
+    cards.forEach(function(card) {
+        // Mouseover event
+        card.addEventListener('mouseover', function() {
+            // Reset z-index for all cards
+            cards.forEach(function(otherCard) {
+                var otherClassName = otherCard.getAttribute('data-best-seller-card');
+                var otherImageDiv = document.querySelector('.' + otherClassName);
+                if (otherImageDiv) {
+                    otherImageDiv.style.zIndex = '1';
+                }
+            });
+
+            // Increase z-index for the hovered card
+            var className = this.getAttribute('data-best-seller-card');
+            var imageDiv = document.querySelector('.' + className);
+            if (imageDiv) {
+                imageDiv.style.zIndex = '10';
+            }
+        });
+    });
+});
+</script>
+
+{% style %}
+    #shopify-section-{{ section.id }}.bb-image-with-text {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.bb-image-with-text {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Ambassadors",
+        "tag": "section",
+        "class": "bb-image-with-text",
+        "max_blocks": 6,
+        "settings": [
+            {
+                "type": "header",
+                "content": "Image with text"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks": [
+            {
+                "type": "blocks",
+                "name": "Brand",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "subtitle",
+                        "label": "Subtitle"
+                    },
+                    {
+                        "type": "product",
+                        "id": "product",
+                        "label": "Image"
+                    },
+                    {
+                        "type": "product",
+                        "id": "product2",
+                        "label": "Image"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Ambassadors"
+            }
+        ]
+    }
+{% endschema %}

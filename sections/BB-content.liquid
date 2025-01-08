@@ -1,0 +1,102 @@
+{% assign ss = section.settings %}
+{%- assign description_content = collection.description | split: '.' | first | strip_html | strip_newlines | append: '.' | size -%}
+{%- assign test = collection.description | strip_html | size -%}
+
+
+{% comment %} <div>
+{{ description_content }}
+</div>
+<div>
+{{- test -}}
+</div>
+{{- collection.description | strip_html | strip_newlines | size -}} {% endcomment %}
+
+
+{%- unless description_content == test or collection.description == blank -%}
+    <div class="content__container content__container-old">
+        {%- if collection.title != blank -%}
+            <h2>{{ collection.title }}</h2>
+        {%- endif -%}
+
+        {%- if collection.description != blank -%}
+            {{ collection.description }}
+        {%- endif -%}
+    </div>
+{%- endunless -%}
+
+{% style %}
+    #shopify-section-{{ section.id }}.content-section {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.content-section {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Content",
+        "tag": "section",
+        "class": "content-section wrapper",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Content"
+            }
+        ]
+    }
+{% endschema %}

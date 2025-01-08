@@ -1,0 +1,213 @@
+{{ 'component-landing-expert.css' | asset_url | stylesheet_tag }}
+{% liquid
+    assign ss = section.settings
+    assign heading = ss.heading
+    assign bg_color = ss.bg_color 
+    assign button_text = ss.button_text
+    assign button_link = ss.button_link
+%}
+
+{% style %}
+    #section__expert__{{section.id}} {
+        background-color: {{bg_color}}
+    }
+{% endstyle %}
+
+{% capture slider_settings %}
+    {
+        "autoplay": false,
+        "slidesPerView": 1.4,
+        "autoAdjustSlidesPerView": false,
+        "loop": true,
+        "arrows": false,
+        "spacing": 18
+    }
+{% endcapture %}
+
+<section class="bs-devshop__expert" id="section__expert__{{section.id}}">
+    <div class="bs-devshop__expert__container page-width">
+        <div class="bs-devshop__expert__content expert__content--desktop">
+            <div class="bs-devshop__expert__columns">
+                {%- for block in section.blocks -%}
+                    {% assign bs = block.settings %}
+                    {% liquid
+                        assign bs = block.settings
+                        assign avatar = bs.image
+                        assign name = bs.name 
+                        assign block_size = bs.block_size
+                        assign btn_text = bs.button_text
+                        assign btn_link = bs.button_link
+                        assign description = bs.description
+                    %}
+                    <div class="bs-devshop__expert__column column--item--{{forloop.index}} column--size--{{block_size}}">
+                        {% if forloop.index0 == 0 %}
+                            <div class="bs-devshop__expert__header">
+                                {% if heading != blank %}
+                                    <h1 class="bs-devshop__expert__heading">{{ heading }}</h1>
+                                {%- endif -%}
+                                {% if button_text != blank %}
+                                    <a href="{{ button_link }}" class="bs-devshop__expert__link btn--white">{{ button_text }}</a>
+                                {%- endif -%}
+                            </div>
+                        {% endif %}
+                        <div class="bs-devshop__expert__column--content">
+                            <div class="bs-devshop__expert__column--image">
+                                {% render 'image-element', image: avatar, size: '500x', extra_class: 'object-fit--cover'%}
+                                {% if block_size == 'large' %}
+                                    <div class="bs-devshop__expert__column--title">
+                                        {{name}}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            {% if block_size == 'large' and description != blank %}
+                                <div class="bs-devshop__expert__column--description">
+                                    {{description}}
+                                </div>
+                            {% endif %}
+                            {% if block_size != 'large' and name != blank %}
+                                <div class="bs-devshop__expert__column--title">
+                                    {{name}}
+                                </div>
+                            {% endif %}
+                            {% if btn_text != blank %}
+                                <a class="bs-devshop__expert__column--link" href="{{btn_link}}">{{btn_text}}</a>
+                            {% endif %} 
+                        </div>
+                    </div>
+                {%- endfor -%}
+            </div>
+
+        </div>
+
+        <div class="bs-devshop__expert__content expert__content--mobile">
+            {% if heading != blank %}
+                <h1 class="bs-devshop__expert__heading">{{ heading }}</h1>
+            {%- endif -%}
+            <div class="bs-devshop__expert__columns" data-keen-slider='{{slider_settings}}'>
+                {%- for block in section.blocks -%}
+                    {% assign bs = block.settings %}
+                    {% liquid
+                        assign bs = block.settings
+                        assign avatar = bs.image
+                        assign name = bs.name 
+                        assign block_size = bs.block_size
+                        assign btn_text = bs.button_text
+                        assign btn_link = bs.button_link
+                        assign description = bs.description
+                    %}
+                    <div class="bs-devshop__expert__column column--size--{{block_size}}">
+                        <div class="bs-devshop__expert__column--content">
+                            <div class="bs-devshop__expert__column--image">
+                                {% render 'image-element', image: avatar, size: '500x', extra_class: 'object-fit--cover'%}
+                            </div>
+                            {% if name != blank %}
+                                <div class="bs-devshop__expert__column--title">
+                                    {{name}}
+                                </div>
+                            {% endif %}
+                            {% if btn_text != blank %}
+                                <a class="bs-devshop__expert__column--link" href="{{btn_link}}">{{btn_text}}</a>
+                            {% endif %} 
+                        </div>
+                    </div>
+                {%- endfor -%}
+            </div>
+            {% if button_text != blank %}
+                <a href="{{ button_link }}" class="bs-devshop__expert__link btn--white">{{ button_text }}</a>
+            {%- endif -%}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Landing - Expert",
+        "tag": "section",
+        "settings": [
+            {
+                "type": "text",
+                "id": "heading",
+                "label": "Heading",
+                "default": "What the experts are saying"
+            },
+            {
+                "type": "color",
+                "id": "bg_color",
+                "label": "Background Color",
+                "default": "#000000"
+            },
+            {
+                "type": "text",
+                "id": "button_text",
+                "label": "Button Text",
+                "default": "See more experts"
+            },
+            {
+                "type": "url",
+                "id": "button_link",
+                "label": "Button Link"
+            }
+        ],
+        "max_blocks": 4,
+        "blocks": [
+            {
+                "type": "block",
+                "name": "Block",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Avatar"
+                    },
+                    {
+                        "type": "select",
+                        "id": "block_size",
+                        "label": "Block Size",
+                        "options": [
+                            {
+                                "value": "large",
+                                "label": "Large"
+                            },
+                            {
+                                "value": "medium",
+                                "label": "Medium"
+                            },
+                            {
+                                "value": "small",
+                                "label": "Small"
+                            }
+                        ],
+                        "default": "small"
+                    },
+                    {
+                        "type": "text",
+                        "id": "name",
+                        "label": "Name"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "description",
+                        "label": "Description",
+                        "info": "Just apply for Large Size Block"
+                    },
+                    {
+                        "type": "text",
+                        "id": "button_text",
+                        "label": "Button Text",
+                        "default": "Learn more"
+                    },
+                    {
+                        "type": "url",
+                        "id": "button_link",
+                        "label": "Button Link"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Landing - Expert"
+            }
+        ]
+    }
+{% endschema %}

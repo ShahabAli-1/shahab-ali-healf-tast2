@@ -1,0 +1,224 @@
+{% assign ss = section.settings %}
+
+<div class="brands-grid__container wrapper">
+    <div class="brands-grid__header">
+        <p>Brand category</p>
+        
+        <div class="brands-grid__accordions">
+            <span
+                class="eat"
+                data-class-change='[
+                    {
+                        "target": ".brands-grid__container .brands-grid__wrapper a, .brands-grid__container .brands-grid__accordions a",
+                        "method": "remove",
+                        "class": "show",
+                        "on": "click"
+                    },
+                    {
+                        "target": ".brands-grid__container .brands-grid__wrapper a.eat, .brands-grid__container .brands-grid__accordions a.eat",
+                        "method": "add",
+                        "class": "show",
+                        "on": "click"
+                    }
+                ]'
+            >
+                Eat
+            </span>
+            <span
+                class="move"
+                data-class-change='[
+                    {
+                        "target": ".brands-grid__container .brands-grid__wrapper a, .brands-grid__container .brands-grid__accordions a",
+                        "method": "remove",
+                        "class": "show",
+                        "on": "click"
+                    },
+                    {
+                        "target": ".brands-grid__container .brands-grid__wrapper a.move, .brands-grid__container .brands-grid__accordions a.move",
+                        "method": "add",
+                        "class": "show",
+                        "on": "click"
+                    }
+                ]'
+            >
+                Move
+            </span>
+            <span
+                class="mind"
+                data-class-change='[
+                    {
+                        "target": ".brands-grid__container .brands-grid__wrapper a, .brands-grid__container .brands-grid__accordions a",
+                        "method": "remove",
+                        "class": "show",
+                        "on": "click"
+                    },
+                    {
+                        "target": ".brands-grid__container .brands-grid__wrapper a.mind, .brands-grid__container .brands-grid__accordions a.mind",
+                        "method": "add",
+                        "class": "show",
+                        "on": "click"
+                    }
+                ]'
+            >
+                Mind
+            </span>
+            <span
+                class="sleep"
+                data-class-change='[
+                    {
+                        "target": ".brands-grid__container .brands-grid__wrapper a, .brands-grid__container .brands-grid__accordions a",
+                        "method": "remove",
+                        "class": "show",
+                        "on": "click"
+                    },
+                    {
+                        "target": ".brands-grid__container .brands-grid__wrapper a.sleep, .brands-grid__container .brands-grid__accordions a.sleep",
+                        "method": "add",
+                        "class": "show",
+                        "on": "click"
+                    }
+                ]'
+            >
+                Sleep
+            </span>
+        </div>
+    </div>
+
+    <div class="brands-grid__wrapper">
+        {% for brand in shop.metaobjects.eat_brands.values %}
+            <a href="{{ brand.link }}" class="eat show">
+                {% render 'image-element', image: brand.image, image_mobile: brand.image, size: '400x', extra_class: 'object-fit--contain'%}      
+            </a>
+        {% endfor %}
+        {% for brand in shop.metaobjects.move_brands.values %}
+            <a href="{{ brand.link }}" class="move">
+                {% render 'image-element', image: brand.image, image_mobile: brand.image, size: '400x', extra_class: 'object-fit--contain'%}      
+            </a>
+        {% endfor %}
+        {% for brand in shop.metaobjects.mind_brands.values %}
+            <a href="{{ brand.link }}" class="mind">
+                {% render 'image-element', image: brand.image, image_mobile: brand.image, size: '400x', extra_class: 'object-fit--contain'%}      
+            </a>
+        {% endfor %}
+        {% for brand in shop.metaobjects.sleep_brands.values %}
+            <a href="{{ brand.link }}" class="sleep">
+                {% render 'image-element', image: brand.image, image_mobile: brand.image, size: '400x', extra_class: 'object-fit--contain'%}      
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% style %}
+    #shopify-section-{{ section.id }}.brands-grid {
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+
+    @media screen and (max-width: 750px) {
+        #shopify-section-{{ section.id }}.brands-grid {
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }
+{% endstyle %}
+
+{% schema %}
+    {
+        "name": "BB - Brands Grid",
+        "tag": "section",
+        "class": "brands-grid",
+        "settings": [
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 120,
+                "step": 5,
+                "default": 80
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            }
+        ],
+        "blocks":[
+            {
+                "name":"Brand",
+                "type":"item",
+                "settings":[
+                    {
+                        "type":"url",
+                        "id":"link",
+                        "label":"Link"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"image",
+                        "label":"Image"
+                    },
+                    {
+                        "type": "select",
+                        "id": "select_accordion",
+                        "label": "Select accordion",
+                        "options": [
+                            {
+                                "value": "eat",
+                                "label": "Eat"
+                            },
+                            {
+                                "value": "move",
+                                "label": "Move"
+                            },
+                            {
+                                "value": "mind",
+                                "label": "Mind"
+                            },
+                            {
+                                "value": "sleep",
+                                "label": "Sleep"
+                            }
+                        ],
+                        "default": "eat"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "BB - Brands Grid"
+            }
+        ]
+    }
+{% endschema %}

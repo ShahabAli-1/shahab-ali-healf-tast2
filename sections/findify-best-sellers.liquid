@@ -1,0 +1,102 @@
+<div class="product-recommendations__wrapper wrapper gradient no-js-hidden">
+  <div class="heading-wrapper">
+    <h2 class="product-recommendations__heading">{{ section.settings.heading | escape }}</h2>
+    <a href="{% if request.path contains '/en-uk' %}/en-uk{% endif %}/collections/best-sellers" class="see-all">See all</a>
+  </div>
+  <div class="findify-element" id="category-findify-rec-4"></div>
+</div>
+<style>
+  .product-recommendations__wrapper {
+    padding-top: 40px;
+  }
+  .product-recommendations__wrapper .findify-recommendation {
+    padding: 0;
+    margin: 0;
+    max-width: inherit;
+  }
+  .product-recommendations__wrapper .findify-recommendation .findify-product-brand {
+    opacity: .7;
+    font-size: 1rem;
+    font-weight: 100;
+    letter-spacing: .13rem;
+    line-height: calc(1 + .2 / var(--font-body-scale));
+    text-transform: uppercase;
+    margin-bottom: 0px;
+  }
+  .product-recommendations__wrapper .findify-components--cards--product:hover .findify-components--cards--product__title {
+    text-decoration: underline;
+  }
+  .product-recommendations__wrapper .findify-recommendation .findify-product-add-to-cart {
+    margin-top: 16px;
+  }
+  @media (max-width: 834px) {
+  .product-recommendations__wrapper {
+    padding-top: 20px;
+  }
+    .product-recommendations__wrapper .findify-components--swiper .swiper-slide {
+      padding-bottom: 0;
+      height: auto !important;
+    }
+    .product-recommendations__wrapper .heading-wrapper .product-recommendations__heading {
+      font-size: 18px;
+    }
+    .product-recommendations__wrapper .findify-recommendation .findify-mobile .findify-components-common--image {
+      padding-bottom: 100% !important;
+    }
+    .findify-components--swiper__next.category-findify-rec-4-next {
+      right: 10px !important;
+    }
+  }
+  .findify-recommendation .findify-components--cards--product__rating {
+    display: block !important;
+  }
+  .product-recommendations__wrapper .findify-components--cards--product__title {
+    margin-bottom: 10px;
+  }
+  .product-recommendations__wrapper .findify-components--cards--product--price__price-wrapper {
+    display: flex;
+  }
+  .product-recommendations__wrapper .findify-components--cards--product--price__price-wrapper .findify-components--cards--product--price__sale-price {
+    order: 2;
+  }
+  .product-recommendations__wrapper .findify-components--cards--product--price__price-wrapper .findify-components--cards--product--price__compare {
+    color: inherit;
+    font-size: 14px;
+  }
+  .heading-wrapper .see-all {
+    position: relative;
+  }
+  .heading-wrapper .see-all::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    transition: all 0.175s;
+  }
+  .heading-wrapper .see-all:hover::after {
+    width: 100%;
+  }
+</style>
+{% schema %}
+{
+  "name": "Findify best sellers",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "You may also like",
+      "label": "heading"
+    }
+  ],
+    "presets": [
+      {
+          "name": "Findify best sellers"
+      }
+  ]
+}
+{% endschema %}

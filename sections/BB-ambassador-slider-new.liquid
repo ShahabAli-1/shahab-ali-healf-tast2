@@ -1,0 +1,229 @@
+{% assign ss = section.settings %}
+
+{% capture slider_settings %}
+    {
+      "slidesPerView": 1,
+      "autoAdjustSlidesPerView": true,
+      "arrows": false,
+      "selector": ".ambas-slide",
+      "spacing": 40,
+      "loop": false,
+      "dotsContainer": "#shopify-section-{{ section.id }} [data-keen-dots]"
+    }
+{% endcapture %}
+
+{% capture main_slider %}
+    {% for block in section.blocks %}
+        {% assign bs = block.settings %}
+        <div class="ambas-slide">
+            {% if bs.image != blank %}
+                {% render 'image-element', image: bs.image, image_mobile: ss.image_mobile, size: 'master', extra_class: 'object-fit--cover ambas-cover'%}
+            {%- endif -%}
+
+            {% if bs.title != blank %}
+                <div class="ambas-info">
+                    <div class="ambas-subtext">
+                        <p class="ambas-info__subtitle">{{ bs.subtitle }}</p>
+                        <div class='ambas-info__description liquid-title'>
+                            {{ bs.description }}
+                        </div>
+                        {% if bs.title != blank %}
+                            {% assign titles = bs.title | split: " " %}
+                            <a href="{{ bs.link }}" class="ambas-info__btn btn liquid-button">Shop {{titles[0]}}'s Collection</a>
+                            {% else %}
+                            <a href="{{ bs.link }}" class="ambas-info__btn btn liquid-button">Shop Collection</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {%- endif -%}
+        </div>
+    {% endfor %}
+{% endcapture %}
+
+{% capture dots_slider %}
+    <ul class="ambas-slider__dots custom-dots hide-scroll-bar" data-keen-dots>
+        {% for block in section.blocks %}
+        {% assign bs = block.settings %}
+        <li class="ambas-slider__dot" data-dot="{{ forloop.index0 }}" data-dot-animate="true">
+            {% if bs.tag != blank %}
+                <span class="thumbnail-slide__tag">{{bs.tag}}</span>
+             {% endif %}
+             {% if bs.title != blank %}
+                <div class="thumbnail-slide__name">{{bs.title}}</div>
+             {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+{% endcapture %}
+
+
+<div class="ambas-slider__container-outer wrapper">
+    <div class="ambas-slider__header">
+        {% if ss.title != blank %}
+            <h2 class='liquid-title' style="color: #fff;">{{ ss.title }}</h2>
+        {%- endif -%}
+    </div>
+    <div class="ambas-slider__container wapper">
+        <div class="ambas-slider__grid">
+           {{dots_slider}}
+           <div class="ambas-slider__main__slider" data-keen-slider='{{ slider_settings }}'>
+                {{main_slider}}
+           </div>
+        </div>
+    </div>
+</div>
+{% style %}
+    #shopify-section-{{ section.id }}{
+        background: #000;
+        padding-top: {{ ss.padding_top }}px;
+        padding-bottom: {{ ss.padding_bottom }}px;
+    }
+    
+    @media screen and (max-width: 834px) {
+    #shopify-section-{{ section.id }}{
+            padding-top: {{ ss.padding_top_tablet }}px;
+            padding-bottom: {{ ss.padding_bottom_tablet }}px;
+        }
+    }  
+{% endstyle %}
+
+<script>
+    const slider_dots = document.querySelectorAll('.ambas-slider__dot');
+    const thumbnail = document.querySelector('.ambas-slider__dots')
+    let currentIndex = 0
+    thumbnail && slider_dots.forEach(dot => {
+        const observer = new MutationObserver((mutations, observe) => {
+            const target = mutations[0]?.target
+            const classDot = target?.classList?.value
+            if(classDot?.includes('active')) {
+                const index = target.getAttribute('data-dot')
+                let range = 0
+                if (index == 0) {
+                    thumbnail.style.setProperty('--data-translate', '0');
+                    return
+                }
+                
+                slider_dots.forEach((d, idx) => {
+                    if (idx < index) {
+                        range = range - d.clientWidth - 24
+                    }
+                }) 
+
+                thumbnail.style.setProperty('--data-translate', `${range}px`);
+            }
+        });
+
+        observer.observe(dot, {  attributes: true, childList: true, characterData: true});
+    })
+</script>
+
+{% schema %}
+    {
+        "name": "Ambasasador Slider V2",
+        "tag": "section",
+        "class": "section-am-slider",
+        "max_blocks": 6,
+        "settings": [
+            {
+                "type": "header",
+                "content": "Header"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Desktop"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 200,
+                "step": 5,
+                "default": 60
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 200,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "header",
+                "content": "Paddings - Tablet"
+            },
+            {
+                "type": "range",
+                "id": "padding_top_tablet",
+                "label": "Padding top",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom_tablet",
+                "label": "Padding bottom",
+                "unit": "px",
+                "min": 0,
+                "max": 60,
+                "step": 5,
+                "default": 30
+            }
+        ],
+        "blocks":[
+            {
+                "name":"slide",
+                "type":"slide",
+                "settings":[
+                    {
+                        "type":"text",
+                        "id":"tag",
+                        "label":"Tag"
+                    },
+                    {
+                        "type":"text",
+                        "id":"title",
+                        "label":"Title"
+                    },
+                    {
+                        "type":"text",
+                        "id":"subtitle",
+                        "label":"Sub Title"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "description",
+                        "label": "Description"
+                    },
+                    {
+                        "type":"url",
+                        "id":"link",
+                        "label":"Link"
+                    },
+                    {
+                        "type":"image_picker",
+                        "id":"image",
+                        "label":"Image"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Ambasasador Slider V2"
+            }
+        ]
+    }
+{% endschema %}

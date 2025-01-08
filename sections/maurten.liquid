@@ -1,0 +1,70 @@
+<div class="wrapper">
+  <video class="video-bg" autoplay muted loop>
+    <source src="https://cdn.shopify.com/videos/c/o/v/416d551f1ee246be84f0a2bb122807a6.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div>
+    <h3 style="color: rgb(255, 255, 255); opacity: 0.6;">Maurten</h3>
+    <h1 class="rich-product-h1" style="color: #fff;">Bicarb System</h1>
+    <div class="d-flex flex-column">
+      <div class="liquid-text" style="color: #fff;">
+        <p>
+          The Maurten Bicarb System is an advanced sports fuel designed to help athletes push the boundaries of effort
+          and power during high-intensity exercise.
+        </p>
+        <p>
+          The Bicarb System contains a mixing bowl, the hydrogel component, the bicarbonate component, and access to the
+          Bicarb Digital System.
+        </p>
+        <p>Box of 4 servings.</p>
+        <a class="btn btn--white" style="margin: 20px 0;" href="/pages/maurten-guide">Get Started</a>
+        <div class="pt-2">
+          <a
+            class="text-white"
+            href="javascript:void(0);"
+            onclick="document.querySelector('.pdp-page__wrapper').style.visibility = 'visible'; document.querySelector('.pdp-page__wrapper').style.height = 'inherit'; document.querySelector('.maurten-background').style.display = 'none';"
+            style="opacity: 0.6;"
+            ><u>Experienced bicarb user, skip ahead</u></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .maurten-background {
+    background-color: #000;
+  }
+  .maurten-background .wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .video-bg {
+    width: 50%;
+  }
+  .pdp-page__wrapper {
+    visibility: hidden;
+    height: 0;
+  }
+  @media screen and (max-width: 767px) {
+    .maurten-background .wrapper {
+      flex-direction: column;
+      padding: 60px 16px 40px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Maurten",
+  "tag": "section",
+  "class": "section maurten-background",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Maurten"
+    }
+  ]
+}
+{% endschema %}

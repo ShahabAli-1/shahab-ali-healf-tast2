@@ -1,0 +1,149 @@
+<video class="video-bg" autoplay muted loop style="position: absolute; top: 0; right: 0; left: 0; bottom: 0; width: 100%; z-index: -1;">
+    <source src="https://cdn.shopify.com/videos/c/o/v/52079718b88541c9aeb6f4a7056fae38.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<h2 class='liquid-title' style="color: #fff;display: flex; align-items: start; margin: 40px 0;"><span>Healf Zone</span><span class="beta-tag">BETA</span></h2>
+<h2 class='liquid-title' style="color: #fff; text-align: center;">Member Login</h2>
+{% if customer %}
+  <a id="externalAppLink" href="#" class='btn liquid-button' style="margin: 40px auto 0;
+      display: block;
+      width: fit-content;
+      width: 260px;
+      border: 2px solid #fff;
+    font-size: 22px;">Go to healf Zone</a>
+  {% assign shopify_secret = "72a0e85fdc3b0384d6145eafa01623cc" %}
+  {% assign shop_name = "how2go" %}
+  {% assign time_stamp = 'now' | date: "%s" %}
+  {% assign customer_id = customer.id %}
+
+  {% capture message %}customerId={{ customer_id }}&shop={{ shop_name }}&time_stamp={{ time_stamp }}{% endcapture %}
+
+  {% assign hmac_full = message | hmac_sha256: shopify_secret %}
+
+  <script>
+    const customerId = "{{ customer_id }}";
+    const message = '{{ message }}';
+    const hmac = "{{ hmac_full }}";
+    (function() {
+      console.log(message);
+      console.log(hmac);
+
+      console.log("Checking query string for Sample ID");
+      var queryString = window.location.search || '';
+      if (queryString.startsWith('?sampleId=')) {
+        console.log("Sample ID included in query string");
+        queryString = queryString.substring(1, 20);
+        console.log("Query string: " + queryString);
+      }
+
+      fetch(`https://api.stage.optimallyme.com/sessions/external/shopify/generate-token?${message}&hmac=${hmac}`)
+        .then(response => response.json())
+        .then(data => {
+          const token = data.token;
+          let url = `https://zone.healf.com/sign-in/sso?token=${token}`;
+          if (queryString.length > 0) {
+            url += `&${queryString}`;
+          }
+          document.getElementById('externalAppLink').href = url;
+        })
+        .catch(error => console.error('Error fetching JWT:', error));
+    })();
+  </script>
+{% else %}
+<a id="loginLink" href="#status" class='btn liquid-button' style="margin: 40px auto 0;
+    display: block;
+    width: 260px;
+    border: 2px solid #fff;
+  font-size: 22px;
+  margin-bottom: 40px;">Login</a>
+  <script>
+    // If a query string exists, append it to the loginLink so that the activation flow is not broken
+    var queryString = window.location.search || '';
+    if (queryString.length > 0) {
+    document.getElementById('loginLink').href = `?`+queryString+`#status`;
+    }
+
+      // event listener for Status Accounts loaded
+  document.addEventListener('status:loaded', (event) => {
+    console.log("Status Accounts Loaded");
+    console.log(window.StatusInitData);
+    if (window.StatusInitData.customerId != null) {
+      console.log("Account data exists - reload needed");
+      window.location.replace(currentURL);
+    }
+  });
+  </script>
+<p class="liquid-subtitle" style="margin: 0 auto 60px; max-width: 660px; line-height: 1.5; color: #ccc; text-align: center;">Trouble with accessing your Healf Zone? — Please ensure that you’re logged in by clicking the customer icon in the top-right corner on the website.</p>
+{% endif %}
+<script>
+    function removeAnchor(url) {
+      const anchorIndex = url.indexOf('#');
+      return anchorIndex !== -1 ? url.slice(0, anchorIndex) : url;
+    }
+  // Prevent Status Accounts sidebar from destroying query parameters
+  var currentURL = window.location.href;
+  // current URL
+  console.log("Full URL: "+currentURL);
+
+  // event listener for Status Accounts open widget
+  document.addEventListener('status:widget:open', (event) => {
+    console.log("Status Widget Opened");
+  });
+  // event listener for Status Accounts close widget
+  document.addEventListener('status:widget:close', (event) => {
+    console.log("Status Widget Closed");
+    window.location.replace(currentURL);
+  });
+  // event listener for Status Accounts shopify login
+  document.addEventListener('status:shopify:login', (event) => {
+    console.log("Status Accounts Shopify Login - reload page with anchor tag removed");
+    window.location.replace(removeAnchor(currentURL));
+  });
+</script>
+<style>
+  .zone-login {
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .beta-tag {
+    font-size: 20px;
+    background: linear-gradient(to right, #32755F, #5377BB, #CB8F51, #CE6C47);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    padding: 0 10px;
+  }
+  @media (max-width: 834px) {
+    .zone-login {
+      padding: 40px 16px;
+    }
+    .beta-tag {
+      font-size: 16px;
+    }
+    .liquid-button {
+      font-size: 16px !important;
+      margin-top: 20px !important;
+      margin-bottom: 20px !important;
+    }
+    .liquid-subtitle {
+      margin-top: 0 !important;
+    }
+  }
+</style>
+{% schema %}
+    {
+        "name": "Healf Zone Login",
+        "tag": "section",
+        "class": "zone-login",
+        "settings": [
+        ],
+        "presets": [
+            {
+                "name": "Healf Zone Login"
+            }
+        ]
+    }
+{% endschema %}
+{% comment %} {{ 'now' | date: '%Y%m%d%H%M%S' }} {% endcomment %}

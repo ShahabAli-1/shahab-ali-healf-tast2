@@ -1,0 +1,19 @@
+<script>
+  const callback = (mutationList, observer) => {
+    if (typeof(__Theme) !== "undefined") {
+      const cartComponent = __Theme._components.find(x => x.type === "cart").component;
+      cartComponent?._refresh().then((r)=>{
+        // Unhide the cart bubble with the correct value
+        document.querySelector(".cart-count-bubble").classList.remove("hidden")
+      });
+
+      // stop observing
+      observer.disconnect();
+    }
+  };
+  const themeObserver = new MutationObserver(callback);
+
+  const config = { attributes: true, childList: true, subtree: true };
+  
+  themeObserver.observe(document, config);
+</script>

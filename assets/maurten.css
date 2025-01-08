@@ -1,0 +1,902 @@
+.bicarb-public {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: #000;
+  color: #fff;
+}
+
+.bicarb-public .panel {
+  margin: 100px auto 0;
+  padding: 30px 40px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  max-width: 768px;
+}
+
+.bicarb-public h1 {
+  color: #fff;
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.bicarb-public .radio {
+  margin-bottom: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.bicarb-public .radio__label {
+  margin-right: 2em;
+}
+
+.bicarb-public .radio input {
+  width: 0;
+  height: 0;
+  margin: 0 0 0 -5px;
+  padding: 0;
+  opacity: 0;
+}
+
+.bicarb-public .experience-radios {
+  display: flex;
+}
+
+.bicarb-public .radio .radio__control {
+  display: grid;
+  width: 1em;
+  height: 1em;
+  margin-right: .5em;
+  -webkit-transform: translateY(-1em);
+  transform: translateY(-1em);
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  place-items: center;
+}
+
+.bicarb-public .radio .radio__control:before {
+  width: .7em;
+  height: .7em;
+  content: "";
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: .2s -webkit-transform ease-in-out;
+  transition: .2s -webkit-transform ease-in-out;
+  transition: .2s transform ease-in-out;
+  transition: .2s transform ease-in-out, .2s -webkit-transform ease-in-out;
+  border-radius: 50%;
+  -webkit-box-shadow: inset .5em .5em #fff;
+  box-shadow: inset .5em .5em #fff;
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons {
+  display: flex;
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons .minus-button {
+  background-image: url(https://www.maurten.com/assets/bicarb/button-minus.svg);
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons .minus-button-pressed {
+  background-image: url(https://www.maurten.com/assets/bicarb/button-minus-pressed.svg);
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons .plus-button {
+  background-image: url(https://www.maurten.com/assets/bicarb/button-plus.svg);
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons .plus-button-pressed {
+  background-image: url(https://www.maurten.com/assets/bicarb/button-plus-pressed.svg);
+}
+
+.radio input:checked+.radio__control:before {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.bicarb-public .radio input:checked+.radio__control {
+  -webkit-box-shadow: 0 0 0 1px #fff;
+  box-shadow: 0 0 0 1px #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #ccc;
+  background: #fff;
+}
+
+.bicarb-public .weight-panel .weight-inputs {
+  display: grid;
+  grid-gap: 0 20px;
+  grid-template-columns: 2fr 100px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, .4);
+  border-bottom: 1px solid rgba(255, 255, 255, .4);
+}
+
+.bicarb-public .xs-text {
+  color: rgba(255, 255, 255, .6);
+  font-size: .9em;
+}
+
+.bicarb-public .weight-panel .weight-text .weight-kg {
+  font-size: 4.5em;
+}
+
+.bicarb-public .weight-panel .weight-buttons {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons .plus-button,
+.bicarb-public .weight-panel .increase-decrease-buttons .plus-button-pressed,
+.bicarb-public .weight-panel .increase-decrease-buttons .minus-button-pressed,
+.bicarb-public .weight-panel .increase-decrease-buttons .minus-button {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  width: 40px;
+  min-width: unset;
+  height: 40px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 40px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: block;
+}
+
+.buttons-description {
+  font-size: 12px;
+  text-align: center;
+  line-height: 1;
+}
+.bicarb-public {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background: #000;
+  color: #fff;
+}
+
+.bicarb-public .panel {
+  margin: 100px auto 0;
+  padding: 30px 40px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  max-width: 768px;
+}
+
+.bicarb-public h1 {
+  color: #fff;
+  text-align: left;
+}
+
+.bicarb-public .radio {
+  margin-bottom: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.bicarb-public .radio__label {
+  margin-right: 2em;
+}
+
+.bicarb-public .radio input {
+  width: 0;
+  height: 0;
+  margin: 0 0 0 -5px;
+  padding: 0;
+  opacity: 0;
+}
+
+.bicarb-public .experience-radios {
+  display: flex;
+}
+
+.bicarb-public .radio .radio__control {
+  display: grid;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.5em;
+  -webkit-transform: translateY(-1em);
+  transform: translateY(-1em);
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  place-items: center;
+}
+
+.bicarb-public .radio .radio__control:before {
+  width: 0.7em;
+  height: 0.7em;
+  content: '';
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: 0.2s -webkit-transform ease-in-out;
+  transition: 0.2s -webkit-transform ease-in-out;
+  transition: 0.2s transform ease-in-out;
+  transition: 0.2s transform ease-in-out, 0.2s -webkit-transform ease-in-out;
+  border-radius: 50%;
+  -webkit-box-shadow: inset 0.5em 0.5em #fff;
+  box-shadow: inset 0.5em 0.5em #fff;
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons {
+  display: flex;
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons .minus-button {
+  background-image: url(https://www.maurten.com/assets/bicarb/button-minus.svg);
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons .minus-button-pressed {
+  background-image: url(https://www.maurten.com/assets/bicarb/button-minus-pressed.svg);
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons .plus-button {
+  background-image: url(https://www.maurten.com/assets/bicarb/button-plus.svg);
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons .plus-button-pressed {
+  background-image: url(https://www.maurten.com/assets/bicarb/button-plus-pressed.svg);
+}
+
+.bicarb-public .radio input:checked+.radio__control:before {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.bicarb-public .radio input:checked+.radio__control {
+  -webkit-box-shadow: 0 0 0 1px #fff;
+  box-shadow: 0 0 0 1px #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #ccc;
+  background: #fff;
+}
+
+.bicarb-public .weight-panel .weight-inputs {
+  display: grid;
+  grid-gap: 0 20px;
+  grid-template-columns: 2fr 100px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.bicarb-public .xs-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9em;
+}
+
+.bicarb-public .weight-panel .weight-text .weight-kg {
+  font-size: 4.5em;
+}
+
+.bicarb-public .weight-panel .weight-buttons {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.bottom-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.bottom-content h2 {
+  margin-top: 80px;
+  font-size: 48px;
+}
+.sport-diciplines-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.bicarb-public .first-panel .bottom-content li {
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+.bicarb-public .bottom-content button, .bicarb-public .bottom-content a {
+  width: fit-content;
+  align-self: flex-end;
+  margin-top: 40px;
+  line-height: 24px;
+}
+
+.bicarb-public .bottom-content li .radio {
+  justify-content: space-between;
+  font-size: 2rem;
+}
+
+.bicarb-public .weight-panel .increase-decrease-buttons .plus-button,
+.bicarb-public .weight-panel .increase-decrease-buttons .plus-button-pressed,
+.bicarb-public .weight-panel .increase-decrease-buttons .minus-button-pressed,
+.bicarb-public .weight-panel .increase-decrease-buttons .minus-button {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  width: 40px;
+  min-width: unset;
+  height: 40px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 40px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: block;
+}
+
+.btns-description {
+  font-size: 12px;
+  text-align: center;
+  line-height: 1;
+}
+
+.bicarb-public .buy-panel .systems {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.bicarb-public .buy-panel .systems .recommended-notification.index-1 {
+  right: unset;
+}
+
+.bicarb-public .buy-panel .systems .recommended-notification.active {
+  display: block;
+}
+
+.bicarb-public .buy-panel .systems .recommended-notification {
+  display: none;
+  position: absolute;
+  z-index: 3;
+  bottom: 82px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px;
+  border-radius: 4px;
+  background-color: rgba(90, 90, 90, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.bicarb-public .buy-panel .systems button.active {
+  background-color: #fff;
+  color: #000;
+}
+
+.bicarb-public .buy-panel .systems.width-2 .recommended-notification.index-1:after {
+  left: 25%;
+}
+
+.bicarb-public .buy-panel .systems.width-2 .recommended-notification.index-2:after {
+  right: 25%;
+  left: unset;
+}
+
+.bicarb-public .buy-panel .systems .recommended-notification:after {
+  content: ' ';
+  position: absolute;
+  top: 100%;
+  right: 14%;
+  width: 0;
+  height: 0;
+  margin-left: -10px;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  border: 10px solid transparent;
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+}
+
+@media screen and (min-width: 440px) {
+  .bicarb-public .buy-panel .systems button {
+    width: 50%;
+  }
+}
+
+.bicarb-public .buy-panel .systems button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid #fff;
+  padding: 12px 6px;
+  color: #fff;
+}
+
+.bicarb-public .buy-panel .systems button .dose {
+  font-size: 12px;
+}
+
+.bicarb-public .buy-panel .systems button .system {
+  margin-top: 6px;
+  font-size: 1.5em;
+}
+
+.bicarb-public .buy-panel .servings {
+  font-weight: 500;
+}
+
+.bicarb-public button,
+.bicarb-public .btn,
+.styleguide.theme-black button,
+.styleguide.theme-black .btn {
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+}
+
+.bicarb-public button,
+.bicarb-public .btn,
+.styleguide.theme-black button,
+.styleguide.theme-black .btn {
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+}
+
+button.cart-qty,
+.cart-qty,
+.product-filter .product-filter-list a.cart-qty,
+.jconfirm.jconfirm-maurten .jconfirm-box .jconfirm-buttons button.cart-qty {
+  padding: 0 10px;
+}
+
+.small-text {
+  font-size: 14px;
+}
+
+.bicarb-public .buy-panel .product-description {
+  display: none;
+}
+
+.bicarb-public .buy-panel .product-description.active {
+  display: block;
+  margin-top: auto;
+}
+
+.bicarb-public .buy-panel form.add-to-cart.desktop .qty-price-container {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding-top: 36px;
+}
+
+.bicarb-public .buy-panel form.add-to-cart .qty-price-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.bicarb-public form.add-to-cart .qty-wrapper {
+  display: flex;
+  padding: 4px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  margin-right: 20px;
+}
+
+.bicarb-public form.add-to-cart .qty-wrapper .decrease,
+.bicarb-public form.add-to-cart .qty-wrapper .increase {
+  border: none;
+  line-height: 1;
+  color: #fff;
+}
+
+.bicarb-public form.add-to-cart .qty-wrapper .qty {
+  line-height: 2.2;
+}
+
+.bicarb-public button,
+.bicarb-public .btn,
+.styleguide.theme-black button,
+.styleguide.theme-black .btn {
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+}
+
+.bicarb-public button.cart-qty,
+.bicarb-public .cart-qty,
+.bicarb-public .product-filter .product-filter-list a.cart-qty,
+.jconfirm.jconfirm-maurten .jconfirm-box .jconfirm-buttons button.cart-qty {
+  padding: 11px 16px;
+}
+
+.bicarb-public .btn.btn--white {
+  height: 50px;
+  padding: 12px 20px;
+  background-color: #fff;
+}
+
+.bicarb-public button,
+.bicarb-public .btn,
+.bicarb-public .product-filter .product-filter-list a,
+.jconfirm.jconfirm-maurten .jconfirm-box .jconfirm-buttons button {
+  height: unset;
+  padding: 12px 16px;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+  border: 1px solid #000;
+  background: transparent;
+  color: #000;
+  font-family: MaurtenSansRegular, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.bicarb-public .buy-panel form.add-to-cart.desktop .price {
+  margin-right: 20px;
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+.bicarb-public .buy-panel form.add-to-cart .qty-price-container .price {
+  font-size: 2em;
+}
+
+@media screen and (min-width: 768px) {
+  .bicarb-public .buy-panel form.add-to-cart.mobile {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .bicarb-public .buy-panel form.add-to-cart.desktop {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.bicarb-public .buy-panel form.add-to-cart {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+}
+
+.bicarb-public .checkbox {
+  display: grid;
+  grid-gap: 6px;
+  grid-template-columns: -webkit-max-content auto;
+  grid-template-columns: max-content auto;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 6px 0;
+  color: rgba(255, 255, 255, .6);
+  font-family: MaurtenSansRegular, sans-serif;
+  cursor: pointer
+}
+
+.bicarb-public .checkbox .checkbox__input {
+  display: grid;
+  grid-template-areas: "checkbox"
+}
+
+.bicarb-public .checkbox .checkbox__input input {
+  width: 1em;
+  height: 1em;
+  opacity: 0
+}
+
+.bicarb-public .checkbox .checkbox__input>* {
+  grid-area: checkbox
+}
+
+.bicarb-public .checkbox .checkbox__input input:checked+.checkbox__control svg {
+  -webkit-transform: scale(1);
+  transform: scale(1)
+}
+
+.bicarb-public .checkbox .checkbox__input input:focus+.checkbox__control {
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  outline: none;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none
+}
+
+.bicarb-public .checkbox .checkbox__input input:disabled+.checkbox__control {
+  color: #ccc
+}
+
+.bicarb-public .checkbox .checkbox__control {
+  display: inline-grid;
+  width: 1em;
+  height: 1em;
+  -webkit-transform: translateY(-.15em);
+  transform: translateY(-.15em);
+  border: none;
+}
+
+.bicarb-public .checkbox .checkbox__control svg {
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  -webkit-transform-origin: bottom left;
+  transform-origin: bottom left;
+  -webkit-transition: -webkit-transform .1s ease-in 25ms;
+  transition: -webkit-transform .1s ease-in 25ms;
+  transition: transform .1s ease-in 25ms;
+  transition: transform .1s ease-in 25ms, -webkit-transform .1s ease-in 25ms
+}
+
+.bicarb-public .checkbox.checkbox--disabled {
+  color: #ccc
+}
+
+.bicarb-public .sport-disciplines-panel .disciplines-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 0 30px;
+  padding: 1em 0;
+  border-top: 1px solid rgba(255, 255, 255, .4);
+  border-bottom: 1px solid rgba(255, 255, 255, .4)
+}
+
+.bicarb-public .sport-disciplines-panel .disciplines-wrapper .disciplines {
+  list-style: none
+}
+
+.bicarb-public .how-to-panel .examples {
+  margin: 20px 0 auto;
+  padding: 0 15px 15px;
+  border: 1px solid rgba(255, 255, 255, .4);
+  color: rgba(255, 255, 255, .6)
+}
+
+.bicarb-public .how-to-panel .examples p {
+  margin-bottom: 10px
+}
+
+.bicarb-public .how-to-panel .examples .example-heading {
+  display: block;
+  margin-top: 15px;
+  font-family: MaurtenSansBold, sans-serif
+}
+
+.bicarb-public .how-to-panel .examples .ex-calc {
+  display: block;
+  padding-bottom: 3px;
+  font-size: .8em
+}
+
+.bicarb-public .how-to-panel .examples .ex-calc.matching {
+  color: #fff
+}
+
+.bicarb-public .how-to-panel .examples p.ex-conclusion {
+  margin-top: 6px;
+  margin-bottom: 18px
+}
+
+.bicarb-public .how-to-panel .examples p.ex-conclusion:last-of-type {
+  margin-bottom: 0
+}
+
+.bicarb-public .how-to-panel .examples .show-full-example-link {
+  display: block;
+  margin-top: 12px;
+  color: #fff;
+  font-size: .8em
+}
+
+.bicarb-public .how-to-panel .examples .show-full-example-link:hover {
+  text-decoration: underline;
+  cursor: pointer
+}
+
+.bicarb-public .how-to-panel .examples .expandable-content {
+  display: none
+}
+
+.bicarb-public .how-to-panel .how-to-calculations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, .4);
+  border-bottom: 1px solid rgba(255, 255, 255, .4)
+}
+
+.bicarb-public .how-to-panel .calc {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 10px 0
+}
+
+.bicarb-public .how-to-panel .calc:first-of-type {
+  border-right: 1px solid rgba(255, 255, 255, .4)
+}
+
+.bicarb-public .how-to-panel .calc:last-of-type {
+  margin-left: 15px
+}
+
+.bicarb-public .how-to-panel .calc .calculation {
+  font-size: 2.5em
+}
+
+.bicarb-doses {
+  width: 100%
+}
+
+.bicarb-doses th.title {
+  text-align: center;
+  border-bottom: 1px solid hsla(0, 0%, 100%, .6)
+}
+
+.bicarb-doses td {
+  padding: 10px 0;
+  border-bottom: 1px solid hsla(0, 0%, 100%, .2)
+}
+
+.bicarb-doses th.system {
+  font-size: 1.4em
+}
+
+.dose-sizes {
+  text-align: left;
+  font-weight: 400;
+}
+.bicarb-doses th.title {
+  font-weight: 400;
+}
+.dose-sizes svg {
+  position: relative;
+  top: -2px;
+  margin-right: 5px
+}
+
+.bicarb-doses td.system,
+.bicarb-doses th.system {
+  text-align: center;
+  font-weight: 400;
+}
+
+.bicarb-public .group-buy-panel ul {
+  margin: 20px 0 10px;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, .3);
+  list-style: none
+}
+
+.bicarb-public form.add-to-cart {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 80px;
+}
+
+.bicarb-public form.add-to-cart button {
+  width: fit-content;
+  align-self: flex-end;
+}
+
+.bicarb-public .group-buy-panel li.bicarb-products {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 10px 0;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .4);
+  justify-items: center
+}
+
+.bicarb-public .group-buy-panel li.bicarb-products .bicarb-product {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column
+}
+
+.bicarb-public .group-buy-panel li.bicarb-products .amount input[type=number] {
+  width: 64px;
+  max-width: 64px;
+  height: 42px;
+  border-radius: 6px;
+  background: black;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .3);
+  outline: none;
+  padding: 5px;
+}
+
+.bicarb-public .group-buy-panel li.bicarb-products .amount input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.bicarb-public .group-buy-panel li.bicarb-products .amount input[type="number"] {
+  appearance: textfield;
+  /* Keeps arrows visible */
+  margin: 0;
+}

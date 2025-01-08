@@ -1,0 +1,379 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "healf_zone_login_zfNWmb": {
+      "type": "healf-zone-login",
+      "settings": {
+      }
+    },
+    "52514ba6-94ce-4386-9da4-7c0388e3b75d": {
+      "type": "BB-accordion-tabs",
+      "blocks": {
+        "0d7e4c62-04c6-42b7-a6dd-dcc623c9e306": {
+          "type": "parent",
+          "settings": {
+            "title": "Before you start"
+          }
+        },
+        "5169ebeb-6f0f-4b2e-823e-75af384f6f1c": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "What is Healf Zone?",
+            "content": "<p>Healf Zone represents the future of wellbeing, one where you will have more insight, understanding, and control of your health. With a combination of at-home blood diagnostics, wearable data, self-assessments and expert consultations, it measures your wellbeing and provides actionable insights via your dashboard. Our team includes healthcare professionals, technical experts, and health-tech specialists, supported by an advisory board of industry leaders such as David Sinclair and Gary Brecka. </p>"
+          }
+        },
+        "dcf7e123-4c44-4b93-a25e-c099d9e7336a": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "How does Healf Zone work for you?",
+            "content": "<p>Healf Zone gives you actionable, personalised insights into your body, so you can make wellbeing changes that make a difference. Healf Zone Technology uses advanced AI to analyse your biomarkers, synced vitals, lifestyle, and the latest scientific literature to find what works best for you—from supplements to daily routines.</p><p></p><p>Once you take your first test, you'll unlock your Healf Zone dashboard, where all your health markers and curated recommendations come together in one place. Designed to stay with you for a lifetime, it’ll keep learning as you do—updating your insights and suggestions based on your progress and the latest science. </p>"
+          }
+        },
+        "c4d93750-c491-4e1e-b735-c56839c0af07": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "What is the Healf Zone 'MOT' test?",
+            "content": "<p>The Healf Zone ‘MOT’ offers the ultimate at-home blood test, measuring 38 key biomarkers to give you a detailed picture of your wellbeing. This comprehensive test provides insights into vital aspects of your wellbeing, including heart health, liver and kidney function, iron levels, thyroid, and more. The test helps you track your progress over time and adjust recommendations based on your unique biomarker data and the latest scientific discoveries.</p>"
+          }
+        },
+        "f9d483f2-df09-4f61-abbe-91d19e2ad4ae": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "Why choose Healf Zone?",
+            "content": "<p>From the time you are born to who you are today, your environment, diet, daily habits, and mindset shape a unique ecosystem within you. Healf Zone is the first health solution that honours your biochemical individuality and elevates it with comprehensive test routines and personalised product recommendations from the world’s best health brands.</p>"
+          }
+        },
+        "fcf3c918-13b1-410c-8925-496d117b5998": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "Where do Healf Zone’s personalised insights come from?",
+            "content": "<p>Healf Zone technology, powered by neurosymbolic AI, analyses millions of combinations of your health data to reveal hidden trends that humans are likely to miss. Unlike regular tests that only check when something's wrong, Healf Zone builds a complete, long-term picture of your health, getting smarter the longer you use it. Your results—biomarkers, vitals and lifestyle habits— come with clear, actionable recommendations that can unlock a new level of intelligence specifically about <em>you</em>. Plus, it syncs with your wearables, so you can check in anytime and actually understand what’s going on inside your body. So you know exactly what steps to take next.</p>"
+          }
+        },
+        "b628fcd1-a3e7-489a-9b3d-7c1088e382db": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "How do I get started?",
+            "content": "<p>Every Healf Zone journey begins with a test. Join Healf Zone <a href=\"https://healf.com/products/healf-zone?variant=45570514616559\"><strong>here</strong></a>.</p>"
+          }
+        },
+        "945f8e2c-eb02-4fab-b66f-ec31cac65ae5": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "How soon can I get tested after joining?",
+            "content": "<p>Typically within just a few days. Once you join, we will send your first test to your home.</p>"
+          }
+        },
+        "835238fb-5d67-4c81-b412-1f6c36b760bb": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "How old do I have to be to use Healf Zone?",
+            "content": "<p>18 years and older.</p>"
+          }
+        },
+        "1f9d488b-fb82-4f0d-9c69-7df1476d9d57": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "What are blood biomarkers?",
+            "content": "<p>Biomarkers are measurable substances, genes, or characteristics found in your blood that offer critical insights about your health. From genes to proteins, these biomarkers provide information that can diagnose diseases and conditions, predict health outcomes, alert you to inflammation, or help in adjusting your treatments. They’re key to letting you know if your health is optimal or if you need to start changing things like your diet or supplement intake, and how.</p>"
+          }
+        },
+        "0be4cd24-5303-448c-bacb-3b5f43eba51e": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "What are optimal blood test ranges?",
+            "content": "<p>“Normal\" ranges used in traditional blood tests might sound fine, but they’re often too generic to catch what really matters for <em>you</em>. They’ll only highlight issues when something's seriously off.</p><p>Healf Zone’s optimal ranges, on the other hand, are tailored to <em>your</em> biology. They factor in your lifestyle, habits, and demographics, giving you a more accurate picture of your health. It’s the detail you need to truly elevate your wellbeing and longevity.</p>"
+          }
+        },
+        "2770e4d8-178f-4fd2-8351-61903c42da58": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "How accurate are at-home blood test kits?",
+            "content": "<p>Home blood test kits are generally accurate, but it is important to note that there is always a margin of error, just like with any medical test. We recommend watching our step-by-step instructional video to guide you through the process and help ensure that you collect an accurate sample.</p>"
+          }
+        },
+        "f6611ce2-3fb2-4190-a3a5-331fe2ccf29b": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "Does Healf Zone integrate with my Oura, Whoop, Apple Health or other services?",
+            "content": "<p>Healf Zone integrates with all wearable devices, fostering a culture of continuous improvement and adaptation.</p>"
+          }
+        },
+        "52d1f99d-a9e4-486e-8f07-0aca163464b7": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Before you start",
+            "title": "Healf Zone is currently in beta. What does beta mean?",
+            "content": "<p>Beta means that Healf Zone is not yet fully developed and there will be rapid changes with occasional bugs. Patience is required.</p><p>After the first round of lab tests are complete, beta members will receive a first-of-its-kind health dashboard. Dashboard features include charting lab test results over time (past results will be automatically loaded) and an organised composite of all recommendations and doctor reviews into a single view.</p>"
+          }
+        },
+        "984203d6-ab5d-49d8-879f-21219a117db0": {
+          "type": "parent",
+          "settings": {
+            "title": "Order"
+          }
+        },
+        "ddcf5760-041b-4dd1-9e7b-8833958f1b32": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Order",
+            "title": "What if I’m buying more than one kit?",
+            "content": "<p>If you purchased multiple test kits for your household, some special notes:</p><p></p><p>Each test kit can only have one unique email address associated with it when registering. Everybody in your household will need to have a separate and unique email address to register their test kit.</p><p></p><p>Make sure that the test kits are identified for each individual after online registration is complete. This is important because the sample collection tubes are associated with the Sample ID. We recommend writing down each person's name on the outside of each test kit to avoid mixing up test kits, sample collection tubes, and ensure the Sample ID matches the registered email address.</p><p></p><p>Please note that you will not be able to switch test kits with someone else after registering a test kit. Healf Zone requests separate and unique email addresses to create an account for each household member to prevent confusion on which test results belong to which household member.</p>"
+          }
+        },
+        "026e74e9-e5bd-4a5e-b17e-a2cfd3dc8fd8": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Order",
+            "title": "How can I change the biological sex, date of birth, or e-mail address I used to sign up on Healf Zone?",
+            "content": "<p>If you believe that you need to change the biological sex, date of birth, or e-mail address information stored on your account, please contact our customer service team <a href=\"https://healf.com/pages/contact-us\"><strong>here</strong></a>.</p>"
+          }
+        },
+        "115d3274-0de9-481a-ba50-31172298667b": {
+          "type": "parent",
+          "settings": {
+            "title": "Your Blood Test"
+          }
+        },
+        "b40b0daf-7957-431a-b327-e699f8670496": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Your Blood Test",
+            "title": "How should I prepare before taking the test?",
+            "content": "<p>You will need to fast for 8 hours before collecting your sample. For the best results, we recommend completing the test in the morning and drinking at least two glasses of water 30 minutes before you begin.</p>"
+          }
+        },
+        "fae1f5dd-17ad-43d2-8594-b25958836a09": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Your Blood Test",
+            "title": "When should I take and send my sample?",
+            "content": "<p>You should collect your sample in the morning after an 8-hour fast any day between Monday - Thursday, as this ensures your test arrives at the labs on a working day. Please avoid Fridays, Saturdays, and Sundays, as your kit may sit in transit too long, which could result in a failed test. Your collected sample should then be posted the same day to prevent the sample from coagulating, which then cannot be used by the lab.</p>"
+          }
+        },
+        "805cd460-eecc-434c-92a5-47057c8b1b21": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Your Blood Test",
+            "title": "How can I guarantee the best results from my kit?",
+            "content": "<ul><li>Our number one tip is to follow the instructions closely and carefully while making sure to take your time collecting your sample. Our instructions and tips are there for a reason (we promise!) and by following them you have the best chance of collecting your sample in the best way to get accurate results.</li></ul><p><strong>- Stay hydrated:</strong>  Drinking plenty of water before your test allows blood to flow more freely.</p><p><strong>- Exercise: </strong> Exercise can help increase blood flow - we recommend some light exercise like swinging arms or some star jumps should be sufficient.</p><p><strong>- Warm up your hands:</strong>  Place your hand in warm water for 3 minutes, or take a hot shower before taking the test. </p><p><strong>- Massage your finger:</strong> When you’ve pricked your finger, massage it to stimulate blood flow in a milking motion down to the pricked area. Don’t squeeze your finger tightly, as this can affect the plasma dilution and lead to haemolysis. If you feel like you can’t get any more blood from your finger, clean another finger and use a new lancet to try again.</p><p><strong>- Stand up:</strong> Gravity can help with blood flow, so consider standing during the collection process. You could also make sure that your hand is hanging down, and drip the blood into the tubes that way.</p><p><strong>- 8-hour fasting: </strong>Fasting for about 8 hours before the blood draw will help ensure the accuracy of the blood test. The easy way to do this is to take your test before you’ve had breakfast, after waking up.</p><p><strong>- Mix tubes correctly:  </strong>After you've collected your blood, it's crucial to mix it properly with the additives in the collection tube. Follow the instructions provided on how to do this, and you’ll be mixing like a scientist.</p><p><strong>- Collect samples Monday to Thursday:</strong>  This ensures that your sample isn't sitting in a postbox or sorting office over the weekend, or at our lab, which could lead to sample degradation.</p><p><strong>- Post your sample promptly: </strong> Post your sample the same day you collect it, in a priority postbox – you can find one here: <span style=\"text-decoration:underline\">https://www.royalmail.com/services-near-you#/</span>. Delaying sending your sample can increase the risk of haemolysis.</p>"
+          }
+        },
+        "9761538e-96c1-4806-95c6-78b904c17db5": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Your Blood Test",
+            "title": "What if I can’t collect a sample?",
+            "content": "<p>While we’ll try our best to help find a solution, at-home blood testing may not be for you right now. We want to make sure that everyone has access to their health data. So, the good news is that we’ll soon be introducing a phlebotomy service. This means you’ll be able to visit a participating nearby pharmacy or health clinic and have your blood drawn for you venously, which you can then send to our lab for results.</p>"
+          }
+        },
+        "item_xmNqgW": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Your Blood Test",
+            "title": "Where will my sample be sent for analysis?",
+            "content": "<p>Your sample will be sent to and analysed at Alderly Lighthouse Labs, our trusted partner for delivering accurate and reliable results. We’ve chosen them to ensure your test is handled with care and precision every step of the way.</p>"
+          }
+        },
+        "7c94d9ff-a93c-4329-91e0-b08db7b408ae": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Order",
+            "title": "Can I use Healf Zone if I am outside the UK?",
+            "content": "<p>Currently, we are unable to offer the option to order our blood tests outside of the UK. However, we are working towards expanding Healf Zone to enable customers to upload their own test results in the future. We appreciate your understanding and look forward to providing this valuable feature soon.</p><p></p><p>In the meantime, you can sign up on our <span style=\"text-decoration:underline\">mailing list</span> and when our service outside of the UK is up and running we will contact you.</p>"
+          }
+        },
+        "f2d7810a-dffb-4377-a0a2-9df4da744903": {
+          "type": "parent",
+          "settings": {
+            "title": "Results"
+          }
+        },
+        "548a205d-d9f1-42f4-b687-36a94964d2ee": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Results",
+            "title": "How will I be notified when my lab test results are ready?",
+            "content": "<p>Once we receive each set of results, we will notify you through email and text. You can access the results directly by logging into Healf Zone.</p>"
+          }
+        },
+        "83575d91-1ad1-4837-b1f9-1cbb393e7157": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Results",
+            "title": "How can I review my Healf Zone results with an expert?",
+            "content": "<p>After receiving your test results, you will enjoy a one-on-one consultation with one of our experts to discuss your results in depth and focus on what matters most to you. Healf Zone provides access to specialist tests for areas such as metabolic health, fertility, sleep, and more, ensuring a comprehensive understanding of your wellbeing. This consultation is included with your Healf Zone package at no extra cost.</p>"
+          }
+        },
+        "8b2acbf6-4a68-4543-aa35-0523b636957b": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Results",
+            "title": "Is it possible to download my results to share with my GP?",
+            "content": "<p>Your results are available for you to download in a PDF format and share with your GP. Follow these steps to access your PDF:</p><ul><li>Login to your dashboard using this <span style=\"text-decoration:underline\">link</span></li><li>Click on your account icon located in the upper-right corner</li><li>Select 'Results history'</li><li>On this page it should show an arrow, the date, and the name of the test that you did - Click here</li><li>The drop-down menu will open where you can click the button 'Download results' to access the PDF of your results.</li></ul>"
+          }
+        },
+        "efacfb1a-ba81-409d-b453-e291e0efa949": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Results",
+            "title": "Does Healf Zone replace my doctor or concierge care membership?",
+            "content": "<p>No, Healf Zone does not replace your doctor or concierge care. Instead, it makes you a more powerful patient. Healf Zone empowers you with knowledge of your key health biomarkers and provides detailed insights from functional medicine experts, specific to your results. Additionally, you will receive a supplement plan to optimise your wellbeing and a dashboard to track your progress. </p><p></p><p>Bringing a history of lab test results to your next doctor visit may reduce the need for follow-up tests and enable a more productive appointment. Healf Zone is designed to make the doctor's time more effective and empower you to be your own advocate.</p>"
+          }
+        },
+        "eb99db4e-9c32-4275-bc68-fa457098e49e": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Results",
+            "title": "Do my biomarkers frequently naturally fluctuate?",
+            "content": "<p>Your body is ever-changing. Your eating, sleeping, stress and outdoor exposure all impact your body. Regular testing allows you to understand how your health is changing and therefore what you can do to improve it.</p>"
+          }
+        },
+        "792c190f-261b-48c9-a19c-4719f6657a18": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Results",
+            "title": "Will Healf Zone explain to me why I feel the way I do?",
+            "content": "<p>Healf Zone includes insights that can help illuminate the role of vitamins, minerals, and toxins on your wellbeing and the imbalances that can sometimes contribute to depression, anxiety, brain fog, insomnia, attention deficits, mood swings, and more.</p>"
+          }
+        },
+        "327387e3-4465-48f2-bc3b-ec6d9611bb26": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Results",
+            "title": "Why has my sample failed?",
+            "content": "<p>Failed biomarkers mean that one or more biomarkers couldn’t be tested or accurately measured from your blood sample. This could be due to haemolysis, insufficient sample volume, or other reasons.</p><p>If your biomarkers fail, don't worry. You’ll be notified by email, and you can then choose to repeat the testing process and get the results you need with no fees.</p>"
+          }
+        },
+        "0b5d0b3e-7f68-47a3-a988-59b2c129e5da": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Results",
+            "title": "Can medications impact the test results?",
+            "content": "<p>Yes, medications can impact the results of a blood test. Certain medications may affect the levels of various biomarkers in your blood, potentially altering the test outcomes. The <span style=\"text-decoration:underline\">health assessment</span> that you do will also ask you what medications you are taking so that we are aware and any medications you take are recorded on your dashboard.</p><p></p><p>If you have any concerns about specific medications and their impact on your blood test, we recommend consulting with your healthcare provider once receiving your results.</p>"
+          }
+        },
+        "7d82baf3-83fd-46cd-b32c-58d08f9b701c": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Results",
+            "title": "Our Commitment to Accuracy",
+            "content": "<p>We understand how important accurate health data is – it’s our whole business. That's why we offer free, express returns to get your sample to our lab as soon as possible. Our labs are fully safety accredited with our test kits regulated by the Medicines & Healthcare Products Regulatory Agency, and we’re continuously improving our methods to get you the most accurate results possible. </p>"
+          }
+        },
+        "86a0ee03-97e2-4a31-b982-0ad909703169": {
+          "type": "parent",
+          "settings": {
+            "title": "Data Protection"
+          }
+        },
+        "6fed7158-bdfd-48d8-9d2b-aea67f2f16a4": {
+          "type": "item",
+          "settings": {
+            "item_parent": "Data Protection",
+            "title": "Protecting Your Data & AI Ethics",
+            "content": "<p>Your wellbeing is in safe hands. Healf Zone uses cutting-edge data security that goes beyond UK privacy standards like GDPR, DPA, ISO 27701, and HIPAA. We’ve achieved the gold standard with HITRUST CSF validation and unbreakable encryption. Plus, our AI technology follows strict ethical guidelines under the ISO 38507 ethical framework for AI governance, ensuring transparency, accountability and privacy.</p>"
+          }
+        },
+        "ecda7194-089d-4822-9a45-c13f2bd718aa": {
+          "type": "parent",
+          "disabled": true,
+          "settings": {
+            "title": "XX"
+          }
+        },
+        "item_KdcGnY": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "item_parent": "X",
+            "title": "Y",
+            "content": "<p>benny is annoying </p>"
+          }
+        }
+      },
+      "block_order": [
+        "0d7e4c62-04c6-42b7-a6dd-dcc623c9e306",
+        "5169ebeb-6f0f-4b2e-823e-75af384f6f1c",
+        "dcf7e123-4c44-4b93-a25e-c099d9e7336a",
+        "c4d93750-c491-4e1e-b735-c56839c0af07",
+        "f9d483f2-df09-4f61-abbe-91d19e2ad4ae",
+        "fcf3c918-13b1-410c-8925-496d117b5998",
+        "b628fcd1-a3e7-489a-9b3d-7c1088e382db",
+        "945f8e2c-eb02-4fab-b66f-ec31cac65ae5",
+        "835238fb-5d67-4c81-b412-1f6c36b760bb",
+        "1f9d488b-fb82-4f0d-9c69-7df1476d9d57",
+        "0be4cd24-5303-448c-bacb-3b5f43eba51e",
+        "2770e4d8-178f-4fd2-8351-61903c42da58",
+        "f6611ce2-3fb2-4190-a3a5-331fe2ccf29b",
+        "52d1f99d-a9e4-486e-8f07-0aca163464b7",
+        "984203d6-ab5d-49d8-879f-21219a117db0",
+        "ddcf5760-041b-4dd1-9e7b-8833958f1b32",
+        "026e74e9-e5bd-4a5e-b17e-a2cfd3dc8fd8",
+        "115d3274-0de9-481a-ba50-31172298667b",
+        "b40b0daf-7957-431a-b327-e699f8670496",
+        "fae1f5dd-17ad-43d2-8594-b25958836a09",
+        "805cd460-eecc-434c-92a5-47057c8b1b21",
+        "9761538e-96c1-4806-95c6-78b904c17db5",
+        "item_xmNqgW",
+        "7c94d9ff-a93c-4329-91e0-b08db7b408ae",
+        "f2d7810a-dffb-4377-a0a2-9df4da744903",
+        "548a205d-d9f1-42f4-b687-36a94964d2ee",
+        "83575d91-1ad1-4837-b1f9-1cbb393e7157",
+        "8b2acbf6-4a68-4543-aa35-0523b636957b",
+        "efacfb1a-ba81-409d-b453-e291e0efa949",
+        "eb99db4e-9c32-4275-bc68-fa457098e49e",
+        "792c190f-261b-48c9-a19c-4719f6657a18",
+        "327387e3-4465-48f2-bc3b-ec6d9611bb26",
+        "0b5d0b3e-7f68-47a3-a988-59b2c129e5da",
+        "7d82baf3-83fd-46cd-b32c-58d08f9b701c",
+        "86a0ee03-97e2-4a31-b982-0ad909703169",
+        "6fed7158-bdfd-48d8-9d2b-aea67f2f16a4",
+        "ecda7194-089d-4822-9a45-c13f2bd718aa",
+        "item_KdcGnY"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "Frequently Asked Questions.",
+        "subtitle": "Everything you need to know about Healf Zone.",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_tablet": 60,
+        "padding_bottom_tablet": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "healf_zone_login_zfNWmb",
+    "52514ba6-94ce-4386-9da4-7c0388e3b75d"
+  ]
+}
