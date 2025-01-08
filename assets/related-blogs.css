@@ -3,7 +3,7 @@
   padding: 20px;
   background-color: #f9f9f9;
   margin-top: 20px;
-  text-align: center; /* Center align the section */
+  text-align: center;
 }
 
 .related-blogs-title {
@@ -12,57 +12,39 @@
   text-align: center;
 }
 
-/* Grid Layout */
-.blog-list {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(1, 1fr); /* Default: 1 column */
-  margin: 0 auto;
-  max-width: 1200px; /* Optional: Limit max width */
+/* Slick Carousel Customization */
+.slick-arrow {
+  background-color: #333;
+  border-radius: 50%;
+  color: #fff;
+  padding: 10px;
+  position: absolute;
+  z-index: 2;
 }
 
-/* Adjust grid for medium and large screens */
-@media (min-width: 768px) {
-  .blog-list {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
-  }
+.slick-prev {
+  left: -40px;
 }
 
-@media (min-width: 1024px) {
-  .blog-list {
-    grid-template-columns: repeat(3, 1fr); /* 3 columns for large screens */
-  }
+.slick-next {
+  right: -40px;
 }
 
 /* Blog Item Styling */
 .blog-item {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #fff;
+  padding: 10px;
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.blog-item:hover {
-  transform: translateY(-5px); /* Add subtle hover effect */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
-
-.blog-item:hover {
-  transform: translateY(-5px); /* Add subtle hover effect */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
 .blog-item-image {
+  border-radius: 10px;
   width: 100%;
   height: auto;
-  display: block;
 }
 
 .blog-item-title {
   font-size: 18px;
-  margin: 10px;
-  padding: 0 10px;
+  font-weight: bold;
   color: #333;
+  margin-top: 10px;
 }
